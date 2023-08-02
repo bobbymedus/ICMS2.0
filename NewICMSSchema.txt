@@ -1,0 +1,947 @@
+
+/****** Object:  Sequence [Arlington].[PVCGroupID]    Script Date: 2/22/2019 12:13:24 PM ******/
+CREATE SEQUENCE [Arlington].[PVCGroupID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[PVCTypeID]    Script Date: 2/22/2019 12:13:39 PM ******/
+CREATE SEQUENCE [Arlington].[PVCTypeID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[PVCVendorID]    Script Date: 2/22/2019 12:13:47 PM ******/
+CREATE SEQUENCE [Arlington].[PVCVendorID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqAlloyFinishID]    Script Date: 2/22/2019 12:13:57 PM ******/
+CREATE SEQUENCE [Arlington].[seqAlloyFinishID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqAlloyID]    Script Date: 2/22/2019 12:14:07 PM ******/
+CREATE SEQUENCE [Arlington].[seqAlloyID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqCoilTagID]    Script Date: 2/22/2019 12:14:15 PM ******/
+CREATE SEQUENCE [Arlington].[seqCoilTagID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqCustID]    Script Date: 2/22/2019 12:14:26 PM ******/
+CREATE SEQUENCE [Arlington].[seqCustID] 
+ AS [int]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -2147483648
+ MAXVALUE 2147483647
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqDamageID]    Script Date: 2/22/2019 12:14:34 PM ******/
+CREATE SEQUENCE [Arlington].[seqDamageID] 
+ AS [bigint]
+ START WITH 52
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqMachineConnectionID]    Script Date: 2/22/2019 12:14:43 PM ******/
+CREATE SEQUENCE [Arlington].[seqMachineConnectionID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqMasterOrderID]    Script Date: 2/22/2019 12:14:52 PM ******/
+CREATE SEQUENCE [Arlington].[seqMasterOrderID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqOrderHdrID]    Script Date: 2/22/2019 12:15:00 PM ******/
+CREATE SEQUENCE [Arlington].[seqOrderHdrID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqPVCRecID]    Script Date: 2/22/2019 12:15:08 PM ******/
+CREATE SEQUENCE [Arlington].[seqPVCRecID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqPVCTagID]    Script Date: 2/22/2019 12:15:15 PM ******/
+CREATE SEQUENCE [Arlington].[seqPVCTagID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqReceiveID]    Script Date: 2/22/2019 12:15:21 PM ******/
+CREATE SEQUENCE [Arlington].[seqReceiveID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqSkidTypeID]    Script Date: 2/22/2019 12:15:29 PM ******/
+CREATE SEQUENCE [Arlington].[seqSkidTypeID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+/****** Object:  Sequence [Arlington].[seqWorkerID]    Script Date: 2/22/2019 12:15:39 PM ******/
+CREATE SEQUENCE [Arlington].[seqWorkerID] 
+ AS [bigint]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE -9223372036854775808
+ MAXVALUE 9223372036854775807
+ CACHE 
+GO
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****** Object:  Table [Arlington].[AdderDesc]    Script Date: 2/22/2019 11:10:42 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[AdderDesc](
+	[adderID] [int] NOT NULL,
+	[adderDesc] [nchar](20) NOT NULL,
+	[adderPrice] [decimal](18, 3) NOT NULL,
+	[adderMin] [decimal](18, 3) NULL,
+ CONSTRAINT [PK_adderDesc] PRIMARY KEY CLUSTERED 
+(
+	[adderID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[Alloy]    Script Date: 2/22/2019 11:59:00 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[Alloy](
+	[AlloyID] [int] NOT NULL,
+	[AlloyDesc] [nchar](15) NOT NULL,
+	[SteelTypeID] [int] NOT NULL,
+	[DensityFactor] [decimal](18, 6) NOT NULL,
+	[OrderList] [int] NULL,
+ CONSTRAINT [PK_Alloy] PRIMARY KEY CLUSTERED 
+(
+	[AlloyID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[Alloy] ADD  CONSTRAINT [DF_Alloy_AlloyID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqAlloyID]) FOR [AlloyID]
+GO
+
+/****** Object:  Table [Arlington].[AlloyFinish]    Script Date: 2/22/2019 11:59:16 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[AlloyFinish](
+	[FinishID] [int] NOT NULL,
+	[SteelTypeID] [int] NOT NULL,
+	[FinishDesc] [nchar](50) NOT NULL,
+ CONSTRAINT [PK_AlloyFinish] PRIMARY KEY CLUSTERED 
+(
+	[FinishID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[AlloyFinish] ADD  CONSTRAINT [DF_AlloyFinish_FinishID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqAlloyFinishID]) FOR [FinishID]
+GO
+
+/****** Object:  Table [Arlington].[Coil]    Script Date: 2/22/2019 11:59:46 AM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[Coil](
+	[coilTagID] [int] NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[coilCount] [int] NULL,
+	[customerID] [int] NULL,
+	[receiveID] [int] NULL,
+	[millCoilNum] [nchar](35) NULL,
+	[vendor] [nchar](35) NULL,
+	[location] [nchar](50) NULL,
+	[alloyID] [int] NULL,
+	[finishID] [int] NULL,
+	[thickness] [decimal](8, 4) NULL,
+	[width] [decimal](18, 3) NULL,
+	[length] [decimal](18, 3) NULL,
+	[weight] [decimal](18, 3) NULL,
+	[heat] [nchar](50) NOT NULL,
+	[countryOfOrigin] [nchar](15) NULL,
+	[carbon] [decimal](8, 3) NULL,
+	[coilStatus] [int] NULL,
+	[type] [int] NULL,
+	[typeNum] [int] NULL,
+ CONSTRAINT [PK_Coil] PRIMARY KEY CLUSTERED 
+(
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[Coil] ADD  CONSTRAINT [DF_Coil_coilTagID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqCoilTagID]) FOR [coilTagID]
+GO
+
+/****** Object:  Table [Arlington].[CoilDamage]    Script Date: 2/22/2019 12:00:02 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CoilDamage](
+	[coilTagID] [int] NOT NULL,
+	[damageDescID] [int] NOT NULL,
+ CONSTRAINT [PK_CoilDamage_1] PRIMARY KEY CLUSTERED 
+(
+	[coilTagID] ASC,
+	[damageDescID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[CoilPolishDtl]    Script Date: 2/22/2019 12:00:22 PM ******/
+SET ANSI_NULLS ON
+GO/****** Object:  Table [Arlington].[CoilPolishHdr]    Script Date: 2/22/2019 12:00:38 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CoilPolishHdr](
+	[OrderID] [int] NOT NULL,
+	[coilTagID] [int] NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[previousFinish] [int] NOT NULL,
+	[newFinish] [int] NOT NULL,
+	[origWeight] [int] NOT NULL,
+	[polishWeight] [int] NOT NULL,
+	[paper] [int] NOT NULL,
+ CONSTRAINT [PK_CoilPolishHdr] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC,
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[CoilSlitOrderBreaks]    Script Date: 2/22/2019 12:01:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CoilSlitOrderBreaks](
+	[OrderID] [int] NOT NULL,
+	[coilTagID] [int] NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[cutbreak] [int] NOT NULL,
+	[paper] [int] NOT NULL,
+	[slitCount] [int] NOT NULL,
+	[FlagID1] [int] NOT NULL,
+	[FlagID2] [int] NOT NULL,
+	[parentWeight] [int] NOT NULL,
+	[weight] [int] NOT NULL,
+ CONSTRAINT [PK_CoilSlitOrderBreaks] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC,
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC,
+	[cutbreak] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[CoilSlitOrderHdr]    Script Date: 2/22/2019 12:01:24 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CoilSlitOrderHdr](
+	[OrderID] [int] NOT NULL,
+	[coilTagID] [int] NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[origWeight] [int] NOT NULL,
+ CONSTRAINT [PK_CoilSlitOrderHdr] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC,
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CoilPolishDtl](
+	[OrderID] [int] NOT NULL,
+	[coilTagID] [int] NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[coilTagNewSuffix] [nchar](30) NOT NULL,
+	[PolishWeight] [int] NOT NULL,
+ CONSTRAINT [PK_CoilPolishDtl] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC,
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC,
+	[coilTagNewSuffix] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
+/****** Object:  Table [Arlington].[CoilSlitOrderWidths]    Script Date: 2/22/2019 12:07:47 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CoilSlitOrderWidths](
+	[OrderID] [int] NOT NULL,
+	[coilTagID] [nchar](30) NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[cutbreak] [int] NOT NULL,
+	[cutNumber] [int] NOT NULL,
+	[widthLeftCol] [int] NOT NULL,
+	[width] [decimal](18, 4) NOT NULL,
+ CONSTRAINT [PK_CoilSlitOrderWidths] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC,
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC,
+	[cutbreak] ASC,
+	[cutNumber] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[CTLAdderPricing]    Script Date: 2/22/2019 12:07:59 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CTLAdderPricing](
+	[orderID] [int] NOT NULL,
+	[coilTagID] [int] NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[sequenceNumber] [int] NOT NULL,
+	[adderID] [int] NOT NULL,
+	[adderPrice] [decimal](18, 3) NOT NULL,
+ CONSTRAINT [PK_CTLAdderPricing] PRIMARY KEY CLUSTERED 
+(
+	[orderID] ASC,
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC,
+	[sequenceNumber] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[CTLDetail]    Script Date: 2/22/2019 12:08:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[CTLDetail](
+	[orderID] [int] NOT NULL,
+	[coilTagID] [int] NOT NULL,
+	[coilTagSuffix] [nchar](30) NOT NULL,
+	[sequenceNumber] [int] NOT NULL,
+	[skidCount] [int] NOT NULL,
+	[pieceCount] [int] NOT NULL,
+	[length] [decimal](18, 0) NOT NULL,
+	[width] [decimal](18, 3) NOT NULL,
+	[alloyID] [int] NOT NULL,
+	[finishID] [int] NOT NULL,
+	[skidTypeID] [int] NOT NULL,
+	[comments] [nchar](255) NOT NULL,
+	[sheetWeight] [decimal](18, 9) NULL,
+	[theoSkidWeight] [int] NULL,
+	[paper] [int] NULL,
+	[PVCGroupID] [int] NULL,
+	[lineMark] [int] NULL,
+	[skidPrice] [decimal](18, 3) NULL,
+ CONSTRAINT [PK_CTLDetail] PRIMARY KEY CLUSTERED 
+(
+	[orderID] ASC,
+	[coilTagID] ASC,
+	[coilTagSuffix] ASC,
+	[sequenceNumber] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[Customer]    Script Date: 2/22/2019 12:09:02 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[Customer](
+	[CustomerID] [int] NOT NULL,
+	[ShortCustomerName] [nvarchar](50) NULL,
+	[LongCustomerName] [nvarchar](50) NULL,
+	[Address1] [nvarchar](75) NULL,
+	[Address2] [nvarchar](30) NULL,
+	[City] [nvarchar](30) NULL,
+	[StateCode] [nvarchar](2) NULL,
+	[Zip] [nvarchar](15) NULL,
+	[Country] [nvarchar](15) NULL,
+	[Phone] [nvarchar](30) NULL,
+	[Fax] [nvarchar](25) NULL,
+	[ContactName] [nvarchar](40) NULL,
+	[Email] [nvarchar](50) NULL,
+	[Packaging] [nvarchar](255) NULL,
+	[MaxSkidWeight] [smallint] NULL,
+	[PriceTier] [tinyint] NULL,
+	[WeightFormula] [tinyint] NULL,
+	[isActive] [int] NULL,
+	[QuickBookName] [nvarchar](45) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CustomerID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[Customer] ADD  DEFAULT (NEXT VALUE FOR [Arlington].[seqCustID]) FOR [CustomerID]
+GO
+
+/****** Object:  Table [Arlington].[DamageDescription]    Script Date: 2/22/2019 12:09:13 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[DamageDescription](
+	[damageDescID] [int] NOT NULL,
+	[damageDescription] [nchar](50) NULL,
+ CONSTRAINT [PK_DamageDescription] PRIMARY KEY CLUSTERED 
+(
+	[damageDescID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[DamageDescription] ADD  CONSTRAINT [DF_DamageDescription_descriptionID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqDamageID]) FOR [damageDescID]
+GO
+
+/****** Object:  Table [Arlington].[MachineConnections]    Script Date: 2/22/2019 12:09:26 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[MachineConnections](
+	[MachineConnectionID] [int] NOT NULL,
+	[fromMachine] [int] NOT NULL,
+	[toMachine] [int] NOT NULL,
+ CONSTRAINT [PK_MachineConnections] PRIMARY KEY CLUSTERED 
+(
+	[MachineConnectionID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[MachineConnections] ADD  CONSTRAINT [DF_MachineConnections_MachineConnectionID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqMachineConnectionID]) FOR [MachineConnectionID]
+GO
+
+/****** Object:  Table [Arlington].[Machines]    Script Date: 2/22/2019 12:09:38 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[Machines](
+	[machineID] [int] NOT NULL,
+	[processID] [int] NOT NULL,
+	[machineName] [nchar](20) NOT NULL,
+	[minThickness] [decimal](18, 4) NULL,
+	[maxThickness] [decimal](18, 4) NULL,
+	[minWidth] [decimal](18, 4) NULL,
+	[maxWidth] [decimal](18, 4) NULL,
+	[minLength] [int] NULL,
+	[maxLength] [int] NULL,
+	[MinWeight] [int] NULL,
+	[maxWeight] [int] NULL,
+	[machineDesc] [nchar](100) NULL,
+	[LeadTime] [int] NULL,
+ CONSTRAINT [PK_Machines] PRIMARY KEY CLUSTERED 
+(
+	[machineID] ASC,
+	[processID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[MasterOrder]    Script Date: 2/22/2019 12:09:50 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[MasterOrder](
+	[masterOrderID] [int] NOT NULL,
+	[orderID] [int] NOT NULL,
+	[sequence] [int] NOT NULL,
+ CONSTRAINT [PK_MasterOrder] PRIMARY KEY CLUSTERED 
+(
+	[masterOrderID] ASC,
+	[orderID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[MasterOrder] ADD  CONSTRAINT [DF_MasterOrder_masterOrderID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqMasterOrderID]) FOR [masterOrderID]
+GO
+
+/****** Object:  Table [Arlington].[MaterialDamageXref]    Script Date: 2/22/2019 12:10:01 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[MaterialDamageXref](
+	[materialTagID] [int] NOT NULL,
+	[materialSuffixID] [nchar](30) NOT NULL,
+	[damageDescID] [int] NOT NULL,
+	[type] [int] NOT NULL,
+ CONSTRAINT [PK_CoilDamage] PRIMARY KEY CLUSTERED 
+(
+	[materialTagID] ASC,
+	[materialSuffixID] ASC,
+	[damageDescID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[OrderHdr]    Script Date: 2/22/2019 12:10:12 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[OrderHdr](
+	[OrderID] [int] NOT NULL,
+	[CustomerID] [int] NOT NULL,
+	[CustomerPO] [nchar](50) NOT NULL,
+	[OrderDate] [date] NOT NULL,
+	[PromiseDate] [date] NOT NULL,
+	[Status] [int] NOT NULL,
+	[Comments] [nchar](250) NULL,
+	[ScrapCredit] [int] NOT NULL,
+	[CalculationType] [int] NOT NULL,
+	[ShipComments] [nchar](250) NULL,
+	[MachineID] [int] NOT NULL,
+	[ProcPrice] [decimal](18, 4) NOT NULL,
+	[Posted] [int] NOT NULL,
+	[BreakIn] [decimal](18, 4) NULL,
+	[RunSheetOrder] [int] NOT NULL,
+	[MixHeats] [int] NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[OrderHdr] ADD  CONSTRAINT [DF_OrderHdr_OrderID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqOrderHdrID]) FOR [OrderID]
+GO
+
+/****** Object:  Table [Arlington].[PVCCustRollDtl]    Script Date: 2/22/2019 12:10:26 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[PVCCustRollDtl](
+	[PVCTagID] [int] NOT NULL,
+	[PVCGroupID] [int] NOT NULL,
+	[PVCDesc] [nchar](50) NOT NULL,
+ CONSTRAINT [PK_PVCCustRollDtl] PRIMARY KEY CLUSTERED 
+(
+	[PVCTagID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[PVCDescription]    Script Date: 2/22/2019 12:10:39 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[PVCDescription](
+	[PVCTypeID] [int] NOT NULL,
+	[VendorID] [int] NOT NULL,
+	[GroupID] [int] NOT NULL,
+	[Tack] [int] NULL,
+	[ItemNumber] [nchar](50) NOT NULL,
+	[ItemDesc] [nchar](50) NOT NULL,
+	[DefaultWidth] [decimal](18, 2) NOT NULL,
+	[DefaultLength] [int] NOT NULL,
+ CONSTRAINT [PK_PVCDescription] PRIMARY KEY CLUSTERED 
+(
+	[PVCTypeID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[PVCDescription] ADD  CONSTRAINT [DF_PVCDescription_PVCTypeID]  DEFAULT (NEXT VALUE FOR [Arlington].[PVCTypeID]) FOR [PVCTypeID]
+GO
+
+/****** Object:  Table [Arlington].[PVCGroup]    Script Date: 2/22/2019 12:10:52 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[PVCGroup](
+	[GroupID] [int] NOT NULL,
+	[GroupName] [nchar](20) NOT NULL,
+	[active] [int] NOT NULL
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[PVCGroup] ADD  CONSTRAINT [DF_PVCGroup_GroupID]  DEFAULT (NEXT VALUE FOR [Arlington].[PVCGroupID]) FOR [GroupID]
+GO
+
+/****** Object:  Table [Arlington].[PVCOrderInfo]    Script Date: 2/22/2019 12:11:03 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[PVCOrderInfo](
+	[PVCTagID] [int] NOT NULL,
+	[OrderID] [int] NOT NULL,
+	[skidSeqNum] [int] NOT NULL,
+	[LinearFootage] [int] NOT NULL,
+ CONSTRAINT [PK_PVCOrderInfo] PRIMARY KEY CLUSTERED 
+(
+	[PVCTagID] ASC,
+	[OrderID] ASC,
+	[skidSeqNum] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[PVCRecHdr]    Script Date: 2/22/2019 12:11:14 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[PVCRecHdr](
+	[PVCRecID] [int] NOT NULL,
+	[VendorID] [int] NOT NULL,
+	[RefNumber] [nchar](20) NOT NULL,
+	[PONumber] [nchar](20) NOT NULL,
+	[Date] [date] NOT NULL,
+ CONSTRAINT [PK_PVCRecHdr] PRIMARY KEY CLUSTERED 
+(
+	[PVCRecID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[PVCRecHdr] ADD  CONSTRAINT [DF_PVCRecHdr_PVCRecID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqPVCRecID]) FOR [PVCRecID]
+GO
+
+/****** Object:  Table [Arlington].[PVCRollDtls]    Script Date: 2/22/2019 12:11:24 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[PVCRollDtls](
+	[PVCTagID] [int] NOT NULL,
+	[PVCRecID] [int] NOT NULL,
+	[CustID] [int] NOT NULL,
+	[PVCTypeID] [int] NOT NULL,
+	[PVCWidth] [decimal](18, 3) NOT NULL,
+	[PVCLength] [int] NOT NULL,
+	[Price] [decimal](18, 3) NOT NULL,
+	[ReferenceNumber] [nchar](25) NOT NULL,
+	[Status] [int] NOT NULL,
+ CONSTRAINT [PK_PVCRollDtls] PRIMARY KEY CLUSTERED 
+(
+	[PVCTagID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[PVCRollDtls] ADD  CONSTRAINT [DF_PVCRollDtls_PVCTagID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqPVCTagID]) FOR [PVCTagID]
+GO
+
+ALTER TABLE [Arlington].[PVCRollDtls] ADD  CONSTRAINT [DF_PVCRollDtls_CustID]  DEFAULT ((0)) FOR [CustID]
+GO
+
+ALTER TABLE [Arlington].[PVCRollDtls] ADD  CONSTRAINT [DF_PVCRollDtls_ReferenceNumber]  DEFAULT ('') FOR [ReferenceNumber]
+GO
+
+/****** Object:  Table [Arlington].[PVCVendor]    Script Date: 2/22/2019 12:11:43 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[PVCVendor](
+	[VendorID] [int] NOT NULL,
+	[VendorName] [nchar](30) NOT NULL,
+	[VendorPhoneNumber] [nchar](15) NOT NULL,
+	[Active] [int] NULL,
+ CONSTRAINT [PK_PVCVendor] PRIMARY KEY CLUSTERED 
+(
+	[VendorID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[PVCVendor] ADD  CONSTRAINT [DF_PVCVendor_VendorID]  DEFAULT (NEXT VALUE FOR [Arlington].[PVCVendorID]) FOR [VendorID]
+GO
+
+/****** Object:  Table [Arlington].[receiveDtl]    Script Date: 2/22/2019 12:11:54 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[receiveDtl](
+	[receiveID] [int] NOT NULL,
+	[coilTagID] [int] NOT NULL,
+	[skidLetter] [nchar](10) NULL,
+	[type] [int] NOT NULL,
+	[purchaseOrder] [nchar](30) NULL,
+	[millNum] [nchar](30) NULL,
+	[heat] [nchar](50) NULL,
+	[pieceCount] [int] NOT NULL,
+	[alloyID] [int] NOT NULL,
+	[finishID] [int] NOT NULL,
+	[thickness] [decimal](18, 4) NULL,
+	[width] [decimal](18, 3) NULL,
+	[length] [decimal](18, 3) NULL,
+	[weight] [int] NULL
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[receiveHdr]    Script Date: 2/22/2019 12:12:11 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[receiveHdr](
+	[receiveID] [int] NOT NULL,
+	[custID] [int] NOT NULL,
+	[purchaseOrder] [nchar](50) NOT NULL,
+	[container] [nchar](50) NULL,
+	[receiveDate] [date] NOT NULL,
+	[status] [int] NULL,
+	[workerID] [int] NULL,
+ CONSTRAINT [PK_receiveHdr] PRIMARY KEY CLUSTERED 
+(
+	[receiveID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[receiveHdr] ADD  CONSTRAINT [DF_receiveHdr_receiveID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqReceiveID]) FOR [receiveID]
+GO
+
+ALTER TABLE [Arlington].[receiveHdr] ADD  CONSTRAINT [DF_receiveHdr_receiveDate]  DEFAULT (getdate()) FOR [receiveDate]
+GO
+
+/****** Object:  Table [Arlington].[skidType]    Script Date: 2/22/2019 12:12:24 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[skidType](
+	[skidTypeID] [int] NOT NULL,
+	[skidDescription] [nchar](50) NOT NULL,
+	[orderby] [int] NOT NULL,
+	[skidLetter] [nchar](10) NOT NULL,
+ CONSTRAINT [PK_skidType] PRIMARY KEY CLUSTERED 
+(
+	[skidTypeID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[skidType] ADD  CONSTRAINT [DF_skidType_skidTypeID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqSkidTypeID]) FOR [skidTypeID]
+GO
+
+/****** Object:  Table [Arlington].[SlitterTrimTable]    Script Date: 2/22/2019 12:12:34 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[SlitterTrimTable](
+	[machineID] [int] NOT NULL,
+	[fromTrim] [decimal](18, 4) NOT NULL,
+	[toTrim] [decimal](18, 4) NOT NULL,
+	[TrimAmount] [decimal](18, 4) NOT NULL,
+ CONSTRAINT [PK_SlitterTrimTable] PRIMARY KEY CLUSTERED 
+(
+	[machineID] ASC,
+	[fromTrim] ASC,
+	[toTrim] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [Arlington].[workers]    Script Date: 2/22/2019 12:12:45 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Arlington].[workers](
+	[workerID] [int] NOT NULL,
+	[firstName] [nchar](10) NULL,
+	[lastName] [nchar](15) NULL,
+	[active] [int] NULL,
+ CONSTRAINT [PK_workers] PRIMARY KEY CLUSTERED 
+(
+	[workerID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Arlington].[workers] ADD  CONSTRAINT [DF_workers_workerID]  DEFAULT (NEXT VALUE FOR [Arlington].[seqWorkerID]) FOR [workerID]
+GO
+
+
+
+
+
+
+

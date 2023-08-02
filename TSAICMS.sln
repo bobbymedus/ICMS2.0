@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICMS", "DesktopApp2\ICMS.csproj", "{F43B597E-4CDB-4725-AE6E-BA2D87FD5B19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ICMS 2.0", "DesktopApp2\ICMS 2.0.csproj", "{F43B597E-4CDB-4725-AE6E-BA2D87FD5B19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
