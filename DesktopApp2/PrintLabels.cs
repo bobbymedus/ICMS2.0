@@ -847,7 +847,7 @@ namespace ICMS
 
         public void PVCLabelZebra(string strPrinter)
         {
-
+            //test hi
             StringBuilder sb = new StringBuilder();
             sb.Append("^XA\r\n");
             sb.Append("^CF0,60");
