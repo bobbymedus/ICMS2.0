@@ -849,11 +849,11 @@ namespace ICMS
         {
             //test hi
             StringBuilder sb = new StringBuilder();
-            //sb.Append("^XA\r\n");
-            //sb.Append("^CF0,60");
-            //sb.Append("^FO740,10^GB70,1200,50^FS\r\n");
-            //sb.Append("^FWR^FO740,410^FR^FDPVC INVENTORY LABEL^FS\r\n");
-            //sb.Append("^CF0,60\r\n");
+            sb.Append("^XA\r\n");
+            sb.Append("^CF0,60");
+            sb.Append("^FO740,10^GB70,1200,50^FS\r\n");
+            sb.Append("^FWR^FO740,410^FR^FDPVC INVENTORY LABEL^FS\r\n");
+            sb.Append("^CF0,60\r\n");
             sb.Append("^FO670,20^FD" + pvcTagInfo.Width.ToString("G29") + " Wide^FS\r\n");
             sb.Append("^FO600,20^FD" + pvcTagInfo.ShortDesc + "^FS\r\n");
             
