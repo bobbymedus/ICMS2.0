@@ -394,7 +394,13 @@ namespace ICMS
                 get { return recDate; }
                 set { recDate = value; }
             }
+            private string location;
 
+            public string Location
+            {
+                get { return location; }
+                set { location = value; }
+            }
         }
 
         public skidLabelInfo SkidLabelInfo = new skidLabelInfo();
@@ -817,7 +823,8 @@ namespace ICMS
             sb.Append("<STX>H5;o1,350;f0;c26;h36;w30;d0,30;<ETX>\r\n");
             sb.Append("<STX>H6;o600,240;f0;c26;h20;w20;d0,30;<ETX>\r\n");
             sb.Append("<STX>H7;o600,290;f0;c26;h20;w20;d0,30;<ETX>\r\n");
-            sb.Append("<STX>H8;o1,0;f0;h28;w48;c25;r0;b3;d3, PVC INVENTORY LABEL ;<ETX>\r\n");
+            sb.Append("<STX>H8;o600,340;f0;c26;h20;w20;d0,30;<ETX>\r\n");
+            sb.Append("<STX>H9;o1,0;f0;h28;w48;c25;r0;b3;d3, PVC INVENTORY LABEL ;<ETX>\r\n");
             sb.Append("<STX>R;<ETX>\r\n");
             sb.Append("<STX><ESC>E4<ETX>\r\n");
             sb.Append("<STX><CAN><ETX>\r\n");
@@ -829,6 +836,7 @@ namespace ICMS
             sb.Append("<STX>" + pvcTagInfo.CustName + "<CR><ETX>\r\n");
             sb.Append("<STX>PO: " + pvcTagInfo.PoNum + "<CR><ETX>\r\n");
             sb.Append("<STX>RV: " + pvcTagInfo.RecID.ToString() + " - " + pvcTagInfo.RecDate.ToString("d") + "<CR><ETX>\r\n");
+            sb.Append("<STX>Loc: " + pvcTagInfo.Location + "<CR><ETX>\r\n");
             sb.Append("<STX><ETB><ETX>\r\n");
 
             
@@ -854,13 +862,12 @@ namespace ICMS
             sb.Append("^CF0,90\r\n");
             if (pvcTagInfo.CustName.Length <= 15)
             {
-                sb.Append("^FO560,550^FD" + pvcTagInfo.CustName.Substring(0, pvcTagInfo.CustName.Length) + "^FS\r\n");
+                sb.Append("^FO560,550^FD" + pvcTagInfo.CustName + "^FS\r\n");
             }
             else
             {
                 sb.Append("^FO560,550^FD" + pvcTagInfo.CustName.Substring(0, 15) + "^FS\r\n");
             }
-
             sb.Append("^CF0,40\r\n");
             sb.Append("^FO500,500^FDPO: " + pvcTagInfo.PoNum + "^FS\r\n");
             sb.Append("^FO460,500^FDRv: " + pvcTagInfo.RecID.ToString() + " - " + pvcTagInfo.RecDate.ToString("d") + "^FS\r\n");

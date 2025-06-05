@@ -227,6 +227,11 @@ namespace ICMS
                 StringBuilder sb = new StringBuilder();
 
                 sb.Append("insert into " + PlantLocation.city + ".skidData ");
+                sb.Append("([skidID],[coilTagSuffix],[letter],[location],[alloyID] , ");
+                sb.Append("[finishID],[customerID],[branchID],[orderID],[sequenceNum],[sheetWeight],[length] ");
+                sb.Append(",[width],[diagnol1],[diagnol2],[mic1],[mic2],[mic3],[orderedPieceCount],[pieceCount]");
+                sb.Append(",[pvcID],[pvcPrice],[paper],[comments],[skidStatus],[skidTypeID],[skidPrice],[notPrime]) ");
+                sb.Append("output inserted.letter ");
                 sb.Append("select distinct c.coiltagid,c.coiltagsuffix, ");
                 sb.Append("iif(ascii(" + PlantLocation.city + ".GetMaxskid(c.coilTagID,c.coilTagSuffix))=32, 'A',char(ascii(" + PlantLocation.city + ".GetMaxskid(c.coilTagID,c.coilTagSuffix))+1)),");
                 sb.Append("c.location,	c.alloyid, 	c.finishID,	c.customerID, ");
@@ -256,8 +261,9 @@ namespace ICMS
                     SQLConn.conn.Open();
                 }
 
-                cmd.ExecuteScalar();
+                string skidid = (string)cmd.ExecuteScalar();
 
+                skidid = skidid.Trim();
 
                 sb.Clear();
 
@@ -279,6 +285,28 @@ namespace ICMS
                 cmd.Parameters.AddWithValue("@suffix", coilTagSuffix);
 
                 cmd.ExecuteScalar();
+
+                sb.Clear();
+
+                sb.Append("Update " + PlantLocation.city + ".receiveDtl set skidLetter = @skidletter where coiltagid = @tagID");
+
+                sql = sb.ToString();
+
+                cmd = new SqlCommand
+                {
+
+                    // Set connection for Command.
+                    Connection = SQLConn.conn,
+                    CommandText = sql,
+                    Transaction = tran
+
+
+                };
+                cmd.Parameters.AddWithValue("@tagID", coilTagID);
+                cmd.Parameters.AddWithValue("@skidletter", skidid);
+
+                cmd.ExecuteScalar();
+
                 return 1;
             }catch (Exception ex)
             {
@@ -2862,37 +2890,37 @@ namespace ICMS
             //receiving
             sb.Append("select distinct coiltagid from " + PlantLocation.city + ".receiveHdr rh, " + PlantLocation.city + ".receiveDtl rd ");
             sb.Append("where rh.receiveID = rd.receiveID ");
-            sb.Append("and rd.purchaseOrder = @customerPO ");
+            sb.Append("and rd.purchaseOrder like  @customerPO ");
             //CTL
             sb.Append("union ");
             sb.Append("select distinct coilTagID from " + PlantLocation.city + ".orderhdr oh, " + PlantLocation.city + ".CTLDetail op ");
             sb.Append("where oh.OrderID = op.orderID ");
-            sb.Append("and customerPO = @customerPO ");
+            sb.Append("and customerPO like @customerPO ");
             sb.Append("union ");
             //sheet polish/Buff
             sb.Append("select distinct skidid from " + PlantLocation.city + ".orderhdr oh, " + PlantLocation.city + ".OrderPolishDtl op ");
             sb.Append("where oh.OrderID = op.orderID ");
-            sb.Append("and customerPO = @customerPO ");
+            sb.Append("and customerPO like @customerPO ");
             sb.Append("union ");
             //coil polish
             sb.Append("select distinct coilTagID from " + PlantLocation.city + ".orderhdr oh, " + PlantLocation.city + ".CoilPolishHdr op ");
             sb.Append("where oh.OrderID = op.orderID ");
-            sb.Append("and customerPO = @customerPO ");
+            sb.Append("and customerPO like @customerPO ");
             sb.Append("union ");
             //slitting
             sb.Append("select distinct coilTagID from " + PlantLocation.city + ".orderhdr oh, " + PlantLocation.city + ".CoilSlitOrderHdr op ");
             sb.Append("where oh.OrderID = op.orderID ");
-            sb.Append("and customerPO = @customerPO ");
+            sb.Append("and customerPO like @customerPO ");
             sb.Append("union ");
             //shearing
             sb.Append("select distinct skidid from " + PlantLocation.city + ".orderhdr oh, " + PlantLocation.city + ".OrderShearMaterial op ");
             sb.Append("where oh.OrderID = op.orderID ");
-            sb.Append("and customerPO = @customerPO ");
+            sb.Append("and customerPO like @customerPO ");
             sb.Append("union ");
             //shipping
             sb.Append("select distinct ID from " + PlantLocation.city + ".shipHdr sh, " + PlantLocation.city + ".shipdtl sd ");
             sb.Append("where sh.shipID = sd.shipid ");
-            sb.Append("and (sh.releaseNUM = @customerPO or custPO = @customerPO) ");
+            sb.Append("and (sh.releaseNUM like @customerPO or custPO like @customerPO) ");
             sb.Append("order by 1");
 
             String sql = sb.ToString();
@@ -2904,7 +2932,7 @@ namespace ICMS
                 Connection = SQLConn.conn,
                 CommandText = sql
             };
-            cmd.Parameters.AddWithValue("@customerPO", customerPO);
+            cmd.Parameters.AddWithValue("@customerPO", "%" + customerPO + "%");
 
 
             if (SQLConn.conn.State == ConnectionState.Closed)
@@ -2923,7 +2951,7 @@ namespace ICMS
                     }
                 }
             }
-
+            
 
             return poTags;
 
@@ -2939,7 +2967,7 @@ namespace ICMS
             StringBuilder sb = new StringBuilder();
             
             sb.Append("select distinct coiltagid from " + PlantLocation.city + ".coil c ");
-            sb.Append("where c.millCoilNum =  @millNum ");
+            sb.Append("where c.millCoilNum like  @millNum ");
             
 
             String sql = sb.ToString();
@@ -2951,7 +2979,7 @@ namespace ICMS
                 Connection = SQLConn.conn,
                 CommandText = sql
             };
-            cmd.Parameters.AddWithValue("@millNum", millNum);
+            cmd.Parameters.AddWithValue("@millNum", "%" + millNum + "%");
 
             if (SQLConn.conn.State == ConnectionState.Closed)
             {
@@ -3214,7 +3242,7 @@ namespace ICMS
             return hdrRecID;
         }
 
-        public DbDataReader GetCoilInfo(int coilID = 0, string coiltagSuffix = "", int customerID = 0, SqlTransaction tran = null, bool useConn1 = true)
+        public DbDataReader GetCoilInfo(int coilID = 0, string coiltagSuffix = "", int customerID = 0, SqlTransaction tran = null, bool useConn1 = false)
         {
 
             StringBuilder sb = new StringBuilder();
@@ -5257,7 +5285,7 @@ namespace ICMS
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("select oh.orderID,sd.skidid, ");
-            sb.Append("sd.coiltagsuffix,");
+            sb.Append("sd.coiltagsuffix,oh.breakin, ");
             sb.Append("procprice,cwc.previousWeight,cwc.currentWeight,cwc.previousWeight * procprice as ProcTotal,'Paper' as TotType,");
             sb.Append("sum((sd.length * sd.width * sd.pieceCount)/144) as sqft,paperPrice as adderPrice, ");
             sb.Append("sum(((sd.length * sd.width * sd.pieceCount) / 144) * PaperPrice) as TypeTotal, ma.PriceMinOrder ");
@@ -5269,9 +5297,9 @@ namespace ICMS
             sb.Append("and cwc.referenceNumber = oh.orderID ");
             sb.Append("and sd.orderid = @orderID ");
             sb.Append("and oh.machineID = ma.machineID ");
-            sb.Append("group by oh.orderID, sd.skidid,sd.coiltagsuffix,cwc.previousWeight, procprice, ma.PriceMinOrder ,oh.paperprice,cwc.currentWeight ");
+            sb.Append("group by oh.orderID, sd.skidid,sd.coiltagsuffix,oh.breakin,cwc.previousWeight, procprice, ma.PriceMinOrder ,oh.paperprice,cwc.currentWeight ");
             sb.Append("union ");
-            sb.Append("select oh.orderID, sd.skidid,sd.coiltagsuffix,procprice,cwc.previousWeight,cwc.currentWeight, ");
+            sb.Append("select oh.orderID, sd.skidid,sd.coiltagsuffix,oh.breakin,procprice,cwc.previousWeight,cwc.currentWeight, ");
             sb.Append("cwc.previousWeight * procprice as ProcTotal,pg.GroupName as TotType, ");
             sb.Append("sum((sd.length * sd.width * sd.pieceCount)/144) as sqft,sd.pvcPrice as adderPrice, ");
             sb.Append("sum(((sd.length * sd.width * sd.pieceCount) / 144) * sd.pvcPrice) as TypeTotal, ma.PriceMinOrder ");
@@ -5285,7 +5313,7 @@ namespace ICMS
             sb.Append("and sd.orderid = @orderID ");
             sb.Append("and pg.GroupID = sd.pvcID ");
             sb.Append("and oh.machineID = ma.machineID ");
-            sb.Append("group by oh.orderID, sd.skidid, sd.coiltagsuffix,cwc.previousWeight, procprice,");
+            sb.Append("group by oh.orderID, sd.skidid, sd.coiltagsuffix,oh.breakin,cwc.previousWeight, procprice,");
             sb.Append("sd.pvcid, pg.GroupName, ma.PriceMinOrder, sd.pvcprice,cwc.currentWeight  ");
             sb.Append("order by sd.skidid, sd.coiltagsuffix, TotType");
             string sql = sb.ToString();

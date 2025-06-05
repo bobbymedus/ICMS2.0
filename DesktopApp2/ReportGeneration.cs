@@ -1969,7 +1969,7 @@ namespace ICMS
 
         }
 
-            public void WorkOrderShShSame(int orderID, _Worksheet oSheet, int status)
+        public void WorkOrderShShSame(int orderID, _Worksheet oSheet, int status)
         {
 
             DBUtils db = new DBUtils();
@@ -3061,7 +3061,7 @@ namespace ICMS
                         }
                         else
                         {
-                            using (DbDataReader reader1 = db.GetCoilInfo(coilTagID, coilTagSuffix))
+                            using (DbDataReader reader1 = db.GetCoilInfo(coilTagID, coilTagSuffix,0,null,true))
                             {
                                 if (reader1.HasRows)
                                 {

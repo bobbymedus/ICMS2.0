@@ -125,6 +125,7 @@ namespace ICMS
                 int prevTagID = -1;
                 string prevTagSuffix = "NOPE";
                 int cntr = 2;
+                bool hasbreakin = false;
                 using (DbDataReader reader = db.GetCTLPricing(orderID))
                 {
                     if (reader.HasRows)
@@ -133,7 +134,7 @@ namespace ICMS
                         {
                             int tagID = reader.GetInt32(reader.GetOrdinal("skidID"));
                             string tagSuffix = reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
-
+                            
                             if (prevTagID != tagID || !prevTagSuffix.Equals(tagSuffix))
                             {
                                 //public class adderPrices
@@ -144,7 +145,18 @@ namespace ICMS
                                 //    public int amount;
                                 //    public int ordBy;
                                 //}
-                                
+                                decimal breakin = reader.GetDecimal(reader.GetOrdinal("breakin"));
+                                if (breakin > 0 && !hasbreakin)
+                                {
+                                    adderPrices apBR = new adderPrices();
+                                    apBR.adderDesc = "Break In";
+                                    apBR.total = breakin;
+                                    apBR.charge = breakin;
+                                    apBR.amount = 1;
+                                    apBR.ordBy = 99999998;
+                                    finalAdders.Add(apBR);
+                                }
+
 
                                 adderPrices ap = new adderPrices();
                                 ap.adderDesc = "CTL Charge";
@@ -158,7 +170,7 @@ namespace ICMS
                                 prevTagID = tagID;
                                 prevTagSuffix = tagSuffix;
 
-                                //I think I need to add scrap credit here.
+                                
                                 adderPrices ap1 = new adderPrices();
 
                                 db.OpenSQLConn1();

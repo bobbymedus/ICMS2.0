@@ -202,183 +202,6 @@ namespace DesktopApp2
             this.tabControlProcess = new System.Windows.Forms.TabControl();
             this.tabControlMachines = new System.Windows.Forms.TabControl();
             this.tabPageOrders = new System.Windows.Forms.TabPage();
-            this.panelSheetSheetSame = new System.Windows.Forms.Panel();
-            this.cbShShSmPrintOpTag = new System.Windows.Forms.CheckBox();
-            this.btnSSSmAddTag = new System.Windows.Forms.Button();
-            this.btnOrderShShSameDeleteRow = new System.Windows.Forms.Button();
-            this.btnShShModifyDelete = new System.Windows.Forms.Button();
-            this.btnShShSmAdderDone = new System.Windows.Forms.Button();
-            this.lblShShSmPaperPrice = new System.Windows.Forms.Label();
-            this.tbShShSmPaperPrice = new System.Windows.Forms.TextBox();
-            this.dgvShShSmAdders = new System.Windows.Forms.DataGridView();
-            this.dgvAdderColSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvSSSmAdderDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmAdderPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnSSMCancel = new System.Windows.Forms.Button();
-            this.labelSSSmSpecialLeadTime = new System.Windows.Forms.Label();
-            this.textBoxSSSmRunSheet = new System.Windows.Forms.TextBox();
-            this.labelSSSmRunSheet = new System.Windows.Forms.Label();
-            this.comboBoxSSSmModify = new System.Windows.Forms.ComboBox();
-            this.checkBoxSSSmModify = new System.Windows.Forms.CheckBox();
-            this.comboBoxSSSmMulti = new System.Windows.Forms.ComboBox();
-            this.checkBoxSSSmMultiStep = new System.Windows.Forms.CheckBox();
-            this.labelSSSmPrice = new System.Windows.Forms.Label();
-            this.labelSSSmPO = new System.Windows.Forms.Label();
-            this.labelSSSmPromiseDate = new System.Windows.Forms.Label();
-            this.textBoxSSSmPO = new System.Windows.Forms.TextBox();
-            this.textBoxSSSmPrice = new System.Windows.Forms.TextBox();
-            this.dateTimePickerSSSmPromiseDate = new System.Windows.Forms.DateTimePicker();
-            this.richTextBoxSSSmComments = new System.Windows.Forms.RichTextBox();
-            this.dataGridViewSSSmSkid = new System.Windows.Forms.DataGridView();
-            this.dgvSSSmBreakSkid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvSSSmSkidID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmLetter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmPieces = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmAlloy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmNewFinish = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmThickness = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmPVC = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmPaper = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvSSSmLineMark = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvSSSmComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmBranch = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmAdders = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmBranchID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmAdderID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmAdderPriceCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmAlloyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmFinishID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmDensityFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmOrigFinish = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSSmPVCGroupID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmPVCPriceList = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSSmCurrPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.listViewSSSmSkidData = new System.Windows.Forms.ListView();
-            this.columnHeader43 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader44 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader45 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader46 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader47 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader48 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader49 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader50 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader101 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader102 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader51 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader52 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader53 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader54 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader55 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvsssOrders = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.buttonSSSmAddOrder = new System.Windows.Forms.Button();
-            this.buttonSSSmStartOrder = new System.Windows.Forms.Button();
-            this.panelCoilCoilSame = new System.Windows.Forms.Panel();
-            this.lblClClSmPaperPrice = new System.Windows.Forms.Label();
-            this.tbClClSmPaperPrice = new System.Windows.Forms.TextBox();
-            this.buttonClClSameDelete = new System.Windows.Forms.Button();
-            this.comboBoxClClSameModify = new System.Windows.Forms.ComboBox();
-            this.checkBoxClClSameModify = new System.Windows.Forms.CheckBox();
-            this.labelClClSameMultiToMachine = new System.Windows.Forms.Label();
-            this.comboBoxClClSameToMachine = new System.Windows.Forms.ComboBox();
-            this.checkBoxClClSameMultiStep = new System.Windows.Forms.CheckBox();
-            this.buttonClClSameReset = new System.Windows.Forms.Button();
-            this.labelClClSamePrice = new System.Windows.Forms.Label();
-            this.labelClClSamePO = new System.Windows.Forms.Label();
-            this.labelClClSamePromiseDate = new System.Windows.Forms.Label();
-            this.checkBoxClClSameScrap = new System.Windows.Forms.CheckBox();
-            this.textBoxClClSamePO = new System.Windows.Forms.TextBox();
-            this.textBoxClClSamePrice = new System.Windows.Forms.TextBox();
-            this.dateTimePickerClClSamePromise = new System.Windows.Forms.DateTimePicker();
-            this.richTextBoxClClSameComments = new System.Windows.Forms.RichTextBox();
-            this.dataGridViewCLCLSame = new System.Windows.Forms.DataGridView();
-            this.colClClSameCoilTagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClCLSameThickness = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClClSameWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClClSameAlloy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClClSameOrigFinish = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClClSameNewFinish = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colClClSameOrigLBS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClClSamePolishLBS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClClSameCoilCnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colClClSamePolWeights = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colClClSamePaper = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.colClClSameNewFinishID = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.colClClSameCoilFinish = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.listViewClClSame = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvCCSOrders = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.buttonClClSameAddOrder = new System.Windows.Forms.Button();
-            this.buttonCLCLSameStartOrder = new System.Windows.Forms.Button();
-            this.panelSheetSheetDiff = new System.Windows.Forms.Panel();
-            this.panelSSDOrderEntry = new System.Windows.Forms.Panel();
-            this.buttonClearAll = new System.Windows.Forms.Button();
-            this.buttonAddCuts = new System.Windows.Forms.Button();
-            this.treeViewSSD = new System.Windows.Forms.TreeView();
-            this.dgvSSDItems = new System.Windows.Forms.DataGridView();
-            this.dgvSSDHeat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSDAlloy = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSDPieceCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSDWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSDLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvSSDSkidIDs = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSDCoilTagSuffix = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSDOrigPcs = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgvSSDCutPcs = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.buttonSSDCancelOrder = new System.Windows.Forms.Button();
-            this.checkBoxSSDScrapCredit = new System.Windows.Forms.CheckBox();
-            this.checkBoxCutFullSkids = new System.Windows.Forms.CheckBox();
-            this.labelSSDSpecialLeadTime = new System.Windows.Forms.Label();
-            this.textBoxSSDRunSheetComments = new System.Windows.Forms.TextBox();
-            this.labelSSDRunSheetComments = new System.Windows.Forms.Label();
-            this.comboBoxSSDModify = new System.Windows.Forms.ComboBox();
-            this.checkBoxSSDModify = new System.Windows.Forms.CheckBox();
-            this.comboBoxSSDMultiStep = new System.Windows.Forms.ComboBox();
-            this.checkBoxSSDMultiStep = new System.Windows.Forms.CheckBox();
-            this.labelSSDPrice = new System.Windows.Forms.Label();
-            this.labelSSDPO = new System.Windows.Forms.Label();
-            this.labelSSDPromiseDate = new System.Windows.Forms.Label();
-            this.textBoxSSDPurchaseOrder = new System.Windows.Forms.TextBox();
-            this.textBoxSSDPrice = new System.Windows.Forms.TextBox();
-            this.dateTimePickerSSDPromiseDate = new System.Windows.Forms.DateTimePicker();
-            this.richTextBoxSSDComments = new System.Windows.Forms.RichTextBox();
-            this.buttonSSDAddOrder = new System.Windows.Forms.Button();
-            this.listViewSSD = new System.Windows.Forms.ListView();
-            this.columnHeader87 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader88 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader89 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader90 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader91 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader92 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader93 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader94 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader100 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvheat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader95 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader96 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader97 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader98 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader99 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwSSDOrders = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.buttonSSDStartOrder = new System.Windows.Forms.Button();
             this.panelCoilSheetSame = new System.Windows.Forms.Panel();
             this.cbCTLWeightCalc = new System.Windows.Forms.CheckBox();
             this.btnOrderCTLAddTag = new System.Windows.Forms.Button();
@@ -515,6 +338,157 @@ namespace DesktopApp2
             this.lvCCDOrders = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonClClDiffStartOrder = new System.Windows.Forms.Button();
             this.buttonClClDiffAddOrder = new System.Windows.Forms.Button();
+            this.panelSheetSheetSame = new System.Windows.Forms.Panel();
+            this.cbShShSmPrintOpTag = new System.Windows.Forms.CheckBox();
+            this.btnSSSmAddTag = new System.Windows.Forms.Button();
+            this.btnOrderShShSameDeleteRow = new System.Windows.Forms.Button();
+            this.btnShShModifyDelete = new System.Windows.Forms.Button();
+            this.btnShShSmAdderDone = new System.Windows.Forms.Button();
+            this.lblShShSmPaperPrice = new System.Windows.Forms.Label();
+            this.tbShShSmPaperPrice = new System.Windows.Forms.TextBox();
+            this.dgvShShSmAdders = new System.Windows.Forms.DataGridView();
+            this.dgvAdderColSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvSSSmAdderDesc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmAdderPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnSSMCancel = new System.Windows.Forms.Button();
+            this.labelSSSmSpecialLeadTime = new System.Windows.Forms.Label();
+            this.textBoxSSSmRunSheet = new System.Windows.Forms.TextBox();
+            this.labelSSSmRunSheet = new System.Windows.Forms.Label();
+            this.comboBoxSSSmModify = new System.Windows.Forms.ComboBox();
+            this.checkBoxSSSmModify = new System.Windows.Forms.CheckBox();
+            this.comboBoxSSSmMulti = new System.Windows.Forms.ComboBox();
+            this.checkBoxSSSmMultiStep = new System.Windows.Forms.CheckBox();
+            this.labelSSSmPrice = new System.Windows.Forms.Label();
+            this.labelSSSmPO = new System.Windows.Forms.Label();
+            this.labelSSSmPromiseDate = new System.Windows.Forms.Label();
+            this.textBoxSSSmPO = new System.Windows.Forms.TextBox();
+            this.textBoxSSSmPrice = new System.Windows.Forms.TextBox();
+            this.dateTimePickerSSSmPromiseDate = new System.Windows.Forms.DateTimePicker();
+            this.richTextBoxSSSmComments = new System.Windows.Forms.RichTextBox();
+            this.dataGridViewSSSmSkid = new System.Windows.Forms.DataGridView();
+            this.listViewSSSmSkidData = new System.Windows.Forms.ListView();
+            this.columnHeader43 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader44 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader45 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader46 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader47 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader48 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader49 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader50 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader101 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader102 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader51 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader52 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader53 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader54 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader55 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvsssOrders = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonSSSmAddOrder = new System.Windows.Forms.Button();
+            this.buttonSSSmStartOrder = new System.Windows.Forms.Button();
+            this.panelCoilCoilSame = new System.Windows.Forms.Panel();
+            this.lblClClSmPaperPrice = new System.Windows.Forms.Label();
+            this.tbClClSmPaperPrice = new System.Windows.Forms.TextBox();
+            this.buttonClClSameDelete = new System.Windows.Forms.Button();
+            this.comboBoxClClSameModify = new System.Windows.Forms.ComboBox();
+            this.checkBoxClClSameModify = new System.Windows.Forms.CheckBox();
+            this.labelClClSameMultiToMachine = new System.Windows.Forms.Label();
+            this.comboBoxClClSameToMachine = new System.Windows.Forms.ComboBox();
+            this.checkBoxClClSameMultiStep = new System.Windows.Forms.CheckBox();
+            this.buttonClClSameReset = new System.Windows.Forms.Button();
+            this.labelClClSamePrice = new System.Windows.Forms.Label();
+            this.labelClClSamePO = new System.Windows.Forms.Label();
+            this.labelClClSamePromiseDate = new System.Windows.Forms.Label();
+            this.checkBoxClClSameScrap = new System.Windows.Forms.CheckBox();
+            this.textBoxClClSamePO = new System.Windows.Forms.TextBox();
+            this.textBoxClClSamePrice = new System.Windows.Forms.TextBox();
+            this.dateTimePickerClClSamePromise = new System.Windows.Forms.DateTimePicker();
+            this.richTextBoxClClSameComments = new System.Windows.Forms.RichTextBox();
+            this.dataGridViewCLCLSame = new System.Windows.Forms.DataGridView();
+            this.colClClSameCoilTagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClCLSameThickness = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSameWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSameAlloy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSameOrigFinish = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSameNewFinish = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colClClSameOrigLBS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSamePolishLBS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSameCoilCnt = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSamePolWeights = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colClClSamePaper = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.colClClSameNewFinishID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.colClClSameCoilFinish = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.listViewClClSame = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvCCSOrders = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonClClSameAddOrder = new System.Windows.Forms.Button();
+            this.buttonCLCLSameStartOrder = new System.Windows.Forms.Button();
+            this.panelSheetSheetDiff = new System.Windows.Forms.Panel();
+            this.panelSSDOrderEntry = new System.Windows.Forms.Panel();
+            this.buttonClearAll = new System.Windows.Forms.Button();
+            this.buttonAddCuts = new System.Windows.Forms.Button();
+            this.treeViewSSD = new System.Windows.Forms.TreeView();
+            this.dgvSSDItems = new System.Windows.Forms.DataGridView();
+            this.dgvSSDHeat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSDAlloy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSDPieceCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSDWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSDLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSDSkidIDs = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSDCoilTagSuffix = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSDOrigPcs = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSDCutPcs = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.buttonSSDCancelOrder = new System.Windows.Forms.Button();
+            this.checkBoxSSDScrapCredit = new System.Windows.Forms.CheckBox();
+            this.checkBoxCutFullSkids = new System.Windows.Forms.CheckBox();
+            this.labelSSDSpecialLeadTime = new System.Windows.Forms.Label();
+            this.textBoxSSDRunSheetComments = new System.Windows.Forms.TextBox();
+            this.labelSSDRunSheetComments = new System.Windows.Forms.Label();
+            this.comboBoxSSDModify = new System.Windows.Forms.ComboBox();
+            this.checkBoxSSDModify = new System.Windows.Forms.CheckBox();
+            this.comboBoxSSDMultiStep = new System.Windows.Forms.ComboBox();
+            this.checkBoxSSDMultiStep = new System.Windows.Forms.CheckBox();
+            this.labelSSDPrice = new System.Windows.Forms.Label();
+            this.labelSSDPO = new System.Windows.Forms.Label();
+            this.labelSSDPromiseDate = new System.Windows.Forms.Label();
+            this.textBoxSSDPurchaseOrder = new System.Windows.Forms.TextBox();
+            this.textBoxSSDPrice = new System.Windows.Forms.TextBox();
+            this.dateTimePickerSSDPromiseDate = new System.Windows.Forms.DateTimePicker();
+            this.richTextBoxSSDComments = new System.Windows.Forms.RichTextBox();
+            this.buttonSSDAddOrder = new System.Windows.Forms.Button();
+            this.listViewSSD = new System.Windows.Forms.ListView();
+            this.columnHeader87 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader88 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader89 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader90 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader91 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader92 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader93 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader94 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader100 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvheat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader95 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader96 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader97 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader98 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader99 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwSSDOrders = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.buttonSSDStartOrder = new System.Windows.Forms.Button();
             this.tabPageReports = new System.Windows.Forms.TabPage();
             this.panelReportOperatorTags = new System.Windows.Forms.Panel();
             this.btnReportOperatorTag = new System.Windows.Forms.Button();
@@ -918,6 +892,36 @@ namespace DesktopApp2
             this.transferToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmPVCLabelPrint = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.printPVCLabelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbCTLBreakIn = new System.Windows.Forms.CheckBox();
+            this.tbCTLBreakIn = new System.Windows.Forms.TextBox();
+            this.cbSSBreakIn = new System.Windows.Forms.CheckBox();
+            this.tbSSBreakIn = new System.Windows.Forms.TextBox();
+            this.dgvSSSmBreakSkid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvSSSmSkidID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmLetter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmPieces = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmAlloy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmNewFinish = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmThickness = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmWeight = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmPVC = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmPaper = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvSSSmLineMark = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvSSSmComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmBranch = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmAdders = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmBranchID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmAdderID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmAdderPriceCol = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmAlloyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmFinishID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmDensityFactor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmOrigFinish = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvSSSmPVCGroupID = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmPVCPriceList = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmCurrPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStrip1.SuspendLayout();
             this.tabControlSettings.SuspendLayout();
             this.tabPageAdders.SuspendLayout();
@@ -941,6 +945,11 @@ namespace DesktopApp2
             ((System.ComponentModel.ISupportInitialize)(this.chartSPHistory)).BeginInit();
             this.tabPageAbout.SuspendLayout();
             this.tabPageOrders.SuspendLayout();
+            this.panelCoilSheetSame.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdders)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTLOrderEntry)).BeginInit();
+            this.panelClClDiff.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClClDiff)).BeginInit();
             this.panelSheetSheetSame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShShSmAdders)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSSSmSkid)).BeginInit();
@@ -949,11 +958,6 @@ namespace DesktopApp2
             this.panelSheetSheetDiff.SuspendLayout();
             this.panelSSDOrderEntry.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSSDItems)).BeginInit();
-            this.panelCoilSheetSame.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdders)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTLOrderEntry)).BeginInit();
-            this.panelClClDiff.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClClDiff)).BeginInit();
             this.tabPageReports.SuspendLayout();
             this.panelReportOperatorTags.SuspendLayout();
             this.panelReportTransfer.SuspendLayout();
@@ -2818,8 +2822,8 @@ namespace DesktopApp2
             this.tabPageOrders.Controls.Add(this.panelSheetSheetSame);
             this.tabPageOrders.Controls.Add(this.panelCoilCoilSame);
             this.tabPageOrders.Controls.Add(this.panelSheetSheetDiff);
-            this.tabPageOrders.Controls.Add(this.panelCoilSheetSame);
             this.tabPageOrders.Controls.Add(this.panelClClDiff);
+            this.tabPageOrders.Controls.Add(this.panelCoilSheetSame);
             this.tabPageOrders.Location = new System.Drawing.Point(4, 25);
             this.tabPageOrders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPageOrders.Name = "tabPageOrders";
@@ -2829,11 +2833,1354 @@ namespace DesktopApp2
             this.tabPageOrders.Text = "Orders";
             this.tabPageOrders.UseVisualStyleBackColor = true;
             // 
+            // panelCoilSheetSame
+            // 
+            this.panelCoilSheetSame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelCoilSheetSame.Controls.Add(this.tbCTLBreakIn);
+            this.panelCoilSheetSame.Controls.Add(this.cbCTLBreakIn);
+            this.panelCoilSheetSame.Controls.Add(this.cbCTLWeightCalc);
+            this.panelCoilSheetSame.Controls.Add(this.btnOrderCTLAddTag);
+            this.panelCoilSheetSame.Controls.Add(this.cbCTLPaperDefault);
+            this.panelCoilSheetSame.Controls.Add(this.cbCTLPrintOperatorTags);
+            this.panelCoilSheetSame.Controls.Add(this.buttonCTLReset);
+            this.panelCoilSheetSame.Controls.Add(this.labelPaperPrice);
+            this.panelCoilSheetSame.Controls.Add(this.textBoxPaperPrice);
+            this.panelCoilSheetSame.Controls.Add(this.labelSpecialLeadTime);
+            this.panelCoilSheetSame.Controls.Add(this.dataGridViewAdders);
+            this.panelCoilSheetSame.Controls.Add(this.buttonCTLDeleteRow);
+            this.panelCoilSheetSame.Controls.Add(this.buttonAdderDone);
+            this.panelCoilSheetSame.Controls.Add(this.textBoxCTLRunSheetComments);
+            this.panelCoilSheetSame.Controls.Add(this.labelCTLRunSheetComments);
+            this.panelCoilSheetSame.Controls.Add(this.buttonCTLDelete);
+            this.panelCoilSheetSame.Controls.Add(this.comboBoxCTLModify);
+            this.panelCoilSheetSame.Controls.Add(this.checkBoxCTLModify);
+            this.panelCoilSheetSame.Controls.Add(this.labelCTLSendTo);
+            this.panelCoilSheetSame.Controls.Add(this.comboBoxCTLSendTo);
+            this.panelCoilSheetSame.Controls.Add(this.checkBoxCTLMultiStep);
+            this.panelCoilSheetSame.Controls.Add(this.labelCTLPrice);
+            this.panelCoilSheetSame.Controls.Add(this.labelCTLPO);
+            this.panelCoilSheetSame.Controls.Add(this.labelCTLPromiseDate);
+            this.panelCoilSheetSame.Controls.Add(this.checkBoxCTLScrapCredit);
+            this.panelCoilSheetSame.Controls.Add(this.textBoxCTLPO);
+            this.panelCoilSheetSame.Controls.Add(this.textBoxCTLPrice);
+            this.panelCoilSheetSame.Controls.Add(this.dateTimePickerCTLPromiseDate);
+            this.panelCoilSheetSame.Controls.Add(this.richTextBoxCTLComments);
+            this.panelCoilSheetSame.Controls.Add(this.buttonCTLArrowDown);
+            this.panelCoilSheetSame.Controls.Add(this.buttonCTLArrowUp);
+            this.panelCoilSheetSame.Controls.Add(this.dataGridViewCTLOrderEntry);
+            this.panelCoilSheetSame.Controls.Add(this.listViewCTLCoilList);
+            this.panelCoilSheetSame.Controls.Add(this.buttonCTLAddOrder);
+            this.panelCoilSheetSame.Controls.Add(this.buttonCTLStartOrder);
+            this.panelCoilSheetSame.Location = new System.Drawing.Point(-3, 7);
+            this.panelCoilSheetSame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelCoilSheetSame.Name = "panelCoilSheetSame";
+            this.panelCoilSheetSame.Size = new System.Drawing.Size(1140, 623);
+            this.panelCoilSheetSame.TabIndex = 0;
+            this.panelCoilSheetSame.Visible = false;
+            this.panelCoilSheetSame.VisibleChanged += new System.EventHandler(this.PanelCoilSheetSame_VisibleChanged);
+            // 
+            // cbCTLWeightCalc
+            // 
+            this.cbCTLWeightCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCTLWeightCalc.AutoSize = true;
+            this.cbCTLWeightCalc.Location = new System.Drawing.Point(941, 528);
+            this.cbCTLWeightCalc.Margin = new System.Windows.Forms.Padding(4);
+            this.cbCTLWeightCalc.Name = "cbCTLWeightCalc";
+            this.cbCTLWeightCalc.Size = new System.Drawing.Size(66, 20);
+            this.cbCTLWeightCalc.TabIndex = 52;
+            this.cbCTLWeightCalc.Text = "Actual";
+            this.cbCTLWeightCalc.UseVisualStyleBackColor = true;
+            // 
+            // btnOrderCTLAddTag
+            // 
+            this.btnOrderCTLAddTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnOrderCTLAddTag.Location = new System.Drawing.Point(155, 459);
+            this.btnOrderCTLAddTag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnOrderCTLAddTag.Name = "btnOrderCTLAddTag";
+            this.btnOrderCTLAddTag.Size = new System.Drawing.Size(85, 30);
+            this.btnOrderCTLAddTag.TabIndex = 51;
+            this.btnOrderCTLAddTag.Text = "Add Tag";
+            this.btnOrderCTLAddTag.UseVisualStyleBackColor = true;
+            this.btnOrderCTLAddTag.Visible = false;
+            this.btnOrderCTLAddTag.Click += new System.EventHandler(this.btnOrderCTLAddTag_Click);
+            // 
+            // cbCTLPaperDefault
+            // 
+            this.cbCTLPaperDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCTLPaperDefault.AutoSize = true;
+            this.cbCTLPaperDefault.Location = new System.Drawing.Point(942, 502);
+            this.cbCTLPaperDefault.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbCTLPaperDefault.Name = "cbCTLPaperDefault";
+            this.cbCTLPaperDefault.Size = new System.Drawing.Size(111, 20);
+            this.cbCTLPaperDefault.TabIndex = 50;
+            this.cbCTLPaperDefault.Text = "Default Paper";
+            this.cbCTLPaperDefault.UseVisualStyleBackColor = true;
+            this.cbCTLPaperDefault.CheckedChanged += new System.EventHandler(this.cbCTLPaperDefault_CheckedChanged);
+            // 
+            // cbCTLPrintOperatorTags
+            // 
+            this.cbCTLPrintOperatorTags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbCTLPrintOperatorTags.AutoSize = true;
+            this.cbCTLPrintOperatorTags.Checked = true;
+            this.cbCTLPrintOperatorTags.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbCTLPrintOperatorTags.Location = new System.Drawing.Point(800, 587);
+            this.cbCTLPrintOperatorTags.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbCTLPrintOperatorTags.Name = "cbCTLPrintOperatorTags";
+            this.cbCTLPrintOperatorTags.Size = new System.Drawing.Size(146, 20);
+            this.cbCTLPrintOperatorTags.TabIndex = 49;
+            this.cbCTLPrintOperatorTags.Text = "Print Operator Tags";
+            this.cbCTLPrintOperatorTags.UseVisualStyleBackColor = true;
+            // 
+            // buttonCTLReset
+            // 
+            this.buttonCTLReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCTLReset.Location = new System.Drawing.Point(1010, 460);
+            this.buttonCTLReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCTLReset.Name = "buttonCTLReset";
+            this.buttonCTLReset.Size = new System.Drawing.Size(112, 28);
+            this.buttonCTLReset.TabIndex = 15;
+            this.buttonCTLReset.Text = "Reset All";
+            this.buttonCTLReset.UseVisualStyleBackColor = true;
+            this.buttonCTLReset.Click += new System.EventHandler(this.ButtonCTLReset_Click);
+            // 
+            // labelPaperPrice
+            // 
+            this.labelPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelPaperPrice.AutoSize = true;
+            this.labelPaperPrice.Location = new System.Drawing.Point(731, 505);
+            this.labelPaperPrice.Name = "labelPaperPrice";
+            this.labelPaperPrice.Size = new System.Drawing.Size(78, 16);
+            this.labelPaperPrice.TabIndex = 48;
+            this.labelPaperPrice.Text = "Paper Price";
+            // 
+            // textBoxPaperPrice
+            // 
+            this.textBoxPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxPaperPrice.Location = new System.Drawing.Point(815, 502);
+            this.textBoxPaperPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxPaperPrice.Name = "textBoxPaperPrice";
+            this.textBoxPaperPrice.Size = new System.Drawing.Size(112, 22);
+            this.textBoxPaperPrice.TabIndex = 10;
+            this.textBoxPaperPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPaperPrice_KeyPress);
+            // 
+            // labelSpecialLeadTime
+            // 
+            this.labelSpecialLeadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelSpecialLeadTime.AutoSize = true;
+            this.labelSpecialLeadTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSpecialLeadTime.ForeColor = System.Drawing.Color.Red;
+            this.labelSpecialLeadTime.Location = new System.Drawing.Point(533, 594);
+            this.labelSpecialLeadTime.Name = "labelSpecialLeadTime";
+            this.labelSpecialLeadTime.Size = new System.Drawing.Size(153, 20);
+            this.labelSpecialLeadTime.TabIndex = 46;
+            this.labelSpecialLeadTime.Text = "Special Lead Time!";
+            this.labelSpecialLeadTime.Visible = false;
+            // 
+            // dataGridViewAdders
+            // 
+            this.dataGridViewAdders.AllowUserToAddRows = false;
+            this.dataGridViewAdders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewAdders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colSelect,
+            this.dgvAdderDesc,
+            this.dgvAdderPrice});
+            this.dataGridViewAdders.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridViewAdders.Location = new System.Drawing.Point(616, 55);
+            this.dataGridViewAdders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewAdders.MultiSelect = false;
+            this.dataGridViewAdders.Name = "dataGridViewAdders";
+            this.dataGridViewAdders.RowHeadersVisible = false;
+            this.dataGridViewAdders.RowHeadersWidth = 12;
+            this.dataGridViewAdders.RowTemplate.Height = 24;
+            this.dataGridViewAdders.Size = new System.Drawing.Size(347, 174);
+            this.dataGridViewAdders.TabIndex = 45;
+            this.dataGridViewAdders.Visible = false;
+            // 
+            // colSelect
+            // 
+            this.colSelect.HeaderText = "Sel";
+            this.colSelect.MinimumWidth = 6;
+            this.colSelect.Name = "colSelect";
+            this.colSelect.Width = 50;
+            // 
+            // dgvAdderDesc
+            // 
+            this.dgvAdderDesc.HeaderText = "Adder";
+            this.dgvAdderDesc.MinimumWidth = 6;
+            this.dgvAdderDesc.Name = "dgvAdderDesc";
+            this.dgvAdderDesc.Width = 125;
+            // 
+            // dgvAdderPrice
+            // 
+            this.dgvAdderPrice.HeaderText = "Price";
+            this.dgvAdderPrice.MinimumWidth = 6;
+            this.dgvAdderPrice.Name = "dgvAdderPrice";
+            this.dgvAdderPrice.Width = 125;
+            // 
+            // buttonCTLDeleteRow
+            // 
+            this.buttonCTLDeleteRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCTLDeleteRow.Location = new System.Drawing.Point(871, 461);
+            this.buttonCTLDeleteRow.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonCTLDeleteRow.Name = "buttonCTLDeleteRow";
+            this.buttonCTLDeleteRow.Size = new System.Drawing.Size(132, 27);
+            this.buttonCTLDeleteRow.TabIndex = 14;
+            this.buttonCTLDeleteRow.Text = "Delete Row";
+            this.buttonCTLDeleteRow.UseVisualStyleBackColor = true;
+            this.buttonCTLDeleteRow.Visible = false;
+            this.buttonCTLDeleteRow.Click += new System.EventHandler(this.ButtonCTLDeleteRow_Click);
+            // 
+            // buttonAdderDone
+            // 
+            this.buttonAdderDone.Location = new System.Drawing.Point(448, 202);
+            this.buttonAdderDone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAdderDone.Name = "buttonAdderDone";
+            this.buttonAdderDone.Size = new System.Drawing.Size(99, 27);
+            this.buttonAdderDone.TabIndex = 41;
+            this.buttonAdderDone.Text = "Done";
+            this.buttonAdderDone.UseVisualStyleBackColor = true;
+            this.buttonAdderDone.Click += new System.EventHandler(this.ButtonAdderDone_Click);
+            // 
+            // textBoxCTLRunSheetComments
+            // 
+            this.textBoxCTLRunSheetComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCTLRunSheetComments.Location = new System.Drawing.Point(643, 551);
+            this.textBoxCTLRunSheetComments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCTLRunSheetComments.Name = "textBoxCTLRunSheetComments";
+            this.textBoxCTLRunSheetComments.Size = new System.Drawing.Size(413, 22);
+            this.textBoxCTLRunSheetComments.TabIndex = 12;
+            this.textBoxCTLRunSheetComments.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCTLRunSheetComments_KeyPress);
+            // 
+            // labelCTLRunSheetComments
+            // 
+            this.labelCTLRunSheetComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelCTLRunSheetComments.AutoSize = true;
+            this.labelCTLRunSheetComments.Location = new System.Drawing.Point(491, 556);
+            this.labelCTLRunSheetComments.Name = "labelCTLRunSheetComments";
+            this.labelCTLRunSheetComments.Size = new System.Drawing.Size(136, 16);
+            this.labelCTLRunSheetComments.TabIndex = 38;
+            this.labelCTLRunSheetComments.Text = "Run Sheet Comments";
+            // 
+            // buttonCTLDelete
+            // 
+            this.buttonCTLDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCTLDelete.Location = new System.Drawing.Point(180, 494);
+            this.buttonCTLDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCTLDelete.Name = "buttonCTLDelete";
+            this.buttonCTLDelete.Size = new System.Drawing.Size(64, 39);
+            this.buttonCTLDelete.TabIndex = 36;
+            this.buttonCTLDelete.Text = "Delete";
+            this.buttonCTLDelete.UseVisualStyleBackColor = true;
+            this.buttonCTLDelete.Visible = false;
+            this.buttonCTLDelete.Click += new System.EventHandler(this.buttonCTLDelete_Click);
+            // 
+            // comboBoxCTLModify
+            // 
+            this.comboBoxCTLModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxCTLModify.FormattingEnabled = true;
+            this.comboBoxCTLModify.Location = new System.Drawing.Point(27, 503);
+            this.comboBoxCTLModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxCTLModify.Name = "comboBoxCTLModify";
+            this.comboBoxCTLModify.Size = new System.Drawing.Size(141, 24);
+            this.comboBoxCTLModify.TabIndex = 2;
+            this.comboBoxCTLModify.Visible = false;
+            this.comboBoxCTLModify.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCTLModify_SelectedIndexChanged);
+            // 
+            // checkBoxCTLModify
+            // 
+            this.checkBoxCTLModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxCTLModify.AutoSize = true;
+            this.checkBoxCTLModify.Location = new System.Drawing.Point(5, 481);
+            this.checkBoxCTLModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxCTLModify.Name = "checkBoxCTLModify";
+            this.checkBoxCTLModify.Size = new System.Drawing.Size(69, 20);
+            this.checkBoxCTLModify.TabIndex = 1;
+            this.checkBoxCTLModify.Text = "Modify";
+            this.checkBoxCTLModify.UseVisualStyleBackColor = true;
+            this.checkBoxCTLModify.CheckedChanged += new System.EventHandler(this.CheckBoxCTLModify_CheckedChanged);
+            // 
+            // labelCTLSendTo
+            // 
+            this.labelCTLSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelCTLSendTo.AutoSize = true;
+            this.labelCTLSendTo.Location = new System.Drawing.Point(24, 558);
+            this.labelCTLSendTo.Name = "labelCTLSendTo";
+            this.labelCTLSendTo.Size = new System.Drawing.Size(53, 16);
+            this.labelCTLSendTo.TabIndex = 33;
+            this.labelCTLSendTo.Text = "Send to";
+            this.labelCTLSendTo.Visible = false;
+            // 
+            // comboBoxCTLSendTo
+            // 
+            this.comboBoxCTLSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxCTLSendTo.FormattingEnabled = true;
+            this.comboBoxCTLSendTo.Location = new System.Drawing.Point(27, 580);
+            this.comboBoxCTLSendTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxCTLSendTo.Name = "comboBoxCTLSendTo";
+            this.comboBoxCTLSendTo.Size = new System.Drawing.Size(171, 24);
+            this.comboBoxCTLSendTo.TabIndex = 4;
+            this.comboBoxCTLSendTo.Visible = false;
+            // 
+            // checkBoxCTLMultiStep
+            // 
+            this.checkBoxCTLMultiStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxCTLMultiStep.AutoSize = true;
+            this.checkBoxCTLMultiStep.Location = new System.Drawing.Point(5, 539);
+            this.checkBoxCTLMultiStep.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxCTLMultiStep.Name = "checkBoxCTLMultiStep";
+            this.checkBoxCTLMultiStep.Size = new System.Drawing.Size(84, 20);
+            this.checkBoxCTLMultiStep.TabIndex = 3;
+            this.checkBoxCTLMultiStep.Text = "MultiStep";
+            this.checkBoxCTLMultiStep.UseVisualStyleBackColor = true;
+            // 
+            // labelCTLPrice
+            // 
+            this.labelCTLPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelCTLPrice.AutoSize = true;
+            this.labelCTLPrice.Location = new System.Drawing.Point(491, 503);
+            this.labelCTLPrice.Name = "labelCTLPrice";
+            this.labelCTLPrice.Size = new System.Drawing.Size(38, 16);
+            this.labelCTLPrice.TabIndex = 28;
+            this.labelCTLPrice.Text = "Price";
+            // 
+            // labelCTLPO
+            // 
+            this.labelCTLPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelCTLPO.AutoSize = true;
+            this.labelCTLPO.Location = new System.Drawing.Point(491, 528);
+            this.labelCTLPO.Name = "labelCTLPO";
+            this.labelCTLPO.Size = new System.Drawing.Size(101, 16);
+            this.labelCTLPO.TabIndex = 27;
+            this.labelCTLPO.Text = "Purchase Order";
+            // 
+            // labelCTLPromiseDate
+            // 
+            this.labelCTLPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelCTLPromiseDate.AutoSize = true;
+            this.labelCTLPromiseDate.Location = new System.Drawing.Point(247, 574);
+            this.labelCTLPromiseDate.Name = "labelCTLPromiseDate";
+            this.labelCTLPromiseDate.Size = new System.Drawing.Size(89, 16);
+            this.labelCTLPromiseDate.TabIndex = 26;
+            this.labelCTLPromiseDate.Text = "Promise Date";
+            // 
+            // checkBoxCTLScrapCredit
+            // 
+            this.checkBoxCTLScrapCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxCTLScrapCredit.AutoSize = true;
+            this.checkBoxCTLScrapCredit.Location = new System.Drawing.Point(494, 469);
+            this.checkBoxCTLScrapCredit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxCTLScrapCredit.Name = "checkBoxCTLScrapCredit";
+            this.checkBoxCTLScrapCredit.Size = new System.Drawing.Size(103, 20);
+            this.checkBoxCTLScrapCredit.TabIndex = 8;
+            this.checkBoxCTLScrapCredit.Text = "Scrap Credit";
+            this.checkBoxCTLScrapCredit.UseVisualStyleBackColor = true;
+            // 
+            // textBoxCTLPO
+            // 
+            this.textBoxCTLPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxCTLPO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBoxCTLPO.Location = new System.Drawing.Point(605, 526);
+            this.textBoxCTLPO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCTLPO.Name = "textBoxCTLPO";
+            this.textBoxCTLPO.Size = new System.Drawing.Size(227, 22);
+            this.textBoxCTLPO.TabIndex = 11;
+            this.textBoxCTLPO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCTLPO_KeyPress);
+            // 
+            // textBoxCTLPrice
+            // 
+            this.textBoxCTLPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxCTLPrice.Location = new System.Drawing.Point(536, 501);
+            this.textBoxCTLPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCTLPrice.Name = "textBoxCTLPrice";
+            this.textBoxCTLPrice.Size = new System.Drawing.Size(83, 22);
+            this.textBoxCTLPrice.TabIndex = 9;
+            this.textBoxCTLPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxCTLPrice_KeyPress);
+            // 
+            // dateTimePickerCTLPromiseDate
+            // 
+            this.dateTimePickerCTLPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dateTimePickerCTLPromiseDate.Location = new System.Drawing.Point(249, 594);
+            this.dateTimePickerCTLPromiseDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateTimePickerCTLPromiseDate.Name = "dateTimePickerCTLPromiseDate";
+            this.dateTimePickerCTLPromiseDate.Size = new System.Drawing.Size(272, 22);
+            this.dateTimePickerCTLPromiseDate.TabIndex = 7;
+            // 
+            // richTextBoxCTLComments
+            // 
+            this.richTextBoxCTLComments.AcceptsTab = true;
+            this.richTextBoxCTLComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.richTextBoxCTLComments.Location = new System.Drawing.Point(249, 494);
+            this.richTextBoxCTLComments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richTextBoxCTLComments.MaxLength = 250;
+            this.richTextBoxCTLComments.Name = "richTextBoxCTLComments";
+            this.richTextBoxCTLComments.Size = new System.Drawing.Size(239, 74);
+            this.richTextBoxCTLComments.TabIndex = 6;
+            this.richTextBoxCTLComments.Text = "";
+            this.richTextBoxCTLComments.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBoxCTLComments_KeyPress);
+            // 
+            // buttonCTLArrowDown
+            // 
+            this.buttonCTLArrowDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCTLArrowDown.Image = global::ICMS.Properties.Resources.DownArrow1;
+            this.buttonCTLArrowDown.Location = new System.Drawing.Point(300, 455);
+            this.buttonCTLArrowDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCTLArrowDown.Name = "buttonCTLArrowDown";
+            this.buttonCTLArrowDown.Size = new System.Drawing.Size(45, 34);
+            this.buttonCTLArrowDown.TabIndex = 44;
+            this.buttonCTLArrowDown.UseVisualStyleBackColor = true;
+            this.buttonCTLArrowDown.Visible = false;
+            this.buttonCTLArrowDown.Click += new System.EventHandler(this.ButtonCTLArrowDown_Click);
+            // 
+            // buttonCTLArrowUp
+            // 
+            this.buttonCTLArrowUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonCTLArrowUp.Image = global::ICMS.Properties.Resources.UpArrow;
+            this.buttonCTLArrowUp.Location = new System.Drawing.Point(249, 455);
+            this.buttonCTLArrowUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCTLArrowUp.Name = "buttonCTLArrowUp";
+            this.buttonCTLArrowUp.Size = new System.Drawing.Size(45, 34);
+            this.buttonCTLArrowUp.TabIndex = 43;
+            this.buttonCTLArrowUp.UseVisualStyleBackColor = true;
+            this.buttonCTLArrowUp.Visible = false;
+            this.buttonCTLArrowUp.Click += new System.EventHandler(this.ButtonCTLArrowUp_Click);
+            this.buttonCTLArrowUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonCTLArrowUp_MouseDown);
+            // 
+            // dataGridViewCTLOrderEntry
+            // 
+            this.dataGridViewCTLOrderEntry.AllowUserToAddRows = false;
+            this.dataGridViewCTLOrderEntry.AllowUserToDeleteRows = false;
+            this.dataGridViewCTLOrderEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewCTLOrderEntry.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewCTLOrderEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCTLOrderEntry.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCTLTagID,
+            this.dgvCTLThickness,
+            this.dgvCTLWidth,
+            this.dgvCTLAlloy,
+            this.dgvCTLSkidWeight,
+            this.dgvCTLWeight,
+            this.dgvCTLWeightLeft,
+            this.dgvCTLPaper,
+            this.dgvCTLPVC,
+            this.dgvCTLAdder,
+            this.dgvCTLAddCut,
+            this.dgvCTLSkidType,
+            this.dgvCTLCurrSkidPrice,
+            this.dgvCTLSkidCount,
+            this.dgvCTLPieceCount,
+            this.dgvCTLLength,
+            this.dgvCTLComments,
+            this.dgvCTLSheetWeight,
+            this.dgvCTLTheoLBS,
+            this.dgvCTLBranch,
+            this.dgvCTLBranchID,
+            this.dgvCTLAdderID,
+            this.dgvCTLAdderPrice,
+            this.dgvCTLDensityFactor,
+            this.dgvCTLPVCGroupID,
+            this.dgvSkidTypeID,
+            this.dgvCTLPVCPriceList,
+            this.dgvCTLCurrPrice});
+            this.dataGridViewCTLOrderEntry.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridViewCTLOrderEntry.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewCTLOrderEntry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewCTLOrderEntry.MultiSelect = false;
+            this.dataGridViewCTLOrderEntry.Name = "dataGridViewCTLOrderEntry";
+            this.dataGridViewCTLOrderEntry.RowHeadersWidth = 51;
+            this.dataGridViewCTLOrderEntry.RowTemplate.Height = 24;
+            this.dataGridViewCTLOrderEntry.Size = new System.Drawing.Size(1131, 455);
+            this.dataGridViewCTLOrderEntry.TabIndex = 37;
+            this.dataGridViewCTLOrderEntry.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridViewCTLOrderEntry_CellBeginEdit);
+            this.dataGridViewCTLOrderEntry.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewCTLOrderEntry_CellClick);
+            this.dataGridViewCTLOrderEntry.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewCTLOrderEntry_CellEndEdit);
+            this.dataGridViewCTLOrderEntry.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewCTLOrderEntry_CellEnter);
+            this.dataGridViewCTLOrderEntry.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridViewCTLOrderEntry_EditingControlShowing);
+            this.dataGridViewCTLOrderEntry.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DataGridViewCTLOrderEntry_KeyPress);
+            this.dataGridViewCTLOrderEntry.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataGridViewCTLOrderEntry_MouseClick);
+            // 
+            // dgvCTLTagID
+            // 
+            this.dgvCTLTagID.FillWeight = 75F;
+            this.dgvCTLTagID.HeaderText = "TagID";
+            this.dgvCTLTagID.MinimumWidth = 6;
+            this.dgvCTLTagID.Name = "dgvCTLTagID";
+            this.dgvCTLTagID.ReadOnly = true;
+            this.dgvCTLTagID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLTagID.Width = 51;
+            // 
+            // dgvCTLThickness
+            // 
+            this.dgvCTLThickness.HeaderText = "Thickness";
+            this.dgvCTLThickness.MinimumWidth = 6;
+            this.dgvCTLThickness.Name = "dgvCTLThickness";
+            this.dgvCTLThickness.ReadOnly = true;
+            this.dgvCTLThickness.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLThickness.Width = 75;
+            // 
+            // dgvCTLWidth
+            // 
+            this.dgvCTLWidth.HeaderText = "Width";
+            this.dgvCTLWidth.MinimumWidth = 6;
+            this.dgvCTLWidth.Name = "dgvCTLWidth";
+            this.dgvCTLWidth.ReadOnly = true;
+            this.dgvCTLWidth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLWidth.Width = 47;
+            // 
+            // dgvCTLAlloy
+            // 
+            this.dgvCTLAlloy.HeaderText = "Alloy";
+            this.dgvCTLAlloy.MinimumWidth = 6;
+            this.dgvCTLAlloy.Name = "dgvCTLAlloy";
+            this.dgvCTLAlloy.ReadOnly = true;
+            this.dgvCTLAlloy.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLAlloy.Width = 43;
+            // 
+            // dgvCTLSkidWeight
+            // 
+            this.dgvCTLSkidWeight.HeaderText = "Skid#";
+            this.dgvCTLSkidWeight.MinimumWidth = 6;
+            this.dgvCTLSkidWeight.Name = "dgvCTLSkidWeight";
+            this.dgvCTLSkidWeight.ReadOnly = true;
+            this.dgvCTLSkidWeight.Width = 70;
+            // 
+            // dgvCTLWeight
+            // 
+            this.dgvCTLWeight.HeaderText = "Orig LBS";
+            this.dgvCTLWeight.MinimumWidth = 6;
+            this.dgvCTLWeight.Name = "dgvCTLWeight";
+            this.dgvCTLWeight.ReadOnly = true;
+            this.dgvCTLWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLWeight.Width = 60;
+            // 
+            // dgvCTLWeightLeft
+            // 
+            this.dgvCTLWeightLeft.HeaderText = "WeightLeft";
+            this.dgvCTLWeightLeft.MinimumWidth = 6;
+            this.dgvCTLWeightLeft.Name = "dgvCTLWeightLeft";
+            this.dgvCTLWeightLeft.ReadOnly = true;
+            this.dgvCTLWeightLeft.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLWeightLeft.Width = 76;
+            // 
+            // dgvCTLPaper
+            // 
+            this.dgvCTLPaper.HeaderText = "Paper";
+            this.dgvCTLPaper.MinimumWidth = 6;
+            this.dgvCTLPaper.Name = "dgvCTLPaper";
+            this.dgvCTLPaper.ToolTipText = ".012";
+            this.dgvCTLPaper.Width = 50;
+            // 
+            // dgvCTLPVC
+            // 
+            this.dgvCTLPVC.HeaderText = "PVC";
+            this.dgvCTLPVC.MinimumWidth = 6;
+            this.dgvCTLPVC.Name = "dgvCTLPVC";
+            this.dgvCTLPVC.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCTLPVC.Width = 40;
+            // 
+            // dgvCTLAdder
+            // 
+            this.dgvCTLAdder.HeaderText = "Adders";
+            this.dgvCTLAdder.MinimumWidth = 6;
+            this.dgvCTLAdder.Name = "dgvCTLAdder";
+            this.dgvCTLAdder.Width = 57;
+            // 
+            // dgvCTLAddCut
+            // 
+            this.dgvCTLAddCut.HeaderText = "AddCut";
+            this.dgvCTLAddCut.MinimumWidth = 6;
+            this.dgvCTLAddCut.Name = "dgvCTLAddCut";
+            this.dgvCTLAddCut.Text = "AddCut";
+            this.dgvCTLAddCut.UseColumnTextForButtonValue = true;
+            this.dgvCTLAddCut.Visible = false;
+            this.dgvCTLAddCut.Width = 57;
+            // 
+            // dgvCTLSkidType
+            // 
+            this.dgvCTLSkidType.HeaderText = "Type";
+            this.dgvCTLSkidType.MinimumWidth = 6;
+            this.dgvCTLSkidType.Name = "dgvCTLSkidType";
+            this.dgvCTLSkidType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCTLSkidType.Width = 45;
+            // 
+            // dgvCTLCurrSkidPrice
+            // 
+            this.dgvCTLCurrSkidPrice.HeaderText = "Skid Price";
+            this.dgvCTLCurrSkidPrice.MinimumWidth = 6;
+            this.dgvCTLCurrSkidPrice.Name = "dgvCTLCurrSkidPrice";
+            this.dgvCTLCurrSkidPrice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCTLCurrSkidPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLCurrSkidPrice.Width = 67;
+            // 
+            // dgvCTLSkidCount
+            // 
+            this.dgvCTLSkidCount.HeaderText = "Skids";
+            this.dgvCTLSkidCount.MinimumWidth = 6;
+            this.dgvCTLSkidCount.Name = "dgvCTLSkidCount";
+            this.dgvCTLSkidCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLSkidCount.Width = 47;
+            // 
+            // dgvCTLPieceCount
+            // 
+            this.dgvCTLPieceCount.HeaderText = "PCS";
+            this.dgvCTLPieceCount.MinimumWidth = 6;
+            this.dgvCTLPieceCount.Name = "dgvCTLPieceCount";
+            this.dgvCTLPieceCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLPieceCount.Width = 40;
+            // 
+            // dgvCTLLength
+            // 
+            this.dgvCTLLength.HeaderText = "Length";
+            this.dgvCTLLength.MinimumWidth = 6;
+            this.dgvCTLLength.Name = "dgvCTLLength";
+            this.dgvCTLLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLLength.Width = 53;
+            // 
+            // dgvCTLComments
+            // 
+            this.dgvCTLComments.HeaderText = "Detail Comments";
+            this.dgvCTLComments.MinimumWidth = 6;
+            this.dgvCTLComments.Name = "dgvCTLComments";
+            this.dgvCTLComments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLComments.Width = 104;
+            // 
+            // dgvCTLSheetWeight
+            // 
+            this.dgvCTLSheetWeight.HeaderText = "Sheet#";
+            this.dgvCTLSheetWeight.MinimumWidth = 6;
+            this.dgvCTLSheetWeight.Name = "dgvCTLSheetWeight";
+            this.dgvCTLSheetWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLSheetWeight.Width = 55;
+            // 
+            // dgvCTLTheoLBS
+            // 
+            this.dgvCTLTheoLBS.HeaderText = "Theo#";
+            this.dgvCTLTheoLBS.MinimumWidth = 6;
+            this.dgvCTLTheoLBS.Name = "dgvCTLTheoLBS";
+            this.dgvCTLTheoLBS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLTheoLBS.Width = 52;
+            // 
+            // dgvCTLBranch
+            // 
+            this.dgvCTLBranch.HeaderText = "Branch";
+            this.dgvCTLBranch.MinimumWidth = 6;
+            this.dgvCTLBranch.Name = "dgvCTLBranch";
+            this.dgvCTLBranch.Width = 55;
+            // 
+            // dgvCTLBranchID
+            // 
+            this.dgvCTLBranchID.HeaderText = "BranchID";
+            this.dgvCTLBranchID.MinimumWidth = 6;
+            this.dgvCTLBranchID.Name = "dgvCTLBranchID";
+            this.dgvCTLBranchID.Visible = false;
+            this.dgvCTLBranchID.Width = 68;
+            // 
+            // dgvCTLAdderID
+            // 
+            this.dgvCTLAdderID.HeaderText = "AdderID";
+            this.dgvCTLAdderID.MinimumWidth = 6;
+            this.dgvCTLAdderID.Name = "dgvCTLAdderID";
+            this.dgvCTLAdderID.Visible = false;
+            this.dgvCTLAdderID.Width = 63;
+            // 
+            // dgvCTLAdderPrice
+            // 
+            this.dgvCTLAdderPrice.HeaderText = "adderPrice";
+            this.dgvCTLAdderPrice.MinimumWidth = 6;
+            this.dgvCTLAdderPrice.Name = "dgvCTLAdderPrice";
+            this.dgvCTLAdderPrice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCTLAdderPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgvCTLAdderPrice.Visible = false;
+            this.dgvCTLAdderPrice.Width = 103;
+            // 
+            // dgvCTLDensityFactor
+            // 
+            this.dgvCTLDensityFactor.HeaderText = "DensityFactor";
+            this.dgvCTLDensityFactor.MinimumWidth = 6;
+            this.dgvCTLDensityFactor.Name = "dgvCTLDensityFactor";
+            this.dgvCTLDensityFactor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvCTLDensityFactor.Visible = false;
+            this.dgvCTLDensityFactor.Width = 96;
+            // 
+            // dgvCTLPVCGroupID
+            // 
+            this.dgvCTLPVCGroupID.HeaderText = "PVCGroupID";
+            this.dgvCTLPVCGroupID.MinimumWidth = 6;
+            this.dgvCTLPVCGroupID.Name = "dgvCTLPVCGroupID";
+            this.dgvCTLPVCGroupID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCTLPVCGroupID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgvCTLPVCGroupID.Visible = false;
+            this.dgvCTLPVCGroupID.Width = 113;
+            // 
+            // dgvSkidTypeID
+            // 
+            this.dgvSkidTypeID.HeaderText = "skidType";
+            this.dgvSkidTypeID.MinimumWidth = 6;
+            this.dgvSkidTypeID.Name = "dgvSkidTypeID";
+            this.dgvSkidTypeID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSkidTypeID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgvSkidTypeID.Visible = false;
+            this.dgvSkidTypeID.Width = 93;
+            // 
+            // dgvCTLPVCPriceList
+            // 
+            this.dgvCTLPVCPriceList.HeaderText = "PVCPriceList";
+            this.dgvCTLPVCPriceList.MinimumWidth = 6;
+            this.dgvCTLPVCPriceList.Name = "dgvCTLPVCPriceList";
+            this.dgvCTLPVCPriceList.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCTLPVCPriceList.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgvCTLPVCPriceList.Visible = false;
+            this.dgvCTLPVCPriceList.Width = 114;
+            // 
+            // dgvCTLCurrPrice
+            // 
+            this.dgvCTLCurrPrice.HeaderText = "PVCCurrPrice";
+            this.dgvCTLCurrPrice.MinimumWidth = 6;
+            this.dgvCTLCurrPrice.Name = "dgvCTLCurrPrice";
+            this.dgvCTLCurrPrice.Visible = false;
+            this.dgvCTLCurrPrice.Width = 118;
+            // 
+            // listViewCTLCoilList
+            // 
+            this.listViewCTLCoilList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewCTLCoilList.CheckBoxes = true;
+            this.listViewCTLCoilList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colCTLTagID,
+            this.colCTLLocation,
+            this.colCTLAlloy,
+            this.colCTLThickness,
+            this.colCTLWidth,
+            this.colCTLLength,
+            this.colCTLWeight,
+            this.colCTLMill,
+            this.colCTLHeat,
+            this.colCTLCarbon,
+            this.colCTLVendor,
+            this.colCTLPO,
+            this.colCTLContainer,
+            this.colCTLRecDate,
+            this.colCTLRecID,
+            this.colCTLCoilCount,
+            this.colCTLCountryOfOrigin,
+            this.colCTLOrders});
+            this.listViewCTLCoilList.HideSelection = false;
+            this.listViewCTLCoilList.Location = new System.Drawing.Point(-1, 0);
+            this.listViewCTLCoilList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listViewCTLCoilList.Name = "listViewCTLCoilList";
+            this.listViewCTLCoilList.Size = new System.Drawing.Size(1133, 456);
+            this.listViewCTLCoilList.TabIndex = 3;
+            this.listViewCTLCoilList.UseCompatibleStateImageBehavior = false;
+            this.listViewCTLCoilList.View = System.Windows.Forms.View.Details;
+            this.listViewCTLCoilList.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.ListViewCSCoilList_ItemChecked);
+            // 
+            // colCTLTagID
+            // 
+            this.colCTLTagID.Text = "TagID";
+            this.colCTLTagID.Width = 100;
+            // 
+            // colCTLLocation
+            // 
+            this.colCTLLocation.Text = "Location";
+            // 
+            // colCTLAlloy
+            // 
+            this.colCTLAlloy.Text = "Alloy";
+            // 
+            // colCTLThickness
+            // 
+            this.colCTLThickness.Text = "Thickness";
+            // 
+            // colCTLWidth
+            // 
+            this.colCTLWidth.Text = "Width";
+            // 
+            // colCTLLength
+            // 
+            this.colCTLLength.Text = "Length";
+            // 
+            // colCTLWeight
+            // 
+            this.colCTLWeight.Text = "Weight";
+            // 
+            // colCTLMill
+            // 
+            this.colCTLMill.Text = "Mill#";
+            // 
+            // colCTLHeat
+            // 
+            this.colCTLHeat.Text = "Heat";
+            // 
+            // colCTLCarbon
+            // 
+            this.colCTLCarbon.Text = "Carbon";
+            // 
+            // colCTLVendor
+            // 
+            this.colCTLVendor.Text = "Vendor";
+            // 
+            // colCTLPO
+            // 
+            this.colCTLPO.Text = "PO";
+            // 
+            // colCTLContainer
+            // 
+            this.colCTLContainer.Text = "Container";
+            // 
+            // colCTLRecDate
+            // 
+            this.colCTLRecDate.Text = "Rec Date";
+            // 
+            // colCTLRecID
+            // 
+            this.colCTLRecID.Text = "Rec#";
+            // 
+            // colCTLCoilCount
+            // 
+            this.colCTLCoilCount.Text = "Coil Cnt";
+            // 
+            // colCTLCountryOfOrigin
+            // 
+            this.colCTLCountryOfOrigin.Text = "Cnt Of Orig";
+            // 
+            // colCTLOrders
+            // 
+            this.colCTLOrders.Text = "Orders";
+            // 
+            // buttonCTLAddOrder
+            // 
+            this.buttonCTLAddOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCTLAddOrder.Location = new System.Drawing.Point(952, 580);
+            this.buttonCTLAddOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCTLAddOrder.Name = "buttonCTLAddOrder";
+            this.buttonCTLAddOrder.Size = new System.Drawing.Size(163, 32);
+            this.buttonCTLAddOrder.TabIndex = 13;
+            this.buttonCTLAddOrder.Text = "AddOrder";
+            this.buttonCTLAddOrder.UseVisualStyleBackColor = true;
+            this.buttonCTLAddOrder.Visible = false;
+            this.buttonCTLAddOrder.Click += new System.EventHandler(this.ButtonCTLAddOrder_Click);
+            // 
+            // buttonCTLStartOrder
+            // 
+            this.buttonCTLStartOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCTLStartOrder.Location = new System.Drawing.Point(949, 580);
+            this.buttonCTLStartOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCTLStartOrder.Name = "buttonCTLStartOrder";
+            this.buttonCTLStartOrder.Size = new System.Drawing.Size(163, 32);
+            this.buttonCTLStartOrder.TabIndex = 20;
+            this.buttonCTLStartOrder.Text = "Start Order";
+            this.buttonCTLStartOrder.UseVisualStyleBackColor = true;
+            this.buttonCTLStartOrder.Click += new System.EventHandler(this.ButtonCTLStartOrder_Click);
+            // 
+            // panelClClDiff
+            // 
+            this.panelClClDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelClClDiff.Controls.Add(this.labelClClDiffMasterSequence);
+            this.panelClClDiff.Controls.Add(this.labelClClDiffMasterFrom);
+            this.panelClClDiff.Controls.Add(this.buttonClClDiffResetCuts);
+            this.panelClClDiff.Controls.Add(this.buttonClClDiffModifyDelte);
+            this.panelClClDiff.Controls.Add(this.comboBoxClClDiffModify);
+            this.panelClClDiff.Controls.Add(this.checkBoxClClDiffModify);
+            this.panelClClDiff.Controls.Add(this.labelClClDiffMultSendTo);
+            this.panelClClDiff.Controls.Add(this.comboBoxClClDiffSendTo);
+            this.panelClClDiff.Controls.Add(this.checkBoxClClDiffMultStep);
+            this.panelClClDiff.Controls.Add(this.labelClClDiffPrice);
+            this.panelClClDiff.Controls.Add(this.labelClClDiffPO);
+            this.panelClClDiff.Controls.Add(this.labelClClDiffPromiseDate);
+            this.panelClClDiff.Controls.Add(this.checkBoxClClDiffScrapCredit);
+            this.panelClClDiff.Controls.Add(this.textBoxClClDiffPO);
+            this.panelClClDiff.Controls.Add(this.textBoxClClDiffPrice);
+            this.panelClClDiff.Controls.Add(this.dateTimePickerClClDiffPromiseDate);
+            this.panelClClDiff.Controls.Add(this.richTextBoxClClDiffComments);
+            this.panelClClDiff.Controls.Add(this.buttonClClDiffReset);
+            this.panelClClDiff.Controls.Add(this.dataGridViewClClDiff);
+            this.panelClClDiff.Controls.Add(this.listViewClClDiff);
+            this.panelClClDiff.Controls.Add(this.buttonClClDiffStartOrder);
+            this.panelClClDiff.Controls.Add(this.buttonClClDiffAddOrder);
+            this.panelClClDiff.Location = new System.Drawing.Point(4, 2);
+            this.panelClClDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelClClDiff.Name = "panelClClDiff";
+            this.panelClClDiff.Size = new System.Drawing.Size(1129, 626);
+            this.panelClClDiff.TabIndex = 2;
+            this.panelClClDiff.VisibleChanged += new System.EventHandler(this.PanelClClDiff_VisibleChanged);
+            // 
+            // labelClClDiffMasterSequence
+            // 
+            this.labelClClDiffMasterSequence.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelClClDiffMasterSequence.AutoSize = true;
+            this.labelClClDiffMasterSequence.Location = new System.Drawing.Point(147, 569);
+            this.labelClClDiffMasterSequence.Name = "labelClClDiffMasterSequence";
+            this.labelClClDiffMasterSequence.Size = new System.Drawing.Size(14, 16);
+            this.labelClClDiffMasterSequence.TabIndex = 40;
+            this.labelClClDiffMasterSequence.Text = "0";
+            // 
+            // labelClClDiffMasterFrom
+            // 
+            this.labelClClDiffMasterFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelClClDiffMasterFrom.AutoSize = true;
+            this.labelClClDiffMasterFrom.Location = new System.Drawing.Point(147, 543);
+            this.labelClClDiffMasterFrom.Name = "labelClClDiffMasterFrom";
+            this.labelClClDiffMasterFrom.Size = new System.Drawing.Size(14, 16);
+            this.labelClClDiffMasterFrom.TabIndex = 39;
+            this.labelClClDiffMasterFrom.Text = "0";
+            // 
+            // buttonClClDiffResetCuts
+            // 
+            this.buttonClClDiffResetCuts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClClDiffResetCuts.Location = new System.Drawing.Point(984, 514);
+            this.buttonClClDiffResetCuts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClClDiffResetCuts.Name = "buttonClClDiffResetCuts";
+            this.buttonClClDiffResetCuts.Size = new System.Drawing.Size(131, 25);
+            this.buttonClClDiffResetCuts.TabIndex = 38;
+            this.buttonClClDiffResetCuts.Text = "Reset Cuts";
+            this.buttonClClDiffResetCuts.UseVisualStyleBackColor = true;
+            this.buttonClClDiffResetCuts.Visible = false;
+            this.buttonClClDiffResetCuts.Click += new System.EventHandler(this.ButtonClClDiffResetCuts_Click);
+            // 
+            // buttonClClDiffModifyDelte
+            // 
+            this.buttonClClDiffModifyDelte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonClClDiffModifyDelte.Location = new System.Drawing.Point(181, 498);
+            this.buttonClClDiffModifyDelte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClClDiffModifyDelte.Name = "buttonClClDiffModifyDelte";
+            this.buttonClClDiffModifyDelte.Size = new System.Drawing.Size(76, 39);
+            this.buttonClClDiffModifyDelte.TabIndex = 33;
+            this.buttonClClDiffModifyDelte.Text = "Delete";
+            this.buttonClClDiffModifyDelte.UseVisualStyleBackColor = true;
+            this.buttonClClDiffModifyDelte.Visible = false;
+            this.buttonClClDiffModifyDelte.Click += new System.EventHandler(this.ButtonClClDiffModifyDelte_Click);
+            // 
+            // comboBoxClClDiffModify
+            // 
+            this.comboBoxClClDiffModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxClClDiffModify.FormattingEnabled = true;
+            this.comboBoxClClDiffModify.Location = new System.Drawing.Point(32, 514);
+            this.comboBoxClClDiffModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxClClDiffModify.Name = "comboBoxClClDiffModify";
+            this.comboBoxClClDiffModify.Size = new System.Drawing.Size(141, 24);
+            this.comboBoxClClDiffModify.TabIndex = 32;
+            this.comboBoxClClDiffModify.Visible = false;
+            this.comboBoxClClDiffModify.SelectedIndexChanged += new System.EventHandler(this.ComboBoxClClDiffModify_SelectedIndexChanged);
+            // 
+            // checkBoxClClDiffModify
+            // 
+            this.checkBoxClClDiffModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxClClDiffModify.AutoSize = true;
+            this.checkBoxClClDiffModify.Location = new System.Drawing.Point(11, 490);
+            this.checkBoxClClDiffModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxClClDiffModify.Name = "checkBoxClClDiffModify";
+            this.checkBoxClClDiffModify.Size = new System.Drawing.Size(69, 20);
+            this.checkBoxClClDiffModify.TabIndex = 31;
+            this.checkBoxClClDiffModify.Text = "Modify";
+            this.checkBoxClClDiffModify.UseVisualStyleBackColor = true;
+            this.checkBoxClClDiffModify.CheckedChanged += new System.EventHandler(this.CheckBoxClClDiffModify_CheckedChanged);
+            // 
+            // labelClClDiffMultSendTo
+            // 
+            this.labelClClDiffMultSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelClClDiffMultSendTo.AutoSize = true;
+            this.labelClClDiffMultSendTo.Location = new System.Drawing.Point(29, 567);
+            this.labelClClDiffMultSendTo.Name = "labelClClDiffMultSendTo";
+            this.labelClClDiffMultSendTo.Size = new System.Drawing.Size(53, 16);
+            this.labelClClDiffMultSendTo.TabIndex = 30;
+            this.labelClClDiffMultSendTo.Text = "Send to";
+            this.labelClClDiffMultSendTo.Visible = false;
+            // 
+            // comboBoxClClDiffSendTo
+            // 
+            this.comboBoxClClDiffSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.comboBoxClClDiffSendTo.FormattingEnabled = true;
+            this.comboBoxClClDiffSendTo.Location = new System.Drawing.Point(32, 586);
+            this.comboBoxClClDiffSendTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxClClDiffSendTo.Name = "comboBoxClClDiffSendTo";
+            this.comboBoxClClDiffSendTo.Size = new System.Drawing.Size(171, 24);
+            this.comboBoxClClDiffSendTo.TabIndex = 29;
+            this.comboBoxClClDiffSendTo.Visible = false;
+            // 
+            // checkBoxClClDiffMultStep
+            // 
+            this.checkBoxClClDiffMultStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxClClDiffMultStep.AutoSize = true;
+            this.checkBoxClClDiffMultStep.Location = new System.Drawing.Point(11, 548);
+            this.checkBoxClClDiffMultStep.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxClClDiffMultStep.Name = "checkBoxClClDiffMultStep";
+            this.checkBoxClClDiffMultStep.Size = new System.Drawing.Size(84, 20);
+            this.checkBoxClClDiffMultStep.TabIndex = 28;
+            this.checkBoxClClDiffMultStep.Text = "MultiStep";
+            this.checkBoxClClDiffMultStep.UseVisualStyleBackColor = true;
+            this.checkBoxClClDiffMultStep.CheckedChanged += new System.EventHandler(this.CheckBoxClClDiffMultStep_CheckedChanged);
+            // 
+            // labelClClDiffPrice
+            // 
+            this.labelClClDiffPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelClClDiffPrice.AutoSize = true;
+            this.labelClClDiffPrice.Location = new System.Drawing.Point(563, 521);
+            this.labelClClDiffPrice.Name = "labelClClDiffPrice";
+            this.labelClClDiffPrice.Size = new System.Drawing.Size(38, 16);
+            this.labelClClDiffPrice.TabIndex = 27;
+            this.labelClClDiffPrice.Text = "Price";
+            // 
+            // labelClClDiffPO
+            // 
+            this.labelClClDiffPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelClClDiffPO.AutoSize = true;
+            this.labelClClDiffPO.Location = new System.Drawing.Point(563, 574);
+            this.labelClClDiffPO.Name = "labelClClDiffPO";
+            this.labelClClDiffPO.Size = new System.Drawing.Size(101, 16);
+            this.labelClClDiffPO.TabIndex = 26;
+            this.labelClClDiffPO.Text = "Purchase Order";
+            // 
+            // labelClClDiffPromiseDate
+            // 
+            this.labelClClDiffPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelClClDiffPromiseDate.AutoSize = true;
+            this.labelClClDiffPromiseDate.Location = new System.Drawing.Point(264, 574);
+            this.labelClClDiffPromiseDate.Name = "labelClClDiffPromiseDate";
+            this.labelClClDiffPromiseDate.Size = new System.Drawing.Size(89, 16);
+            this.labelClClDiffPromiseDate.TabIndex = 25;
+            this.labelClClDiffPromiseDate.Text = "Promise Date";
+            // 
+            // checkBoxClClDiffScrapCredit
+            // 
+            this.checkBoxClClDiffScrapCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBoxClClDiffScrapCredit.AutoSize = true;
+            this.checkBoxClClDiffScrapCredit.Location = new System.Drawing.Point(563, 494);
+            this.checkBoxClClDiffScrapCredit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.checkBoxClClDiffScrapCredit.Name = "checkBoxClClDiffScrapCredit";
+            this.checkBoxClClDiffScrapCredit.Size = new System.Drawing.Size(103, 20);
+            this.checkBoxClClDiffScrapCredit.TabIndex = 24;
+            this.checkBoxClClDiffScrapCredit.Text = "Scrap Credit";
+            this.checkBoxClClDiffScrapCredit.UseVisualStyleBackColor = true;
+            // 
+            // textBoxClClDiffPO
+            // 
+            this.textBoxClClDiffPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxClClDiffPO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBoxClClDiffPO.Location = new System.Drawing.Point(563, 594);
+            this.textBoxClClDiffPO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxClClDiffPO.Name = "textBoxClClDiffPO";
+            this.textBoxClClDiffPO.Size = new System.Drawing.Size(227, 22);
+            this.textBoxClClDiffPO.TabIndex = 23;
+            // 
+            // textBoxClClDiffPrice
+            // 
+            this.textBoxClClDiffPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxClClDiffPrice.Location = new System.Drawing.Point(563, 542);
+            this.textBoxClClDiffPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxClClDiffPrice.Name = "textBoxClClDiffPrice";
+            this.textBoxClClDiffPrice.Size = new System.Drawing.Size(112, 22);
+            this.textBoxClClDiffPrice.TabIndex = 22;
+            // 
+            // dateTimePickerClClDiffPromiseDate
+            // 
+            this.dateTimePickerClClDiffPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.dateTimePickerClClDiffPromiseDate.Location = new System.Drawing.Point(267, 594);
+            this.dateTimePickerClClDiffPromiseDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateTimePickerClClDiffPromiseDate.Name = "dateTimePickerClClDiffPromiseDate";
+            this.dateTimePickerClClDiffPromiseDate.Size = new System.Drawing.Size(272, 22);
+            this.dateTimePickerClClDiffPromiseDate.TabIndex = 21;
+            // 
+            // richTextBoxClClDiffComments
+            // 
+            this.richTextBoxClClDiffComments.AcceptsTab = true;
+            this.richTextBoxClClDiffComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.richTextBoxClClDiffComments.Location = new System.Drawing.Point(267, 489);
+            this.richTextBoxClClDiffComments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.richTextBoxClClDiffComments.Name = "richTextBoxClClDiffComments";
+            this.richTextBoxClClDiffComments.Size = new System.Drawing.Size(239, 74);
+            this.richTextBoxClClDiffComments.TabIndex = 20;
+            this.richTextBoxClClDiffComments.Text = "";
+            // 
+            // buttonClClDiffReset
+            // 
+            this.buttonClClDiffReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClClDiffReset.Location = new System.Drawing.Point(984, 487);
+            this.buttonClClDiffReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClClDiffReset.Name = "buttonClClDiffReset";
+            this.buttonClClDiffReset.Size = new System.Drawing.Size(131, 25);
+            this.buttonClClDiffReset.TabIndex = 5;
+            this.buttonClClDiffReset.Text = "Reset All";
+            this.buttonClClDiffReset.UseVisualStyleBackColor = true;
+            this.buttonClClDiffReset.Visible = false;
+            this.buttonClClDiffReset.Click += new System.EventHandler(this.ButtonClClDiffReset_Click);
+            // 
+            // dataGridViewClClDiff
+            // 
+            this.dataGridViewClClDiff.AllowUserToAddRows = false;
+            this.dataGridViewClClDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewClClDiff.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dataGridViewClClDiff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewClClDiff.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colClClDiffTagID,
+            this.colClClDiffThickness,
+            this.colClClDiffWidth,
+            this.colClClDiffAlloy,
+            this.colClClDiffBreak,
+            this.colClClDiffOrigWeight,
+            this.colClClDiffNewWeight,
+            this.colClClDiffWidthLeft,
+            this.colClClDiffTrimAmount,
+            this.colClClDiffCutCount,
+            this.colClClDiffPaper,
+            this.colClClDiffAddCutButton});
+            this.dataGridViewClClDiff.Location = new System.Drawing.Point(-3, 7);
+            this.dataGridViewClClDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewClClDiff.Name = "dataGridViewClClDiff";
+            this.dataGridViewClClDiff.RowHeadersWidth = 51;
+            this.dataGridViewClClDiff.RowTemplate.Height = 24;
+            this.dataGridViewClClDiff.Size = new System.Drawing.Size(1131, 474);
+            this.dataGridViewClClDiff.TabIndex = 34;
+            this.dataGridViewClClDiff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClClDiff_CellContentClick);
+            this.dataGridViewClClDiff.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClClDiff_CellEndEdit);
+            this.dataGridViewClClDiff.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClClDiff_CellEnter);
+            this.dataGridViewClClDiff.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewClClDiff_CellMouseUp);
+            this.dataGridViewClClDiff.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewClClDiff_MouseClick);
+            // 
+            // colClClDiffTagID
+            // 
+            this.colClClDiffTagID.FillWeight = 75F;
+            this.colClClDiffTagID.HeaderText = "TagID";
+            this.colClClDiffTagID.MinimumWidth = 6;
+            this.colClClDiffTagID.Name = "colClClDiffTagID";
+            this.colClClDiffTagID.ReadOnly = true;
+            this.colClClDiffTagID.Width = 74;
+            // 
+            // colClClDiffThickness
+            // 
+            this.colClClDiffThickness.HeaderText = "Thickness";
+            this.colClClDiffThickness.MinimumWidth = 6;
+            this.colClClDiffThickness.Name = "colClClDiffThickness";
+            this.colClClDiffThickness.ReadOnly = true;
+            this.colClClDiffThickness.Width = 98;
+            // 
+            // colClClDiffWidth
+            // 
+            this.colClClDiffWidth.HeaderText = "Width";
+            this.colClClDiffWidth.MinimumWidth = 6;
+            this.colClClDiffWidth.Name = "colClClDiffWidth";
+            this.colClClDiffWidth.ReadOnly = true;
+            this.colClClDiffWidth.Width = 70;
+            // 
+            // colClClDiffAlloy
+            // 
+            this.colClClDiffAlloy.HeaderText = "Alloy";
+            this.colClClDiffAlloy.MinimumWidth = 6;
+            this.colClClDiffAlloy.Name = "colClClDiffAlloy";
+            this.colClClDiffAlloy.ReadOnly = true;
+            this.colClClDiffAlloy.Width = 66;
+            // 
+            // colClClDiffBreak
+            // 
+            this.colClClDiffBreak.FillWeight = 50F;
+            this.colClClDiffBreak.HeaderText = "Break";
+            this.colClClDiffBreak.MinimumWidth = 6;
+            this.colClClDiffBreak.Name = "colClClDiffBreak";
+            this.colClClDiffBreak.Width = 49;
+            // 
+            // colClClDiffOrigWeight
+            // 
+            this.colClClDiffOrigWeight.HeaderText = "Orig LBS";
+            this.colClClDiffOrigWeight.MinimumWidth = 6;
+            this.colClClDiffOrigWeight.Name = "colClClDiffOrigWeight";
+            this.colClClDiffOrigWeight.ReadOnly = true;
+            this.colClClDiffOrigWeight.Width = 89;
+            // 
+            // colClClDiffNewWeight
+            // 
+            this.colClClDiffNewWeight.HeaderText = "New LBS";
+            this.colClClDiffNewWeight.MinimumWidth = 6;
+            this.colClClDiffNewWeight.Name = "colClClDiffNewWeight";
+            this.colClClDiffNewWeight.ReadOnly = true;
+            this.colClClDiffNewWeight.Width = 91;
+            // 
+            // colClClDiffWidthLeft
+            // 
+            this.colClClDiffWidthLeft.HeaderText = "Remaining";
+            this.colClClDiffWidthLeft.MinimumWidth = 6;
+            this.colClClDiffWidthLeft.Name = "colClClDiffWidthLeft";
+            this.colClClDiffWidthLeft.ReadOnly = true;
+            this.colClClDiffWidthLeft.Width = 101;
+            // 
+            // colClClDiffTrimAmount
+            // 
+            this.colClClDiffTrimAmount.HeaderText = "Trim";
+            this.colClClDiffTrimAmount.MinimumWidth = 6;
+            this.colClClDiffTrimAmount.Name = "colClClDiffTrimAmount";
+            this.colClClDiffTrimAmount.Width = 63;
+            // 
+            // colClClDiffCutCount
+            // 
+            this.colClClDiffCutCount.HeaderText = "CutCount";
+            this.colClClDiffCutCount.MinimumWidth = 6;
+            this.colClClDiffCutCount.Name = "colClClDiffCutCount";
+            this.colClClDiffCutCount.ReadOnly = true;
+            this.colClClDiffCutCount.Width = 89;
+            // 
+            // colClClDiffPaper
+            // 
+            this.colClClDiffPaper.HeaderText = "Paper";
+            this.colClClDiffPaper.MinimumWidth = 6;
+            this.colClClDiffPaper.Name = "colClClDiffPaper";
+            this.colClClDiffPaper.Width = 50;
+            // 
+            // colClClDiffAddCutButton
+            // 
+            this.colClClDiffAddCutButton.HeaderText = "AddCut";
+            this.colClClDiffAddCutButton.MinimumWidth = 6;
+            this.colClClDiffAddCutButton.Name = "colClClDiffAddCutButton";
+            this.colClClDiffAddCutButton.Text = "Add";
+            this.colClClDiffAddCutButton.UseColumnTextForButtonValue = true;
+            this.colClClDiffAddCutButton.Width = 57;
+            // 
+            // listViewClClDiff
+            // 
+            this.listViewClClDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewClClDiff.CheckBoxes = true;
+            this.listViewClClDiff.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader22,
+            this.columnHeader23,
+            this.columnHeader24,
+            this.columnHeader25,
+            this.columnHeader26,
+            this.columnHeader27,
+            this.columnHeader28,
+            this.columnHeader29,
+            this.columnHeader30,
+            this.columnHeader31,
+            this.columnHeader32,
+            this.columnHeader33,
+            this.columnHeader34,
+            this.lvCCDOrders});
+            this.listViewClClDiff.HideSelection = false;
+            this.listViewClClDiff.Location = new System.Drawing.Point(-7, 5);
+            this.listViewClClDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listViewClClDiff.Name = "listViewClClDiff";
+            this.listViewClClDiff.Size = new System.Drawing.Size(1139, 477);
+            this.listViewClClDiff.TabIndex = 3;
+            this.listViewClClDiff.UseCompatibleStateImageBehavior = false;
+            this.listViewClClDiff.View = System.Windows.Forms.View.Details;
+            this.listViewClClDiff.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewClClDiff_ItemChecked);
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Tag ID";
+            this.columnHeader18.Width = 100;
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "Location";
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Alloy";
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Thickness";
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Width";
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "Length";
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "Weight";
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "Mill#";
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "Heat";
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "Carbon";
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "Vendor";
+            // 
+            // columnHeader29
+            // 
+            this.columnHeader29.Text = "PO";
+            // 
+            // columnHeader30
+            // 
+            this.columnHeader30.Text = "Container";
+            // 
+            // columnHeader31
+            // 
+            this.columnHeader31.Text = "Rec Date";
+            // 
+            // columnHeader32
+            // 
+            this.columnHeader32.Text = "Rec#";
+            // 
+            // columnHeader33
+            // 
+            this.columnHeader33.Text = "Coil Cnt";
+            // 
+            // columnHeader34
+            // 
+            this.columnHeader34.Text = "Cnt Of Orig";
+            // 
+            // lvCCDOrders
+            // 
+            this.lvCCDOrders.Text = "Orders";
+            // 
+            // buttonClClDiffStartOrder
+            // 
+            this.buttonClClDiffStartOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClClDiffStartOrder.Location = new System.Drawing.Point(984, 574);
+            this.buttonClClDiffStartOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClClDiffStartOrder.Name = "buttonClClDiffStartOrder";
+            this.buttonClClDiffStartOrder.Size = new System.Drawing.Size(131, 34);
+            this.buttonClClDiffStartOrder.TabIndex = 4;
+            this.buttonClClDiffStartOrder.Text = "Start Order";
+            this.buttonClClDiffStartOrder.UseVisualStyleBackColor = true;
+            this.buttonClClDiffStartOrder.Click += new System.EventHandler(this.ButtonClClDiffStartOrder_Click);
+            // 
+            // buttonClClDiffAddOrder
+            // 
+            this.buttonClClDiffAddOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClClDiffAddOrder.Location = new System.Drawing.Point(984, 574);
+            this.buttonClClDiffAddOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClClDiffAddOrder.Name = "buttonClClDiffAddOrder";
+            this.buttonClClDiffAddOrder.Size = new System.Drawing.Size(131, 34);
+            this.buttonClClDiffAddOrder.TabIndex = 35;
+            this.buttonClClDiffAddOrder.Text = "Add Order";
+            this.buttonClClDiffAddOrder.UseVisualStyleBackColor = true;
+            this.buttonClClDiffAddOrder.Visible = false;
+            this.buttonClClDiffAddOrder.Click += new System.EventHandler(this.ButtonClClDiffAddOrder_Click);
+            // 
             // panelSheetSheetSame
             // 
             this.panelSheetSheetSame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelSheetSheetSame.Controls.Add(this.tbSSBreakIn);
+            this.panelSheetSheetSame.Controls.Add(this.cbSSBreakIn);
             this.panelSheetSheetSame.Controls.Add(this.cbShShSmPrintOpTag);
             this.panelSheetSheetSame.Controls.Add(this.btnSSSmAddTag);
             this.panelSheetSheetSame.Controls.Add(this.btnOrderShShSameDeleteRow);
@@ -2870,11 +4217,11 @@ namespace DesktopApp2
             // 
             // cbShShSmPrintOpTag
             // 
-            this.cbShShSmPrintOpTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.cbShShSmPrintOpTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbShShSmPrintOpTag.AutoSize = true;
             this.cbShShSmPrintOpTag.Checked = true;
             this.cbShShSmPrintOpTag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbShShSmPrintOpTag.Location = new System.Drawing.Point(926, 489);
+            this.cbShShSmPrintOpTag.Location = new System.Drawing.Point(491, 472);
             this.cbShShSmPrintOpTag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbShShSmPrintOpTag.Name = "cbShShSmPrintOpTag";
             this.cbShShSmPrintOpTag.Size = new System.Drawing.Size(146, 20);
@@ -2899,7 +4246,7 @@ namespace DesktopApp2
             // btnOrderShShSameDeleteRow
             // 
             this.btnOrderShShSameDeleteRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOrderShShSameDeleteRow.Location = new System.Drawing.Point(725, 475);
+            this.btnOrderShShSameDeleteRow.Location = new System.Drawing.Point(960, 471);
             this.btnOrderShShSameDeleteRow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnOrderShShSameDeleteRow.Name = "btnOrderShShSameDeleteRow";
             this.btnOrderShShSameDeleteRow.Size = new System.Drawing.Size(163, 32);
@@ -2935,7 +4282,7 @@ namespace DesktopApp2
             // 
             // lblShShSmPaperPrice
             // 
-            this.lblShShSmPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblShShSmPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblShShSmPaperPrice.AutoSize = true;
             this.lblShShSmPaperPrice.Location = new System.Drawing.Point(836, 526);
             this.lblShShSmPaperPrice.Name = "lblShShSmPaperPrice";
@@ -2945,7 +4292,7 @@ namespace DesktopApp2
             // 
             // tbShShSmPaperPrice
             // 
-            this.tbShShSmPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbShShSmPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tbShShSmPaperPrice.Location = new System.Drawing.Point(925, 522);
             this.tbShShSmPaperPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbShShSmPaperPrice.Name = "tbShShSmPaperPrice";
@@ -3020,8 +4367,7 @@ namespace DesktopApp2
             // 
             // textBoxSSSmRunSheet
             // 
-            this.textBoxSSSmRunSheet.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSSSmRunSheet.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxSSSmRunSheet.Location = new System.Drawing.Point(641, 548);
             this.textBoxSSSmRunSheet.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSSSmRunSheet.Name = "textBoxSSSmRunSheet";
@@ -3208,223 +4554,6 @@ namespace DesktopApp2
             this.dataGridViewSSSmSkid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewSSSmSkid_CellContentClick);
             this.dataGridViewSSSmSkid.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridViewSSSmSkid_EditingControlShowing);
             this.dataGridViewSSSmSkid.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewSSSmSkid_MouseClick);
-            // 
-            // dgvSSSmBreakSkid
-            // 
-            this.dgvSSSmBreakSkid.HeaderText = "Break Skid";
-            this.dgvSSSmBreakSkid.MinimumWidth = 6;
-            this.dgvSSSmBreakSkid.Name = "dgvSSSmBreakSkid";
-            this.dgvSSSmBreakSkid.Width = 79;
-            // 
-            // dgvSSSmSkidID
-            // 
-            this.dgvSSSmSkidID.HeaderText = "Skid ID";
-            this.dgvSSSmSkidID.MinimumWidth = 6;
-            this.dgvSSSmSkidID.Name = "dgvSSSmSkidID";
-            this.dgvSSSmSkidID.ReadOnly = true;
-            this.dgvSSSmSkidID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmSkidID.Width = 56;
-            // 
-            // dgvSSSmLetter
-            // 
-            this.dgvSSSmLetter.HeaderText = "Letter";
-            this.dgvSSSmLetter.MinimumWidth = 6;
-            this.dgvSSSmLetter.Name = "dgvSSSmLetter";
-            this.dgvSSSmLetter.ReadOnly = true;
-            this.dgvSSSmLetter.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmLetter.Width = 46;
-            // 
-            // dgvSSSmPieces
-            // 
-            this.dgvSSSmPieces.HeaderText = "Pieces";
-            this.dgvSSSmPieces.MinimumWidth = 6;
-            this.dgvSSSmPieces.Name = "dgvSSSmPieces";
-            this.dgvSSSmPieces.ReadOnly = true;
-            this.dgvSSSmPieces.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmPieces.Width = 55;
-            // 
-            // dgvSSSmAlloy
-            // 
-            this.dgvSSSmAlloy.HeaderText = "Alloy";
-            this.dgvSSSmAlloy.MinimumWidth = 6;
-            this.dgvSSSmAlloy.Name = "dgvSSSmAlloy";
-            this.dgvSSSmAlloy.ReadOnly = true;
-            this.dgvSSSmAlloy.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmAlloy.Width = 43;
-            // 
-            // dgvSSSmNewFinish
-            // 
-            this.dgvSSSmNewFinish.HeaderText = "New Finish";
-            this.dgvSSSmNewFinish.MinimumWidth = 6;
-            this.dgvSSSmNewFinish.Name = "dgvSSSmNewFinish";
-            this.dgvSSSmNewFinish.Width = 78;
-            // 
-            // dgvSSSmThickness
-            // 
-            this.dgvSSSmThickness.HeaderText = "Thick";
-            this.dgvSSSmThickness.MinimumWidth = 6;
-            this.dgvSSSmThickness.Name = "dgvSSSmThickness";
-            this.dgvSSSmThickness.ReadOnly = true;
-            this.dgvSSSmThickness.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmThickness.Width = 46;
-            // 
-            // dgvSSSmWidth
-            // 
-            this.dgvSSSmWidth.HeaderText = "Width";
-            this.dgvSSSmWidth.MinimumWidth = 6;
-            this.dgvSSSmWidth.Name = "dgvSSSmWidth";
-            this.dgvSSSmWidth.ReadOnly = true;
-            this.dgvSSSmWidth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmWidth.Width = 47;
-            // 
-            // dgvSSSmLength
-            // 
-            this.dgvSSSmLength.HeaderText = "Length";
-            this.dgvSSSmLength.MinimumWidth = 6;
-            this.dgvSSSmLength.Name = "dgvSSSmLength";
-            this.dgvSSSmLength.ReadOnly = true;
-            this.dgvSSSmLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmLength.Width = 53;
-            // 
-            // dgvSSSmWeight
-            // 
-            this.dgvSSSmWeight.HeaderText = "Weight";
-            this.dgvSSSmWeight.MinimumWidth = 6;
-            this.dgvSSSmWeight.Name = "dgvSSSmWeight";
-            this.dgvSSSmWeight.ReadOnly = true;
-            this.dgvSSSmWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmWeight.Width = 55;
-            // 
-            // dgvSSSmPVC
-            // 
-            this.dgvSSSmPVC.HeaderText = "PVC";
-            this.dgvSSSmPVC.MinimumWidth = 6;
-            this.dgvSSSmPVC.Name = "dgvSSSmPVC";
-            this.dgvSSSmPVC.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSSSmPVC.Width = 40;
-            // 
-            // dgvSSSmPaper
-            // 
-            this.dgvSSSmPaper.HeaderText = "Paper";
-            this.dgvSSSmPaper.MinimumWidth = 6;
-            this.dgvSSSmPaper.Name = "dgvSSSmPaper";
-            this.dgvSSSmPaper.Width = 50;
-            // 
-            // dgvSSSmLineMark
-            // 
-            this.dgvSSSmLineMark.HeaderText = "LM";
-            this.dgvSSSmLineMark.MinimumWidth = 6;
-            this.dgvSSSmLineMark.Name = "dgvSSSmLineMark";
-            this.dgvSSSmLineMark.Width = 31;
-            // 
-            // dgvSSSmComments
-            // 
-            this.dgvSSSmComments.HeaderText = "Comments";
-            this.dgvSSSmComments.MaxInputLength = 50;
-            this.dgvSSSmComments.MinimumWidth = 6;
-            this.dgvSSSmComments.Name = "dgvSSSmComments";
-            this.dgvSSSmComments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmComments.Width = 77;
-            // 
-            // dgvSSSmBranch
-            // 
-            this.dgvSSSmBranch.HeaderText = "Branch";
-            this.dgvSSSmBranch.MinimumWidth = 6;
-            this.dgvSSSmBranch.Name = "dgvSSSmBranch";
-            this.dgvSSSmBranch.Width = 55;
-            // 
-            // dgvSSSmAdders
-            // 
-            this.dgvSSSmAdders.HeaderText = "Adders";
-            this.dgvSSSmAdders.MinimumWidth = 6;
-            this.dgvSSSmAdders.Name = "dgvSSSmAdders";
-            this.dgvSSSmAdders.Width = 57;
-            // 
-            // dgvSSSmBranchID
-            // 
-            this.dgvSSSmBranchID.HeaderText = "BranchID";
-            this.dgvSSSmBranchID.MinimumWidth = 6;
-            this.dgvSSSmBranchID.Name = "dgvSSSmBranchID";
-            this.dgvSSSmBranchID.Visible = false;
-            this.dgvSSSmBranchID.Width = 68;
-            // 
-            // dgvSSSmAdderID
-            // 
-            this.dgvSSSmAdderID.HeaderText = "Adder ID";
-            this.dgvSSSmAdderID.MinimumWidth = 6;
-            this.dgvSSSmAdderID.Name = "dgvSSSmAdderID";
-            this.dgvSSSmAdderID.Visible = false;
-            this.dgvSSSmAdderID.Width = 66;
-            // 
-            // dgvSSSmAdderPriceCol
-            // 
-            this.dgvSSSmAdderPriceCol.HeaderText = "Adder Price";
-            this.dgvSSSmAdderPriceCol.MinimumWidth = 6;
-            this.dgvSSSmAdderPriceCol.Name = "dgvSSSmAdderPriceCol";
-            this.dgvSSSmAdderPriceCol.Visible = false;
-            this.dgvSSSmAdderPriceCol.Width = 84;
-            // 
-            // dgvSSSmAlloyID
-            // 
-            this.dgvSSSmAlloyID.HeaderText = "AlloyID";
-            this.dgvSSSmAlloyID.MinimumWidth = 6;
-            this.dgvSSSmAlloyID.Name = "dgvSSSmAlloyID";
-            this.dgvSSSmAlloyID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmAlloyID.Visible = false;
-            this.dgvSSSmAlloyID.Width = 56;
-            // 
-            // dgvSSSmFinishID
-            // 
-            this.dgvSSSmFinishID.HeaderText = "Finish ID";
-            this.dgvSSSmFinishID.MinimumWidth = 6;
-            this.dgvSSSmFinishID.Name = "dgvSSSmFinishID";
-            this.dgvSSSmFinishID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSSSmFinishID.Visible = false;
-            this.dgvSSSmFinishID.Width = 64;
-            // 
-            // dgvSSSmDensityFactor
-            // 
-            this.dgvSSSmDensityFactor.HeaderText = "Density Factor";
-            this.dgvSSSmDensityFactor.MinimumWidth = 6;
-            this.dgvSSSmDensityFactor.Name = "dgvSSSmDensityFactor";
-            this.dgvSSSmDensityFactor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmDensityFactor.Visible = false;
-            this.dgvSSSmDensityFactor.Width = 99;
-            // 
-            // dgvSSSmOrigFinish
-            // 
-            this.dgvSSSmOrigFinish.HeaderText = "Orig Finish";
-            this.dgvSSSmOrigFinish.MinimumWidth = 6;
-            this.dgvSSSmOrigFinish.Name = "dgvSSSmOrigFinish";
-            this.dgvSSSmOrigFinish.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmOrigFinish.Visible = false;
-            this.dgvSSSmOrigFinish.Width = 76;
-            // 
-            // dgvSSSmPVCGroupID
-            // 
-            this.dgvSSSmPVCGroupID.HeaderText = "PVCGRoupID";
-            this.dgvSSSmPVCGroupID.MinimumWidth = 6;
-            this.dgvSSSmPVCGroupID.Name = "dgvSSSmPVCGroupID";
-            this.dgvSSSmPVCGroupID.Visible = false;
-            this.dgvSSSmPVCGroupID.Width = 96;
-            // 
-            // dgvSSSmPVCPriceList
-            // 
-            this.dgvSSSmPVCPriceList.HeaderText = "PVCPriceList";
-            this.dgvSSSmPVCPriceList.MinimumWidth = 6;
-            this.dgvSSSmPVCPriceList.Name = "dgvSSSmPVCPriceList";
-            this.dgvSSSmPVCPriceList.Visible = false;
-            this.dgvSSSmPVCPriceList.Width = 91;
-            // 
-            // dgvSSSmCurrPrice
-            // 
-            this.dgvSSSmCurrPrice.HeaderText = "CurrPrice";
-            this.dgvSSSmCurrPrice.MinimumWidth = 6;
-            this.dgvSSSmCurrPrice.Name = "dgvSSSmCurrPrice";
-            this.dgvSSSmCurrPrice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSSSmCurrPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvSSSmCurrPrice.Visible = false;
-            this.dgvSSSmCurrPrice.Width = 68;
             // 
             // listViewSSSmSkidData
             // 
@@ -4568,1345 +5697,6 @@ namespace DesktopApp2
             this.buttonSSDStartOrder.Text = "Start Order";
             this.buttonSSDStartOrder.UseVisualStyleBackColor = true;
             this.buttonSSDStartOrder.Click += new System.EventHandler(this.ButtonSSDStartOrder_Click);
-            // 
-            // panelCoilSheetSame
-            // 
-            this.panelCoilSheetSame.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelCoilSheetSame.Controls.Add(this.cbCTLWeightCalc);
-            this.panelCoilSheetSame.Controls.Add(this.btnOrderCTLAddTag);
-            this.panelCoilSheetSame.Controls.Add(this.cbCTLPaperDefault);
-            this.panelCoilSheetSame.Controls.Add(this.cbCTLPrintOperatorTags);
-            this.panelCoilSheetSame.Controls.Add(this.buttonCTLReset);
-            this.panelCoilSheetSame.Controls.Add(this.labelPaperPrice);
-            this.panelCoilSheetSame.Controls.Add(this.textBoxPaperPrice);
-            this.panelCoilSheetSame.Controls.Add(this.labelSpecialLeadTime);
-            this.panelCoilSheetSame.Controls.Add(this.dataGridViewAdders);
-            this.panelCoilSheetSame.Controls.Add(this.buttonCTLDeleteRow);
-            this.panelCoilSheetSame.Controls.Add(this.buttonAdderDone);
-            this.panelCoilSheetSame.Controls.Add(this.textBoxCTLRunSheetComments);
-            this.panelCoilSheetSame.Controls.Add(this.labelCTLRunSheetComments);
-            this.panelCoilSheetSame.Controls.Add(this.buttonCTLDelete);
-            this.panelCoilSheetSame.Controls.Add(this.comboBoxCTLModify);
-            this.panelCoilSheetSame.Controls.Add(this.checkBoxCTLModify);
-            this.panelCoilSheetSame.Controls.Add(this.labelCTLSendTo);
-            this.panelCoilSheetSame.Controls.Add(this.comboBoxCTLSendTo);
-            this.panelCoilSheetSame.Controls.Add(this.checkBoxCTLMultiStep);
-            this.panelCoilSheetSame.Controls.Add(this.labelCTLPrice);
-            this.panelCoilSheetSame.Controls.Add(this.labelCTLPO);
-            this.panelCoilSheetSame.Controls.Add(this.labelCTLPromiseDate);
-            this.panelCoilSheetSame.Controls.Add(this.checkBoxCTLScrapCredit);
-            this.panelCoilSheetSame.Controls.Add(this.textBoxCTLPO);
-            this.panelCoilSheetSame.Controls.Add(this.textBoxCTLPrice);
-            this.panelCoilSheetSame.Controls.Add(this.dateTimePickerCTLPromiseDate);
-            this.panelCoilSheetSame.Controls.Add(this.richTextBoxCTLComments);
-            this.panelCoilSheetSame.Controls.Add(this.buttonCTLArrowDown);
-            this.panelCoilSheetSame.Controls.Add(this.buttonCTLArrowUp);
-            this.panelCoilSheetSame.Controls.Add(this.dataGridViewCTLOrderEntry);
-            this.panelCoilSheetSame.Controls.Add(this.listViewCTLCoilList);
-            this.panelCoilSheetSame.Controls.Add(this.buttonCTLAddOrder);
-            this.panelCoilSheetSame.Controls.Add(this.buttonCTLStartOrder);
-            this.panelCoilSheetSame.Location = new System.Drawing.Point(-3, 7);
-            this.panelCoilSheetSame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelCoilSheetSame.Name = "panelCoilSheetSame";
-            this.panelCoilSheetSame.Size = new System.Drawing.Size(1140, 623);
-            this.panelCoilSheetSame.TabIndex = 0;
-            this.panelCoilSheetSame.Visible = false;
-            this.panelCoilSheetSame.VisibleChanged += new System.EventHandler(this.PanelCoilSheetSame_VisibleChanged);
-            // 
-            // cbCTLWeightCalc
-            // 
-            this.cbCTLWeightCalc.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbCTLWeightCalc.AutoSize = true;
-            this.cbCTLWeightCalc.Location = new System.Drawing.Point(941, 528);
-            this.cbCTLWeightCalc.Margin = new System.Windows.Forms.Padding(4);
-            this.cbCTLWeightCalc.Name = "cbCTLWeightCalc";
-            this.cbCTLWeightCalc.Size = new System.Drawing.Size(66, 20);
-            this.cbCTLWeightCalc.TabIndex = 52;
-            this.cbCTLWeightCalc.Text = "Actual";
-            this.cbCTLWeightCalc.UseVisualStyleBackColor = true;
-            // 
-            // btnOrderCTLAddTag
-            // 
-            this.btnOrderCTLAddTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnOrderCTLAddTag.Location = new System.Drawing.Point(155, 464);
-            this.btnOrderCTLAddTag.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnOrderCTLAddTag.Name = "btnOrderCTLAddTag";
-            this.btnOrderCTLAddTag.Size = new System.Drawing.Size(85, 30);
-            this.btnOrderCTLAddTag.TabIndex = 51;
-            this.btnOrderCTLAddTag.Text = "Add Tag";
-            this.btnOrderCTLAddTag.UseVisualStyleBackColor = true;
-            this.btnOrderCTLAddTag.Visible = false;
-            this.btnOrderCTLAddTag.Click += new System.EventHandler(this.btnOrderCTLAddTag_Click);
-            // 
-            // cbCTLPaperDefault
-            // 
-            this.cbCTLPaperDefault.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbCTLPaperDefault.AutoSize = true;
-            this.cbCTLPaperDefault.Location = new System.Drawing.Point(942, 502);
-            this.cbCTLPaperDefault.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbCTLPaperDefault.Name = "cbCTLPaperDefault";
-            this.cbCTLPaperDefault.Size = new System.Drawing.Size(111, 20);
-            this.cbCTLPaperDefault.TabIndex = 50;
-            this.cbCTLPaperDefault.Text = "Default Paper";
-            this.cbCTLPaperDefault.UseVisualStyleBackColor = true;
-            this.cbCTLPaperDefault.CheckedChanged += new System.EventHandler(this.cbCTLPaperDefault_CheckedChanged);
-            // 
-            // cbCTLPrintOperatorTags
-            // 
-            this.cbCTLPrintOperatorTags.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbCTLPrintOperatorTags.AutoSize = true;
-            this.cbCTLPrintOperatorTags.Checked = true;
-            this.cbCTLPrintOperatorTags.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCTLPrintOperatorTags.Location = new System.Drawing.Point(800, 587);
-            this.cbCTLPrintOperatorTags.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.cbCTLPrintOperatorTags.Name = "cbCTLPrintOperatorTags";
-            this.cbCTLPrintOperatorTags.Size = new System.Drawing.Size(146, 20);
-            this.cbCTLPrintOperatorTags.TabIndex = 49;
-            this.cbCTLPrintOperatorTags.Text = "Print Operator Tags";
-            this.cbCTLPrintOperatorTags.UseVisualStyleBackColor = true;
-            // 
-            // buttonCTLReset
-            // 
-            this.buttonCTLReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCTLReset.Location = new System.Drawing.Point(952, 463);
-            this.buttonCTLReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonCTLReset.Name = "buttonCTLReset";
-            this.buttonCTLReset.Size = new System.Drawing.Size(165, 28);
-            this.buttonCTLReset.TabIndex = 15;
-            this.buttonCTLReset.Text = "Reset All";
-            this.buttonCTLReset.UseVisualStyleBackColor = true;
-            this.buttonCTLReset.Click += new System.EventHandler(this.ButtonCTLReset_Click);
-            // 
-            // labelPaperPrice
-            // 
-            this.labelPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelPaperPrice.AutoSize = true;
-            this.labelPaperPrice.Location = new System.Drawing.Point(696, 503);
-            this.labelPaperPrice.Name = "labelPaperPrice";
-            this.labelPaperPrice.Size = new System.Drawing.Size(78, 16);
-            this.labelPaperPrice.TabIndex = 48;
-            this.labelPaperPrice.Text = "Paper Price";
-            // 
-            // textBoxPaperPrice
-            // 
-            this.textBoxPaperPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxPaperPrice.Location = new System.Drawing.Point(780, 501);
-            this.textBoxPaperPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxPaperPrice.Name = "textBoxPaperPrice";
-            this.textBoxPaperPrice.Size = new System.Drawing.Size(112, 22);
-            this.textBoxPaperPrice.TabIndex = 10;
-            this.textBoxPaperPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxPaperPrice_KeyPress);
-            // 
-            // labelSpecialLeadTime
-            // 
-            this.labelSpecialLeadTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelSpecialLeadTime.AutoSize = true;
-            this.labelSpecialLeadTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSpecialLeadTime.ForeColor = System.Drawing.Color.Red;
-            this.labelSpecialLeadTime.Location = new System.Drawing.Point(533, 594);
-            this.labelSpecialLeadTime.Name = "labelSpecialLeadTime";
-            this.labelSpecialLeadTime.Size = new System.Drawing.Size(153, 20);
-            this.labelSpecialLeadTime.TabIndex = 46;
-            this.labelSpecialLeadTime.Text = "Special Lead Time!";
-            this.labelSpecialLeadTime.Visible = false;
-            // 
-            // dataGridViewAdders
-            // 
-            this.dataGridViewAdders.AllowUserToAddRows = false;
-            this.dataGridViewAdders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAdders.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSelect,
-            this.dgvAdderDesc,
-            this.dgvAdderPrice});
-            this.dataGridViewAdders.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridViewAdders.Location = new System.Drawing.Point(616, 55);
-            this.dataGridViewAdders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewAdders.MultiSelect = false;
-            this.dataGridViewAdders.Name = "dataGridViewAdders";
-            this.dataGridViewAdders.RowHeadersVisible = false;
-            this.dataGridViewAdders.RowHeadersWidth = 12;
-            this.dataGridViewAdders.RowTemplate.Height = 24;
-            this.dataGridViewAdders.Size = new System.Drawing.Size(347, 174);
-            this.dataGridViewAdders.TabIndex = 45;
-            this.dataGridViewAdders.Visible = false;
-            // 
-            // colSelect
-            // 
-            this.colSelect.HeaderText = "Sel";
-            this.colSelect.MinimumWidth = 6;
-            this.colSelect.Name = "colSelect";
-            this.colSelect.Width = 50;
-            // 
-            // dgvAdderDesc
-            // 
-            this.dgvAdderDesc.HeaderText = "Adder";
-            this.dgvAdderDesc.MinimumWidth = 6;
-            this.dgvAdderDesc.Name = "dgvAdderDesc";
-            this.dgvAdderDesc.Width = 125;
-            // 
-            // dgvAdderPrice
-            // 
-            this.dgvAdderPrice.HeaderText = "Price";
-            this.dgvAdderPrice.MinimumWidth = 6;
-            this.dgvAdderPrice.Name = "dgvAdderPrice";
-            this.dgvAdderPrice.Width = 125;
-            // 
-            // buttonCTLDeleteRow
-            // 
-            this.buttonCTLDeleteRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCTLDeleteRow.Location = new System.Drawing.Point(785, 463);
-            this.buttonCTLDeleteRow.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonCTLDeleteRow.Name = "buttonCTLDeleteRow";
-            this.buttonCTLDeleteRow.Size = new System.Drawing.Size(163, 27);
-            this.buttonCTLDeleteRow.TabIndex = 14;
-            this.buttonCTLDeleteRow.Text = "Delete Row";
-            this.buttonCTLDeleteRow.UseVisualStyleBackColor = true;
-            this.buttonCTLDeleteRow.Visible = false;
-            this.buttonCTLDeleteRow.Click += new System.EventHandler(this.ButtonCTLDeleteRow_Click);
-            // 
-            // buttonAdderDone
-            // 
-            this.buttonAdderDone.Location = new System.Drawing.Point(448, 202);
-            this.buttonAdderDone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonAdderDone.Name = "buttonAdderDone";
-            this.buttonAdderDone.Size = new System.Drawing.Size(99, 27);
-            this.buttonAdderDone.TabIndex = 41;
-            this.buttonAdderDone.Text = "Done";
-            this.buttonAdderDone.UseVisualStyleBackColor = true;
-            this.buttonAdderDone.Click += new System.EventHandler(this.ButtonAdderDone_Click);
-            // 
-            // textBoxCTLRunSheetComments
-            // 
-            this.textBoxCTLRunSheetComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCTLRunSheetComments.Location = new System.Drawing.Point(643, 551);
-            this.textBoxCTLRunSheetComments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxCTLRunSheetComments.Name = "textBoxCTLRunSheetComments";
-            this.textBoxCTLRunSheetComments.Size = new System.Drawing.Size(413, 22);
-            this.textBoxCTLRunSheetComments.TabIndex = 12;
-            this.textBoxCTLRunSheetComments.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCTLRunSheetComments_KeyPress);
-            // 
-            // labelCTLRunSheetComments
-            // 
-            this.labelCTLRunSheetComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelCTLRunSheetComments.AutoSize = true;
-            this.labelCTLRunSheetComments.Location = new System.Drawing.Point(491, 556);
-            this.labelCTLRunSheetComments.Name = "labelCTLRunSheetComments";
-            this.labelCTLRunSheetComments.Size = new System.Drawing.Size(136, 16);
-            this.labelCTLRunSheetComments.TabIndex = 38;
-            this.labelCTLRunSheetComments.Text = "Run Sheet Comments";
-            // 
-            // buttonCTLDelete
-            // 
-            this.buttonCTLDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCTLDelete.Location = new System.Drawing.Point(180, 494);
-            this.buttonCTLDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonCTLDelete.Name = "buttonCTLDelete";
-            this.buttonCTLDelete.Size = new System.Drawing.Size(64, 39);
-            this.buttonCTLDelete.TabIndex = 36;
-            this.buttonCTLDelete.Text = "Delete";
-            this.buttonCTLDelete.UseVisualStyleBackColor = true;
-            this.buttonCTLDelete.Visible = false;
-            this.buttonCTLDelete.Click += new System.EventHandler(this.buttonCTLDelete_Click);
-            // 
-            // comboBoxCTLModify
-            // 
-            this.comboBoxCTLModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBoxCTLModify.FormattingEnabled = true;
-            this.comboBoxCTLModify.Location = new System.Drawing.Point(27, 503);
-            this.comboBoxCTLModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBoxCTLModify.Name = "comboBoxCTLModify";
-            this.comboBoxCTLModify.Size = new System.Drawing.Size(141, 24);
-            this.comboBoxCTLModify.TabIndex = 2;
-            this.comboBoxCTLModify.Visible = false;
-            this.comboBoxCTLModify.SelectedIndexChanged += new System.EventHandler(this.ComboBoxCTLModify_SelectedIndexChanged);
-            // 
-            // checkBoxCTLModify
-            // 
-            this.checkBoxCTLModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxCTLModify.AutoSize = true;
-            this.checkBoxCTLModify.Location = new System.Drawing.Point(5, 481);
-            this.checkBoxCTLModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxCTLModify.Name = "checkBoxCTLModify";
-            this.checkBoxCTLModify.Size = new System.Drawing.Size(69, 20);
-            this.checkBoxCTLModify.TabIndex = 1;
-            this.checkBoxCTLModify.Text = "Modify";
-            this.checkBoxCTLModify.UseVisualStyleBackColor = true;
-            this.checkBoxCTLModify.CheckedChanged += new System.EventHandler(this.CheckBoxCTLModify_CheckedChanged);
-            // 
-            // labelCTLSendTo
-            // 
-            this.labelCTLSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelCTLSendTo.AutoSize = true;
-            this.labelCTLSendTo.Location = new System.Drawing.Point(24, 558);
-            this.labelCTLSendTo.Name = "labelCTLSendTo";
-            this.labelCTLSendTo.Size = new System.Drawing.Size(53, 16);
-            this.labelCTLSendTo.TabIndex = 33;
-            this.labelCTLSendTo.Text = "Send to";
-            this.labelCTLSendTo.Visible = false;
-            // 
-            // comboBoxCTLSendTo
-            // 
-            this.comboBoxCTLSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBoxCTLSendTo.FormattingEnabled = true;
-            this.comboBoxCTLSendTo.Location = new System.Drawing.Point(27, 580);
-            this.comboBoxCTLSendTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBoxCTLSendTo.Name = "comboBoxCTLSendTo";
-            this.comboBoxCTLSendTo.Size = new System.Drawing.Size(171, 24);
-            this.comboBoxCTLSendTo.TabIndex = 4;
-            this.comboBoxCTLSendTo.Visible = false;
-            // 
-            // checkBoxCTLMultiStep
-            // 
-            this.checkBoxCTLMultiStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxCTLMultiStep.AutoSize = true;
-            this.checkBoxCTLMultiStep.Location = new System.Drawing.Point(5, 539);
-            this.checkBoxCTLMultiStep.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxCTLMultiStep.Name = "checkBoxCTLMultiStep";
-            this.checkBoxCTLMultiStep.Size = new System.Drawing.Size(84, 20);
-            this.checkBoxCTLMultiStep.TabIndex = 3;
-            this.checkBoxCTLMultiStep.Text = "MultiStep";
-            this.checkBoxCTLMultiStep.UseVisualStyleBackColor = true;
-            // 
-            // labelCTLPrice
-            // 
-            this.labelCTLPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelCTLPrice.AutoSize = true;
-            this.labelCTLPrice.Location = new System.Drawing.Point(491, 503);
-            this.labelCTLPrice.Name = "labelCTLPrice";
-            this.labelCTLPrice.Size = new System.Drawing.Size(38, 16);
-            this.labelCTLPrice.TabIndex = 28;
-            this.labelCTLPrice.Text = "Price";
-            // 
-            // labelCTLPO
-            // 
-            this.labelCTLPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelCTLPO.AutoSize = true;
-            this.labelCTLPO.Location = new System.Drawing.Point(491, 528);
-            this.labelCTLPO.Name = "labelCTLPO";
-            this.labelCTLPO.Size = new System.Drawing.Size(101, 16);
-            this.labelCTLPO.TabIndex = 27;
-            this.labelCTLPO.Text = "Purchase Order";
-            // 
-            // labelCTLPromiseDate
-            // 
-            this.labelCTLPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelCTLPromiseDate.AutoSize = true;
-            this.labelCTLPromiseDate.Location = new System.Drawing.Point(247, 574);
-            this.labelCTLPromiseDate.Name = "labelCTLPromiseDate";
-            this.labelCTLPromiseDate.Size = new System.Drawing.Size(89, 16);
-            this.labelCTLPromiseDate.TabIndex = 26;
-            this.labelCTLPromiseDate.Text = "Promise Date";
-            // 
-            // checkBoxCTLScrapCredit
-            // 
-            this.checkBoxCTLScrapCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxCTLScrapCredit.AutoSize = true;
-            this.checkBoxCTLScrapCredit.Location = new System.Drawing.Point(493, 481);
-            this.checkBoxCTLScrapCredit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxCTLScrapCredit.Name = "checkBoxCTLScrapCredit";
-            this.checkBoxCTLScrapCredit.Size = new System.Drawing.Size(103, 20);
-            this.checkBoxCTLScrapCredit.TabIndex = 8;
-            this.checkBoxCTLScrapCredit.Text = "Scrap Credit";
-            this.checkBoxCTLScrapCredit.UseVisualStyleBackColor = true;
-            // 
-            // textBoxCTLPO
-            // 
-            this.textBoxCTLPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxCTLPO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBoxCTLPO.Location = new System.Drawing.Point(605, 526);
-            this.textBoxCTLPO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxCTLPO.Name = "textBoxCTLPO";
-            this.textBoxCTLPO.Size = new System.Drawing.Size(227, 22);
-            this.textBoxCTLPO.TabIndex = 11;
-            this.textBoxCTLPO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCTLPO_KeyPress);
-            // 
-            // textBoxCTLPrice
-            // 
-            this.textBoxCTLPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxCTLPrice.Location = new System.Drawing.Point(536, 501);
-            this.textBoxCTLPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxCTLPrice.Name = "textBoxCTLPrice";
-            this.textBoxCTLPrice.Size = new System.Drawing.Size(112, 22);
-            this.textBoxCTLPrice.TabIndex = 9;
-            this.textBoxCTLPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBoxCTLPrice_KeyPress);
-            // 
-            // dateTimePickerCTLPromiseDate
-            // 
-            this.dateTimePickerCTLPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dateTimePickerCTLPromiseDate.Location = new System.Drawing.Point(249, 594);
-            this.dateTimePickerCTLPromiseDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePickerCTLPromiseDate.Name = "dateTimePickerCTLPromiseDate";
-            this.dateTimePickerCTLPromiseDate.Size = new System.Drawing.Size(272, 22);
-            this.dateTimePickerCTLPromiseDate.TabIndex = 7;
-            // 
-            // richTextBoxCTLComments
-            // 
-            this.richTextBoxCTLComments.AcceptsTab = true;
-            this.richTextBoxCTLComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBoxCTLComments.Location = new System.Drawing.Point(249, 494);
-            this.richTextBoxCTLComments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.richTextBoxCTLComments.MaxLength = 250;
-            this.richTextBoxCTLComments.Name = "richTextBoxCTLComments";
-            this.richTextBoxCTLComments.Size = new System.Drawing.Size(239, 74);
-            this.richTextBoxCTLComments.TabIndex = 6;
-            this.richTextBoxCTLComments.Text = "";
-            this.richTextBoxCTLComments.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBoxCTLComments_KeyPress);
-            // 
-            // buttonCTLArrowDown
-            // 
-            this.buttonCTLArrowDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCTLArrowDown.Image = global::ICMS.Properties.Resources.DownArrow1;
-            this.buttonCTLArrowDown.Location = new System.Drawing.Point(300, 455);
-            this.buttonCTLArrowDown.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonCTLArrowDown.Name = "buttonCTLArrowDown";
-            this.buttonCTLArrowDown.Size = new System.Drawing.Size(45, 34);
-            this.buttonCTLArrowDown.TabIndex = 44;
-            this.buttonCTLArrowDown.UseVisualStyleBackColor = true;
-            this.buttonCTLArrowDown.Visible = false;
-            this.buttonCTLArrowDown.Click += new System.EventHandler(this.ButtonCTLArrowDown_Click);
-            // 
-            // buttonCTLArrowUp
-            // 
-            this.buttonCTLArrowUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCTLArrowUp.Image = global::ICMS.Properties.Resources.UpArrow;
-            this.buttonCTLArrowUp.Location = new System.Drawing.Point(249, 455);
-            this.buttonCTLArrowUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonCTLArrowUp.Name = "buttonCTLArrowUp";
-            this.buttonCTLArrowUp.Size = new System.Drawing.Size(45, 34);
-            this.buttonCTLArrowUp.TabIndex = 43;
-            this.buttonCTLArrowUp.UseVisualStyleBackColor = true;
-            this.buttonCTLArrowUp.Visible = false;
-            this.buttonCTLArrowUp.Click += new System.EventHandler(this.ButtonCTLArrowUp_Click);
-            this.buttonCTLArrowUp.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ButtonCTLArrowUp_MouseDown);
-            // 
-            // dataGridViewCTLOrderEntry
-            // 
-            this.dataGridViewCTLOrderEntry.AllowUserToAddRows = false;
-            this.dataGridViewCTLOrderEntry.AllowUserToDeleteRows = false;
-            this.dataGridViewCTLOrderEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewCTLOrderEntry.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewCTLOrderEntry.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCTLOrderEntry.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgvCTLTagID,
-            this.dgvCTLThickness,
-            this.dgvCTLWidth,
-            this.dgvCTLAlloy,
-            this.dgvCTLSkidWeight,
-            this.dgvCTLWeight,
-            this.dgvCTLWeightLeft,
-            this.dgvCTLPaper,
-            this.dgvCTLPVC,
-            this.dgvCTLAdder,
-            this.dgvCTLAddCut,
-            this.dgvCTLSkidType,
-            this.dgvCTLCurrSkidPrice,
-            this.dgvCTLSkidCount,
-            this.dgvCTLPieceCount,
-            this.dgvCTLLength,
-            this.dgvCTLComments,
-            this.dgvCTLSheetWeight,
-            this.dgvCTLTheoLBS,
-            this.dgvCTLBranch,
-            this.dgvCTLBranchID,
-            this.dgvCTLAdderID,
-            this.dgvCTLAdderPrice,
-            this.dgvCTLDensityFactor,
-            this.dgvCTLPVCGroupID,
-            this.dgvSkidTypeID,
-            this.dgvCTLPVCPriceList,
-            this.dgvCTLCurrPrice});
-            this.dataGridViewCTLOrderEntry.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridViewCTLOrderEntry.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewCTLOrderEntry.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewCTLOrderEntry.MultiSelect = false;
-            this.dataGridViewCTLOrderEntry.Name = "dataGridViewCTLOrderEntry";
-            this.dataGridViewCTLOrderEntry.RowHeadersWidth = 51;
-            this.dataGridViewCTLOrderEntry.RowTemplate.Height = 24;
-            this.dataGridViewCTLOrderEntry.Size = new System.Drawing.Size(1131, 455);
-            this.dataGridViewCTLOrderEntry.TabIndex = 37;
-            this.dataGridViewCTLOrderEntry.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DataGridViewCTLOrderEntry_CellBeginEdit);
-            this.dataGridViewCTLOrderEntry.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewCTLOrderEntry_CellClick);
-            this.dataGridViewCTLOrderEntry.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewCTLOrderEntry_CellEndEdit);
-            this.dataGridViewCTLOrderEntry.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewCTLOrderEntry_CellEnter);
-            this.dataGridViewCTLOrderEntry.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DataGridViewCTLOrderEntry_EditingControlShowing);
-            this.dataGridViewCTLOrderEntry.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DataGridViewCTLOrderEntry_KeyPress);
-            this.dataGridViewCTLOrderEntry.MouseClick += new System.Windows.Forms.MouseEventHandler(this.DataGridViewCTLOrderEntry_MouseClick);
-            // 
-            // dgvCTLTagID
-            // 
-            this.dgvCTLTagID.FillWeight = 75F;
-            this.dgvCTLTagID.HeaderText = "TagID";
-            this.dgvCTLTagID.MinimumWidth = 6;
-            this.dgvCTLTagID.Name = "dgvCTLTagID";
-            this.dgvCTLTagID.ReadOnly = true;
-            this.dgvCTLTagID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLTagID.Width = 51;
-            // 
-            // dgvCTLThickness
-            // 
-            this.dgvCTLThickness.HeaderText = "Thickness";
-            this.dgvCTLThickness.MinimumWidth = 6;
-            this.dgvCTLThickness.Name = "dgvCTLThickness";
-            this.dgvCTLThickness.ReadOnly = true;
-            this.dgvCTLThickness.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLThickness.Width = 75;
-            // 
-            // dgvCTLWidth
-            // 
-            this.dgvCTLWidth.HeaderText = "Width";
-            this.dgvCTLWidth.MinimumWidth = 6;
-            this.dgvCTLWidth.Name = "dgvCTLWidth";
-            this.dgvCTLWidth.ReadOnly = true;
-            this.dgvCTLWidth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLWidth.Width = 47;
-            // 
-            // dgvCTLAlloy
-            // 
-            this.dgvCTLAlloy.HeaderText = "Alloy";
-            this.dgvCTLAlloy.MinimumWidth = 6;
-            this.dgvCTLAlloy.Name = "dgvCTLAlloy";
-            this.dgvCTLAlloy.ReadOnly = true;
-            this.dgvCTLAlloy.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLAlloy.Width = 43;
-            // 
-            // dgvCTLSkidWeight
-            // 
-            this.dgvCTLSkidWeight.HeaderText = "Skid#";
-            this.dgvCTLSkidWeight.MinimumWidth = 6;
-            this.dgvCTLSkidWeight.Name = "dgvCTLSkidWeight";
-            this.dgvCTLSkidWeight.ReadOnly = true;
-            this.dgvCTLSkidWeight.Width = 70;
-            // 
-            // dgvCTLWeight
-            // 
-            this.dgvCTLWeight.HeaderText = "Orig LBS";
-            this.dgvCTLWeight.MinimumWidth = 6;
-            this.dgvCTLWeight.Name = "dgvCTLWeight";
-            this.dgvCTLWeight.ReadOnly = true;
-            this.dgvCTLWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLWeight.Width = 60;
-            // 
-            // dgvCTLWeightLeft
-            // 
-            this.dgvCTLWeightLeft.HeaderText = "WeightLeft";
-            this.dgvCTLWeightLeft.MinimumWidth = 6;
-            this.dgvCTLWeightLeft.Name = "dgvCTLWeightLeft";
-            this.dgvCTLWeightLeft.ReadOnly = true;
-            this.dgvCTLWeightLeft.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLWeightLeft.Width = 76;
-            // 
-            // dgvCTLPaper
-            // 
-            this.dgvCTLPaper.HeaderText = "Paper";
-            this.dgvCTLPaper.MinimumWidth = 6;
-            this.dgvCTLPaper.Name = "dgvCTLPaper";
-            this.dgvCTLPaper.ToolTipText = ".012";
-            this.dgvCTLPaper.Width = 50;
-            // 
-            // dgvCTLPVC
-            // 
-            this.dgvCTLPVC.HeaderText = "PVC";
-            this.dgvCTLPVC.MinimumWidth = 6;
-            this.dgvCTLPVC.Name = "dgvCTLPVC";
-            this.dgvCTLPVC.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCTLPVC.Width = 40;
-            // 
-            // dgvCTLAdder
-            // 
-            this.dgvCTLAdder.HeaderText = "Adders";
-            this.dgvCTLAdder.MinimumWidth = 6;
-            this.dgvCTLAdder.Name = "dgvCTLAdder";
-            this.dgvCTLAdder.Width = 57;
-            // 
-            // dgvCTLAddCut
-            // 
-            this.dgvCTLAddCut.HeaderText = "AddCut";
-            this.dgvCTLAddCut.MinimumWidth = 6;
-            this.dgvCTLAddCut.Name = "dgvCTLAddCut";
-            this.dgvCTLAddCut.Text = "AddCut";
-            this.dgvCTLAddCut.UseColumnTextForButtonValue = true;
-            this.dgvCTLAddCut.Visible = false;
-            this.dgvCTLAddCut.Width = 57;
-            // 
-            // dgvCTLSkidType
-            // 
-            this.dgvCTLSkidType.HeaderText = "Type";
-            this.dgvCTLSkidType.MinimumWidth = 6;
-            this.dgvCTLSkidType.Name = "dgvCTLSkidType";
-            this.dgvCTLSkidType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCTLSkidType.Width = 45;
-            // 
-            // dgvCTLCurrSkidPrice
-            // 
-            this.dgvCTLCurrSkidPrice.HeaderText = "Skid Price";
-            this.dgvCTLCurrSkidPrice.MinimumWidth = 6;
-            this.dgvCTLCurrSkidPrice.Name = "dgvCTLCurrSkidPrice";
-            this.dgvCTLCurrSkidPrice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCTLCurrSkidPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLCurrSkidPrice.Width = 67;
-            // 
-            // dgvCTLSkidCount
-            // 
-            this.dgvCTLSkidCount.HeaderText = "Skids";
-            this.dgvCTLSkidCount.MinimumWidth = 6;
-            this.dgvCTLSkidCount.Name = "dgvCTLSkidCount";
-            this.dgvCTLSkidCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLSkidCount.Width = 47;
-            // 
-            // dgvCTLPieceCount
-            // 
-            this.dgvCTLPieceCount.HeaderText = "PCS";
-            this.dgvCTLPieceCount.MinimumWidth = 6;
-            this.dgvCTLPieceCount.Name = "dgvCTLPieceCount";
-            this.dgvCTLPieceCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLPieceCount.Width = 40;
-            // 
-            // dgvCTLLength
-            // 
-            this.dgvCTLLength.HeaderText = "Length";
-            this.dgvCTLLength.MinimumWidth = 6;
-            this.dgvCTLLength.Name = "dgvCTLLength";
-            this.dgvCTLLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLLength.Width = 53;
-            // 
-            // dgvCTLComments
-            // 
-            this.dgvCTLComments.HeaderText = "Detail Comments";
-            this.dgvCTLComments.MinimumWidth = 6;
-            this.dgvCTLComments.Name = "dgvCTLComments";
-            this.dgvCTLComments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLComments.Width = 104;
-            // 
-            // dgvCTLSheetWeight
-            // 
-            this.dgvCTLSheetWeight.HeaderText = "Sheet#";
-            this.dgvCTLSheetWeight.MinimumWidth = 6;
-            this.dgvCTLSheetWeight.Name = "dgvCTLSheetWeight";
-            this.dgvCTLSheetWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLSheetWeight.Width = 55;
-            // 
-            // dgvCTLTheoLBS
-            // 
-            this.dgvCTLTheoLBS.HeaderText = "Theo#";
-            this.dgvCTLTheoLBS.MinimumWidth = 6;
-            this.dgvCTLTheoLBS.Name = "dgvCTLTheoLBS";
-            this.dgvCTLTheoLBS.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLTheoLBS.Width = 52;
-            // 
-            // dgvCTLBranch
-            // 
-            this.dgvCTLBranch.HeaderText = "Branch";
-            this.dgvCTLBranch.MinimumWidth = 6;
-            this.dgvCTLBranch.Name = "dgvCTLBranch";
-            this.dgvCTLBranch.Width = 55;
-            // 
-            // dgvCTLBranchID
-            // 
-            this.dgvCTLBranchID.HeaderText = "BranchID";
-            this.dgvCTLBranchID.MinimumWidth = 6;
-            this.dgvCTLBranchID.Name = "dgvCTLBranchID";
-            this.dgvCTLBranchID.Visible = false;
-            this.dgvCTLBranchID.Width = 68;
-            // 
-            // dgvCTLAdderID
-            // 
-            this.dgvCTLAdderID.HeaderText = "AdderID";
-            this.dgvCTLAdderID.MinimumWidth = 6;
-            this.dgvCTLAdderID.Name = "dgvCTLAdderID";
-            this.dgvCTLAdderID.Visible = false;
-            this.dgvCTLAdderID.Width = 63;
-            // 
-            // dgvCTLAdderPrice
-            // 
-            this.dgvCTLAdderPrice.HeaderText = "adderPrice";
-            this.dgvCTLAdderPrice.MinimumWidth = 6;
-            this.dgvCTLAdderPrice.Name = "dgvCTLAdderPrice";
-            this.dgvCTLAdderPrice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCTLAdderPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dgvCTLAdderPrice.Visible = false;
-            this.dgvCTLAdderPrice.Width = 103;
-            // 
-            // dgvCTLDensityFactor
-            // 
-            this.dgvCTLDensityFactor.HeaderText = "DensityFactor";
-            this.dgvCTLDensityFactor.MinimumWidth = 6;
-            this.dgvCTLDensityFactor.Name = "dgvCTLDensityFactor";
-            this.dgvCTLDensityFactor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.dgvCTLDensityFactor.Visible = false;
-            this.dgvCTLDensityFactor.Width = 96;
-            // 
-            // dgvCTLPVCGroupID
-            // 
-            this.dgvCTLPVCGroupID.HeaderText = "PVCGroupID";
-            this.dgvCTLPVCGroupID.MinimumWidth = 6;
-            this.dgvCTLPVCGroupID.Name = "dgvCTLPVCGroupID";
-            this.dgvCTLPVCGroupID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCTLPVCGroupID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dgvCTLPVCGroupID.Visible = false;
-            this.dgvCTLPVCGroupID.Width = 113;
-            // 
-            // dgvSkidTypeID
-            // 
-            this.dgvSkidTypeID.HeaderText = "skidType";
-            this.dgvSkidTypeID.MinimumWidth = 6;
-            this.dgvSkidTypeID.Name = "dgvSkidTypeID";
-            this.dgvSkidTypeID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvSkidTypeID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dgvSkidTypeID.Visible = false;
-            this.dgvSkidTypeID.Width = 93;
-            // 
-            // dgvCTLPVCPriceList
-            // 
-            this.dgvCTLPVCPriceList.HeaderText = "PVCPriceList";
-            this.dgvCTLPVCPriceList.MinimumWidth = 6;
-            this.dgvCTLPVCPriceList.Name = "dgvCTLPVCPriceList";
-            this.dgvCTLPVCPriceList.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCTLPVCPriceList.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dgvCTLPVCPriceList.Visible = false;
-            this.dgvCTLPVCPriceList.Width = 114;
-            // 
-            // dgvCTLCurrPrice
-            // 
-            this.dgvCTLCurrPrice.HeaderText = "PVCCurrPrice";
-            this.dgvCTLCurrPrice.MinimumWidth = 6;
-            this.dgvCTLCurrPrice.Name = "dgvCTLCurrPrice";
-            this.dgvCTLCurrPrice.Visible = false;
-            this.dgvCTLCurrPrice.Width = 118;
-            // 
-            // listViewCTLCoilList
-            // 
-            this.listViewCTLCoilList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewCTLCoilList.CheckBoxes = true;
-            this.listViewCTLCoilList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.colCTLTagID,
-            this.colCTLLocation,
-            this.colCTLAlloy,
-            this.colCTLThickness,
-            this.colCTLWidth,
-            this.colCTLLength,
-            this.colCTLWeight,
-            this.colCTLMill,
-            this.colCTLHeat,
-            this.colCTLCarbon,
-            this.colCTLVendor,
-            this.colCTLPO,
-            this.colCTLContainer,
-            this.colCTLRecDate,
-            this.colCTLRecID,
-            this.colCTLCoilCount,
-            this.colCTLCountryOfOrigin,
-            this.colCTLOrders});
-            this.listViewCTLCoilList.HideSelection = false;
-            this.listViewCTLCoilList.Location = new System.Drawing.Point(-1, 0);
-            this.listViewCTLCoilList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.listViewCTLCoilList.Name = "listViewCTLCoilList";
-            this.listViewCTLCoilList.Size = new System.Drawing.Size(1133, 456);
-            this.listViewCTLCoilList.TabIndex = 3;
-            this.listViewCTLCoilList.UseCompatibleStateImageBehavior = false;
-            this.listViewCTLCoilList.View = System.Windows.Forms.View.Details;
-            this.listViewCTLCoilList.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.ListViewCSCoilList_ItemChecked);
-            // 
-            // colCTLTagID
-            // 
-            this.colCTLTagID.Text = "TagID";
-            this.colCTLTagID.Width = 100;
-            // 
-            // colCTLLocation
-            // 
-            this.colCTLLocation.Text = "Location";
-            // 
-            // colCTLAlloy
-            // 
-            this.colCTLAlloy.Text = "Alloy";
-            // 
-            // colCTLThickness
-            // 
-            this.colCTLThickness.Text = "Thickness";
-            // 
-            // colCTLWidth
-            // 
-            this.colCTLWidth.Text = "Width";
-            // 
-            // colCTLLength
-            // 
-            this.colCTLLength.Text = "Length";
-            // 
-            // colCTLWeight
-            // 
-            this.colCTLWeight.Text = "Weight";
-            // 
-            // colCTLMill
-            // 
-            this.colCTLMill.Text = "Mill#";
-            // 
-            // colCTLHeat
-            // 
-            this.colCTLHeat.Text = "Heat";
-            // 
-            // colCTLCarbon
-            // 
-            this.colCTLCarbon.Text = "Carbon";
-            // 
-            // colCTLVendor
-            // 
-            this.colCTLVendor.Text = "Vendor";
-            // 
-            // colCTLPO
-            // 
-            this.colCTLPO.Text = "PO";
-            // 
-            // colCTLContainer
-            // 
-            this.colCTLContainer.Text = "Container";
-            // 
-            // colCTLRecDate
-            // 
-            this.colCTLRecDate.Text = "Rec Date";
-            // 
-            // colCTLRecID
-            // 
-            this.colCTLRecID.Text = "Rec#";
-            // 
-            // colCTLCoilCount
-            // 
-            this.colCTLCoilCount.Text = "Coil Cnt";
-            // 
-            // colCTLCountryOfOrigin
-            // 
-            this.colCTLCountryOfOrigin.Text = "Cnt Of Orig";
-            // 
-            // colCTLOrders
-            // 
-            this.colCTLOrders.Text = "Orders";
-            // 
-            // buttonCTLAddOrder
-            // 
-            this.buttonCTLAddOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCTLAddOrder.Location = new System.Drawing.Point(952, 580);
-            this.buttonCTLAddOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonCTLAddOrder.Name = "buttonCTLAddOrder";
-            this.buttonCTLAddOrder.Size = new System.Drawing.Size(163, 32);
-            this.buttonCTLAddOrder.TabIndex = 13;
-            this.buttonCTLAddOrder.Text = "AddOrder";
-            this.buttonCTLAddOrder.UseVisualStyleBackColor = true;
-            this.buttonCTLAddOrder.Visible = false;
-            this.buttonCTLAddOrder.Click += new System.EventHandler(this.ButtonCTLAddOrder_Click);
-            // 
-            // buttonCTLStartOrder
-            // 
-            this.buttonCTLStartOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCTLStartOrder.Location = new System.Drawing.Point(949, 580);
-            this.buttonCTLStartOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonCTLStartOrder.Name = "buttonCTLStartOrder";
-            this.buttonCTLStartOrder.Size = new System.Drawing.Size(163, 32);
-            this.buttonCTLStartOrder.TabIndex = 20;
-            this.buttonCTLStartOrder.Text = "Start Order";
-            this.buttonCTLStartOrder.UseVisualStyleBackColor = true;
-            this.buttonCTLStartOrder.Click += new System.EventHandler(this.ButtonCTLStartOrder_Click);
-            // 
-            // panelClClDiff
-            // 
-            this.panelClClDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelClClDiff.Controls.Add(this.labelClClDiffMasterSequence);
-            this.panelClClDiff.Controls.Add(this.labelClClDiffMasterFrom);
-            this.panelClClDiff.Controls.Add(this.buttonClClDiffResetCuts);
-            this.panelClClDiff.Controls.Add(this.buttonClClDiffModifyDelte);
-            this.panelClClDiff.Controls.Add(this.comboBoxClClDiffModify);
-            this.panelClClDiff.Controls.Add(this.checkBoxClClDiffModify);
-            this.panelClClDiff.Controls.Add(this.labelClClDiffMultSendTo);
-            this.panelClClDiff.Controls.Add(this.comboBoxClClDiffSendTo);
-            this.panelClClDiff.Controls.Add(this.checkBoxClClDiffMultStep);
-            this.panelClClDiff.Controls.Add(this.labelClClDiffPrice);
-            this.panelClClDiff.Controls.Add(this.labelClClDiffPO);
-            this.panelClClDiff.Controls.Add(this.labelClClDiffPromiseDate);
-            this.panelClClDiff.Controls.Add(this.checkBoxClClDiffScrapCredit);
-            this.panelClClDiff.Controls.Add(this.textBoxClClDiffPO);
-            this.panelClClDiff.Controls.Add(this.textBoxClClDiffPrice);
-            this.panelClClDiff.Controls.Add(this.dateTimePickerClClDiffPromiseDate);
-            this.panelClClDiff.Controls.Add(this.richTextBoxClClDiffComments);
-            this.panelClClDiff.Controls.Add(this.buttonClClDiffReset);
-            this.panelClClDiff.Controls.Add(this.dataGridViewClClDiff);
-            this.panelClClDiff.Controls.Add(this.listViewClClDiff);
-            this.panelClClDiff.Controls.Add(this.buttonClClDiffStartOrder);
-            this.panelClClDiff.Controls.Add(this.buttonClClDiffAddOrder);
-            this.panelClClDiff.Location = new System.Drawing.Point(4, 2);
-            this.panelClClDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panelClClDiff.Name = "panelClClDiff";
-            this.panelClClDiff.Size = new System.Drawing.Size(1129, 626);
-            this.panelClClDiff.TabIndex = 2;
-            this.panelClClDiff.VisibleChanged += new System.EventHandler(this.PanelClClDiff_VisibleChanged);
-            // 
-            // labelClClDiffMasterSequence
-            // 
-            this.labelClClDiffMasterSequence.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelClClDiffMasterSequence.AutoSize = true;
-            this.labelClClDiffMasterSequence.Location = new System.Drawing.Point(147, 569);
-            this.labelClClDiffMasterSequence.Name = "labelClClDiffMasterSequence";
-            this.labelClClDiffMasterSequence.Size = new System.Drawing.Size(14, 16);
-            this.labelClClDiffMasterSequence.TabIndex = 40;
-            this.labelClClDiffMasterSequence.Text = "0";
-            // 
-            // labelClClDiffMasterFrom
-            // 
-            this.labelClClDiffMasterFrom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelClClDiffMasterFrom.AutoSize = true;
-            this.labelClClDiffMasterFrom.Location = new System.Drawing.Point(147, 543);
-            this.labelClClDiffMasterFrom.Name = "labelClClDiffMasterFrom";
-            this.labelClClDiffMasterFrom.Size = new System.Drawing.Size(14, 16);
-            this.labelClClDiffMasterFrom.TabIndex = 39;
-            this.labelClClDiffMasterFrom.Text = "0";
-            // 
-            // buttonClClDiffResetCuts
-            // 
-            this.buttonClClDiffResetCuts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClClDiffResetCuts.Location = new System.Drawing.Point(984, 514);
-            this.buttonClClDiffResetCuts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonClClDiffResetCuts.Name = "buttonClClDiffResetCuts";
-            this.buttonClClDiffResetCuts.Size = new System.Drawing.Size(131, 25);
-            this.buttonClClDiffResetCuts.TabIndex = 38;
-            this.buttonClClDiffResetCuts.Text = "Reset Cuts";
-            this.buttonClClDiffResetCuts.UseVisualStyleBackColor = true;
-            this.buttonClClDiffResetCuts.Visible = false;
-            this.buttonClClDiffResetCuts.Click += new System.EventHandler(this.ButtonClClDiffResetCuts_Click);
-            // 
-            // buttonClClDiffModifyDelte
-            // 
-            this.buttonClClDiffModifyDelte.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonClClDiffModifyDelte.Location = new System.Drawing.Point(181, 498);
-            this.buttonClClDiffModifyDelte.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonClClDiffModifyDelte.Name = "buttonClClDiffModifyDelte";
-            this.buttonClClDiffModifyDelte.Size = new System.Drawing.Size(76, 39);
-            this.buttonClClDiffModifyDelte.TabIndex = 33;
-            this.buttonClClDiffModifyDelte.Text = "Delete";
-            this.buttonClClDiffModifyDelte.UseVisualStyleBackColor = true;
-            this.buttonClClDiffModifyDelte.Visible = false;
-            this.buttonClClDiffModifyDelte.Click += new System.EventHandler(this.ButtonClClDiffModifyDelte_Click);
-            // 
-            // comboBoxClClDiffModify
-            // 
-            this.comboBoxClClDiffModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBoxClClDiffModify.FormattingEnabled = true;
-            this.comboBoxClClDiffModify.Location = new System.Drawing.Point(32, 514);
-            this.comboBoxClClDiffModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBoxClClDiffModify.Name = "comboBoxClClDiffModify";
-            this.comboBoxClClDiffModify.Size = new System.Drawing.Size(141, 24);
-            this.comboBoxClClDiffModify.TabIndex = 32;
-            this.comboBoxClClDiffModify.Visible = false;
-            this.comboBoxClClDiffModify.SelectedIndexChanged += new System.EventHandler(this.ComboBoxClClDiffModify_SelectedIndexChanged);
-            // 
-            // checkBoxClClDiffModify
-            // 
-            this.checkBoxClClDiffModify.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxClClDiffModify.AutoSize = true;
-            this.checkBoxClClDiffModify.Location = new System.Drawing.Point(11, 490);
-            this.checkBoxClClDiffModify.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxClClDiffModify.Name = "checkBoxClClDiffModify";
-            this.checkBoxClClDiffModify.Size = new System.Drawing.Size(69, 20);
-            this.checkBoxClClDiffModify.TabIndex = 31;
-            this.checkBoxClClDiffModify.Text = "Modify";
-            this.checkBoxClClDiffModify.UseVisualStyleBackColor = true;
-            this.checkBoxClClDiffModify.CheckedChanged += new System.EventHandler(this.CheckBoxClClDiffModify_CheckedChanged);
-            // 
-            // labelClClDiffMultSendTo
-            // 
-            this.labelClClDiffMultSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelClClDiffMultSendTo.AutoSize = true;
-            this.labelClClDiffMultSendTo.Location = new System.Drawing.Point(29, 567);
-            this.labelClClDiffMultSendTo.Name = "labelClClDiffMultSendTo";
-            this.labelClClDiffMultSendTo.Size = new System.Drawing.Size(53, 16);
-            this.labelClClDiffMultSendTo.TabIndex = 30;
-            this.labelClClDiffMultSendTo.Text = "Send to";
-            this.labelClClDiffMultSendTo.Visible = false;
-            // 
-            // comboBoxClClDiffSendTo
-            // 
-            this.comboBoxClClDiffSendTo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.comboBoxClClDiffSendTo.FormattingEnabled = true;
-            this.comboBoxClClDiffSendTo.Location = new System.Drawing.Point(32, 586);
-            this.comboBoxClClDiffSendTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBoxClClDiffSendTo.Name = "comboBoxClClDiffSendTo";
-            this.comboBoxClClDiffSendTo.Size = new System.Drawing.Size(171, 24);
-            this.comboBoxClClDiffSendTo.TabIndex = 29;
-            this.comboBoxClClDiffSendTo.Visible = false;
-            // 
-            // checkBoxClClDiffMultStep
-            // 
-            this.checkBoxClClDiffMultStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxClClDiffMultStep.AutoSize = true;
-            this.checkBoxClClDiffMultStep.Location = new System.Drawing.Point(11, 548);
-            this.checkBoxClClDiffMultStep.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxClClDiffMultStep.Name = "checkBoxClClDiffMultStep";
-            this.checkBoxClClDiffMultStep.Size = new System.Drawing.Size(84, 20);
-            this.checkBoxClClDiffMultStep.TabIndex = 28;
-            this.checkBoxClClDiffMultStep.Text = "MultiStep";
-            this.checkBoxClClDiffMultStep.UseVisualStyleBackColor = true;
-            this.checkBoxClClDiffMultStep.CheckedChanged += new System.EventHandler(this.CheckBoxClClDiffMultStep_CheckedChanged);
-            // 
-            // labelClClDiffPrice
-            // 
-            this.labelClClDiffPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelClClDiffPrice.AutoSize = true;
-            this.labelClClDiffPrice.Location = new System.Drawing.Point(563, 521);
-            this.labelClClDiffPrice.Name = "labelClClDiffPrice";
-            this.labelClClDiffPrice.Size = new System.Drawing.Size(38, 16);
-            this.labelClClDiffPrice.TabIndex = 27;
-            this.labelClClDiffPrice.Text = "Price";
-            // 
-            // labelClClDiffPO
-            // 
-            this.labelClClDiffPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelClClDiffPO.AutoSize = true;
-            this.labelClClDiffPO.Location = new System.Drawing.Point(563, 574);
-            this.labelClClDiffPO.Name = "labelClClDiffPO";
-            this.labelClClDiffPO.Size = new System.Drawing.Size(101, 16);
-            this.labelClClDiffPO.TabIndex = 26;
-            this.labelClClDiffPO.Text = "Purchase Order";
-            // 
-            // labelClClDiffPromiseDate
-            // 
-            this.labelClClDiffPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelClClDiffPromiseDate.AutoSize = true;
-            this.labelClClDiffPromiseDate.Location = new System.Drawing.Point(264, 574);
-            this.labelClClDiffPromiseDate.Name = "labelClClDiffPromiseDate";
-            this.labelClClDiffPromiseDate.Size = new System.Drawing.Size(89, 16);
-            this.labelClClDiffPromiseDate.TabIndex = 25;
-            this.labelClClDiffPromiseDate.Text = "Promise Date";
-            // 
-            // checkBoxClClDiffScrapCredit
-            // 
-            this.checkBoxClClDiffScrapCredit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBoxClClDiffScrapCredit.AutoSize = true;
-            this.checkBoxClClDiffScrapCredit.Location = new System.Drawing.Point(563, 494);
-            this.checkBoxClClDiffScrapCredit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBoxClClDiffScrapCredit.Name = "checkBoxClClDiffScrapCredit";
-            this.checkBoxClClDiffScrapCredit.Size = new System.Drawing.Size(103, 20);
-            this.checkBoxClClDiffScrapCredit.TabIndex = 24;
-            this.checkBoxClClDiffScrapCredit.Text = "Scrap Credit";
-            this.checkBoxClClDiffScrapCredit.UseVisualStyleBackColor = true;
-            // 
-            // textBoxClClDiffPO
-            // 
-            this.textBoxClClDiffPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxClClDiffPO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBoxClClDiffPO.Location = new System.Drawing.Point(563, 594);
-            this.textBoxClClDiffPO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxClClDiffPO.Name = "textBoxClClDiffPO";
-            this.textBoxClClDiffPO.Size = new System.Drawing.Size(227, 22);
-            this.textBoxClClDiffPO.TabIndex = 23;
-            // 
-            // textBoxClClDiffPrice
-            // 
-            this.textBoxClClDiffPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxClClDiffPrice.Location = new System.Drawing.Point(563, 542);
-            this.textBoxClClDiffPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxClClDiffPrice.Name = "textBoxClClDiffPrice";
-            this.textBoxClClDiffPrice.Size = new System.Drawing.Size(112, 22);
-            this.textBoxClClDiffPrice.TabIndex = 22;
-            // 
-            // dateTimePickerClClDiffPromiseDate
-            // 
-            this.dateTimePickerClClDiffPromiseDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.dateTimePickerClClDiffPromiseDate.Location = new System.Drawing.Point(267, 594);
-            this.dateTimePickerClClDiffPromiseDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dateTimePickerClClDiffPromiseDate.Name = "dateTimePickerClClDiffPromiseDate";
-            this.dateTimePickerClClDiffPromiseDate.Size = new System.Drawing.Size(272, 22);
-            this.dateTimePickerClClDiffPromiseDate.TabIndex = 21;
-            // 
-            // richTextBoxClClDiffComments
-            // 
-            this.richTextBoxClClDiffComments.AcceptsTab = true;
-            this.richTextBoxClClDiffComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBoxClClDiffComments.Location = new System.Drawing.Point(267, 489);
-            this.richTextBoxClClDiffComments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.richTextBoxClClDiffComments.Name = "richTextBoxClClDiffComments";
-            this.richTextBoxClClDiffComments.Size = new System.Drawing.Size(239, 74);
-            this.richTextBoxClClDiffComments.TabIndex = 20;
-            this.richTextBoxClClDiffComments.Text = "";
-            // 
-            // buttonClClDiffReset
-            // 
-            this.buttonClClDiffReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClClDiffReset.Location = new System.Drawing.Point(984, 487);
-            this.buttonClClDiffReset.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonClClDiffReset.Name = "buttonClClDiffReset";
-            this.buttonClClDiffReset.Size = new System.Drawing.Size(131, 25);
-            this.buttonClClDiffReset.TabIndex = 5;
-            this.buttonClClDiffReset.Text = "Reset All";
-            this.buttonClClDiffReset.UseVisualStyleBackColor = true;
-            this.buttonClClDiffReset.Visible = false;
-            this.buttonClClDiffReset.Click += new System.EventHandler(this.ButtonClClDiffReset_Click);
-            // 
-            // dataGridViewClClDiff
-            // 
-            this.dataGridViewClClDiff.AllowUserToAddRows = false;
-            this.dataGridViewClClDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridViewClClDiff.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewClClDiff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewClClDiff.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colClClDiffTagID,
-            this.colClClDiffThickness,
-            this.colClClDiffWidth,
-            this.colClClDiffAlloy,
-            this.colClClDiffBreak,
-            this.colClClDiffOrigWeight,
-            this.colClClDiffNewWeight,
-            this.colClClDiffWidthLeft,
-            this.colClClDiffTrimAmount,
-            this.colClClDiffCutCount,
-            this.colClClDiffPaper,
-            this.colClClDiffAddCutButton});
-            this.dataGridViewClClDiff.Location = new System.Drawing.Point(-3, 7);
-            this.dataGridViewClClDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewClClDiff.Name = "dataGridViewClClDiff";
-            this.dataGridViewClClDiff.RowHeadersWidth = 51;
-            this.dataGridViewClClDiff.RowTemplate.Height = 24;
-            this.dataGridViewClClDiff.Size = new System.Drawing.Size(1131, 474);
-            this.dataGridViewClClDiff.TabIndex = 34;
-            this.dataGridViewClClDiff.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewClClDiff_CellContentClick);
-            this.dataGridViewClClDiff.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClClDiff_CellEndEdit);
-            this.dataGridViewClClDiff.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewClClDiff_CellEnter);
-            this.dataGridViewClClDiff.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewClClDiff_CellMouseUp);
-            this.dataGridViewClClDiff.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewClClDiff_MouseClick);
-            // 
-            // colClClDiffTagID
-            // 
-            this.colClClDiffTagID.FillWeight = 75F;
-            this.colClClDiffTagID.HeaderText = "TagID";
-            this.colClClDiffTagID.MinimumWidth = 6;
-            this.colClClDiffTagID.Name = "colClClDiffTagID";
-            this.colClClDiffTagID.ReadOnly = true;
-            this.colClClDiffTagID.Width = 74;
-            // 
-            // colClClDiffThickness
-            // 
-            this.colClClDiffThickness.HeaderText = "Thickness";
-            this.colClClDiffThickness.MinimumWidth = 6;
-            this.colClClDiffThickness.Name = "colClClDiffThickness";
-            this.colClClDiffThickness.ReadOnly = true;
-            this.colClClDiffThickness.Width = 98;
-            // 
-            // colClClDiffWidth
-            // 
-            this.colClClDiffWidth.HeaderText = "Width";
-            this.colClClDiffWidth.MinimumWidth = 6;
-            this.colClClDiffWidth.Name = "colClClDiffWidth";
-            this.colClClDiffWidth.ReadOnly = true;
-            this.colClClDiffWidth.Width = 70;
-            // 
-            // colClClDiffAlloy
-            // 
-            this.colClClDiffAlloy.HeaderText = "Alloy";
-            this.colClClDiffAlloy.MinimumWidth = 6;
-            this.colClClDiffAlloy.Name = "colClClDiffAlloy";
-            this.colClClDiffAlloy.ReadOnly = true;
-            this.colClClDiffAlloy.Width = 66;
-            // 
-            // colClClDiffBreak
-            // 
-            this.colClClDiffBreak.FillWeight = 50F;
-            this.colClClDiffBreak.HeaderText = "Break";
-            this.colClClDiffBreak.MinimumWidth = 6;
-            this.colClClDiffBreak.Name = "colClClDiffBreak";
-            this.colClClDiffBreak.Width = 49;
-            // 
-            // colClClDiffOrigWeight
-            // 
-            this.colClClDiffOrigWeight.HeaderText = "Orig LBS";
-            this.colClClDiffOrigWeight.MinimumWidth = 6;
-            this.colClClDiffOrigWeight.Name = "colClClDiffOrigWeight";
-            this.colClClDiffOrigWeight.ReadOnly = true;
-            this.colClClDiffOrigWeight.Width = 89;
-            // 
-            // colClClDiffNewWeight
-            // 
-            this.colClClDiffNewWeight.HeaderText = "New LBS";
-            this.colClClDiffNewWeight.MinimumWidth = 6;
-            this.colClClDiffNewWeight.Name = "colClClDiffNewWeight";
-            this.colClClDiffNewWeight.ReadOnly = true;
-            this.colClClDiffNewWeight.Width = 91;
-            // 
-            // colClClDiffWidthLeft
-            // 
-            this.colClClDiffWidthLeft.HeaderText = "Remaining";
-            this.colClClDiffWidthLeft.MinimumWidth = 6;
-            this.colClClDiffWidthLeft.Name = "colClClDiffWidthLeft";
-            this.colClClDiffWidthLeft.ReadOnly = true;
-            this.colClClDiffWidthLeft.Width = 101;
-            // 
-            // colClClDiffTrimAmount
-            // 
-            this.colClClDiffTrimAmount.HeaderText = "Trim";
-            this.colClClDiffTrimAmount.MinimumWidth = 6;
-            this.colClClDiffTrimAmount.Name = "colClClDiffTrimAmount";
-            this.colClClDiffTrimAmount.Width = 63;
-            // 
-            // colClClDiffCutCount
-            // 
-            this.colClClDiffCutCount.HeaderText = "CutCount";
-            this.colClClDiffCutCount.MinimumWidth = 6;
-            this.colClClDiffCutCount.Name = "colClClDiffCutCount";
-            this.colClClDiffCutCount.ReadOnly = true;
-            this.colClClDiffCutCount.Width = 89;
-            // 
-            // colClClDiffPaper
-            // 
-            this.colClClDiffPaper.HeaderText = "Paper";
-            this.colClClDiffPaper.MinimumWidth = 6;
-            this.colClClDiffPaper.Name = "colClClDiffPaper";
-            this.colClClDiffPaper.Width = 50;
-            // 
-            // colClClDiffAddCutButton
-            // 
-            this.colClClDiffAddCutButton.HeaderText = "AddCut";
-            this.colClClDiffAddCutButton.MinimumWidth = 6;
-            this.colClClDiffAddCutButton.Name = "colClClDiffAddCutButton";
-            this.colClClDiffAddCutButton.Text = "Add";
-            this.colClClDiffAddCutButton.UseColumnTextForButtonValue = true;
-            this.colClClDiffAddCutButton.Width = 57;
-            // 
-            // listViewClClDiff
-            // 
-            this.listViewClClDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewClClDiff.CheckBoxes = true;
-            this.listViewClClDiff.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader18,
-            this.columnHeader19,
-            this.columnHeader20,
-            this.columnHeader21,
-            this.columnHeader22,
-            this.columnHeader23,
-            this.columnHeader24,
-            this.columnHeader25,
-            this.columnHeader26,
-            this.columnHeader27,
-            this.columnHeader28,
-            this.columnHeader29,
-            this.columnHeader30,
-            this.columnHeader31,
-            this.columnHeader32,
-            this.columnHeader33,
-            this.columnHeader34,
-            this.lvCCDOrders});
-            this.listViewClClDiff.HideSelection = false;
-            this.listViewClClDiff.Location = new System.Drawing.Point(-7, 5);
-            this.listViewClClDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.listViewClClDiff.Name = "listViewClClDiff";
-            this.listViewClClDiff.Size = new System.Drawing.Size(1139, 477);
-            this.listViewClClDiff.TabIndex = 3;
-            this.listViewClClDiff.UseCompatibleStateImageBehavior = false;
-            this.listViewClClDiff.View = System.Windows.Forms.View.Details;
-            this.listViewClClDiff.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewClClDiff_ItemChecked);
-            // 
-            // columnHeader18
-            // 
-            this.columnHeader18.Text = "Tag ID";
-            this.columnHeader18.Width = 100;
-            // 
-            // columnHeader19
-            // 
-            this.columnHeader19.Text = "Location";
-            // 
-            // columnHeader20
-            // 
-            this.columnHeader20.Text = "Alloy";
-            // 
-            // columnHeader21
-            // 
-            this.columnHeader21.Text = "Thickness";
-            // 
-            // columnHeader22
-            // 
-            this.columnHeader22.Text = "Width";
-            // 
-            // columnHeader23
-            // 
-            this.columnHeader23.Text = "Length";
-            // 
-            // columnHeader24
-            // 
-            this.columnHeader24.Text = "Weight";
-            // 
-            // columnHeader25
-            // 
-            this.columnHeader25.Text = "Mill#";
-            // 
-            // columnHeader26
-            // 
-            this.columnHeader26.Text = "Heat";
-            // 
-            // columnHeader27
-            // 
-            this.columnHeader27.Text = "Carbon";
-            // 
-            // columnHeader28
-            // 
-            this.columnHeader28.Text = "Vendor";
-            // 
-            // columnHeader29
-            // 
-            this.columnHeader29.Text = "PO";
-            // 
-            // columnHeader30
-            // 
-            this.columnHeader30.Text = "Container";
-            // 
-            // columnHeader31
-            // 
-            this.columnHeader31.Text = "Rec Date";
-            // 
-            // columnHeader32
-            // 
-            this.columnHeader32.Text = "Rec#";
-            // 
-            // columnHeader33
-            // 
-            this.columnHeader33.Text = "Coil Cnt";
-            // 
-            // columnHeader34
-            // 
-            this.columnHeader34.Text = "Cnt Of Orig";
-            // 
-            // lvCCDOrders
-            // 
-            this.lvCCDOrders.Text = "Orders";
-            // 
-            // buttonClClDiffStartOrder
-            // 
-            this.buttonClClDiffStartOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClClDiffStartOrder.Location = new System.Drawing.Point(984, 574);
-            this.buttonClClDiffStartOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonClClDiffStartOrder.Name = "buttonClClDiffStartOrder";
-            this.buttonClClDiffStartOrder.Size = new System.Drawing.Size(131, 34);
-            this.buttonClClDiffStartOrder.TabIndex = 4;
-            this.buttonClClDiffStartOrder.Text = "Start Order";
-            this.buttonClClDiffStartOrder.UseVisualStyleBackColor = true;
-            this.buttonClClDiffStartOrder.Click += new System.EventHandler(this.ButtonClClDiffStartOrder_Click);
-            // 
-            // buttonClClDiffAddOrder
-            // 
-            this.buttonClClDiffAddOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClClDiffAddOrder.Location = new System.Drawing.Point(984, 574);
-            this.buttonClClDiffAddOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonClClDiffAddOrder.Name = "buttonClClDiffAddOrder";
-            this.buttonClClDiffAddOrder.Size = new System.Drawing.Size(131, 34);
-            this.buttonClClDiffAddOrder.TabIndex = 35;
-            this.buttonClClDiffAddOrder.Text = "Add Order";
-            this.buttonClClDiffAddOrder.UseVisualStyleBackColor = true;
-            this.buttonClClDiffAddOrder.Visible = false;
-            this.buttonClClDiffAddOrder.Click += new System.EventHandler(this.ButtonClClDiffAddOrder_Click);
             // 
             // tabPageReports
             // 
@@ -9755,6 +9545,266 @@ namespace DesktopApp2
             this.printPVCLabelToolStripMenuItem.Text = "Print PVC Label";
             this.printPVCLabelToolStripMenuItem.Click += new System.EventHandler(this.printPVCLabelToolStripMenuItem_Click);
             // 
+            // cbCTLBreakIn
+            // 
+            this.cbCTLBreakIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbCTLBreakIn.AutoSize = true;
+            this.cbCTLBreakIn.Location = new System.Drawing.Point(603, 469);
+            this.cbCTLBreakIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbCTLBreakIn.Name = "cbCTLBreakIn";
+            this.cbCTLBreakIn.Size = new System.Drawing.Size(78, 20);
+            this.cbCTLBreakIn.TabIndex = 53;
+            this.cbCTLBreakIn.Text = "Break In";
+            this.cbCTLBreakIn.UseVisualStyleBackColor = true;
+            // 
+            // tbCTLBreakIn
+            // 
+            this.tbCTLBreakIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbCTLBreakIn.Location = new System.Drawing.Point(687, 467);
+            this.tbCTLBreakIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbCTLBreakIn.Name = "tbCTLBreakIn";
+            this.tbCTLBreakIn.Size = new System.Drawing.Size(107, 22);
+            this.tbCTLBreakIn.TabIndex = 54;
+            this.tbCTLBreakIn.Text = "0";
+            this.tbCTLBreakIn.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCTLBreakIn_KeyPress);
+            // 
+            // cbSSBreakIn
+            // 
+            this.cbSSBreakIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.cbSSBreakIn.AutoSize = true;
+            this.cbSSBreakIn.Location = new System.Drawing.Point(660, 500);
+            this.cbSSBreakIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbSSBreakIn.Name = "cbSSBreakIn";
+            this.cbSSBreakIn.Size = new System.Drawing.Size(78, 20);
+            this.cbSSBreakIn.TabIndex = 74;
+            this.cbSSBreakIn.Text = "Break In";
+            this.cbSSBreakIn.UseVisualStyleBackColor = true;
+            // 
+            // tbSSBreakIn
+            // 
+            this.tbSSBreakIn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.tbSSBreakIn.Location = new System.Drawing.Point(745, 497);
+            this.tbSSBreakIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbSSBreakIn.Name = "tbSSBreakIn";
+            this.tbSSBreakIn.Size = new System.Drawing.Size(144, 22);
+            this.tbSSBreakIn.TabIndex = 75;
+            this.tbSSBreakIn.Text = "0";
+            // 
+            // dgvSSSmBreakSkid
+            // 
+            this.dgvSSSmBreakSkid.HeaderText = "Break Skid";
+            this.dgvSSSmBreakSkid.MinimumWidth = 6;
+            this.dgvSSSmBreakSkid.Name = "dgvSSSmBreakSkid";
+            this.dgvSSSmBreakSkid.Width = 79;
+            // 
+            // dgvSSSmSkidID
+            // 
+            this.dgvSSSmSkidID.HeaderText = "Skid ID";
+            this.dgvSSSmSkidID.MinimumWidth = 6;
+            this.dgvSSSmSkidID.Name = "dgvSSSmSkidID";
+            this.dgvSSSmSkidID.ReadOnly = true;
+            this.dgvSSSmSkidID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmSkidID.Width = 56;
+            // 
+            // dgvSSSmLetter
+            // 
+            this.dgvSSSmLetter.HeaderText = "Letter";
+            this.dgvSSSmLetter.MinimumWidth = 6;
+            this.dgvSSSmLetter.Name = "dgvSSSmLetter";
+            this.dgvSSSmLetter.ReadOnly = true;
+            this.dgvSSSmLetter.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmLetter.Width = 46;
+            // 
+            // dgvSSSmPieces
+            // 
+            this.dgvSSSmPieces.HeaderText = "Pieces";
+            this.dgvSSSmPieces.MinimumWidth = 6;
+            this.dgvSSSmPieces.Name = "dgvSSSmPieces";
+            this.dgvSSSmPieces.ReadOnly = true;
+            this.dgvSSSmPieces.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmPieces.Width = 55;
+            // 
+            // dgvSSSmAlloy
+            // 
+            this.dgvSSSmAlloy.HeaderText = "Alloy";
+            this.dgvSSSmAlloy.MinimumWidth = 6;
+            this.dgvSSSmAlloy.Name = "dgvSSSmAlloy";
+            this.dgvSSSmAlloy.ReadOnly = true;
+            this.dgvSSSmAlloy.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmAlloy.Width = 43;
+            // 
+            // dgvSSSmNewFinish
+            // 
+            this.dgvSSSmNewFinish.HeaderText = "New Finish";
+            this.dgvSSSmNewFinish.MinimumWidth = 6;
+            this.dgvSSSmNewFinish.Name = "dgvSSSmNewFinish";
+            this.dgvSSSmNewFinish.Width = 78;
+            // 
+            // dgvSSSmThickness
+            // 
+            this.dgvSSSmThickness.HeaderText = "Thick";
+            this.dgvSSSmThickness.MinimumWidth = 6;
+            this.dgvSSSmThickness.Name = "dgvSSSmThickness";
+            this.dgvSSSmThickness.ReadOnly = true;
+            this.dgvSSSmThickness.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmThickness.Width = 46;
+            // 
+            // dgvSSSmWidth
+            // 
+            this.dgvSSSmWidth.HeaderText = "Width";
+            this.dgvSSSmWidth.MinimumWidth = 6;
+            this.dgvSSSmWidth.Name = "dgvSSSmWidth";
+            this.dgvSSSmWidth.ReadOnly = true;
+            this.dgvSSSmWidth.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmWidth.Width = 47;
+            // 
+            // dgvSSSmLength
+            // 
+            this.dgvSSSmLength.HeaderText = "Length";
+            this.dgvSSSmLength.MinimumWidth = 6;
+            this.dgvSSSmLength.Name = "dgvSSSmLength";
+            this.dgvSSSmLength.ReadOnly = true;
+            this.dgvSSSmLength.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmLength.Width = 53;
+            // 
+            // dgvSSSmWeight
+            // 
+            this.dgvSSSmWeight.HeaderText = "Weight";
+            this.dgvSSSmWeight.MinimumWidth = 6;
+            this.dgvSSSmWeight.Name = "dgvSSSmWeight";
+            this.dgvSSSmWeight.ReadOnly = true;
+            this.dgvSSSmWeight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmWeight.Width = 55;
+            // 
+            // dgvSSSmPVC
+            // 
+            this.dgvSSSmPVC.HeaderText = "PVC";
+            this.dgvSSSmPVC.MinimumWidth = 6;
+            this.dgvSSSmPVC.Name = "dgvSSSmPVC";
+            this.dgvSSSmPVC.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSSSmPVC.Width = 40;
+            // 
+            // dgvSSSmPaper
+            // 
+            this.dgvSSSmPaper.HeaderText = "Paper";
+            this.dgvSSSmPaper.MinimumWidth = 6;
+            this.dgvSSSmPaper.Name = "dgvSSSmPaper";
+            this.dgvSSSmPaper.Width = 50;
+            // 
+            // dgvSSSmLineMark
+            // 
+            this.dgvSSSmLineMark.HeaderText = "LM";
+            this.dgvSSSmLineMark.MinimumWidth = 6;
+            this.dgvSSSmLineMark.Name = "dgvSSSmLineMark";
+            this.dgvSSSmLineMark.Width = 31;
+            // 
+            // dgvSSSmComments
+            // 
+            this.dgvSSSmComments.HeaderText = "Comments";
+            this.dgvSSSmComments.MaxInputLength = 50;
+            this.dgvSSSmComments.MinimumWidth = 6;
+            this.dgvSSSmComments.Name = "dgvSSSmComments";
+            this.dgvSSSmComments.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmComments.Width = 77;
+            // 
+            // dgvSSSmBranch
+            // 
+            this.dgvSSSmBranch.HeaderText = "Branch";
+            this.dgvSSSmBranch.MinimumWidth = 6;
+            this.dgvSSSmBranch.Name = "dgvSSSmBranch";
+            this.dgvSSSmBranch.Width = 55;
+            // 
+            // dgvSSSmAdders
+            // 
+            this.dgvSSSmAdders.HeaderText = "Adders";
+            this.dgvSSSmAdders.MinimumWidth = 6;
+            this.dgvSSSmAdders.Name = "dgvSSSmAdders";
+            this.dgvSSSmAdders.Width = 57;
+            // 
+            // dgvSSSmBranchID
+            // 
+            this.dgvSSSmBranchID.HeaderText = "BranchID";
+            this.dgvSSSmBranchID.MinimumWidth = 6;
+            this.dgvSSSmBranchID.Name = "dgvSSSmBranchID";
+            this.dgvSSSmBranchID.Visible = false;
+            this.dgvSSSmBranchID.Width = 68;
+            // 
+            // dgvSSSmAdderID
+            // 
+            this.dgvSSSmAdderID.HeaderText = "Adder ID";
+            this.dgvSSSmAdderID.MinimumWidth = 6;
+            this.dgvSSSmAdderID.Name = "dgvSSSmAdderID";
+            this.dgvSSSmAdderID.Width = 66;
+            // 
+            // dgvSSSmAdderPriceCol
+            // 
+            this.dgvSSSmAdderPriceCol.HeaderText = "Adder Price";
+            this.dgvSSSmAdderPriceCol.MinimumWidth = 6;
+            this.dgvSSSmAdderPriceCol.Name = "dgvSSSmAdderPriceCol";
+            this.dgvSSSmAdderPriceCol.Width = 84;
+            // 
+            // dgvSSSmAlloyID
+            // 
+            this.dgvSSSmAlloyID.HeaderText = "AlloyID";
+            this.dgvSSSmAlloyID.MinimumWidth = 6;
+            this.dgvSSSmAlloyID.Name = "dgvSSSmAlloyID";
+            this.dgvSSSmAlloyID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmAlloyID.Visible = false;
+            this.dgvSSSmAlloyID.Width = 56;
+            // 
+            // dgvSSSmFinishID
+            // 
+            this.dgvSSSmFinishID.HeaderText = "Finish ID";
+            this.dgvSSSmFinishID.MinimumWidth = 6;
+            this.dgvSSSmFinishID.Name = "dgvSSSmFinishID";
+            this.dgvSSSmFinishID.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSSSmFinishID.Visible = false;
+            this.dgvSSSmFinishID.Width = 64;
+            // 
+            // dgvSSSmDensityFactor
+            // 
+            this.dgvSSSmDensityFactor.HeaderText = "Density Factor";
+            this.dgvSSSmDensityFactor.MinimumWidth = 6;
+            this.dgvSSSmDensityFactor.Name = "dgvSSSmDensityFactor";
+            this.dgvSSSmDensityFactor.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmDensityFactor.Visible = false;
+            this.dgvSSSmDensityFactor.Width = 99;
+            // 
+            // dgvSSSmOrigFinish
+            // 
+            this.dgvSSSmOrigFinish.HeaderText = "Orig Finish";
+            this.dgvSSSmOrigFinish.MinimumWidth = 6;
+            this.dgvSSSmOrigFinish.Name = "dgvSSSmOrigFinish";
+            this.dgvSSSmOrigFinish.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmOrigFinish.Visible = false;
+            this.dgvSSSmOrigFinish.Width = 76;
+            // 
+            // dgvSSSmPVCGroupID
+            // 
+            this.dgvSSSmPVCGroupID.HeaderText = "PVCGRoupID";
+            this.dgvSSSmPVCGroupID.MinimumWidth = 6;
+            this.dgvSSSmPVCGroupID.Name = "dgvSSSmPVCGroupID";
+            this.dgvSSSmPVCGroupID.Visible = false;
+            this.dgvSSSmPVCGroupID.Width = 96;
+            // 
+            // dgvSSSmPVCPriceList
+            // 
+            this.dgvSSSmPVCPriceList.HeaderText = "PVCPriceList";
+            this.dgvSSSmPVCPriceList.MinimumWidth = 6;
+            this.dgvSSSmPVCPriceList.Name = "dgvSSSmPVCPriceList";
+            this.dgvSSSmPVCPriceList.Visible = false;
+            this.dgvSSSmPVCPriceList.Width = 91;
+            // 
+            // dgvSSSmCurrPrice
+            // 
+            this.dgvSSSmCurrPrice.HeaderText = "CurrPrice";
+            this.dgvSSSmCurrPrice.MinimumWidth = 6;
+            this.dgvSSSmCurrPrice.Name = "dgvSSSmCurrPrice";
+            this.dgvSSSmCurrPrice.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvSSSmCurrPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.dgvSSSmCurrPrice.Visible = false;
+            this.dgvSSSmCurrPrice.Width = 68;
+            // 
             // FormICMSMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -9809,6 +9859,13 @@ namespace DesktopApp2
             this.tabPageAbout.ResumeLayout(false);
             this.tabPageAbout.PerformLayout();
             this.tabPageOrders.ResumeLayout(false);
+            this.panelCoilSheetSame.ResumeLayout(false);
+            this.panelCoilSheetSame.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdders)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTLOrderEntry)).EndInit();
+            this.panelClClDiff.ResumeLayout(false);
+            this.panelClClDiff.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClClDiff)).EndInit();
             this.panelSheetSheetSame.ResumeLayout(false);
             this.panelSheetSheetSame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShShSmAdders)).EndInit();
@@ -9820,13 +9877,6 @@ namespace DesktopApp2
             this.panelSheetSheetDiff.PerformLayout();
             this.panelSSDOrderEntry.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSSDItems)).EndInit();
-            this.panelCoilSheetSame.ResumeLayout(false);
-            this.panelCoilSheetSame.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAdders)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCTLOrderEntry)).EndInit();
-            this.panelClClDiff.ResumeLayout(false);
-            this.panelClClDiff.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClClDiff)).EndInit();
             this.tabPageReports.ResumeLayout(false);
             this.panelReportOperatorTags.ResumeLayout(false);
             this.panelReportOperatorTags.PerformLayout();
@@ -10579,32 +10629,6 @@ namespace DesktopApp2
         private Label lblFixOrdid;
         private Label label6;
         private TextBox tbFixCoilLocation;
-        private DataGridViewCheckBoxColumn dgvSSSmBreakSkid;
-        private DataGridViewTextBoxColumn dgvSSSmSkidID;
-        private DataGridViewTextBoxColumn dgvSSSmLetter;
-        private DataGridViewTextBoxColumn dgvSSSmPieces;
-        private DataGridViewTextBoxColumn dgvSSSmAlloy;
-        private DataGridViewComboBoxColumn dgvSSSmNewFinish;
-        private DataGridViewTextBoxColumn dgvSSSmThickness;
-        private DataGridViewTextBoxColumn dgvSSSmWidth;
-        private DataGridViewTextBoxColumn dgvSSSmLength;
-        private DataGridViewTextBoxColumn dgvSSSmWeight;
-        private DataGridViewComboBoxColumn dgvSSSmPVC;
-        private DataGridViewCheckBoxColumn dgvSSSmPaper;
-        private DataGridViewCheckBoxColumn dgvSSSmLineMark;
-        private DataGridViewTextBoxColumn dgvSSSmComments;
-        private DataGridViewComboBoxColumn dgvSSSmBranch;
-        private DataGridViewComboBoxColumn dgvSSSmAdders;
-        private DataGridViewComboBoxColumn dgvSSSmBranchID;
-        private DataGridViewComboBoxColumn dgvSSSmAdderID;
-        private DataGridViewComboBoxColumn dgvSSSmAdderPriceCol;
-        private DataGridViewTextBoxColumn dgvSSSmAlloyID;
-        private DataGridViewComboBoxColumn dgvSSSmFinishID;
-        private DataGridViewTextBoxColumn dgvSSSmDensityFactor;
-        private DataGridViewTextBoxColumn dgvSSSmOrigFinish;
-        private DataGridViewComboBoxColumn dgvSSSmPVCGroupID;
-        private DataGridViewComboBoxColumn dgvSSSmPVCPriceList;
-        private DataGridViewTextBoxColumn dgvSSSmCurrPrice;
         private ToolStripMenuItem commentsToolStripMenuItem;
         private ContextMenuStrip menuCustomer;
         private ToolStripMenuItem deactivateCustomerToolStripMenuItem;
@@ -10798,6 +10822,36 @@ namespace DesktopApp2
         private Label lblPrintSetLocationOveride;
         private ComboBox comboBoxSettingOverideCity;
         private ColumnHeader RecDate;
+        private TextBox tbCTLBreakIn;
+        private CheckBox cbCTLBreakIn;
+        private TextBox tbSSBreakIn;
+        private CheckBox cbSSBreakIn;
+        private DataGridViewCheckBoxColumn dgvSSSmBreakSkid;
+        private DataGridViewTextBoxColumn dgvSSSmSkidID;
+        private DataGridViewTextBoxColumn dgvSSSmLetter;
+        private DataGridViewTextBoxColumn dgvSSSmPieces;
+        private DataGridViewTextBoxColumn dgvSSSmAlloy;
+        private DataGridViewComboBoxColumn dgvSSSmNewFinish;
+        private DataGridViewTextBoxColumn dgvSSSmThickness;
+        private DataGridViewTextBoxColumn dgvSSSmWidth;
+        private DataGridViewTextBoxColumn dgvSSSmLength;
+        private DataGridViewTextBoxColumn dgvSSSmWeight;
+        private DataGridViewComboBoxColumn dgvSSSmPVC;
+        private DataGridViewCheckBoxColumn dgvSSSmPaper;
+        private DataGridViewCheckBoxColumn dgvSSSmLineMark;
+        private DataGridViewTextBoxColumn dgvSSSmComments;
+        private DataGridViewComboBoxColumn dgvSSSmBranch;
+        private DataGridViewComboBoxColumn dgvSSSmAdders;
+        private DataGridViewComboBoxColumn dgvSSSmBranchID;
+        private DataGridViewComboBoxColumn dgvSSSmAdderID;
+        private DataGridViewComboBoxColumn dgvSSSmAdderPriceCol;
+        private DataGridViewTextBoxColumn dgvSSSmAlloyID;
+        private DataGridViewComboBoxColumn dgvSSSmFinishID;
+        private DataGridViewTextBoxColumn dgvSSSmDensityFactor;
+        private DataGridViewTextBoxColumn dgvSSSmOrigFinish;
+        private DataGridViewComboBoxColumn dgvSSSmPVCGroupID;
+        private DataGridViewComboBoxColumn dgvSSSmPVCPriceList;
+        private DataGridViewTextBoxColumn dgvSSSmCurrPrice;
     }
 }
 

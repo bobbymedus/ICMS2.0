@@ -63,7 +63,8 @@ namespace DesktopApp2
         public bool OTShShPrint = true;//sheet polish operator tag print
         public bool OTctlPrint = true;//cut to length operator tag print
 
-
+        private const int SCROLL_MARGIN = 20; // Pixels from top/bottom to trigger scrolling
+        private const int SCROLL_SPEED = 1;   // Adjust for faster/slower scrolling
         private class SheetInfo
         {
             public decimal width = 0;
@@ -209,7 +210,8 @@ namespace DesktopApp2
             Boolean value = true;
             foreach (Char c in s.ToCharArray())
             {
-                value = value && Char.IsDigit(c);
+                if (c!='-')
+                    value = value && Char.IsDigit(c);
             }
 
             return value;
@@ -1451,6 +1453,7 @@ namespace DesktopApp2
                     sb.Append(" and skidTypeID = " + skidID.ToString());
                 }
             }
+            
             sb.Append(" order by tierLevel, skidTypeID, fromWidth, toWidth,fromLength,ToLength");
 
             String sql = sb.ToString();
@@ -4177,6 +4180,7 @@ namespace DesktopApp2
             sb.Append("and custID != 0 ");
             sb.Append("and status > 0 ");
             sb.Append("and pvcrolldtls.PVCRecID = PVCRecHdr.PVCRecID ");
+            sb.Append("order by PVCRollDtls.PVCTagID");
 
 
 
@@ -5694,10 +5698,10 @@ namespace DesktopApp2
             {
                 SQLConn.conn.Open();
             }
-            int tierLevel = (int)cmd.ExecuteScalar();
+            cmd.ExecuteScalar();
 
 
-            return tierLevel;
+            return 1;
         }
         private int UpdateLeadTime(int machineID, int leadTime)
         {
@@ -7341,9 +7345,9 @@ namespace DesktopApp2
             {
 
                 //?????need to sync type column with item column to keep track of the correct PVCTypeID when I insert.
-                dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecTypeID"].Value = ((DataGridViewComboBoxCell)dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecTypeID"]).Items[num-1];
-                dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefWidth"].Value = ((DataGridViewComboBoxCell)dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefWidth"]).Items[num-1];
-                dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefLength"].Value = ((DataGridViewComboBoxCell)dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefLength"]).Items[num-1];
+                dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecTypeID"].Value = ((DataGridViewComboBoxCell)dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecTypeID"]).Items[num];
+                dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefWidth"].Value = ((DataGridViewComboBoxCell)dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefWidth"]).Items[num];
+                dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefLength"].Value = ((DataGridViewComboBoxCell)dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefLength"]).Items[num];
                 dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecItemWidth"].Value = dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefWidth"].Value;
                 dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecItemLength"].Value = dataGridViewPVCRec.Rows[RecGridInfo.row].Cells["PVCRecDefLength"].Value;
             }
@@ -8198,6 +8202,7 @@ namespace DesktopApp2
                 TreeViewCustomer.SelectedNode.BackColor = Color.Empty;
                 TreeViewCustomer.SelectedNode.ForeColor = Color.Empty;
             }
+            
         }
 
         private void TreeViewCustomer_Leave(object sender, EventArgs e)
@@ -8207,6 +8212,7 @@ namespace DesktopApp2
                 TreeViewCustomer.SelectedNode.BackColor = SystemColors.Highlight;
                 TreeViewCustomer.SelectedNode.ForeColor = Color.White;
             }
+            
         }
 
 
@@ -9686,8 +9692,7 @@ namespace DesktopApp2
                         polDtl.coilTagSuffix = polHdr.coilTagSuffix;
                         polDtl.newCoilTagSuffix = polDtl.coilTagSuffix + "." + j;
                         polDtl.Weight = Convert.ToInt32(((DataGridViewComboBoxCell)dataGridViewCLCLSame.Rows[i].Cells["colClClSamePolWeights"]).Items[j - 1]);
-                        polDtl.FinishID = Convert.ToInt32(((DataGridViewComboBoxCell)dataGridViewCLCLSame.Rows[i].Cells[colClClSameCoilFinish.Index]).Items[j - 1]);
-
+                        polDtl.FinishID = Convert.ToInt32(dataGridViewCLCLSame.Rows[i].Cells[colClClSameNewFinishID.Index].Value);
                         if (modifyOrder && j == 1 && i == 0)
                         {
                             //because we are deleting the whole order only go on first record.
@@ -11910,7 +11915,15 @@ namespace DesktopApp2
                     ordHdrInfo.MachineID = Convert.ToInt32(tabControlMachines.SelectedTab.Tag);
                     ordHdrInfo.ProcPrice = Convert.ToDecimal(textBoxCTLPrice.Text);
                     ordHdrInfo.Posted = 0;
-                    ordHdrInfo.BreakIn = 0;
+                    if (cbCTLBreakIn.Checked)
+                    {
+                        ordHdrInfo.BreakIn = Convert.ToDecimal(tbCTLBreakIn.Text);
+                    }
+                    else
+                    {
+                        ordHdrInfo.BreakIn = 0;
+                    }
+                        
                     ordHdrInfo.RunSheetOrder = DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Year + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second;
                     ordHdrInfo.MixHeats = 0;
                     ordHdrInfo.paperPrice = 0;
@@ -13762,7 +13775,7 @@ namespace DesktopApp2
                         decimal dPrice = Convert.ToDecimal(dataGridViewPVCRec.Rows[i].Cells["PVCRecPrice"].Value);
                         int rollCnt = Convert.ToInt32(dataGridViewPVCRec.Rows[i].Cells["PVCRecRollCount"].Value);
                         string strLocation = dataGridViewPVCRec.Rows[i].Cells["PVCRecLocation"].Value.ToString();
-
+                        pl.pvcTagInfo.Location = strLocation;
                         for (int j = 0; j < rollCnt; j++)
                         {
                             int TagID = InsertPVCRollDtl(PVCRecID, -1, CustID, dWidth, iLength, dPrice, strLocation);
@@ -13823,6 +13836,7 @@ namespace DesktopApp2
                         pl.pvcTagInfo.CustName = "TSA OWNED";
                         pl.pvcTagInfo.PoNum = textBoxPVCRecPONum.Text;
                         pl.pvcTagInfo.RecDate = DateTime.Now;
+                        pl.pvcTagInfo.Location = strLocation;
 
                         for (int j = 0; j < rollCnt; j++)
                         {
@@ -13862,6 +13876,14 @@ namespace DesktopApp2
 
         private void DataGridViewPVCRec_EditingControlShowing(object sender, DataGridViewEditingControlShowingEventArgs e)
         {
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnDigit_KeyPress);
+            e.Control.KeyPress -= new KeyPressEventHandler(ColumnDigitNoDecimal_KeyPress);
+            
+            if (e.Control is System.Windows.Forms.TextBox)
+
+                ((System.Windows.Forms.TextBox)e.Control).CharacterCasing = CharacterCasing.Upper;
+
+
 
             var cmbBx = e.Control as DataGridViewComboBoxEditingControl; // or your combobox control
             if (cmbBx != null)
@@ -13886,6 +13908,16 @@ namespace DesktopApp2
                     combo.SelectedIndexChanged += new EventHandler(ComboBoxPVCRecCust_SelectedIndexChanged);
                 }
             }
+            if (dataGridViewPVCRec.CurrentCell.ColumnIndex == PVCRecPrice.Index ||
+                dataGridViewPVCRec.CurrentCell.ColumnIndex == PVCRecItemWidth.Index)
+            {
+                e.Control.KeyPress += new KeyPressEventHandler(ColumnDigit_KeyPress);
+            }
+            if (dataGridViewPVCRec.CurrentCell.ColumnIndex == PVCRecRollCount.Index ||
+                dataGridViewPVCRec.CurrentCell.ColumnIndex == PVCRecItemLength.Index)
+            {
+                e.Control.KeyPress += new KeyPressEventHandler(ColumnDigitNoDecimal_KeyPress);
+            }
         }
 
         private void ButtonPVCItemDelete_Click(object sender, EventArgs e)
@@ -13893,7 +13925,6 @@ namespace DesktopApp2
 
             try
             {
-
 
                 for (int i = 0; i < listViewPVCItems.Items.Count; i++)
                 {
@@ -15413,8 +15444,8 @@ namespace DesktopApp2
                         {
                             int cnt = comboBoxTierLevel.Items.Count;
                             int max = Convert.ToInt32(comboBoxTierLevel.Tag);
-                            comboBoxTierLevel.Items.Insert(cnt - 1, max + 1);
-                            comboBoxTierLevel.Text = Convert.ToString(max + 1);
+                            comboBoxTierLevel.Items.Insert(cnt - 1, max);
+                            comboBoxTierLevel.Text = Convert.ToString(max);
                         }
                     }
                 }
@@ -17161,6 +17192,14 @@ namespace DesktopApp2
                     RunSheetOrder = DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Year + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second
                 };
                 bool modify = false;
+                if (cbSSBreakIn.Checked)
+                {
+                    ordHdrInfo.BreakIn = Convert.ToDecimal(tbSSBreakIn.Text);
+                }
+                else
+                {
+                    ordHdrInfo.BreakIn = 0;
+                }
                 if (buttonSSSmAddOrder.Text.Equals("Modify Order"))
                 {
                     //need to delete everything
@@ -19146,13 +19185,13 @@ namespace DesktopApp2
             {
                 if (tbReportsHistoryPO.Text.Length > 0)
                 {
-                    ht.setPO(tbReportsHistoryPO.Text);
+                    ht.setPO(tbReportsHistoryPO.Text.Trim());
                 }
                 else
                 {
                     if (tbReportsHistoryMillNum.Text.Length > 0)
                     {
-                        ht.setMillNum(tbReportsHistoryMillNum.Text);
+                        ht.setMillNum(tbReportsHistoryMillNum.Text.Trim());
                     }
                     else
                     {
@@ -19732,6 +19771,9 @@ namespace DesktopApp2
 
         private void lvwRunSheet_DragDrop(object sender, DragEventArgs e)
         {
+
+
+            
             int targetIndex = lvwRunSheet.InsertionMark.Index;
 
             // If the insertion mark is not visible, exit the method.
@@ -19841,6 +19883,28 @@ namespace DesktopApp2
             Point targetPoint =
             lvwRunSheet.PointToClient(new Point(e.X, e.Y));
 
+            if (lvwRunSheet.Items.Count == 0) return;
+
+
+            if (targetPoint.Y < SCROLL_MARGIN)
+            {
+                int topIndex = lvwRunSheet.TopItem?.Index ?? 0;
+                if (topIndex > 0)
+                {
+                    lvwRunSheet.TopItem = lvwRunSheet.Items[topIndex - 1];
+                    lvwRunSheet.Refresh(); // Ensure smooth scrolling
+                }
+            }
+            else if (targetPoint.Y > lvwRunSheet.ClientSize.Height - SCROLL_MARGIN)
+            {
+                int topIndex = lvwRunSheet.TopItem?.Index ?? 0;
+                if (topIndex < lvwRunSheet.Items.Count - 1)
+                {
+                    lvwRunSheet.TopItem = lvwRunSheet.Items[topIndex + 1];
+                    lvwRunSheet.Refresh(); // Ensure smooth scrolling
+                }
+            }
+
             // Retrieve the index of the item closest to the mouse pointer.
             int targetIndex = lvwRunSheet.InsertionMark.NearestIndex(targetPoint);
 
@@ -19891,6 +19955,7 @@ namespace DesktopApp2
             }
 
             lvwRunSheet.InsertionMark.Index = targetIndex;
+            e.Effect = DragDropEffects.Move;
         }
 
         private void lvwRunSheet_DragLeave(object sender, EventArgs e)
@@ -20248,10 +20313,10 @@ namespace DesktopApp2
             //clear current stuff
             dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdders.Index].Value = null;
             ((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdders.Index]).Items.Clear();
-            //dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderID.Index].Value = null;
-            //((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderID.Index]).Items.Clear();
-            //dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderPriceCol.Index].Value = null;
-            //((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderPriceCol.Index]).Items.Clear();
+            dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderID.Index].Value = null;
+            ((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderID.Index]).Items.Clear();
+            dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderPriceCol.Index].Value = null;
+            ((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells[dgvSSSmAdderPriceCol.Index]).Items.Clear();
 
             string adderDesc = "";
             string adderID = "";
@@ -20269,8 +20334,8 @@ namespace DesktopApp2
 
 
                     ((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells["dgvSSSmAdders"]).Items.Add(adderDesc);
-                    //((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells["dgvSSSmAdderID"]).Items.Add(adderID.ToString());
-                    // ((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells["dgvSSSmAdderPriceCol"]).Items.Add(adderPrice);
+                    ((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells["dgvSSSmAdderID"]).Items.Add(adderID.ToString());
+                    ((DataGridViewComboBoxCell)dataGridViewSSSmSkid.Rows[RecGridInfo.row].Cells["dgvSSSmAdderPriceCol"]).Items.Add(adderPrice);
 
                     if (cntr == 0)
                     {
@@ -20653,6 +20718,7 @@ namespace DesktopApp2
                     db.updateCoilWeightChange(tp.TagID, tp.CoilTagSuffix, orderID, newWeight, tran);
                     string location = tbFixCoilLocation.Text;
                     db.UpdateCoilWeight(tp.TagID, tp.CoilTagSuffix, newWeight, location, tran);
+                    //need to update the skid weights.
 
                     tran.Commit();
 
@@ -22423,6 +22489,8 @@ namespace DesktopApp2
                 pl.pvcTagInfo.PoNum = lv.SubItems[0].Tag.ToString();
                 pl.pvcTagInfo.RecID = Convert.ToInt32( lv.SubItems[1].Tag);
                 pl.pvcTagInfo.RecDate = Convert.ToDateTime(lv.SubItems[8].Text);
+                pl.pvcTagInfo.Location = lv.SubItems[4].Text;
+
                 if (LabelPrinters.zebraTagPrinter)
                 {
                     pl.PVCLabelZebra(LabelPrinters.tagPrinter);
@@ -22485,6 +22553,11 @@ namespace DesktopApp2
             paddedBounds.Offset(1, yOffset);
             TextRenderer.DrawText(e.Graphics, page.Text, Font, paddedBounds, page.ForeColor);
 
+        }
+
+        private void tbCTLBreakIn_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            NumberOnlyField(sender, e, true);
         }
     }
 }

@@ -2818,7 +2818,7 @@ namespace ICMS
                 {
                     dr.Cells[j].Value = newLength;
                 }
-                if (dataGridViewCOOrderEntry.Columns["dgvCOPieces"].Index == j)
+                if (dgvCOActualPieces.Index == j)
                 {
                     dr.Cells[j].Value = pieceCount;
                 }
@@ -2995,7 +2995,10 @@ namespace ICMS
 
             };
 
-
+            if (SQLConn.conn.State == ConnectionState.Closed)
+            {
+                SQLConn.conn.Open();
+            }
 
             using (DbDataReader reader = cmd.ExecuteReader())
             {
