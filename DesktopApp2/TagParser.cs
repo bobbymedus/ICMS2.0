@@ -14,7 +14,8 @@ namespace ICMS
         public int TagID { get; set; }
         public string CoilTagSuffix { get; set; }
         public string SkidLetter { get; set; }
-
+        public string BaseSkidLetter { get; set; }
+        public string LastSkidLetter { get; set; }
         public bool HasLetter { get; set; }
 
         private Boolean IsNumber(String s)
@@ -49,6 +50,14 @@ namespace ICMS
                     {
                         sb.Append("." + tagparts[j].Trim());
                         skCntr++;
+                    }
+                    if (j == tagparts.Length - 2)
+                    {
+                        BaseSkidLetter = sb.ToString().Trim();
+                    }
+                    if (j == tagparts.Length - 1)
+                    {
+                        LastSkidLetter = tagparts[j].Trim();
                     }
                 }
                 else

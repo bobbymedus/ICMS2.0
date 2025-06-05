@@ -25,7 +25,7 @@ namespace ICMS
 
         
 
-        public static DialogResult Show(String title, String message, String inputTitle, out String inputValue,string DefVal = "",bool wholeNum = false, bool textOK = false, bool decimNum = false)
+        public static DialogResult Show(String title, String message, String inputTitle, out String inputValue,string DefVal = "",bool wholeNum = false, bool textOK = false, bool decimNum = false, bool ignoreCase = false)
         {
             InputBox inputBox = null;
             DialogResult results = DialogResult.None;
@@ -33,17 +33,26 @@ namespace ICMS
             wholeNumber = wholeNum;
             decNum = decimNum;
             textAllowed = textOK;
+            
 
             using (inputBox = new InputBox() { Text = title })
             {
                 inputBox.Text = title;
                 inputBox.labelInput.Text = message;
                 inputBox.textBoxInput.Text = DefVal;
-                
+                if (ignoreCase)
+                {
+                    inputBox.textBoxInput.CharacterCasing = CharacterCasing.Normal;
+                }
+                else
+                {
+                    inputBox.textBoxInput.CharacterCasing = CharacterCasing.Upper;
+                }
 
                 results = inputBox.ShowDialog();
 
                 inputValue = inputBox.textBoxInput.Text;
+                
             }
 
             return results;

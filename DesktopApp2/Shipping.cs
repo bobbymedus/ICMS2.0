@@ -211,6 +211,11 @@ namespace ICMS
                     sh.PrepaidCollect = 1;
                 }
                 sh.Status = 1;
+                if (checkBoxShipRelImmediate.Checked)
+                {
+                    sh.Status = -2;
+                }
+                
                 sh.Branch = branch;
 
                 int shipID = 0;
@@ -249,21 +254,36 @@ namespace ICMS
                     sd.Letter = dataGridViewShip.Rows[i].Cells[dgvShipSkidLetter.Index].Value.ToString().Trim();
                     sd.Type = Convert.ToInt32(dataGridViewShip.Rows[i].Cells[dgvShipType.Index].Tag);
                     sd.Status = 1;
+                    if (checkBoxShipRelImmediate.Checked)
+                    {
+                        sd.Status = -1;
+                    }
+                    
                     sd.Weight = Convert.ToInt32(dataGridViewShip.Rows[i].Cells[dgvShipWeight.Index].Value);
                     sd.DateModified = DateTime.Now;
 
-                   
+                    int status = 2;
+                    if (checkBoxShipRelImmediate.Checked)
+                    {
+                        status = -2;
+                    }
                     //insert shipdtl
 
                     int retID = db.InsertShipDtl(sd, tran);
 
                     if (sd.Type == 1)
                     {
-                        int cnt = db.UpdateSkidStatus(sd.Id, sd.CoilTagSuffix, sd.Letter, 2, tran);
+                        int cnt = db.UpdateSkidStatus(sd.Id, sd.CoilTagSuffix, sd.Letter, status, tran);
+                        if (cnt <=0)
+                        {
+                            tran.Rollback();
+                            MessageBox.Show("Unable to create BOL.  Skid " + sd.Id + sd.CoilTagSuffix + "." + sd.Letter +" could not be updated because it is now out of stock.");
+                            return;
+                        }
                     }
                     else
                     {
-                        int cnt = db.UpdateCoilStatus(sd.Id, sd.CoilTagSuffix, 2, tran);
+                        int cnt = db.UpdateCoilStatus(sd.Id, sd.CoilTagSuffix, status, tran);
                     }
                     
 
@@ -279,6 +299,7 @@ namespace ICMS
                 }
                 
 
+
                 tran.Commit();
                 db.CloseSQLConn();
 
@@ -287,7 +308,14 @@ namespace ICMS
                 rg.setReportDrive(MachineDefaults.ReportDrive);
 
                 rg.Shipping(shipID);
+                
+                if (LabelPrinters.printShipLabels)
+                {
+                    PrintLabels pl = new PrintLabels();
 
+                    pl.printAllShipLabels(shipID, LabelPrinters.shippingPrinter);
+                }
+                
 
                 if (!modify)
                 {
@@ -296,14 +324,28 @@ namespace ICMS
                     foreach (ListViewItem fr in f1.GetShipCoilItems())
                     {
                         int index = fr.Index;
-
-                        fr.ForeColor = Color.Blue;
-                        fr.Checked = false;
+                        if (checkBoxShipRelImmediate.Checked)
+                        {
+                            fr.Remove();
+                        }
+                        else
+                        {
+                            fr.ForeColor = Color.Blue;
+                            fr.Checked = false;
+                        }
+                        
                     }
                     foreach (ListViewItem fr in f1.GetShipSkidItems())
                     {
-                        fr.ForeColor = Color.Blue;
-                        fr.Checked = false;
+                        if (checkBoxShipRelImmediate.Checked)
+                        {
+                            fr.Remove();
+                        }
+                        else
+                        {
+                            fr.ForeColor = Color.Blue;
+                            fr.Checked = false;
+                        }
                     }
                     f1.SyncShipColor();
                 }
@@ -315,7 +357,7 @@ namespace ICMS
             }
             catch (Exception se)
             {
-                if (tran != null)
+                if (tran.Connection.State == ConnectionState.Open)
                 {
                     tran.Rollback();
                 }
@@ -456,7 +498,7 @@ namespace ICMS
             db.OpenSQLConn();
             int cntr = 0;
             //get coils
-            using (DbDataReader reader = db.GetShipCoilDtls(bolNumber,false, true))
+            using (DbDataReader reader = db.GetShipCoilDtls(bolNumber,false, 1))
             {
                 
                 if (reader.HasRows)
@@ -543,7 +585,7 @@ namespace ICMS
                 }
             }
 
-            using (DbDataReader reader = db.GetShipSkidlDtls(bolNumber,false,true))
+            using (DbDataReader reader = db.GetShipSkidlDtls(bolNumber,false,1))
             {
                 
                 if (reader.HasRows)
