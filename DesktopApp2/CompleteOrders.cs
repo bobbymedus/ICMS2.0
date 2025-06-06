@@ -13,6 +13,7 @@ using static DesktopApp2.FormICMSMain;
 using System.Diagnostics;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TrackBar;
 using static ICMS.CompleteOrders;
+using DesktopApp2;
 
 namespace ICMS
 {
@@ -21,6 +22,7 @@ namespace ICMS
         delegate void SetColumnIndex(int i);
         private int PVCCurrRow = 0;
         private string tracer = "start";
+
         public class PVCInfo
         {
             public int id;
@@ -28,8 +30,12 @@ namespace ICMS
             public decimal price;
             
         }
-       
-     
+        public class CoilsToPrint
+        {
+            public int coilTagID;
+            public string coilTagSuffix = "";
+        }
+
         public class SkidsToPrint
         {
             public int skidID;
@@ -134,7 +140,7 @@ namespace ICMS
 
         static class SQLConn
         {
-            public static SqlConnection conn = DBUtils.GetDBConnection();
+            public static SqlConnection conn = FormICMSMain.SQLConn.conn;
         }
         public CompleteOrders()
         {
@@ -167,7 +173,7 @@ namespace ICMS
                 
                 if (Convert.ToInt32(tabControlProcess.SelectedTab.Tag) == CTL)//cut to length=1
                 {
-                    LoadOrders(1);
+                    LoadOrders(CTL);
                 }
                 labelCOCity.Text = PlantLocation.city;
             }
@@ -318,23 +324,28 @@ namespace ICMS
                
                 if (reader.HasRows)
                 {
-                    int cntr = 0;
+                    
                     while (reader.Read())
                     {
                         int tier = reader.GetInt32(reader.GetOrdinal("PriceTier"));
                         int orderID = reader.GetInt32(reader.GetOrdinal("OrderID"));
                         string customerName = reader.GetString(reader.GetOrdinal("LongCustomerName"));
                         string PONumber = reader.GetString(reader.GetOrdinal("CustomerPO"));
+                        int weightFormula = reader.GetInt32(reader.GetOrdinal("weightFormula"));
                         DateTime dt = reader.GetDateTime(reader.GetOrdinal("PromiseDate"));
 
-                        listViewCOOpenOrders.Items.Add(new System.Windows.Forms.ListViewItem(
+                        ListViewItem item = listViewCOOpenOrders.Items.Add(new System.Windows.Forms.ListViewItem(
 
                                         new string[] { orderID.ToString().Trim(),
                                                         customerName.Trim(),
                                                         PONumber.Trim(),
                                                         dt.ToString("MM/dd/yyyy").Trim() }));
 
-                        listViewCOOpenOrders.Items[cntr].Tag = tier;
+                        item.Tag = tier;
+                        item.SubItems[1].Tag = weightFormula;
+                        
+                        
+
                     }
                 }
             }
@@ -367,6 +378,11 @@ namespace ICMS
             };
 
             cmd.Parameters.AddWithValue("@ProcessID", processID);
+            if (SQLConn.conn.State == ConnectionState.Closed)
+            {
+
+                SQLConn.conn.Open();
+            }
 
             DbDataReader reader = cmd.ExecuteReader();
             return reader;
@@ -414,13 +430,32 @@ namespace ICMS
             {
                 CloseSSSameOrder(e);
             }
+            if (Convert.ToInt32(tabControlProcess.SelectedTab.Tag) == Buff)
+            {
+                CloseSSSameOrder(e);
+            }
 
             if (Convert.ToInt32(tabControlProcess.SelectedTab.Tag) == CoilPolish)
             {
                 CloseClClSameOrder (e);
             }
+            if (Convert.ToInt32(tabControlProcess.SelectedTab.Tag) == Slitting)
+            {
+                CloseClClDiffOrder(e);
+            }
         }
+        private void CloseClClDiffOrder(ItemCheckedEventArgs e)
+        {
+            if (e.Item.Checked)
+            {
 
+
+                panelCOClClDiff.BringToFront();
+                int orderID = Convert.ToInt32(e.Item.SubItems[0].Text);
+                LoadClClDiffOrder(orderID);
+
+            }
+        }
         private void CloseSSSameOrder(ItemCheckedEventArgs e)
         {
             if (e.Item.Checked)
@@ -430,6 +465,50 @@ namespace ICMS
                 panelCOShShSame.BringToFront();
                 int orderID = Convert.ToInt32(e.Item.SubItems[0].Text);
                 LoadShShSameOrder(orderID);
+
+            }
+        }
+
+        private void LoadClClDiffOrder(int orderID)
+        {
+
+            DBUtils db = new DBUtils();
+            db.OpenSQLConn();
+
+            using (DbDataReader reader = db.getClClDiffCloseOrderInfo(orderID))
+            {
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        int row = dgvClClDfCloseOrder.Rows.Add();
+                        int coilTagID = reader.GetInt32(reader.GetOrdinal("coilTagID"));
+                        string coilTagSuffix = reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
+                        string newTagSuffix = reader.GetString(reader.GetOrdinal("newTagSuffix")).Trim();
+
+                        string alloy = reader.GetString(reader.GetOrdinal("AlloyDesc")).Trim();
+                        string finish = reader.GetString(reader.GetOrdinal("FinishDesc")).Trim();
+
+                        decimal thickness = reader.GetDecimal(reader.GetOrdinal("thickness"));
+
+                        decimal slitWidth = reader.GetDecimal(reader.GetOrdinal("slitWidth"));
+
+                        int origLBS = reader.GetInt32(reader.GetOrdinal("parentWeight"));
+                        int newLBS = reader.GetInt32(reader.GetOrdinal("slitWeight"));
+
+                        int paper = reader.GetInt32(reader.GetOrdinal("slitPaper"));
+
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfTagID.Index].Value = coilTagID.ToString() + coilTagSuffix + newTagSuffix;
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfTagID.Index].Tag = coilTagSuffix; //originalsuffix
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfThickness.Index].Value = thickness;
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfWidth.Index].Value = Width;
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfAlloy.Index].Value = alloy + " " + finish;
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfOrigLBS.Index].Value = origLBS;
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfNewLBS.Index].Value = newLBS;
+                        dgvClClDfCloseOrder.Rows[row].Cells[dgvCOClClDfPaper.Index].Value = paper;
+
+                    }
+                }
 
             }
         }
@@ -494,12 +573,8 @@ namespace ICMS
 
                         if (origSkidCount > 0)
                         {
-
-
                             dgv.Rows[i].Cells[dgvSSSmBreakSkid.Index].Tag = skidID;
                             dgv.Rows[i].Cells[dgvSSSmBreakSkid.Index].Value = true;
-
-
                         }
                         string orderLetter = reader.GetString(reader.GetOrdinal("orderLetter")).Trim();
                         dgv.Rows[i].Cells[dgvSSSmOrderLetter.Index].Value = orderLetter; 
@@ -614,7 +689,7 @@ namespace ICMS
                             }
                         }
 
-                        using (DbDataReader branchreader = GetBranchInfo(custID))
+                        using (DbDataReader branchreader = db.GetBranchInfo(custID,true))
                         {
                             if (branchreader.HasRows)
                             {
@@ -648,7 +723,7 @@ namespace ICMS
                         {
                             dgv.Rows[i].Cells[dgvSSSmLineMark.Index].Value = true;
                         }
-
+                        dgv.Rows[i].Cells[dgvSSSmSkidPrice.Index].Value = 25.00;
 
 
                         i++;
@@ -687,6 +762,7 @@ namespace ICMS
 
             if (e.Item.Checked)
             {
+                
                 this.WindowState = FormWindowState.Maximized;
                 //this.MinimumSize = this.Size;
                 //this.MaximumSize = this.Size;
@@ -712,8 +788,9 @@ namespace ICMS
                 }
                 labelCOCustomerTier.Tag = tier;
 
+                lblOrderID.Text = orderID.ToString();
 
-                
+
 
                 using (DbDataReader reader = db.GetClClSameDetails(orderID))
                 {
@@ -803,7 +880,11 @@ namespace ICMS
                                 
                             }
                             dgvCOCLCLSame.Rows[cntr].Cells[colClClSameNewFinish.Index].Tag = densityFact;
-                            dgvCOCLCLSame.Rows[cntr].Cells[colClClSameCoilTagID.Index].Value = tagID.ToString().Trim() + coilTagSuffix.Trim();
+                            //dgvCOCLCLSame.Rows[cntr].Cells[colClClSameCoilTagID.Index].Value = tagID.ToString().Trim() + coilTagSuffix.Trim() + NewcoilTagSuffix.Trim();
+                            dgvCOCLCLSame.Rows[cntr].Cells[colClClSameCoilTagID.Index].Value = tagID.ToString().Trim() + NewcoilTagSuffix.Trim();
+
+
+                            dgvCOCLCLSame.Rows[cntr].Cells[colClClSameOriginalTag.Index].Value = tagID.ToString() + coilTagSuffix;
                             dgvCOCLCLSame.Rows[cntr].Cells[colClClSameOrigTagSuffix.Index].Value = coilTagSuffix.Trim();
                             dgvCOCLCLSame.Rows[cntr].Cells[colClClSameNewTagSuffix.Index].Value = NewcoilTagSuffix.Trim();
                             dgvCOCLCLSame.Rows[cntr].Cells[colClCLSameThickness.Index].Value = thickness.ToString().Trim();
@@ -822,6 +903,7 @@ namespace ICMS
                             cntr++;
 
                         }
+                        dateTimePickerClClSameStartTime.Value = dateTimePickerClClSameEndTime.Value.AddHours(-1);
                         panelCOClClSame.Visible = true;
                         panelCOClClSame.BringToFront();
                         buttonCOAddRow.Visible = false;
@@ -873,6 +955,11 @@ namespace ICMS
                 {
                     tier = Convert.ToInt32(e.Item.Tag);
                 }
+                int weightFormula = 0;
+                if (e.Item.SubItems[1].Tag != null)
+                {
+                    weightFormula = Convert.ToInt32(e.Item.SubItems[1].Tag);
+                }
                 labelCOCustomerTier.Tag = tier;
                 int orderID = Convert.ToInt32(e.Item.SubItems[0].Text);
                 labelCOCustomer.Text = e.Item.SubItems[1].Text;
@@ -883,6 +970,8 @@ namespace ICMS
                 int scraprow = 0;
                 labelCOCustomerPO.Tag = orderID;
 
+                lblOrderID.Text = orderID.ToString();
+                lblOrderID.Tag = weightFormula;
                 using (DbDataReader reader = db.GetCTLDetails(orderID))
                 {
                     if (reader.HasRows)
@@ -893,12 +982,31 @@ namespace ICMS
                         SetDataVisibility(true);
                         int skidcount = 0;
                         int currRow = 0;
-                        string skidLetter = skidInfo.SetFirstLetter();
+                        string skidLetter = "A";
                         string prevTag = "";
                         string currTag = "";
-
+                        bool setmaxletter = false;
                         while (reader.Read())
                         {
+
+                           
+                            if (!setmaxletter)
+                            {
+                                string maxLetter = reader.GetString(reader.GetOrdinal("MaxLetter")).Trim();
+                                if (!maxLetter.Equals(""))
+                                {
+                                    skidLetter = skidInfo.SetFirstLetter(maxLetter);
+                                    skidLetter = skidInfo.GetNextLetter();
+                                }
+                                else
+                                {
+                                    skidLetter = skidInfo.SetFirstLetter();
+                                }
+                               
+                                setmaxletter = true;
+                            }
+                            
+                            
                             int custID = reader.GetInt32(reader.GetOrdinal("customerID"));
                             labelCOCustomer.Tag = custID;
                             skidcount += reader.GetInt32(reader.GetOrdinal("skidCount"));
@@ -925,6 +1033,8 @@ namespace ICMS
                             int skidTypeID = reader.GetInt32(reader.GetOrdinal("skidTypeID"));
                             Decimal skidprice = reader.GetDecimal(reader.GetOrdinal("skidPrice"));
                             decimal coilWeight = reader.GetDecimal(reader.GetOrdinal("weight"));
+                            int sequenceNumber = reader.GetInt32(reader.GetOrdinal("sequenceNumber"));
+                            decimal densityFactor = reader.GetDecimal(reader.GetOrdinal("densityFactor"));
                             if (prevTag.Equals(""))
                             {
                                 currTag = tagID.ToString().Trim() + tagSuffix.Trim();
@@ -937,6 +1047,7 @@ namespace ICMS
                                 ((DataGridViewComboBoxCell)dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOscrapUnits"]).Items.Add("LBS");
                                 dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOscrapUnits"].Value = MachineDefaults.scrapUnit;
                                 dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOScrapCoilTagID"].Value = tagID;
+                                dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOScrapCoilTagID"].Tag = densityFactor;
                                 dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOScrapCoilTagSuffix"].Value = tagSuffix;
                                 scraprow++;
                             }
@@ -945,8 +1056,18 @@ namespace ICMS
                                 currTag = tagID.ToString().Trim() + tagSuffix.Trim();
                                 if (!currTag.Equals(prevTag))//changed tags
                                 {
-                                   
-                                    skidLetter = skidInfo.SetFirstLetter("A");
+                                    skidLetter = reader.GetString(reader.GetOrdinal("MaxLetter")).Trim();
+                                    if (skidLetter.Equals(""))
+                                    {
+                                        skidLetter = "A";
+                                        skidLetter = skidInfo.SetFirstLetter(skidLetter);
+                                    }
+                                    else
+                                    {
+                                        skidLetter = skidInfo.SetFirstLetter(skidLetter);
+                                        skidLetter = skidInfo.GetNextLetter();
+                                    }
+                                    
                                     prevTag = currTag;
                                     if (currColor == c1)
                                     {
@@ -965,6 +1086,7 @@ namespace ICMS
                                     ((DataGridViewComboBoxCell)dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOscrapUnits"]).Items.Add("LBS");
                                     dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOscrapUnits"].Value = MachineDefaults.scrapUnit;
                                     dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOScrapCoilTagID"].Value = tagID;
+                                    dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOScrapCoilTagID"].Tag = densityFactor;
                                     dgvCOCoilScrap.Rows[scraprow].Cells["dgvCOScrapCoilTagSuffix"].Value = tagSuffix;
                                     scraprow++;
 
@@ -973,9 +1095,11 @@ namespace ICMS
                             for (int i = currRow ; i < skidcount; i++)
                             {
                                 dataGridViewCOOrderEntry.Rows.Add();
-
+                                dataGridViewCOOrderEntry.Rows[i].Tag = sequenceNumber;
                                 dataGridViewCOOrderEntry.Rows[i].Cells["dgvCOBaseTagID"].Value = tagID;
+                                dataGridViewCOOrderEntry.Rows[i].Cells["dgvCOBaseTagID"].Tag = coilWeight;
                                 dataGridViewCOOrderEntry.Rows[i].Cells["dgvCOCoilTagSuffix"].Value = tagSuffix;
+                                dataGridViewCOOrderEntry.Rows[i].Cells["dgvCOCoilTagSuffix"].Tag = densityFactor;
                                 dataGridViewCOOrderEntry.Rows[i].DefaultCellStyle.ForeColor = currColor;
                                     
                                     
@@ -1017,8 +1141,9 @@ namespace ICMS
                                     dataGridViewCOOrderEntry.Rows[i].Cells["dgvCOPaper"].Value = true;
                                 }
 
-                                using (DbDataReader branchreader = GetBranchInfo(custID))
+                                using (DbDataReader branchreader = db.GetBranchInfo(custID, true))
                                 {
+
                                     if (branchreader.HasRows)
                                     {
                                         while (branchreader.Read())
@@ -1029,6 +1154,7 @@ namespace ICMS
                                         }
                                     }
                                 }
+                                
 
                                 int skidBranchID = 0;
                                 if (!reader.IsDBNull(reader.GetOrdinal("BranchID")))
@@ -1202,7 +1328,8 @@ namespace ICMS
                     if (!((DataGridViewComboBoxCell)dataGridViewCOOrderEntry.Rows[r].Cells["dgvCOPVC"]).Value.Equals("None"))
                     {
                         //did they select a roll?
-                        if (((DataGridViewComboBoxCell)dataGridViewCOOrderEntry.Rows[r].Cells["dgvCOPVCRollIDs"]).Value.Equals("Choose"))
+                        if (((DataGridViewComboBoxCell)dataGridViewCOOrderEntry.Rows[r].Cells["dgvCOPVCRollIDs"]).Value.Equals("Choose") ||
+                            ((DataGridViewComboBoxCell)dataGridViewCOOrderEntry.Rows[r].Cells["dgvCOPVCRollIDs"]).Value.Equals("N/A"))
                         {
                             //nope...try again.
                             MessageBox.Show("PVC Roll ID is required.");
@@ -1288,9 +1415,9 @@ namespace ICMS
             DBUtils db = new DBUtils();
 
             db.OpenSQLConn();
-
+            Cursor.Current = Cursors.WaitCursor;
             SqlTransaction tran = db.StartTrans();
-            SqlTransaction tranloc = SQLConn.conn.BeginTransaction();
+            //SqlTransaction tranloc = SQLConn.conn.BeginTransaction();
             try
             {
 
@@ -1310,67 +1437,189 @@ namespace ICMS
                 
 
                 //get time information
-                AddOrderTime(timecntr, Convert.ToInt32(labelCOCustomerPO.Tag), listViewCOTimeRecords, tranloc);
+                AddOrderTime(timecntr, Convert.ToInt32(labelCOCustomerPO.Tag), listViewCOTimeRecords, tran);
 
                 
 
                 
                 List<SkidsToPrint> stp = new List<SkidsToPrint>();
+                List<CoilsToPrint> ctp = new List<CoilsToPrint>();
 
                 SkidData sd = new SkidData();
 
                 DataGridView dgv = dataGridViewCOOrderEntry;
 
+
+
+
+                for (int i = 0; i < dgvCOCoilScrap.Rows.Count; i++)
+                {
+                    int tagid = Convert.ToInt32(dgvCOCoilScrap.Rows[i].Cells[dgvCOScrapCoilTagID.Index].Value);
+                    string tagSuff = dgvCOCoilScrap.Rows[i].Cells[dgvCOScrapCoilTagSuffix.Index].Value.ToString().Trim();
+                    dgvCOCoilScrap.Rows[i].Cells[dgvCOTotalLength.Index].Value = 0;
+                    decimal totlen = 0;
+                    for (int j = 0;j < dgv.Rows.Count; j++)
+                    {
+                        int skidID = Convert.ToInt32(dgv.Rows[j].Cells[dgvCOBaseTagID.Index].Value);
+                        string skidSuffix = dgv.Rows[j].Cells[dgvCOcoilTagSuffix.Index].Value.ToString().Trim();
+
+                        if (tagid == skidID && tagSuff.Equals(skidSuffix))
+                        {
+                            int pieces = Convert.ToInt32(dgv.Rows[j].Cells[dgvCOActualPieces.Index].Value);
+                            decimal len = Convert.ToDecimal(dgv.Rows[j].Cells[dgvCOLength.Index].Value);
+
+                            totlen += (pieces * len);
+
+
+                        }
+                    }
+                    dgvCOCoilScrap.Rows[i].Cells[dgvCOTotalLength.Index].Value = totlen;
+
+
+                }
+
+                decimal lbsPerInch = 0;
                 for (int i = 0; i < dgv.RowCount; i++)
                 {
-                    sd.skidID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOBaseTagID"].Value);
-                    sd.coilTagSuffix = dgv.Rows[i].Cells["dgvCOcoilTagSuffix"].Value.ToString().Trim();
-                    sd.letter = dgv.Rows[i].Cells["dgvCOLetter"].Value.ToString().Trim();
-                    SkidsToPrint sp = new SkidsToPrint();
-                    //setup a list of skids to print after we commit;
-                    sp.skidID = sd.skidID;
-                    sp.coilTagSuffix = sd.coilTagSuffix;
-                    sp.letter = sd.letter;
-                    stp.Add(sp);
-
-                    sd.location = "";
-                    
-                    sd.alloyID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOAlloyID"].Value);
-                   
-                    sd.finishID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOFinishID"].Value);
-                    sd.customerID = Convert.ToInt32(labelCOCustomer.Tag);
-                    sd.branchID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOBranchID"].Value);
-                    sd.orderID = Convert.ToInt32(labelCOCustomerPO.Tag);
-                    sd.sequenceNumber = i;
-                    sd.sheetWeight = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOSheetWeight"].Value);
-                    sd.length = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOLength"].Value);
-                    sd.width = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOCoilInfo"].Tag);
-                    sd.diagnol1 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCODiag1"].Value);
-                    sd.diagnol2 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCODiag2"].Value);
-                    sd.mic1 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOThickness1"].Value);
-                    sd.mic2 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOThickness2"].Value);
-                    sd.mic3 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOThickness3"].Value);
-                    sd.orderedPieceCount = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOPieces"].Value);
-                    sd.pieceCount = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOActualPieces"].Value);
-                    sd.pvcID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOPVCID"].Value);
-                    sd.paper = 0;
-                    if (Convert.ToBoolean(dgv.Rows[i].Cells["dgvCOPaper"].Value) == true)
+                    if (Convert.ToInt32(dgv.Rows[i].Cells["dgvCOActualPieces"].Value) > 0)
                     {
-                        sd.paper = Convert.ToInt32((sd.length * sd.width * sd.pieceCount) / 144);
-                    }
-                    sd.comments = dgv.Rows[i].Cells["dgvCOSkidComments"].Value.ToString();
-                    sd.status = 1;
-                    sd.skidTypeID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOSkidTypeID"].Value);
-                    sd.skidPrice = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOSkidPrice"].Value);
-                    sd.notPrime = 0;
-                    if (Convert.ToBoolean(dgv.Rows[i].Cells["dgvCONotPrime"].Value) == true)
-                    {
-                        sd.notPrime = 1;
-                    }
 
-                    
 
-                    InsertSkidDataRecord(sd, tranloc);
+                        int coilWeight = -99;
+
+                        sd.skidID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOBaseTagID"].Value);
+                        sd.coilTagSuffix = dgv.Rows[i].Cells["dgvCOcoilTagSuffix"].Value.ToString().Trim();
+                        sd.letter = dgv.Rows[i].Cells["dgvCOLetter"].Value.ToString().Trim();
+                        //find the original coil weight
+                        if (dgvCOCoilScrap.Rows.Count > 1)
+                        {
+                            for (int re = 0; re < dgvCOCoilScrap.Rows.Count; re++)
+                            {
+                                int coilTagID = Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapCoilTagID.Index].Value);
+                                string coilTagSuffix = dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapCoilTagSuffix.Index].Value.ToString().Trim();
+
+                                if (sd.skidID == coilTagID && sd.coilTagSuffix.Equals(coilTagSuffix))
+                                {
+                                    if (dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapTagEndWeight.Index].Value != null)
+                                    {
+                                        coilWeight = Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapTagID.Index].Tag) - Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapTagEndWeight.Index].Value);
+
+                                    }
+                                    else
+                                    {
+                                        coilWeight = Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapTagID.Index].Tag); ;
+
+                                    }
+                                    //coilWeight = Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapTagID.Index].Tag);
+                                    decimal totlen = Convert.ToDecimal(dgvCOCoilScrap.Rows[re].Cells[dgvCOTotalLength.Index].Value);
+
+                                    if (dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapUnits.Index].Value.ToString().ToUpper().Equals("IN"))
+                                    {
+                                        totlen += Convert.ToDecimal(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapAmount.Index].Value);
+                                    }
+                                    else
+                                    {
+                                        coilWeight -= Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapAmount.Index].Value);
+                                    }
+
+                                    lbsPerInch = coilWeight / totlen;
+
+                                    dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapLbsPerInch.Index].Value = lbsPerInch;
+
+                                    re = dgvCOCoilScrap.Rows.Count;
+                                }
+                            }
+
+                        }
+                        else
+                        {
+                            if (dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapTagEndWeight.Index].Value != null)
+                            {
+                                coilWeight = Convert.ToInt32(dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapTagID.Index].Tag) - Convert.ToInt32(dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapTagEndWeight.Index].Value);
+
+                            }
+                            else
+                            {
+                                coilWeight = Convert.ToInt32(dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapTagID.Index].Tag); ;
+
+                            }
+                            decimal totlen = Convert.ToDecimal(dgvCOCoilScrap.Rows[0].Cells[dgvCOTotalLength.Index].Value);
+
+                            if (dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapUnits.Index].Value.ToString().ToUpper().Equals("IN"))
+                            {
+                                totlen += Convert.ToDecimal(dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapAmount.Index].Value);
+                            }
+                            else
+                            {
+                                coilWeight -= Convert.ToInt32(dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapAmount.Index].Value);
+                            }
+
+                            lbsPerInch = coilWeight / totlen;
+
+                            dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapLbsPerInch.Index].Value = lbsPerInch;
+                        }
+
+                        SkidsToPrint sp = new SkidsToPrint();
+                        //setup a list of skids to print after we commit;
+                        sp.skidID = sd.skidID;
+                        sp.coilTagSuffix = sd.coilTagSuffix;
+                        sp.letter = sd.letter;
+                        stp.Add(sp);
+
+                        sd.location = "";
+
+                        sd.alloyID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOAlloyID"].Value);
+
+                        sd.finishID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOFinishID"].Value);
+                        sd.customerID = Convert.ToInt32(labelCOCustomer.Tag);
+                        sd.branchID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOBranchID"].Value);
+                        sd.orderID = Convert.ToInt32(labelCOCustomerPO.Tag);
+                        sd.sequenceNumber = Convert.ToInt32(dgv.Rows[i].Tag);
+
+                        sd.length = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOLength"].Value);
+
+                        //the weightformula is stored in the lblorderid.tag
+
+                        if (Convert.ToInt32(lblOrderID.Tag) == 0)
+                        {
+                            //Theo
+                            sd.sheetWeight = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOSheetWeight"].Value);
+                            lbsPerInch = 0;
+                        }
+                        else
+                        {
+                            sd.sheetWeight = sd.length * lbsPerInch;
+                        }
+
+                        sd.width = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOCoilInfo"].Tag);
+                        sd.diagnol1 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCODiag1"].Value);
+                        sd.diagnol2 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCODiag2"].Value);
+                        sd.mic1 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOThickness1"].Value);
+                        sd.mic2 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOThickness2"].Value);
+                        sd.mic3 = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOThickness3"].Value);
+                        sd.orderedPieceCount = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOPieces"].Value);
+                        sd.pieceCount = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOActualPieces"].Value);
+                        sd.pvcID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOPVCID"].Value);
+                        sd.pvcPrice = Convert.ToDecimal(dgv.Rows[i].Cells[dgvCOPVCCurrPrice.Index].Value);
+                        sd.paper = 0;
+                        if (Convert.ToBoolean(dgv.Rows[i].Cells["dgvCOPaper"].Value) == true)
+                        {
+                            sd.paper = Convert.ToInt32((sd.length * sd.width * sd.pieceCount) / 144);
+                        }
+                        sd.comments = dgv.Rows[i].Cells["dgvCOSkidComments"].Value.ToString();
+                        sd.status = 1;
+                        sd.skidTypeID = Convert.ToInt32(dgv.Rows[i].Cells["dgvCOSkidTypeID"].Value);
+                        sd.skidPrice = Convert.ToDecimal(dgv.Rows[i].Cells["dgvCOSkidPrice"].Value);
+                        sd.notPrime = 0;
+                        if (Convert.ToBoolean(dgv.Rows[i].Cells["dgvCONotPrime"].Value) == true)
+                        {
+                            sd.notPrime = 1;
+                        }
+
+
+
+                        db.InsertSkidDataRecord(sd, tran);
+                    }
                 }
 
 
@@ -1411,9 +1660,9 @@ namespace ICMS
 
                     int coilTagID = Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapCoilTagID.Index].Value);
                     string coilTagSuffix = dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapCoilTagSuffix.Index].Value.ToString().Trim();
-
+                    lbsPerInch = Convert.ToDecimal(dgvCOCoilScrap.Rows[0].Cells[dgvCOScrapLbsPerInch.Index].Value);
                     //insert work order details.
-                    db.InsertCoilWorkOrderDtls(coilTagID, coilTagSuffix, orderID, scrapAmount, scrapType, rejectReason, tran);
+                    db.InsertCoilWorkOrderDtls(coilTagID, coilTagSuffix, orderID, scrapAmount, scrapType, rejectReason, lbsPerInch, tran);
 
                     string coilLoc = "";
                     if (dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapLocation.Index].Value != null)
@@ -1426,10 +1675,17 @@ namespace ICMS
                     if (weight > 0)
                     {
                         status = 1;
+                        CoilsToPrint cp = new CoilsToPrint();
+                        cp.coilTagID = coilTagID;
+                        cp.coilTagSuffix = coilTagSuffix;
+                        ctp.Add(cp);
                     }
 
                     //Update the coil information
                     db.UpdateCoil(coilTagID, coilTagSuffix, weight, coilLoc, status, reject, tran);
+                    
+                    
+
 
 
                     int prevWeight = Convert.ToInt32(dgvCOCoilScrap.Rows[re].Cells[dgvCOScrapTagID.Index].Tag);
@@ -1440,15 +1696,21 @@ namespace ICMS
                 }
 
                 tran.Commit();
-                tranloc.Commit();
+                //tranloc.Commit();
                 db.CloseSQLConn();
                 //listViewCOOpenOrders.Items[0].Checked = false;
                 foreach (ListViewItem lv in listViewCOOpenOrders.CheckedItems)
                 {
                     lv.ForeColor = Color.Blue;
                 }
+                PrintLabels pl = new PrintLabels();
+                pl.PrintSkids(stp);
+                pl.PrintCoils(ctp);
 
-                PrintSkids(stp);
+                ReportGeneration rg = new ReportGeneration();
+
+                rg.WorkOrder(orderID);
+                
 
             }
             catch (Exception se)
@@ -1457,7 +1719,7 @@ namespace ICMS
                 Console.WriteLine(se.StackTrace);
                 //something went wrong rollback everything.
                 tran.Rollback();
-                tranloc.Rollback();
+                //tranloc.Rollback();
                 MessageBox.Show("Error: " + se);
                 db.CloseSQLConn();
                 //listViewCOOpenOrders.SelectedItems[0].Checked = false;
@@ -1475,76 +1737,84 @@ namespace ICMS
             listViewCOTimeRecords.Items.Clear();
             SetDataVisibility(false);
             listViewCOOpenOrders.BringToFront();
+
+            Cursor.Current = Cursors.Default;
         }
 
-        private void PrintSkids(List<SkidsToPrint> skidsToPrint)
-        {
+        //private void TEMP_PrintSkids(List<SkidsToPrint> skidsToPrint)
+        //{
 
 
-            if (skidsToPrint.Count > 0)
-            {
-                DBUtils db = new DBUtils();
+        //    if (skidsToPrint.Count > 0)
+        //    {
+        //        DBUtils db = new DBUtils();
 
-                db.OpenSQLConn();
+        //        db.OpenSQLConn();
 
-                PrintLabels pl = new PrintLabels();
-                for (int i = 0; i < skidsToPrint.Count; i++)
-                {
-                    using (DbDataReader reader = db.GetSkidInfo("-1", skidsToPrint[i].skidID, skidsToPrint[i].coilTagSuffix, skidsToPrint[i].letter))
-                    {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-
-
-
-                                pl.SkidLabelInfo.SkidID = reader.GetInt32(reader.GetOrdinal("skidID"));
-                                pl.SkidLabelInfo.CoilTagSuffix = reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
-
-                                pl.SkidLabelInfo.SkidLetter = reader.GetString(reader.GetOrdinal("letter")).Trim();
-                                pl.SkidLabelInfo.Gauge = reader.GetDecimal(reader.GetOrdinal("thickness"));
-                                pl.SkidLabelInfo.Width = reader.GetDecimal(reader.GetOrdinal("width"));
-                                pl.SkidLabelInfo.Length = reader.GetDecimal(reader.GetOrdinal("length"));
-                                pl.SkidLabelInfo.Type = reader.GetInt32(reader.GetOrdinal("steelTypeID"));
-                                string alloy = reader.GetString(reader.GetOrdinal("alloyDesc")).Trim();
-                                string finish = reader.GetString(reader.GetOrdinal("finishDesc")).Trim();
-                                pl.SkidLabelInfo.Alloy = alloy + " " + finish;
-                                pl.SkidLabelInfo.OrderID = reader.GetInt32(reader.GetOrdinal("orderID"));
-                                pl.SkidLabelInfo.Heat = reader.GetString(reader.GetOrdinal("Heat")).Trim();
-                                pl.SkidLabelInfo.Mill = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
-                                pl.SkidLabelInfo.Vendor = reader.GetString(reader.GetOrdinal("vendor")).Trim();
-                                decimal sheetweight = reader.GetDecimal(reader.GetOrdinal("sheetWeight"));
-                                int pieces = reader.GetInt32(reader.GetOrdinal("pieceCount"));
-                                pl.SkidLabelInfo.Pieces = pieces;
-                                if (sheetweight > 0)
-                                {
-                                    pl.SkidLabelInfo.TheoWeight = Convert.ToInt32(pieces * sheetweight);
-
-                                }
-                                else
-                                {
-                                    decimal density = reader.GetDecimal(reader.GetOrdinal("densityFactor"));
-                                    MetalFormula mt = new MetalFormula();
-                                    pl.SkidLabelInfo.TheoWeight = Convert.ToInt32(mt.MetFormula(density, pl.SkidLabelInfo.Gauge, pl.SkidLabelInfo.Length, pl.SkidLabelInfo.Width, pieces, 0));
-
-                                }
-                                pl.SkidLabelInfo.CustName = reader.GetString(reader.GetOrdinal("shortCustomerName")).Trim();
-                                pl.SkidLabelInfo.PO = "";
-                                pl.SkidLabelInfo.RecDate = DateTime.Now.ToString("d");
-                                pl.SkidLabelInfo.Carbon = reader.GetDecimal(reader.GetOrdinal("carbon"));
-                                pl.SkidLabelInfo.COO = reader.GetString(reader.GetOrdinal("countryOfOrigin"));
-                                pl.SkidLabelInfo.SkidSteelDesc = reader.GetString(reader.GetOrdinal("SteelDesc"));
+        //        PrintLabels pl = new PrintLabels();
+        //        for (int i = 0; i < skidsToPrint.Count; i++)
+        //        {
+        //            using (DbDataReader reader = db.GetSkidInfo("-1", skidsToPrint[i].skidID, skidsToPrint[i].coilTagSuffix, skidsToPrint[i].letter))
+        //            {
+        //                if (reader.HasRows)
+        //                {
+        //                    while (reader.Read())
+        //                    {
 
 
-                                pl.SkidLabel(LabelPrinters.tagPrinter);
-                            }
-                        }
 
-                    }
-                }
-            }
-        }
+        //                        pl.SkidLabelInfo.SkidID = reader.GetInt32(reader.GetOrdinal("skidID"));
+        //                        pl.SkidLabelInfo.CoilTagSuffix = reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
+
+        //                        pl.SkidLabelInfo.SkidLetter = reader.GetString(reader.GetOrdinal("letter")).Trim();
+        //                        pl.SkidLabelInfo.Gauge = reader.GetDecimal(reader.GetOrdinal("thickness"));
+        //                        pl.SkidLabelInfo.Width = reader.GetDecimal(reader.GetOrdinal("width"));
+        //                        pl.SkidLabelInfo.Length = reader.GetDecimal(reader.GetOrdinal("length"));
+        //                        pl.SkidLabelInfo.Type = reader.GetInt32(reader.GetOrdinal("steelTypeID"));
+        //                        string alloy = reader.GetString(reader.GetOrdinal("alloyDesc")).Trim();
+        //                        string finish = reader.GetString(reader.GetOrdinal("finishDesc")).Trim();
+        //                        pl.SkidLabelInfo.Alloy = alloy + " " + finish;
+        //                        pl.SkidLabelInfo.OrderID = reader.GetInt32(reader.GetOrdinal("orderID"));
+        //                        pl.SkidLabelInfo.Heat = reader.GetString(reader.GetOrdinal("Heat")).Trim();
+        //                        pl.SkidLabelInfo.Mill = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
+        //                        pl.SkidLabelInfo.Vendor = reader.GetString(reader.GetOrdinal("vendor")).Trim();
+        //                        decimal sheetweight = reader.GetDecimal(reader.GetOrdinal("sheetWeight"));
+        //                        int pieces = reader.GetInt32(reader.GetOrdinal("pieceCount"));
+        //                        pl.SkidLabelInfo.Pieces = pieces;
+
+        //                        pl.SkidLabelInfo.TheoWeight = Convert.ToInt32(reader.GetValue(reader.GetOrdinal("SheetWeight")));
+                                
+        //                        pl.SkidLabelInfo.CustName = reader.GetString(reader.GetOrdinal("shortCustomerName")).Trim();
+        //                        pl.SkidLabelInfo.PO = "";
+        //                        if (!reader.IsDBNull(reader.GetOrdinal("CustomerPO")))
+        //                        {
+        //                            pl.SkidLabelInfo.PO = reader.GetString(reader.GetOrdinal("CustomerPO"));
+        //                        }
+                                
+        //                        pl.SkidLabelInfo.RecDate = DateTime.Now.ToString("d");
+        //                        pl.SkidLabelInfo.Carbon = reader.GetDecimal(reader.GetOrdinal("carbon"));
+        //                        pl.SkidLabelInfo.COO = reader.GetString(reader.GetOrdinal("countryOfOrigin"));
+        //                        pl.SkidLabelInfo.SkidSteelDesc = reader.GetString(reader.GetOrdinal("SteelDesc"));
+        //                        pl.SkidLabelInfo.Comments = reader.GetString(reader.GetOrdinal("comments"));
+        //                        pl.SkidLabelInfo.Location = reader.GetString(reader.GetOrdinal("location"));
+        //                        pl.SkidLabelInfo.TheoWeight = Convert.ToInt32(reader.GetValue(reader.GetOrdinal("SkidWeight")));
+                                
+        //                        if (LabelPrinters.zebraTagPrinter)
+        //                        {
+        //                            pl.SkidLabelZebra(LabelPrinters.tagPrinter);
+        //                        }
+        //                        else
+        //                        {
+        //                            pl.SkidLabel(LabelPrinters.tagPrinter);
+        //                        }
+                                    
+        //                    }
+        //                }
+
+        //            }
+        //        }
+        //    }
+        //}
 
         private void RemovePVCRolls(List<int> pvcIds, int PieceCol, int lengthCol, int colIndex, DataGridView dgv, DBUtils db, int orderID, SqlTransaction tran)
         {
@@ -1632,6 +1902,11 @@ namespace ICMS
         
         private void AddOrderTime(int timecntr, int orderID, ListView lv, SqlTransaction tranloc)
         {
+
+            DBUtils db = new DBUtils();
+
+            db.OpenSQLConn();
+
             OrderTime ot = new OrderTime();
 
             for (int t = 0; t < timecntr; t++)
@@ -1643,7 +1918,7 @@ namespace ICMS
 
                 //here
                 //need to move  InsertOrderTime to DBUtils
-                InsertOrderTime(ot, tranloc);
+                db.InsertOrderTime(ot, tranloc);
             }
         }
         private bool CheckCellValue(string cellName, int r)
@@ -2141,7 +2416,11 @@ namespace ICMS
         private void SetCellCTL(int rowIndex)
         {
             tracer = "In SetCellCTL";
-            
+            if (rowIndex < 0)
+            {
+                return;
+            }
+                
             if (rowIndex < dataGridViewCOOrderEntry.RowCount -1)
             {
                 
@@ -2214,7 +2493,7 @@ namespace ICMS
 
         private void DataGridViewCOOrderEntry_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MessageBox.Show( e.Exception.Message + " " + tracer );
+            //MessageBox.Show( e.Exception.Message + " " + tracer );
         }
 
         private void DataGridViewCOOrderEntry_RowEnter(object sender, DataGridViewCellEventArgs e)
@@ -2383,7 +2662,7 @@ namespace ICMS
                 result = InputBox.Show(
                     "Piece Count", "Enter a Piece Count.",
                    "Piece Count",
-                   out output);
+                   out output,"",true);
 
                 if (result != System.Windows.Forms.DialogResult.OK)
                 {
@@ -2539,7 +2818,7 @@ namespace ICMS
                 {
                     dr.Cells[j].Value = newLength;
                 }
-                if (dataGridViewCOOrderEntry.Columns["dgvCOPieces"].Index == j)
+                if (dgvCOActualPieces.Index == j)
                 {
                     dr.Cells[j].Value = pieceCount;
                 }
@@ -2612,9 +2891,10 @@ namespace ICMS
         {
 
 
+            DBUtils db = new DBUtils();
+            
 
-
-            using (DbDataReader reader = GetSkidData())
+            using (DbDataReader reader = db.GetSkidTypeData(true))
             {
                 StringBuilder sp = new StringBuilder();
 
@@ -2652,6 +2932,7 @@ namespace ICMS
 
             }
 
+            
         }
 
         public DbDataReader GetSkidData()
@@ -2714,7 +2995,10 @@ namespace ICMS
 
             };
 
-
+            if (SQLConn.conn.State == ConnectionState.Closed)
+            {
+                SQLConn.conn.Open();
+            }
 
             using (DbDataReader reader = cmd.ExecuteReader())
             {
@@ -2773,12 +3057,12 @@ namespace ICMS
             sb.Append("INSERT INTO " + PlantLocation.city + ".SkidData ");
             sb.Append("(skidID,coilTagSuffix, letter,location,alloyID,finishID,customerID,branchID,");
             sb.Append("orderID,sequenceNum,sheetWeight,length,width,diagnol1,diagnol2,mic1,mic2,mic3,");
-            sb.Append("orderedPieceCount,pieceCount,pvcID,paper,comments,skidStatus,skidTypeID,");
+            sb.Append("orderedPieceCount,pieceCount,pvcID,pvcPrice, paper,comments,skidStatus,skidTypeID,");
             sb.Append("skidPrice,notPrime) ");
             sb.Append("output INSERTED.skidID ");
             sb.Append("VALUES(@skidID,@coilTagSuffix,@letter,@location,@alloyID,@finishID,@customerID,@branchID,");
             sb.Append("@orderID,@sequenceNum,@sheetWeight,@length,@width,@diagnol1,@diagnol2,@mic1,@mic2,@mic3,");
-            sb.Append("@orderedPieceCount,@pieceCount,@pvcID,@paper,@comments,@status,@skidTypeID,");
+            sb.Append("@orderedPieceCount,@pieceCount,@pvcID,@pvcPrice,@paper,@comments,@status,@skidTypeID,");
             sb.Append("@skidPrice,@notPrime) ");
 
 
@@ -2824,6 +3108,7 @@ namespace ICMS
             cmd.Parameters.AddWithValue("@pieceCount", sd.pieceCount);
 
             cmd.Parameters.AddWithValue("@pvcID", sd.pvcID);
+            cmd.Parameters.AddWithValue("@pvcPrice", sd.pvcPrice);
             cmd.Parameters.AddWithValue("@paper", sd.paper);
             cmd.Parameters.AddWithValue("@comments", sd.comments);
             cmd.Parameters.AddWithValue("@status", sd.status);
@@ -2904,7 +3189,7 @@ namespace ICMS
         private void ButtonClClRecordTime_Click(object sender, EventArgs e)
         {
 
-            DateTime dt = new DateTime();
+            
 
             if (dateTimePickerClClSameStartDate.Value.Date > dateTimePickerClClSameEndDate.Value.Date)
             {
@@ -2944,8 +3229,11 @@ namespace ICMS
             dgvCOCLCLSame.Rows.Clear();
             //dgvCOCoilScrap.Rows.Clear();
             listViewClClSameTimeRecords.Items.Clear();
-
-            listViewCOOpenOrders.CheckedItems[0].Checked = false;
+            if (listViewCOOpenOrders.CheckedItems.Count > 0)
+            {
+                listViewCOOpenOrders.CheckedItems[0].Checked = false;
+            }
+            panelCOClClSame.SendToBack();
             listViewCOOpenOrders.BringToFront();
             SetDataVisibility(false);
         }
@@ -3113,10 +3401,14 @@ namespace ICMS
             int origweight = Convert.ToInt32(dr.Cells[colClClSameOrigLBS.Index].Value);
             int newWeight = Convert.ToInt32(dr.Cells[colClClSamePolishLBS.Index].Value);
             int scrapWeight = 0;
-            if (!dr.Cells[colClClSameScrap.Index].Value.ToString().Equals(""))
+            if (dr.Cells[colClClSameScrap.Index].Value != null)
             {
-                scrapWeight = Convert.ToInt32(dr.Cells[colClClSameScrap.Index].Value);
+                if (!dr.Cells[colClClSameScrap.Index].Value.ToString().Equals(""))
+                {
+                    scrapWeight = Convert.ToInt32(dr.Cells[colClClSameScrap.Index].Value);
+                }
             }
+            
             
 
             
@@ -3154,10 +3446,11 @@ namespace ICMS
             }
             //need to loop trhough and add up weights for total.
             totlbs = 0;
-            string coilID = dgvCOCLCLSame.Rows[row].Cells[colClClSameCoilTagID.Index].Value.ToString();
+            //string coilID = dgvCOCLCLSame.Rows[row].Cells[colClClSameCoilTagID.Index].Value.ToString();
+            string coilID = dgvCOCLCLSame.Rows[row].Cells[colClClSameOriginalTag.Index].Value.ToString();
             for (int i = 0; i < dgvCOCLCLSame.Rows.Count; i++)
             {
-                if (coilID.Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameCoilTagID.Index].Value.ToString()))
+                if (coilID.Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameOriginalTag.Index].Value.ToString()))
                 {
                     if (i != row)
                     {
@@ -3178,7 +3471,7 @@ namespace ICMS
             if (e.ColumnIndex == colClClSamePolishLBS.Index)
             {
                 //We are changing the polished lbs.  What coil is this?
-                string coilID = dgvCOCLCLSame.Rows[e.RowIndex].Cells[colClClSameCoilTagID.Index].Value.ToString();
+                string coilID = dgvCOCLCLSame.Rows[e.RowIndex].Cells[colClClSameOriginalTag.Index].Value.ToString();
                 string origCoilTagSuffix = dgvCOCLCLSame.Rows[e.RowIndex].Cells[colClClSameOrigTagSuffix.Index].Value.ToString().Trim();
                 string newCoilTagSuffix = dgvCOCLCLSame.Rows[e.RowIndex].Cells[colClClSameNewTagSuffix.Index].Value.ToString().Trim();
                 //What is the original weight of the coil?
@@ -3196,9 +3489,12 @@ namespace ICMS
                 //bool deleteRow = false;
                 int totcnt = 0;
                 int firstRow = -1;
+
+                //bobby 1-11-23 need to look at base tagsuffix and not whole tag.
+
                 for (int i = 0; i < dgvCOCLCLSame.Rows.Count; i++)
                 {
-                    if (coilID.Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameCoilTagID.Index].Value.ToString()))
+                    if (dgvCOCLCLSame.Rows[e.RowIndex].Cells[colClClSameOriginalTag.Index].Value.ToString().Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameOriginalTag.Index].Value.ToString()))
                     {
                         totcnt++;
                         if (firstRow == -1)
@@ -3252,7 +3548,7 @@ namespace ICMS
                 //What is the total weight in this order, including scrap.
                 for (int i = 0; i < dgvCOCLCLSame.Rows.Count; i++)
                 {
-                    if (coilID.Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameCoilTagID.Index].Value.ToString()))
+                    if (coilID.Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameOriginalTag.Index].Value.ToString()))
                     {
                         //add up the coil weight
                         totlbs += Convert.ToInt32(dgvCOCLCLSame.Rows[i].Cells[e.ColumnIndex].Value);
@@ -3304,8 +3600,11 @@ namespace ICMS
                             dgvCOCLCLSame.Rows.Insert(e.RowIndex + 1, dr);
                             //We now have to renumber all of the rows.
                             //Get the tag suffix on the first row.
-                            newCoilTagSuffix = coilID.ToString() + dgvCOCLCLSame.Rows[firstRow].Cells[colClClSameNewTagSuffix.Index].Value.ToString().Trim();
-                            //break it into pieces
+                            newCoilTagSuffix = coilID.ToString();// + dgvCOCLCLSame.Rows[firstRow].Cells[colClClSameNewTagSuffix.Index].Value.ToString().Trim();
+                                                                 //break it into pieces
+
+                            coilID = dgvCOCLCLSame.Rows[e.RowIndex].Cells[colClClSameOriginalTag.Index].Value.ToString().Trim();
+                            newCoilTagSuffix = coilID;
                             RenumberTagSuffix(coilID, newCoilTagSuffix);
                             //only needed refresh for debugging.
                             //dgvCOCLCLSame.Refresh();
@@ -3351,12 +3650,35 @@ namespace ICMS
 
             }
 
+            TagParser tp = new TagParser();
+            tp.TagToBeParsed = coilID + newCoilTagSuffix;
+            tp.ParseTag();
+            int coilTagID = tp.TagID;
+            string coilTagSuffix = tp.CoilTagSuffix;
+               
+
+            CoilSetup cs = new CoilSetup();
+            cs.coilTagID = coilTagID;
+            cs.coilTagSuffix = newCoilTagSuffix;
+            //cs.SetStartPoint(newCoilTagSuffix);
+
+            cs.resetTag();
+
+            //string test = cs.getNextSuffix();
+            //test = cs.getNextSuffix();
+            //test = cs.getNextSuffix();
+            
+
+            
             for (int i = 0; i < dgvCOCLCLSame.Rows.Count; i++)
             {
-                if (coilID.Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameCoilTagID.Index].Value.ToString()))
+                if (coilID.Equals(dgvCOCLCLSame.Rows[i].Cells[colClClSameOriginalTag.Index].Value.ToString()))
                 {
-                    dgvCOCLCLSame.Rows[i].Cells[colClClSameNewTagSuffix.Index].Value = newCoilTagSuffix + "." + newtag;
-                    newtag++;
+
+                    string suff = cs.getNextSuffix();
+                    dgvCOCLCLSame.Rows[i].Cells[colClClSameNewTagSuffix.Index].Value = suff;
+                    dgvCOCLCLSame.Rows[i].Cells[colClClSameCoilTagID.Index].Value = coilTagID + suff;
+                    
                 }
             }
         }
@@ -3466,7 +3788,7 @@ namespace ICMS
 
                 //update order_hdr
 
-                db.UpdateOrderHdr(ordID, 0, tran);
+                db.UpdateOrderHdr(ordID, -1, tran);
 
                 //insert time records
                 
@@ -3491,8 +3813,9 @@ namespace ICMS
                 string prevSuf = "NO";
                 bool needToInsert = false;
 
-                
 
+                db.DeleteCoilPolishDtl(ordID, tran);
+                ClClSameDtlInfo polDtl = new ClClSameDtlInfo();
                 for (int i = 0; i < dgvCOCLCLSame.RowCount; i++)
                 {
                     //if mastercoil
@@ -3531,7 +3854,16 @@ namespace ICMS
                     int newFinishID = Convert.ToInt32(dgvCOCLCLSame.Rows[i].Cells[colClClSameNewFinishID.Index].Value);
                     if (needToInsert)
                     {
-                        
+                        polDtl.orderID = ordID;
+                        polDtl.coilTagID = tagid;
+                        polDtl.coilTagSuffix = tagsuffix;
+                        polDtl.newCoilTagSuffix = newTagSuffix;
+                        polDtl.Weight = weight;
+                        polDtl.FinishID = newFinishID;
+
+                        db.AddCoilPolishDtl(polDtl, tran);
+
+
                         int retval = db.DuplicateCoil(tagid,prevSuf,newTagSuffix, newFinishID, weight, tran);
                         
                         PrintCoildLabel(i, tagid, newTagSuffix, tran, db);
@@ -3546,6 +3878,15 @@ namespace ICMS
                             //update on this one because coil has been split/broken
                             needToInsert = true;
 
+                            polDtl.orderID = ordID;
+                            polDtl.coilTagID = tagid;
+                            polDtl.coilTagSuffix = tagsuffix;
+                            polDtl.newCoilTagSuffix = newTagSuffix;
+                            polDtl.Weight = weight;
+                            polDtl.FinishID = newFinishID;
+
+                            db.AddCoilPolishDtl(polDtl, tran);
+
                             int retval = db.DuplicateCoil(tagid, tagsuffix, newTagSuffix, newFinishID, weight, tran);
 
                             //print label
@@ -3555,6 +3896,15 @@ namespace ICMS
                         else
                         {
                             needToInsert = true;
+
+                            polDtl.orderID = ordID;
+                            polDtl.coilTagID = tagid;
+                            polDtl.coilTagSuffix = tagsuffix;
+                            polDtl.newCoilTagSuffix = newTagSuffix;
+                            polDtl.Weight = weight;
+                            polDtl.FinishID = newFinishID;
+
+                            db.AddCoilPolishDtl(polDtl, tran);
 
                             int retval = db.DuplicateCoil(tagid, tagsuffix, newTagSuffix, newFinishID, weight, tran);
 
@@ -3593,8 +3943,10 @@ namespace ICMS
             {
                 listViewCOOpenOrders.CheckedItems[0].Remove();
             }
-
+            listViewCOOpenOrders.BringToFront();
+            panelCOClClSame.SendToBack();
             SetDataVisibility(false);
+            
             return retVal;
         }
 
@@ -3608,7 +3960,10 @@ namespace ICMS
                 return;
             }
 
-            AddCLCLSame();
+            if (AddCLCLSame() == 1)
+            {
+
+            }
 
         }
 
@@ -3689,6 +4044,10 @@ namespace ICMS
                 }
 
             }
+            if (dataGridViewCOShShSame.CurrentCell.ColumnIndex == dgvSSSmSkidPrice.Index)
+            {
+                e.Control.KeyPress += new KeyPressEventHandler(dataGridViewTextBoxNumber_KeyDown);
+            }
         }
 
         private void btnCOShShSameCompleteOrder_Click(object sender, EventArgs e)
@@ -3724,6 +4083,11 @@ namespace ICMS
                 //if it is a break skid the total piece count is in the tag of the piece count column
                 int origPcCnt = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPieces.Index].Tag);
                 int skidPcs = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPieces.Index].Value);
+                if (dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidPrice.Index].Value == null || dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidPrice.Index].Value.ToString().Length <=0)
+                {
+                    MessageBox.Show("Skid Price must exist!  Missing on row " + (i+1));
+                    return;
+                }
                 if (Convert.ToBoolean(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmBreakSkid.Index].Value) == false)
                 {
                     //this is not a break skid so original piece count is in the tag of the row.
@@ -3781,8 +4145,13 @@ namespace ICMS
                 if (!dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVC.Index].Value.ToString().Trim().Equals("None"))
                 {
                     //make sure a roll has been selected
-                   
-                    if (!IsNumber(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCRollID.Index].Value.ToString().Trim()))
+                    string pvcInfo = dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCRollID.Index].Value.ToString();
+                    string[] pvcArr = pvcInfo.Split('-');
+
+                    string pvcRoll = pvcArr[0];
+
+
+                    if (!IsNumber(pvcRoll))
                     {
                         MessageBox.Show("Please pick a PVC roll for " + dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidID.Index].Value.ToString());
                         return;
@@ -3801,7 +4170,7 @@ namespace ICMS
             SkidData skidData = new SkidData();
 
             
-            SqlTransaction transloc = SQLConn.conn.BeginTransaction();
+           
  
             SqlTransaction trans = db.StartTrans();
             
@@ -3820,7 +4189,12 @@ namespace ICMS
                 {
                     if (!dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVC.Index].Value.ToString().Trim().Equals("None"))
                     {
-                        int currID = Convert.ToInt32(((DataGridViewComboBoxCell)dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCRollID.Index]).Value);
+                        string pvcInfo = ((DataGridViewComboBoxCell)dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCRollID.Index]).Value.ToString().Trim();
+                        string[] pvcArr = pvcInfo.Split('-');
+
+                        string pvcRoll = pvcArr[0];
+
+                        int currID = Convert.ToInt32(pvcRoll);
                         bool addID = true;
                         //make sure the pvc tag is only in the list once.
                         foreach (int id in pvcIDs)
@@ -3834,7 +4208,7 @@ namespace ICMS
                         if (addID)
                         {
                             //didn't find the id so add to the list
-                            pvcIDs.Add(Convert.ToInt32(((DataGridViewComboBoxCell)dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCRollID.Index]).Value));
+                            pvcIDs.Add(currID);
                         }
                     }
                    
@@ -3853,7 +4227,10 @@ namespace ICMS
                 string customerName = "";
                    
 
-                AddOrderTime(timecntr, orderID, lvwSSSmTimes, transloc);
+                AddOrderTime(timecntr, orderID, lvwSSSmTimes, trans);
+
+                PrintLabels pl = new PrintLabels();
+                List<SkidsToPrint> stp = new List<SkidsToPrint>();
 
                 for (int i = 0; i < dataGridViewCOShShSame.Rows.Count; i++)
                 {
@@ -3869,6 +4246,7 @@ namespace ICMS
 
                     DbDataReader reader = db.GetSkidData(skidData.skidID, skidData.coilTagSuffix, skidData.letter, trans);
                     
+
                     if (reader.HasRows)
                     {
                         while (reader.Read())
@@ -3905,7 +4283,8 @@ namespace ICMS
 
                     reader.Close();
 
-                    
+                    skidData.skidPrice = Convert.ToDecimal(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidPrice.Index].Value);
+
 
                     skidData.pieceCount = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPieces.Index].Value);
                     skidData.finishID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmFinishID.Index].Value);
@@ -3915,92 +4294,136 @@ namespace ICMS
                     skidData.branchID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmBranchID.Index].Value);
                     string orderletter = skidData.letter + "." + dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmOrderLetter.Index].Value.ToString().Trim();
                     skidData.orderID = orderID;
-
+                    
                     if (Convert.ToBoolean(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmBreakSkid.Index].Value) == true)
                     {
-                        //update piece count on first one.
-                        PrintSkidLabel(i,orderletter, customerName, skidData, trans, db);
-                        db.UpdateSkidInfo(skidData, orderletter, trans);
-                        // i++  go to next record
 
                         
+
+
+                        //Bobby Here
+                        //PrintSkidLabel(i,orderletter, customerName, skidData, trans, db);
+
+
+
+
+                        
+                        db.UpdateSkidStatus(skidData.skidID, skidData.coilTagSuffix, skidData.letter, -4, trans);
+                        string letter = skidData.letter;
+                        skidData.letter = orderletter;
+                        skidData.status = 1;
+
+                        db.InsertSkidDataRecord(skidData, trans);
+
+                        SkidsToPrint sp = new SkidsToPrint();
+                        sp.skidID = skidData.skidID;
+                        sp.coilTagSuffix = skidData.coilTagSuffix;
+                        sp.letter = skidData.letter;
+                        stp.Add(sp);
+                        // i++  go to next record
+                        skidData.letter = letter;
+
                         i++;
                         bool keepgoing = true;
-                        while (keepgoing)
+                        if (i <= dataGridViewCOShShSame.Rows.Count - 1)
                         {
-                            
-                            if (skidData.skidID == Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidIDBase.Index].Value) &&
-                                 dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmCoilTagSuffix.Index].Value.ToString().Trim().Equals(skidData.coilTagSuffix) &&
-                                 dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidLetter.Index].Value.ToString().Trim().Equals(skidData.letter))
+
+
+                            while (keepgoing)
                             {
-                                //if still same letter insert new record
-                                skidData.pieceCount = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPieces.Index].Value);
-                                skidData.finishID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmFinishID.Index].Value);
-                                skidData.pvcID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCGroupID.Index].Value);
-                                skidData.paper = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPaper.Index].Value);
-                                skidData.comments = Convert.ToString(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmComments.Index].Value).Trim();
-                                skidData.branchID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmBranchID.Index].Value);
 
-                                string skLetter = skidData.letter;
-                                orderletter = skidData.letter + "." + dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmOrderLetter.Index].Value.ToString().Trim();
-                                skidData.letter = orderletter;
-
-                                
-
-                                db.InsertSkidDataRecord(skidData,trans);
-                                PrintSkidLabel(i,orderletter, customerName, skidData, trans, db);
-                                skidData.letter = skLetter;
-
-                                i++;
-                                if (i >= dataGridViewCOShShSame.Rows.Count)
+                                if (skidData.skidID == Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidIDBase.Index].Value) &&
+                                     dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmCoilTagSuffix.Index].Value.ToString().Trim().Equals(skidData.coilTagSuffix) &&
+                                     dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidLetter.Index].Value.ToString().Trim().Equals(skidData.letter))
                                 {
-                                    keepgoing = false;
+                                    //if still same letter insert new record
+                                    skidData.pieceCount = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPieces.Index].Value);
+                                    skidData.finishID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmFinishID.Index].Value);
+                                    skidData.pvcID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCGroupID.Index].Value);
+                                    skidData.pvcPrice = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPVCPriceList.Index].Value);
+                                    skidData.paper = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmPaper.Index].Value);
+                                    skidData.comments = Convert.ToString(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmComments.Index].Value).Trim();
+                                    skidData.branchID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmBranchID.Index].Value);
 
+                                    string skLetter = skidData.letter;
+                                    orderletter = skidData.letter + "." + dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmOrderLetter.Index].Value.ToString().Trim();
+
+
+
+                                    skidData.letter = orderletter;
+
+
+
+                                    db.InsertSkidDataRecord(skidData, trans);
+                                    sp = new SkidsToPrint();
+                                    sp.skidID = skidData.skidID;
+                                    sp.coilTagSuffix = skidData.coilTagSuffix;
+                                    sp.letter = skidData.letter;
+                                    stp.Add(sp);
+                                    //Bobby Here
+                                    //PrintSkidLabel(i,orderletter, customerName, skidData, trans, db);
+                                    skidData.letter = skLetter;
+
+                                    i++;
+                                    if (i >= dataGridViewCOShShSame.Rows.Count)
+                                    {
+                                        keepgoing = false;
+
+                                    }
                                 }
+                                else
+                                {
+                                    //else i-- go back to previous and exit while loop
+                                    i--;
+                                    keepgoing = false;
+                                }
+
                             }
-                            else
-                            {
-                                //else i-- go back to previous and exit while loop
-                                i--;
-                                keepgoing = false;
-                            }
+
 
                         }
-                       
-
-                        
 
 
                     }
                     else
                     {
-                        db.UpdateSkidInfo(skidData, orderletter, trans);
-                        PrintSkidLabel(i, orderletter, customerName, skidData, trans, db);
+
+                        //need to update status then insert instead of this
+                        //8-17-23
+                        //db.UpdateSkidInfo(skidData, orderletter, trans);
+
+                        db.UpdateSkidStatus(skidData.skidID, skidData.coilTagSuffix, skidData.letter, -4, trans);
+                        skidData.letter = orderletter;
+                        skidData.status = 1;
+                        db.InsertSkidDataRecord(skidData, trans);
+
+                        //add to stp for later printing
+                        SkidsToPrint sp = new SkidsToPrint();
+                        sp.skidID = skidData.skidID;
+                        sp.coilTagSuffix = skidData.coilTagSuffix;
+                        sp.letter = skidData.letter;
+                        stp.Add(sp);
+
+                        //Bobby Here
+                        //PrintSkidLabel(i, orderletter, customerName, skidData, trans, db);
                     }
 
                     
 
 
 
-                }
+                }   
 
                 db.UpdateOrderHdr(orderID, -1, trans);
 
 
                 trans.Commit();
-                transloc.Commit();
+               
 
+                //print all of the labels
+                pl.PrintSkids(stp);
 
-                
-                for (int i = 0; i < dataGridViewCOShShSame.Rows.Count; i++)
-                {
-                    skidData.skidID = Convert.ToInt32(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidIDBase.Index].Value);
-                    skidData.coilTagSuffix = dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmCoilTagSuffix.Index].Value.ToString().Trim();
-                    skidData.letter = dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmSkidLetter.Index].Value.ToString().Trim();
-
-                    
-
-                }
+              
 
                 dataGridViewCOShShSame.Rows.Clear();
                 for (int i = 0; i < listViewCOOpenOrders.CheckedItems.Count; i++)
@@ -4010,14 +4433,22 @@ namespace ICMS
                 lvwSSSmTimes.Items.Clear();
 
                 panelCOShShSame.SendToBack();
+                Cursor.Current = Cursors.WaitCursor;
+                ReportGeneration rg = new ReportGeneration();
+
+                rg.WorkOrder(orderID);
+                Cursor.Current = Cursors.Default;
 
             }
             catch (Exception ex)
             {
-                
-                trans.Rollback();
-                transloc.Rollback();
-                MessageBox.Show(ex.Message);
+                if (trans.Connection != null)
+                {
+                    trans.Rollback();
+                    
+                    MessageBox.Show(ex.Message);
+                }
+               
             }
 
             
@@ -4037,7 +4468,7 @@ namespace ICMS
                     while (reader.Read())
                     {
                         pl.CoilLabelInfo.TagID = coilTagID.ToString().Trim() + coilTagSuffix;
-                        pl.CoilLabelInfo.PO = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
+                        pl.CoilLabelInfo.PO = reader.GetString(reader.GetOrdinal("dtlPO")).Trim();
                         pl.CoilLabelInfo.Alloy = reader.GetString(reader.GetOrdinal("alloyDesc")).Trim() + " " + reader.GetString(reader.GetOrdinal("FinishDesc")).Trim();
                         pl.CoilLabelInfo.Thickness = reader.GetDecimal(reader.GetOrdinal("thickness"));
                         pl.CoilLabelInfo.Width = reader.GetDecimal(reader.GetOrdinal("width"));
@@ -4049,7 +4480,15 @@ namespace ICMS
                         pl.CoilLabelInfo.Heat = reader.GetString(reader.GetOrdinal("heat")).Trim();
                         pl.CoilLabelInfo.Length = reader.GetDecimal(reader.GetOrdinal("length"));
                         pl.CoilLabelInfo.Location = reader.GetString(reader.GetOrdinal("location")).Trim();
-                        pl.CoilLabelInfo.RecDate = reader.GetDateTime(reader.GetOrdinal("receiveDate")).ToString("d");
+                        if (!reader.IsDBNull(reader.GetOrdinal("receiveDate")))
+                        {
+                            pl.CoilLabelInfo.RecDate = reader.GetDateTime(reader.GetOrdinal("receiveDate")).ToString("d");
+                        }
+                        else
+                        {
+                            pl.CoilLabelInfo.RecDate = DateTime.Now.ToString("d") ;
+                        }
+                        
                         pl.CoilLabelInfo.RecID = reader.GetInt32(reader.GetOrdinal("receiveID"));
                         pl.CoilLabelInfo.SkidSteelDesc = reader.GetString(reader.GetOrdinal("SteelDesc")).Trim();
                         pl.CoilLabelInfo.Type = reader.GetInt32(reader.GetOrdinal("type"));
@@ -4069,110 +4508,104 @@ namespace ICMS
                 reader.Close();
             }
 
+            List<string> list = new List<string>();
 
-            pl.CoilLabel(LabelPrinters.tagPrinter);
-        }
-
-        private void PrintSkidLabel(int i, string orderletter, string customerName, SkidData skidData,SqlTransaction trans, DBUtils db)
-        {
-            PrintLabels pl = new PrintLabels();
-
-
-            using (DbDataReader reader = db.GetCoilInfo(skidData.skidID, skidData.coilTagSuffix, 0, trans))
+            using (DbDataReader reader = db.GetCoilDamage(coilTagID, false,trans))
             {
                 if (reader.HasRows)
                 {
+                    bool something = false;
                     while (reader.Read())
                     {
-                        pl.SkidLabelInfo.COO = reader.GetString(reader.GetOrdinal("countryOfOrigin"));
-                        pl.SkidLabelInfo.Gauge = reader.GetDecimal(reader.GetOrdinal("thickness"));
-                        pl.SkidLabelInfo.Heat = reader.GetString(reader.GetOrdinal("heat"));
-                        pl.SkidLabelInfo.Mill = reader.GetString(reader.GetOrdinal("millCoilNum"));
-                        pl.SkidLabelInfo.Carbon = reader.GetDecimal(reader.GetOrdinal("carbon"));
-                        pl.SkidLabelInfo.Vendor = reader.GetString(reader.GetOrdinal("vendor"));
-                        pl.SkidLabelInfo.SkidSteelDesc = reader.GetString(reader.GetOrdinal("SteelDesc"));
-
-
+                        list.Add(reader.GetString(reader.GetOrdinal("damageDescription")));
+                        something = true;
+                    }
+                    if (something)
+                    {
+                        pl.CoilLabelInfo.Damage = list;
                     }
                 }
-                reader.Close();
             }
 
-            pl.SkidLabelInfo.SkidID = skidData.skidID;
-            pl.SkidLabelInfo.CoilTagSuffix = skidData.coilTagSuffix;
-            pl.SkidLabelInfo.SkidLetter = orderletter;
-            pl.SkidLabelInfo.Location = skidData.location;
-            pl.SkidLabelInfo.Alloy = dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmAlloy.Index].Value.ToString().Trim() + " " + dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmNewFinish.Index].Value.ToString().Trim();
-            pl.SkidLabelInfo.CustName = customerName;
-            pl.SkidLabelInfo.OrderID = skidData.orderID;
-            decimal skidWeight = skidData.sheetWeight * skidData.pieceCount;
-            if (skidWeight == 0)
+            if (LabelPrinters.zebraTagPrinter)
             {
-                skidWeight = Convert.ToDecimal(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmWeight.Index].Value);
+                pl.CoilLabelZebra(LabelPrinters.tagPrinter);
             }
-
-            pl.SkidLabelInfo.TheoWeight = Convert.ToInt32(skidWeight);
-            pl.SkidLabelInfo.Length = skidData.length;
-            pl.SkidLabelInfo.PO = textBoxSSSmPO.Text;
-            pl.SkidLabelInfo.RecDate = DateTime.Now.ToShortDateString();
-            pl.SkidLabelInfo.Comments = skidData.comments;
-
-
-
-
-            pl.SkidLabelInfo.Pieces = skidData.pieceCount;
-
-            pl.SkidLabelInfo.Type = skidData.skidTypeID;
-
-            pl.SkidLabelInfo.Width = skidData.width;
-
-            pl.SkidLabel(LabelPrinters.tagPrinter);
+            else
+            {
+                pl.CoilLabel(LabelPrinters.tagPrinter);
+            }
+           
         }
+
+        //private void PrintSkidLabel(int i, string orderletter, string customerName, SkidData skidData,SqlTransaction trans, DBUtils db)
+        //{
+        //    PrintLabels pl = new PrintLabels();
+
+
+        //    using (DbDataReader reader = db.GetCoilInfo(skidData.skidID, skidData.coilTagSuffix, 0, trans))
+        //    {
+        //        if (reader.HasRows)
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                pl.SkidLabelInfo.COO = reader.GetString(reader.GetOrdinal("countryOfOrigin"));
+        //                pl.SkidLabelInfo.Gauge = reader.GetDecimal(reader.GetOrdinal("thickness"));
+        //                pl.SkidLabelInfo.Heat = reader.GetString(reader.GetOrdinal("heat"));
+        //                pl.SkidLabelInfo.Mill = reader.GetString(reader.GetOrdinal("millCoilNum"));
+        //                pl.SkidLabelInfo.Carbon = reader.GetDecimal(reader.GetOrdinal("carbon"));
+        //                pl.SkidLabelInfo.Vendor = reader.GetString(reader.GetOrdinal("vendor"));
+        //                pl.SkidLabelInfo.SkidSteelDesc = reader.GetString(reader.GetOrdinal("SteelDesc"));
+
+
+        //            }
+        //        }
+        //        reader.Close();
+        //    }
+
+        //    pl.SkidLabelInfo.SkidID = skidData.skidID;
+        //    pl.SkidLabelInfo.CoilTagSuffix = skidData.coilTagSuffix;
+        //    pl.SkidLabelInfo.SkidLetter = orderletter;
+        //    pl.SkidLabelInfo.Location = skidData.location;
+        //    pl.SkidLabelInfo.Alloy = dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmAlloy.Index].Value.ToString().Trim() + " " + dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmNewFinish.Index].Value.ToString().Trim();
+        //    pl.SkidLabelInfo.CustName = customerName;
+        //    pl.SkidLabelInfo.OrderID = skidData.orderID;
+        //    decimal skidWeight = skidData.sheetWeight * skidData.pieceCount;
+        //    if (skidWeight == 0)
+        //    {
+        //        skidWeight = Convert.ToDecimal(dataGridViewCOShShSame.Rows[i].Cells[dgvSSSmWeight.Index].Value);
+        //    }
+
+        //    pl.SkidLabelInfo.TheoWeight = Convert.ToInt32(skidWeight);
+        //    pl.SkidLabelInfo.Length = skidData.length;
+        //    pl.SkidLabelInfo.PO = textBoxSSSmPO.Text;
+        //    pl.SkidLabelInfo.RecDate = DateTime.Now.ToShortDateString();
+        //    pl.SkidLabelInfo.Comments = skidData.comments;
+
+
+
+
+        //    pl.SkidLabelInfo.Pieces = skidData.pieceCount;
+
+        //    pl.SkidLabelInfo.Type = skidData.skidTypeID;
+
+        //    pl.SkidLabelInfo.Width = skidData.width;
+
+        //    if (LabelPrinters.zebraTagPrinter)
+        //    {
+        //        pl.SkidLabelZebra(LabelPrinters.tagPrinter);
+        //    }
+        //    else
+        //    {
+        //        pl.SkidLabel(LabelPrinters.tagPrinter);
+        //    }
+        //}
         
         
         private void dataGridViewCOShShSame_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             return;
-            if (e.RowIndex >= 0)
-            {
-                if (e.ColumnIndex == dgvSSSmPVC.Index) // Assuming the combobox column is the 9th column (index 8)
-                {
-                    System.Windows.Forms.ComboBox cb = (System.Windows.Forms.ComboBox)sender;
-
-                    int num = cb.SelectedIndex;
-
-                    var dataGridView = (DataGridView)sender;
-                    var selectedValue = dataGridView[e.ColumnIndex, e.RowIndex].Value.ToString();
-                    var selectedTextLength = TextRenderer.MeasureText(selectedValue, dataGridView.Font).Width;
-
-                    // Adjust the width based on the length of the selected item
-                    dataGridView.Columns[e.ColumnIndex + 1].Width = selectedTextLength;
-                    decimal cPrice = Convert.ToDecimal(((DataGridViewComboBoxCell)dataGridViewCOOrderEntry.Rows[row].Cells[dgvSSSmPVCPriceList.Index]).Items[num]);
-
-
-                    System.Windows.Forms.DialogResult result = System.Windows.Forms.DialogResult.None;
-
-                    result = InputBox.Show(
-                            "Enter PVC Price", "PVC Price",
-                            "Price",
-                            out string output, cPrice.ToString());
-
-                    if (result != System.Windows.Forms.DialogResult.OK)
-                    {
-                        //????not sure what happens if they hit cancel
-
-                    }
-                    else
-                    {
-
-                        
-                        cPrice = Convert.ToDecimal(output);
-                        dataGridViewCOOrderEntry.Rows[row].Cells["dgvCOPVCCurrPrice"].Value = cPrice;
-                        dataGridViewCOOrderEntry.Rows[row].Cells["dgvCOPVC"].ToolTipText = cPrice.ToString();
-
-                    }
-                }
-            }
+      
             
         }
 
@@ -4194,6 +4627,69 @@ namespace ICMS
             lv.SubItems[1].Text = dtSSSmEndDate.Text + " " + dtSSSmEndTime.Text;
 
             lvwSSSmTimes.Items.Add(lv);
+        }
+        private void dataGridViewTextBoxNumber_KeyDown(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if (e.KeyChar == '.' && (sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void panelCOClClSame_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void listViewClClSameTimeRecords_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelClClEndtime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void labelClClStartTime_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerClClSameEndTime_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerClClSameEndDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerClClSameStartTime_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerClClSameStartDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClClDiffCancel_Click(object sender, EventArgs e)
+        {
+            panelCOClClDiff.SendToBack();
+            listViewCOOpenOrders.BringToFront();
+            for (int i = listViewCOOpenOrders.CheckedItems.Count -1; i >= 0;i--)
+            {
+                listViewCOOpenOrders.CheckedItems[i].Checked = false;
+            }
         }
     }
 }

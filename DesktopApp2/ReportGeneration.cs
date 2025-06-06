@@ -18,6 +18,9 @@ using static DesktopApp2.FormICMSMain;
 using System.ComponentModel.Design;
 using System.Windows.Forms.VisualStyles;
 using System.Data;
+using System.Drawing;
+using System.Xml.Linq;
+using Org.BouncyCastle.Ocsp;
 
 namespace ICMS
 {
@@ -33,6 +36,9 @@ namespace ICMS
             public string zip;
         }
 
+        public int RSCoilCnt { get; set; }
+        public int RSPieceCnt { get; set; }
+        public int RStotWeight { get; set; }
 
         private List<PVCInfo> pvcInfo = new List<PVCInfo>();
 
@@ -59,6 +65,7 @@ namespace ICMS
 
         // The DllImport requires -- Using System.Runtime.InteropServices;
         [DllImport("user32.dll", SetLastError = true)]
+
         private static extern int GetWindowThreadProcessId(IntPtr hwnd, ref int lpdwProcessId);
 
         static class ReportDrive
@@ -125,7 +132,14 @@ namespace ICMS
             }
             else
             {
-                oWB.SaveAs(filePath);
+                try
+                {
+                    oWB.SaveAs(filePath);
+                }catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                
             }
 
 
@@ -151,17 +165,17 @@ namespace ICMS
 
 
 
-
-
+            //here
+            //oXL.Visible = true;
 
             oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
             oSheet = (Excel._Worksheet)oWB.ActiveSheet;
 
             oXL.ActiveWindow.DisplayGridlines = false;
 
-            oSheet.get_Range("A1", "D1").Merge();
+            oSheet.get_Range("A1", "E1").Merge();
 
-            oSheet.Cells[1, 1] = "Report from TSA Processing: ";
+            oSheet.Cells[1, 1] = "Report from TSA Processing " + PlantLocation.city + ": ";
             oSheet.Cells[1, 6] = "Receive ID:";
             oSheet.Cells[1, 8] = recID;
 
@@ -190,7 +204,7 @@ namespace ICMS
             {
 
 
-                oRng = oSheet.get_Range("A" + hRow, "L" + hRow);
+                oRng = oSheet.get_Range("A" + hRow, "N" + hRow);
 
 
                 oRng.Borders.get_Item(Excel.XlBordersIndex.xlEdgeBottom).LineStyle
@@ -199,32 +213,40 @@ namespace ICMS
                                     = Excel.XlLineStyle.xlDouble;
 
 
-                oSheet.Cells[hRow, 1] = "Tag ID";
-                oSheet.Cells[hRow, 2] = "CC";
-                oSheet.Cells[hRow, 3] = "Mill Num";
-                oSheet.Cells[hRow, 4] = "Heat Num";
-                oSheet.Cells[hRow, 5] = "C/O";
-                oSheet.Cells[hRow, 6] = "C";
-                oSheet.Cells[hRow, 7] = "Weight";
-                oSheet.Cells[hRow, 8] = "Gauge";
-                oSheet.Cells[hRow, 9] = "Width";
-                oSheet.Cells[hRow, 10] = "Alloy";
-                oSheet.Cells[hRow, 11] = "Type";
-                oSheet.Cells[hRow, 12] = "Location";
+                oSheet.Cells[hRow, 1] = "PO#";
+                oSheet.Cells[hRow, 2] = "Tag ID";
+                oSheet.Cells[hRow, 3] = "CC";
+                oSheet.Cells[hRow, 4] = "Mill Num";
+                oSheet.Cells[hRow, 5] = "Heat Num";
+                oSheet.Cells[hRow, 6] = "C/O";
+                oSheet.Cells[hRow, 7] = "C";
+                oSheet.Cells[hRow, 8] = "Weight";
+                oSheet.Cells[hRow, 9] = "Gauge";
+                oSheet.Cells[hRow, 10] = "Width";
+                oSheet.Cells[hRow, 11] = "Alloy";
+                oSheet.Cells[hRow, 12] = "Type";
+                oSheet.Cells[hRow, 13] = "Location";
 
                 hRow++;
 
+                int totWeight = 0;
+                int totCnt = 0;
 
                 List<coilRows> cra = new List<coilRows>();
                 while (reader.Read())
                 {
                     if (!printHdr)
                     {
+                        DateTime dtRec = reader.GetDateTime(reader.GetOrdinal("receiveDate"));  
                         oSheet.Cells[3, 1] = "We have received the following items for " + reader.GetString(reader.GetOrdinal("LongCustomerName"));
-                        oSheet.Cells[4, 1] = "under your PO of " + reader.GetString(reader.GetOrdinal("purchaseOrder"));
+                        oSheet.Cells[4, 1] = " on " + dtRec.ToString("d");
                         printHdr = true;
                     }
-                    string[] CoilInfo = new string[12];
+                    string[] CoilInfo = new string[13];
+                    //PO#
+                    string poNum = reader.GetString(reader.GetOrdinal("dtlPO")).Trim();
+                    CoilInfo[0] = poNum;
+
 
                     //TagID
                     coilRows cr = new coilRows();
@@ -233,33 +255,37 @@ namespace ICMS
                     cr.hRow = hRow;
                     cra.Add(cr);
 
-                    CoilInfo[0] = coilID.ToString().Trim() + " " +
+                    CoilInfo[1] = coilID.ToString().Trim() + " " +
                                     reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
                     //CoilCount
-                    CoilInfo[1] = reader.GetInt32(reader.GetOrdinal("coilCount")).ToString().Trim();
+                    int coilCnt = reader.GetInt32(reader.GetOrdinal("coilCount"));
+                    CoilInfo[2] = coilCnt.ToString().Trim();
+                    totCnt += coilCnt;
                     //MillNum
-                    CoilInfo[2] = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
+                    CoilInfo[3] = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
                     //HeatNum
-                    CoilInfo[3] = reader.GetString(reader.GetOrdinal("heat")).Trim();
+                    CoilInfo[4] = reader.GetString(reader.GetOrdinal("heat")).Trim();
                     //C/O
-                    CoilInfo[4] = reader.GetString(reader.GetOrdinal("countryOfOrigin")).Trim();
+                    CoilInfo[5] = reader.GetString(reader.GetOrdinal("countryOfOrigin")).Trim();
                     //C
-                    CoilInfo[5] = reader.GetDecimal(reader.GetOrdinal("carbon")).ToString("G29").Trim();
+                    CoilInfo[6] = reader.GetDecimal(reader.GetOrdinal("carbon")).ToString("G29").Trim();
                     //Weight
-                    CoilInfo[6] = reader.GetInt32(reader.GetOrdinal("origWeight")).ToString().Trim();
+                    int weight = reader.GetInt32(reader.GetOrdinal("origWeight"));
+                    CoilInfo[7] = weight.ToString().Trim();
+                    totWeight += weight;
                     //Gauge
-                    CoilInfo[7] = reader.GetDecimal(reader.GetOrdinal("thickness")).ToString("G29").Trim();
+                    CoilInfo[8] = reader.GetDecimal(reader.GetOrdinal("thickness")).ToString("G29").Trim();
                     //Width
-                    CoilInfo[8] = reader.GetDecimal(reader.GetOrdinal("width")).ToString("G29").Trim();
+                    CoilInfo[9] = reader.GetDecimal(reader.GetOrdinal("width")).ToString("G29").Trim();
                     //Alloy
-                    CoilInfo[9] = reader.GetString(reader.GetOrdinal("AlloyDesc")).ToString().Trim() + " " +
+                    CoilInfo[10] = reader.GetString(reader.GetOrdinal("AlloyDesc")).ToString().Trim() + " " +
                                   reader.GetString(reader.GetOrdinal("FinishDesc")).ToString().Trim();
                     //Type
-                    CoilInfo[10] = reader.GetString(reader.GetOrdinal("SteelDesc")).Trim();
+                    CoilInfo[11] = reader.GetString(reader.GetOrdinal("SteelDesc")).Trim();
                     //Location
-                    CoilInfo[11] = reader.GetString(reader.GetOrdinal("location")).Trim();
+                    CoilInfo[12] = reader.GetString(reader.GetOrdinal("location")).Trim();
 
-                    oSheet.get_Range("A" + hRow, "L" + hRow).Value2 = CoilInfo;
+                    oSheet.get_Range("A" + hRow, "M" + hRow).Value2 = CoilInfo;
                     hRow++;
 
                 }
@@ -286,8 +312,9 @@ namespace ICMS
                         {
                             if (dCnt > 1)
                             {
-                                oSheet.Rows[coilID.hRow + 1].Insert();
+                                oSheet.Rows[coilID.hRow + dCnt - 1].Insert();
                                 cnt++;
+                                hRow++;
                             }
                             oSheet.Cells[coilID.hRow + dCnt - 1, 15] = reader.GetString(reader.GetOrdinal("damageDescription"));
 
@@ -298,7 +325,9 @@ namespace ICMS
                     reader.Close();
 
                 }
-
+                //A-E
+                oSheet.get_Range("A" + hRow.ToString(), "E" + hRow.ToString()).Merge();
+                oSheet.Cells[hRow, 1] = "Total Count = " + totCnt + ": Total Weight = " + totWeight;
 
 
                 hRow++;
@@ -323,38 +352,45 @@ namespace ICMS
 
             if (haveSkids)
             {
-                oRng = oSheet.get_Range("A" + hRow, "M" + hRow);
+                oRng = oSheet.get_Range("A" + hRow, "N" + hRow);
 
                 oRng.Borders.get_Item(Excel.XlBordersIndex.xlEdgeBottom).LineStyle
                                             = Excel.XlLineStyle.xlDouble;
                 oRng.Borders.get_Item(Excel.XlBordersIndex.xlEdgeTop).LineStyle
                                             = Excel.XlLineStyle.xlDouble;
-                oSheet.Cells[hRow, 1] = "Skid ID";
-                oSheet.Cells[hRow, 2] = "PC";
-                oSheet.Cells[hRow, 3] = "Mill Num";
-                oSheet.Cells[hRow, 4] = "Heat Num";
-                oSheet.Cells[hRow, 5] = "C/O";
-                oSheet.Cells[hRow, 6] = "C";
-                oSheet.Cells[hRow, 7] = "Alloy";
-                oSheet.Cells[hRow, 8] = "Gauge";
-                oSheet.Cells[hRow, 9] = "Width";
-                oSheet.Cells[hRow, 10] = "Length";
-                oSheet.Cells[hRow, 11] = "Weight";
-                oSheet.Cells[hRow, 12] = "Type";
-                oSheet.Cells[hRow, 13] = "Location";
+                oSheet.Cells[hRow, 1] = "PO#";
+                oSheet.Cells[hRow, 2] = "Skid ID";
+                oSheet.Cells[hRow, 3] = "PC";
+                oSheet.Cells[hRow, 4] = "Mill Num";
+                oSheet.Cells[hRow, 5] = "Heat Num";
+                oSheet.Cells[hRow, 6] = "C/O";
+                oSheet.Cells[hRow, 7] = "C";
+                oSheet.Cells[hRow, 8] = "Alloy";
+                oSheet.Cells[hRow, 9] = "Gauge";
+                oSheet.Cells[hRow, 10] = "Width";
+                oSheet.Cells[hRow, 11] = "Length";
+                oSheet.Cells[hRow, 12] = "Weight";
+                oSheet.Cells[hRow, 13] = "Type";
+                oSheet.Cells[hRow, 14] = "Location";
 
 
                 hRow++;
+
+                int totPieces = 0;
+                int totWeight = 0;
+                int totCnt = 0;
                 List<coilRows> cra = new List<coilRows>();
                 while (reader.Read())
                 {
+                   
                     if (!printHdr)
                     {
+                        DateTime dtRec = reader.GetDateTime(reader.GetOrdinal("receiveDate"));
                         oSheet.Cells[3, 1] = "We have received the following items for " + reader.GetString(reader.GetOrdinal("LongCustomerName"));
-                        oSheet.Cells[4, 1] = "under your PO of " + reader.GetString(reader.GetOrdinal("purchaseOrder"));
+                        oSheet.Cells[4, 1] = " on " + dtRec.ToString("d");
                         printHdr = true;
                     }
-                    string[] SkidInfo = new string[13];
+                    string[] SkidInfo = new string[14];
 
                     coilRows cr = new coilRows();
 
@@ -362,43 +398,48 @@ namespace ICMS
                     cr.coilID = coilID;
                     cr.hRow = hRow;
                     cra.Add(cr);
-
+                    //PO#
+                    SkidInfo[0] = reader.GetString(reader.GetOrdinal("dtlPO"));
 
                     //TagID
-                    SkidInfo[0] = reader.GetInt32(reader.GetOrdinal("skidID")).ToString().Trim() + "-" +
+                    SkidInfo[1] = reader.GetInt32(reader.GetOrdinal("skidID")).ToString().Trim() + "." +
                                     reader.GetString(reader.GetOrdinal("letter")).Trim();
                     //PieceCount
-                    SkidInfo[1] = reader.GetInt32(reader.GetOrdinal("pieceCount")).ToString().Trim();
+                    int pieces = reader.GetInt32(reader.GetOrdinal("pieceCount"));
+                    SkidInfo[2] = pieces.ToString().Trim();
+                    totPieces += pieces;
                     //MillNum
-                    SkidInfo[2] = reader.GetString(reader.GetOrdinal("millNum")).Trim();
+                    SkidInfo[3] = reader.GetString(reader.GetOrdinal("millNum")).Trim();
                     //HeatNum
-                    SkidInfo[3] = reader.GetString(reader.GetOrdinal("heat")).Trim();
+                    SkidInfo[4] = reader.GetString(reader.GetOrdinal("heat")).Trim();
                     //C/O
-                    SkidInfo[4] = reader.GetString(reader.GetOrdinal("countryOfOrigin")).Trim();
+                    SkidInfo[5] = reader.GetString(reader.GetOrdinal("countryOfOrigin")).Trim();
                     //C
-                    SkidInfo[5] = reader.GetDecimal(reader.GetOrdinal("carbon")).ToString("G29").Trim();
+                    SkidInfo[6] = reader.GetDecimal(reader.GetOrdinal("carbon")).ToString("G29").Trim();
                     //Alloy
-                    SkidInfo[6] = reader.GetString(reader.GetOrdinal("AlloyDesc")).ToString().Trim() + " " +
+                    SkidInfo[7] = reader.GetString(reader.GetOrdinal("AlloyDesc")).ToString().Trim() + " " +
                                   reader.GetString(reader.GetOrdinal("FinishDesc")).ToString().Trim();
                     //Gauge
-                    SkidInfo[7] = reader.GetDecimal(reader.GetOrdinal("thickness")).ToString("G29").Trim();
+                    SkidInfo[8] = reader.GetDecimal(reader.GetOrdinal("thickness")).ToString("G29").Trim();
                     //Width
-                    SkidInfo[8] = reader.GetDecimal(reader.GetOrdinal("width")).ToString("G29").Trim();
+                    SkidInfo[9] = reader.GetDecimal(reader.GetOrdinal("width")).ToString("G29").Trim();
                     //Length
-                    SkidInfo[9] = reader.GetDecimal(reader.GetOrdinal("length")).ToString("G29").Trim();
+                    SkidInfo[10] = reader.GetDecimal(reader.GetOrdinal("length")).ToString("G29").Trim();
 
                     //Weight
-                    SkidInfo[10] = reader.GetInt32(reader.GetOrdinal("weight")).ToString().Trim();
-
+                    int weight = reader.GetInt32(reader.GetOrdinal("weight"));
+                    SkidInfo[11] = weight.ToString().Trim();
+                    totWeight += weight;
 
 
                     //Type
-                    SkidInfo[11] = reader.GetString(reader.GetOrdinal("SteelDesc")).Trim();
+                    SkidInfo[12] = reader.GetString(reader.GetOrdinal("SteelDesc")).Trim();
                     //Location
-                    SkidInfo[12] = reader.GetString(reader.GetOrdinal("location")).Trim();
+                    SkidInfo[13] = reader.GetString(reader.GetOrdinal("location")).Trim();
 
-                    oSheet.get_Range("A" + hRow, "M" + hRow).Value2 = SkidInfo;
+                    oSheet.get_Range("A" + hRow, "N" + hRow).Value2 = SkidInfo;
                     hRow++;
+                    totCnt++;
 
                 }
 
@@ -426,8 +467,10 @@ namespace ICMS
                         {
                             if (dCnt > 1)
                             {
-                                oSheet.Rows[coilID.hRow + 1].Insert();
+                                oSheet.Rows[coilID.hRow + dCnt -1 ].Insert();
                                 cnt++;
+                                hRow++;
+                                
                             }
                             oSheet.Cells[coilID.hRow + dCnt - 1, 15] = reader.GetString(reader.GetOrdinal("damageDescription"));
 
@@ -441,21 +484,28 @@ namespace ICMS
 
                 reader.Close();
 
+                oSheet.Cells[hRow, 1] = "Total Count = " + totCnt.ToString().Trim() + ": Total Weight = " + totWeight.ToString().Trim() + ": Total Pieces = " + totPieces.ToString().Trim();
 
             }
 
             oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
 
 
-            oRng = oSheet.get_Range("A1", "M1");
+            oRng = oSheet.get_Range("A1", "N1");
             oRng.EntireColumn.AutoFit();
 
             db.CloseSQLConn();
             oXL.Visible = true;
 
             string filename = "Rec-" + recID + ".xlsx";
-
-            SaveFile(oWB, filename, "Receiving");
+            try
+            {
+                SaveFile(oWB, filename, "Receiving");
+            }catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
 
 
         }
@@ -515,7 +565,7 @@ namespace ICMS
 
 
             oXL = new Excel.Application();
-
+            //need to figure out WORKORDER and 
 
             oWB = oXL.Workbooks.Open(templatePath);
             oSheet = (Excel._Worksheet)oWB.ActiveSheet;
@@ -661,7 +711,7 @@ namespace ICMS
                     }
                     if (!headerInfo)
                     {
-                        oSheet.Cells[4, 11] = reader.GetString(reader.GetOrdinal("releaseNum")).Trim();
+                        oSheet.Cells[4, 11] = reader.GetInt32(reader.GetOrdinal("orderID"));
                         oSheet.Cells[21, 2] = reader.GetString(reader.GetOrdinal("releaseNum")).Trim();
                         oSheet.Cells[5, 11] = reader.GetString(reader.GetOrdinal("custPO")).Trim();
 
@@ -676,6 +726,9 @@ namespace ICMS
                         oSheet.Cells[18, 7] = reader.GetString(reader.GetOrdinal("SHCity")).Trim() + ", " +
                                               reader.GetString(reader.GetOrdinal("State")).Trim() + ", " +
                                               reader.GetString(reader.GetOrdinal("SHzip")).Trim();
+                        oSheet.Cells[7, 8] = reader.GetDateTime(reader.GetOrdinal("releaseDate")).ToString("d");
+                        oSheet.Cells[60, 9] = reader.GetString(reader.GetOrdinal("shipPerson")).Trim();
+                        
                         headerInfo = true;
 
                     }
@@ -696,7 +749,7 @@ namespace ICMS
                     oSheet.Cells[row, 10] = "Skid";
                     oSheet.Cells[row + 1, 1] = "Tag# " +
                                                 reader.GetInt32(reader.GetOrdinal("skidID")).ToString().Trim() +
-                                                reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim() + "-" +
+                                                reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim() + "." +
                                                 reader.GetString(reader.GetOrdinal("letter")).ToString().Trim(); ;
                     oSheet.Cells[row + 1, 3] = reader.GetDecimal(reader.GetOrdinal("thickness")).ToString("G29").Trim();
                     oSheet.Cells[row + 1, 4] = reader.GetString(reader.GetOrdinal("AlloyDesc")).Trim() + " " +
@@ -747,10 +800,11 @@ namespace ICMS
         }
 
 
-        public void WorkOrder(int orderID)
+        public void WorkOrder(int orderID,bool printOperatorTag = false)
         {
 
 
+            PrintLabels pl = new PrintLabels();
 
             DBUtils db = new DBUtils();
 
@@ -765,6 +819,7 @@ namespace ICMS
             string hdrComments = "";
             int status = -9999;
             string packaging = "";
+            string machineName = "";
 
 
             using (DbDataReader reader = db.GetOrderHdr(orderID))
@@ -782,8 +837,10 @@ namespace ICMS
                         promisedate = reader.GetDateTime(reader.GetOrdinal("PromiseDate")).ToString("M/dd/yyyy");
                         processFunction = reader.GetString(reader.GetOrdinal("processFunction")).Trim();
                         status = reader.GetInt32(reader.GetOrdinal("status"));
-                        hdrComments = reader.GetString(reader.GetOrdinal("comments"));
-                        packaging = reader.GetString(reader.GetOrdinal("Packaging"));
+                        hdrComments = reader.GetString(reader.GetOrdinal("comments")).Trim();
+                        packaging = reader.GetString(reader.GetOrdinal("Packaging")).Trim();
+                        machineName = reader.GetString(reader.GetOrdinal("machineName")).Trim();
+
                     }
                 }
                 else
@@ -799,7 +856,7 @@ namespace ICMS
             Excel.Application oXL;
             Excel._Workbook oWB;
             Excel._Worksheet oSheet;
-            Excel.Range oRng;
+            
 
             oXL = new Excel.Application();
 
@@ -856,6 +913,8 @@ namespace ICMS
             MergeCellAddBox(oSheet, "F1", "I1", "", true);
             MergeCellAddBox(oSheet, "J1", "K1", "Order#");
             MergeCellAddBox(oSheet, "L1", "L1", "", true);
+
+            MergeCellAddBox(oSheet, "Q1", "S1", machineName);
             MergeCellAddBox(oSheet, "T1", "T1", "Date");
 
 
@@ -914,15 +973,11 @@ namespace ICMS
             oSheet.Range["I12"].Style.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
             oSheet.Range["A12"].WrapText = true;
 
-            
-            bool CTL = false;
-            if (processFunction == ProcessFunction.ClSkSame)
-            {
-                CTL = true;
-            }
 
-            MergeDataRow(oSheet, 16, true, true);
-            MergeDataRow(oSheet, 17);
+            //oXL.Visible = true;
+
+            MergeDataRow(oSheet, 16,true, processFunction);
+            MergeDataRow(oSheet, 17, false, processFunction);
 
             MergeCellAddBox(oSheet, "O15", "Q15", "RA Readings");
 
@@ -949,42 +1004,346 @@ namespace ICMS
             oSheet.get_Range(cellOrdDate, cellOrdDate).Value = orderdate ;
             oSheet.get_Range(cellPromiseDt, cellPromiseDt).Value = promisedate;
 
-            
+            pl.SkidLabelInfo.CustName = customername;
 
+            //temp  remove
+            //oXL.Visible = true;
+
+            //temp  remove
+
+            //print work orders
             switch (processFunction)
             {
                 case ProcessFunction.ClClSame://coil polish
+                    WorkOrderClClSame(orderID, oSheet, status);
                     break;
                 case ProcessFunction.ClSkSame://cut to length
-                    WorkOrderClskSame(orderID, oSheet, status);
+                    WorkOrderClSkSame(orderID, oSheet, status);
                     break;
                 case ProcessFunction.ClClDiff://slitter
+                    WorkOrderClClDiff(orderID, oSheet, status);
                     break;
                 case ProcessFunction.ShShSame://sheet polish/buff
                     WorkOrderShShSame(orderID, oSheet, status);
                     break;
                 case ProcessFunction.ShShDiff:
+                    WorkOrderShShDiff(orderID, oSheet, status);
                     break;
             }
 
+
+            oSheet.PageSetup.LeftFooter = "&\"Calibri\"&B&12Date___________\rStart___________\rStop___________";
+            oSheet.PageSetup.CenterFooter = "&\"Calibri\"&B&12Operator___________\rLeveler___________\rPage &P of &N";
+            oSheet.PageSetup.RightFooter = "&\"Calibri\"&B&12Skids_________\rPacker_________\r_________";
+            oSheet.PageSetup.Orientation = XlPageOrientation.xlLandscape;
+            oSheet.PageSetup.Zoom = false;
+            oSheet.PageSetup.FitToPagesWide = 1;
             oXL.ScreenUpdating = true;
             oXL.Visible = true;
 
 
         }
+        public void WorkOrderClClDiff(int orderID, _Worksheet oSheet, int status)
+        {
+            DBUtils db = new DBUtils();
 
-        public void WorkOrderClskSame(int orderID, _Worksheet oSheet, int status)
+            db.OpenSQLConn();
+            int firstHeaderRow = 8;
+            int firstDtlRow = 17;
+
+
+            Excel.Range oRng;
+
+            oRng = oSheet.get_Range("A" + firstDtlRow.ToString() , "Z" + firstDtlRow.ToString());
+            oRng.UnMerge();
+
+            oRng.Borders.LineStyle = XlLineStyle.xlLineStyleNone;
+
+
+
+            MergeCellAddBox(oSheet, "U1", "V1", DateTime.Now.ToString("d"));
+            MergeCellAddBox(oSheet, "O15", "Q15", "MIC Readings");
+            MergeCellAddBox(oSheet, "A16", "A16", "");
+            MergeCellAddBox(oSheet, "B16", "B16", "");
+            MergeCellAddBox(oSheet, "C16", "C16", "");
+            MergeCellAddBox(oSheet, "D16", "D16", "");
+            MergeCellAddBox(oSheet, "E16", "E16", "");
+            MergeCellAddBox(oSheet, "F16", "F16", "");
+            MergeCellAddBox(oSheet, "G16", "G16", "");
+            MergeCellAddBox(oSheet, "H16", "H16", "");
+            MergeCellAddBox(oSheet, "I16", "I16", "");
+            MergeCellAddBox(oSheet, "J16", "J16", "");
+            MergeCellAddBox(oSheet, "K16", "K16", "");
+            MergeCellAddBox(oSheet, "L16", "L16", "");
+            MergeCellAddBox(oSheet, "M16", "M16", "");
+            MergeCellAddBox(oSheet, "N16", "N16", "");
+
+
+
+
+
+            using (DbDataReader reader = db.GetClClDiffDetails(orderID))
+            {
+                if (reader.HasRows)
+                {
+                    int prevCutBreak = -9999;
+                    int prevTagID = -9999;
+                    string prevCoilTagSuffix = "NOPE";
+                    while (reader.Read())
+                    {
+
+
+                        int tagID = reader.GetInt32(reader.GetOrdinal("coilTagID"));
+                        string tagSuffix = reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
+                        string alloyDesc = reader.GetString(reader.GetOrdinal("alloyDesc")).Trim();
+                        string finishDesc = reader.GetString(reader.GetOrdinal("finishDesc")).Trim();
+                        decimal thickness = reader.GetDecimal(reader.GetOrdinal("thickness"));
+                        decimal width = reader.GetDecimal(reader.GetOrdinal("OGWidth"));
+                        decimal densityFactor = reader.GetDecimal(reader.GetOrdinal("DensityFactor"));
+                        int weight = reader.GetInt32(reader.GetOrdinal("OrigWeight")); 
+                        string location = reader.GetString(reader.GetOrdinal("location")).Trim();
+                        string heat = reader.GetString(reader.GetOrdinal("heat")).Trim();
+                        string millnum = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
+                        string origTagID = tagID.ToString() + tagSuffix;
+                        int cutbreak = reader.GetInt32(reader.GetOrdinal("cutBreak"));
+                        int breakWeight = reader.GetInt32(reader.GetOrdinal("nWeight"));
+                        string slitComments = reader.GetString(reader.GetOrdinal("slitComments")).Trim();
+                        if (prevTagID == -9999)
+                        {
+
+                            MergeCellAddBox(oSheet, "A" + firstHeaderRow.ToString(), "A" + firstHeaderRow.ToString(), origTagID, true);
+                            MergeCellAddBox(oSheet, "B" + firstHeaderRow.ToString(), "D" + firstHeaderRow.ToString(), alloyDesc + " " + finishDesc, true);
+                            MergeCellAddBox(oSheet, "E" + firstHeaderRow.ToString(), "E" + firstHeaderRow.ToString(), thickness.ToString("G29"), true);
+                            MergeCellAddBox(oSheet, "F" + firstHeaderRow.ToString(), "G" + firstHeaderRow.ToString(), width.ToString("G29"), true);
+                            MergeCellAddBox(oSheet, "H" + firstHeaderRow.ToString(), "I" + firstHeaderRow.ToString(), "NA", true);//skid weight
+                            MergeCellAddBox(oSheet, "J" + firstHeaderRow.ToString(), "K" + firstHeaderRow.ToString(), "", true);//scrap
+                            MergeCellAddBox(oSheet, "L" + firstHeaderRow.ToString(), "L" + firstHeaderRow.ToString(), weight.ToString(), true);
+                            MergeCellAddBox(oSheet, "M" + firstHeaderRow.ToString(), "N" + firstHeaderRow.ToString(), "", true);
+                            MergeCellAddBox(oSheet, "O" + firstHeaderRow.ToString(), "P" + firstHeaderRow.ToString(), location, true);
+                            MergeCellAddBox(oSheet, "Q" + firstHeaderRow.ToString(), "R" + firstHeaderRow.ToString(), heat, true);
+                            MergeCellAddBox(oSheet, "S" + firstHeaderRow.ToString(), "S" + firstHeaderRow.ToString(), millnum, true);
+                            MergeCellAddBox(oSheet, "A" + (firstDtlRow - 1).ToString(), "B" + (firstDtlRow - 1).ToString(), "Tag - " + origTagID, true);
+
+
+                            prevTagID = tagID;
+                            prevCoilTagSuffix = tagSuffix;
+                            prevCutBreak = cutbreak;
+                            if (weight != breakWeight)
+                            {
+                                
+                                MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), "Break " + (cutbreak + 1).ToString() + "- " + breakWeight.ToString("###,###") + "#", true);
+
+                                decimal density = reader.GetDecimal(reader.GetOrdinal("densityFactor"));
+                                MetalFormula mf = new MetalFormula();
+                                int breakLength = Convert.ToInt32(mf.MetFormula(density, thickness, 0, width, 1, breakWeight, true) / 12);
+                                
+                                MergeCellAddBox(oSheet, "C" + firstDtlRow.ToString(), "C" + firstDtlRow.ToString(), breakLength.ToString("###,###") + " feet", true);
+                                MergeCellAddBox(oSheet, "D" + firstDtlRow.ToString(), "F" + firstDtlRow.ToString(), "SLIT TO", true);
+                                MergeCellAddBox(oSheet, "G" + firstDtlRow.ToString(), "H" + firstDtlRow.ToString(), "EST LBS", true);
+                                MergeCellAddBox(oSheet, "I" + firstDtlRow.ToString(), "N" + firstDtlRow.ToString(), "SCALE WEIGHT", true);
+
+                                firstDtlRow++;
+                            }
+                        }
+                        else
+                        {
+                            if (prevTagID != tagID || !prevCoilTagSuffix.Equals(tagSuffix))
+                            {
+                                firstHeaderRow++;
+                                Range line = (Range)oSheet.Rows[firstHeaderRow];
+                                line.Insert();
+
+                                MergeCellAddBox(oSheet, "A" + firstHeaderRow.ToString(), "A" + firstHeaderRow.ToString(), origTagID, true);
+                                MergeCellAddBox(oSheet, "B" + firstHeaderRow.ToString(), "D" + firstHeaderRow.ToString(), alloyDesc + " " + finishDesc, true);
+                                MergeCellAddBox(oSheet, "E" + firstHeaderRow.ToString(), "E" + firstHeaderRow.ToString(), thickness.ToString("G29"), true);
+                                MergeCellAddBox(oSheet, "F" + firstHeaderRow.ToString(), "G" + firstHeaderRow.ToString(), width.ToString("G29"), true);
+                                MergeCellAddBox(oSheet, "H" + firstHeaderRow.ToString(), "I" + firstHeaderRow.ToString(), "NA", true);
+                                MergeCellAddBox(oSheet, "J" + firstHeaderRow.ToString(), "K" + firstHeaderRow.ToString(), "", true);
+                                MergeCellAddBox(oSheet, "L" + firstHeaderRow.ToString(), "L" + firstHeaderRow.ToString(), weight.ToString(), true);
+                                MergeCellAddBox(oSheet, "M" + firstHeaderRow.ToString(), "N" + firstHeaderRow.ToString(), "", true);
+                                MergeCellAddBox(oSheet, "O" + firstHeaderRow.ToString(), "P" + firstHeaderRow.ToString(), location, true);
+                                MergeCellAddBox(oSheet, "Q" + firstHeaderRow.ToString(), "R" + firstHeaderRow.ToString(), heat, true);
+                                MergeCellAddBox(oSheet, "S" + firstHeaderRow.ToString(), "S" + firstHeaderRow.ToString(), millnum, true);
+                                
+                                firstDtlRow += 3;
+                                prevTagID = tagID;
+                                prevCoilTagSuffix = tagSuffix;
+                                MergeCellAddBox(oSheet, "A" + (firstDtlRow - 1).ToString(), "B" + (firstDtlRow - 1).ToString(), "Tag - " + origTagID, true);
+
+
+                            }
+                            else if (prevCutBreak != cutbreak)
+                            {
+                                if (weight != breakWeight)
+                                {
+                                    firstDtlRow++;
+
+                                    
+                                    MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), "Break " + (cutbreak + 1).ToString() + "- " + breakWeight.ToString("###,###") + "#", true);
+
+                                    decimal density = reader.GetDecimal(reader.GetOrdinal("densityFactor"));
+                                    MetalFormula mf = new MetalFormula();
+                                    int breakLength = Convert.ToInt32(mf.MetFormula(density, thickness, 0, width, 1, breakWeight, true) / 12);
+
+                                    MergeCellAddBox(oSheet, "C" + firstDtlRow.ToString(), "C" + firstDtlRow.ToString(), breakLength.ToString("###,###") + " feet", true);
+                                    MergeCellAddBox(oSheet, "D" + firstDtlRow.ToString(), "F" + firstDtlRow.ToString(), "SLIT TO", true);
+                                    MergeCellAddBox(oSheet, "G" + firstDtlRow.ToString(), "H" + firstDtlRow.ToString(), "EST LBS", true);
+                                    MergeCellAddBox(oSheet, "I" + firstDtlRow.ToString(), "N" + firstDtlRow.ToString(), "SCALE WEIGHT", true);
+
+                                    firstDtlRow++;
+                                }
+                                prevCutBreak = cutbreak;
+                            }
+                        }
+
+
+                        string tagNewSuffix = reader.GetString(reader.GetOrdinal("newTagSuffix")).Trim();
+                        string coilTagID = tagID.ToString() + tagNewSuffix;
+
+                        char colLetter = 'A';
+                        if (weight != breakWeight)
+                        {
+                            colLetter = 'B';
+
+                            
+                        }
+
+                        //nextChar = (char)(((int)letter) + 1);
+
+                        //B-C
+                        MergeCellAddBox(oSheet, (char)(((int)colLetter)) + firstDtlRow.ToString(), (char)(((int)colLetter) + 1) + firstDtlRow.ToString(), coilTagID, true);
+
+
+                        decimal slitWidth = reader.GetDecimal(reader.GetOrdinal("width"));
+
+                        //D-F
+                        MergeCellAddBox(oSheet, (char)(((int)colLetter) + 2) + firstDtlRow.ToString(), (char)(((int)colLetter) + 4) + firstDtlRow.ToString(), slitWidth.ToString("G29"), true);
+
+                        int slitWeight = reader.GetInt32(reader.GetOrdinal("slitWeight"));
+                        //G-H
+                        int adder = 7;
+                        if (weight != breakWeight)
+                        {
+                            adder = 6;
+                        }
+                        MergeCellAddBox(oSheet, (char)(((int)colLetter) + 5) + firstDtlRow.ToString(), (char)(((int)colLetter) + adder) + firstDtlRow.ToString(), slitWeight.ToString("###,###") + "#", true);
+
+
+                        //string newFinish = reader.GetString(reader.GetOrdinal("newFinishDesc")).Trim();
+                        //MergeCellAddBox(oSheet, "F" + firstDtlRow.ToString(), "G" + firstDtlRow.ToString(), newFinish, true)
+
+
+                        MergeCellAddBox(oSheet, (char)(((int)colLetter) + adder + 1) + firstDtlRow.ToString(), "N" + firstDtlRow.ToString(), "", true) ;
+                        MergeCellAddBox(oSheet, "O" + firstDtlRow.ToString(), "O" + firstDtlRow.ToString(), "", true);
+                        MergeCellAddBox(oSheet, "P" + firstDtlRow.ToString(), "P" + firstDtlRow.ToString(), "", true);
+                        MergeCellAddBox(oSheet, "Q" + firstDtlRow.ToString(), "Q" + firstDtlRow.ToString(), "", true);
+                        
+
+                        //int paper = reader.GetInt32(reader.GetOrdinal("paper"));
+                        //string comm = "Paper";
+                        //if (paper <= 0)
+                        //    comm = "NO PAPER!!!";
+
+                        MergeCellAddBox(oSheet, "R" + firstDtlRow.ToString(), "V" + firstDtlRow.ToString(), slitComments, true);
+
+
+                        firstDtlRow++;
+                    }
+
+                }
+            }
+
+
+            db.CloseSQLConn();
+
+        }
+
+        public void WorkOrderClSkSame(int orderID, _Worksheet oSheet, int status)
         {
             DBUtils db  = new DBUtils();
 
             db.OpenSQLConn();
 
+            CTLPrice pricing = new CTLPrice();
+            pricing.OrderID = orderID;
+
+            pricing.GetCTLPrices();
+
+            MergeCellAddBox(oSheet, "U1", "V1", DateTime.Now.ToString("d"));
+
+            using (DbDataReader PVCreader = db.GetPVCGroup())
+            {
+                if (PVCreader.HasRows)
+                {
+                    while (PVCreader.Read())
+                    {
+                        PVCInfo pv = new PVCInfo();
+
+                        pv.groupID = PVCreader.GetInt32(PVCreader.GetOrdinal("GroupID"));
+                        pv.groupName = PVCreader.GetString(PVCreader.GetOrdinal("GroupName")).Trim();
+                        pv.price = PVCreader.GetDecimal(PVCreader.GetOrdinal("price"));
+
+                        pvcInfo.Add(pv);
+
+                    }
+                }
+                PVCreader.Close();
+            }
+
+            int row = 0;
+            decimal totalCharge = 0;
+            decimal scrapCredit = 0;
+            for (int i = 0; i < pricing.Adders.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        row = 3;
+                        break;
+                    case 1:
+                        row = 5; 
+                        break;
+                    default:
+                        row++;
+                        break;
+                }
+                MergeCellAddBox(oSheet, "T" + row.ToString(), "T" + row.ToString(), pricing.Adders[i].adderDesc);
+                string charges = pricing.Adders[i].charge.ToString("$##,###.00##") + " X " + pricing.Adders[i].amount.ToString();
+                MergeCellAddBox(oSheet, "U" + row.ToString(), "U" + row.ToString(), charges);
+                decimal total = Math.Round(pricing.Adders[i].charge * pricing.Adders[i].amount,2);
+                MergeCellAddBox(oSheet, "V" + row.ToString(), "V" + row.ToString(), total.ToString("$##,###.00"));
+                if (pricing.Adders[i].charge >= 0)
+                {
+                    totalCharge += total;
+                }
+                else
+                {
+                    scrapCredit += total;
+                }
+            }
+            if (totalCharge > 0)
+            {
+                row++;
+                MergeCellAddBox(oSheet, "T" + row.ToString(), "V" + row.ToString(), "Total " + totalCharge.ToString("$##,###.00"), true);
+                if (scrapCredit != 0)
+                {
+                    row++;
+                    MergeCellAddBox(oSheet, "T" + row.ToString(), "V" + row.ToString(), "Scrap Credit " + scrapCredit.ToString("$##,###.00"), true);
+                    totalCharge += scrapCredit;
+                    row++;
+                    MergeCellAddBox(oSheet, "T" + row.ToString(), "V" + row.ToString(), "Invoice Total " + totalCharge.ToString("$##,###.00"), true);
+
+                }
+
+            }
+            oSheet.get_Range("T1", "U1").EntireColumn.AutoFit();
+
             string prevCoilTagSuffix = "";
-            string prevSkidLetter = "";
+            
             
             int firstHeaderRow = 8;
             int firstDtlRow = 17;
-            bool addRow = true;
+            
             List<int> coilIDs = new List<int>();
             List<string> coilSuffix = new List<string>();
             List<decimal> skidWeigts = new List<decimal>();
@@ -998,14 +1357,8 @@ namespace ICMS
                         while (reader.Read())
                         {
                             int pvc = reader.GetInt32(reader.GetOrdinal("pvcID"));
-                            if (pvc > 0)
-                            {
-                                MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), "YES", true);
-                            }
-                            else
-                            {
-                                MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), "NO", true);
-                            }
+
+                            
                             int paper = reader.GetInt32(reader.GetOrdinal("paper"));
                             if (paper > 0)
                             {
@@ -1036,26 +1389,113 @@ namespace ICMS
 
                             decimal sheetWeight = reader.GetDecimal(reader.GetOrdinal("sheetWeight"));
                             string weight = "";
-                            if (sheetWeight > 0)
-                            {
-                                decimal w = sheetWeight * pieces;
-                                skidWeigts.Add(w);
-                                weight = Math.Round(w).ToString();
+                            decimal width = reader.GetDecimal(reader.GetOrdinal("width"));
+                            decimal w = 0;
 
+                            int skidWeight = reader.GetInt32(reader.GetOrdinal("SkidWeight"));
+
+                            
+                            if (skidWeight > 0)
+                            {
+                                w = skidWeight;
+                                skidWeigts.Add(skidWeight);
+                                weight = skidWeight.ToString();
                             }
                             else
                             {
-                                decimal density = reader.GetDecimal(reader.GetOrdinal("DensityFactor"));
+                                if (sheetWeight > 0)
+                                {
+                                    w = sheetWeight * pieces;
+                                    skidWeigts.Add(w);
+                                    weight = Math.Round(w).ToString();
 
-                                MetalFormula mt = new MetalFormula();
-                                decimal t = reader.GetDecimal(reader.GetOrdinal("thickness"));
-                                decimal w = reader.GetDecimal(reader.GetOrdinal("width"));
+                                }
+                                else
+                                {
+                                    decimal density = reader.GetDecimal(reader.GetOrdinal("DensityFactor"));
 
-                                w = mt.MetFormula(density, t, length, w, pieces, 0);
-                                skidWeigts.Add(w);
-                                weight = Math.Round(w).ToString();
+                                    MetalFormula mt = new MetalFormula();
+                                    decimal t = reader.GetDecimal(reader.GetOrdinal("thickness"));
+
+
+                                    w = mt.MetFormula(density, t, length, width, pieces, 0);
+                                    skidWeigts.Add(w);
+                                    weight = Math.Round(w).ToString();
+                                }
                             }
-
+                            
+                            decimal sqft = (length * width * pieces) / 144;
+                            if (pvc > 0)
+                            {
+                                string pvcName = "";
+                                PVCInfo pv = pvcInfo.Find(x => x.groupID == pvc);
+                                pvcName = pv.groupName.Trim();
+                                if (status < 0)
+                                {
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //here
+                                    
+                                    pvcName = Math.Round(sqft, 0).ToString();
+                                }
+                                MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), pvcName, true);
+                            }
+                            else
+                            {
+                                string pvcName = "NO";
+                                //if (status < 0)
+                                //{
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //here
+                                //    decimal sqft = (length * width * pieces) / 144;
+                                //    pvcName = Math.Round(sqft, 0).ToString();
+                                //}
+                                MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), pvcName, true);
+                            }
+                            if (paper > 0)
+                            {
+                                string paperName = "Y";
+                                
+                                if (status < 0)
+                                {
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //here
+                                    
+                                    paperName = Math.Round(sqft, 0).ToString();
+                                }
+                                MergeCellAddBox(oSheet, "B" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), paperName, true);
+                            }
+                            else
+                            {
+                                string paperName = "NO";
+                                //if (status < 0)
+                                //{
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //temporary for Trish
+                                //    //here
+                                //    decimal sqft = (length * width * pieces) / 144;
+                                //    pvcName = Math.Round(sqft, 0).ToString();
+                                //}
+                                MergeCellAddBox(oSheet, "B" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), paperName, true);
+                            }
                             MergeCellAddBox(oSheet, "J" + firstDtlRow.ToString(), "K" + firstDtlRow.ToString(), weight, true);
 
                             decimal diag = reader.GetDecimal(reader.GetOrdinal("diagnol1"));
@@ -1107,8 +1547,15 @@ namespace ICMS
                                 if (maxLetter.Equals(""))
                                 {
                                     maxLetter = "A";
+                                    sp.SetFirstLetter(maxLetter);
                                 }
-                                sp.SetFirstLetter(maxLetter);
+                                else
+                                {
+                                    sp.SetFirstLetter(maxLetter);
+                                    maxLetter = sp.GetNextLetter();
+                                }
+                                
+                                
                                 skidLetter = maxLetter;
                                 
                             }
@@ -1122,8 +1569,13 @@ namespace ICMS
                                     if (maxLetter.Equals(""))
                                     {
                                         maxLetter = "A";
+                                        sp.SetFirstLetter(maxLetter);
                                     }
-                                    sp.SetFirstLetter(maxLetter);
+                                    else
+                                    {
+                                        sp.SetFirstLetter(maxLetter);
+                                        maxLetter = sp.GetNextLetter();
+                                    }
                                     skidLetter = maxLetter;
                                     
                                 }
@@ -1140,24 +1592,66 @@ namespace ICMS
                             decimal t = reader.GetDecimal(reader.GetOrdinal("thickness"));
                             decimal width = reader.GetDecimal(reader.GetOrdinal("width"));
                             
-                            
-                            
-                           
-                            
+
+
+
+
                             for (int i = 0;i < skidCnt; i++)
                             {
+                                decimal sqft = (length * width * pieceCount) / 144;
                                 if (pvc > 0)
                                 {
-                                    MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), "YES", true);
+                                    string pvcName = "";
+                                    PVCInfo pv = pvcInfo.Find(x => x.groupID == pvc);
+                                    pvcName = pv.groupName.Trim();
+                                    if (status < 0)
+                                    {
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //here
+                                        
+                                        pvcName = Math.Round(sqft, 0).ToString();
+                                    }
+                                    MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), pvcName, true);
                                 }
                                 else
                                 {
-                                    MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), "NO", true);
+                                    string pvcName = "NO";
+                                    //if (status < 0)
+                                    //{
+                                    //    //temporary for Trish
+                                    //    //temporary for Trish
+                                    //    //temporary for Trish
+                                    //    //temporary for Trish
+                                    //    //temporary for Trish
+                                    //    //temporary for Trish
+                                    //    //here
+                                    //    decimal sqft = (length * width * pieceCount) / 144;
+                                    //    pvcName = Math.Round(sqft, 0).ToString();
+                                    //}
+                                    MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), pvcName, true);
                                 }
                                 
                                 if (paper > 0)
                                 {
-                                    MergeCellAddBox(oSheet, "B" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), "Y", true);
+                                    string paperName = "Y";
+                                    if (status < 0)
+                                    {
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //temporary for Trish
+                                        //here
+
+                                        paperName = Math.Round(sqft, 0).ToString();
+                                    }
+                                    MergeCellAddBox(oSheet, "B" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), paperName, true);
                                 }
                                 else
                                 {
@@ -1170,6 +1664,13 @@ namespace ICMS
 
                                 string skidID = coilTagID.ToString() + coilTagSuffix + "." + skidLetter;
                                 MergeCellAddBox(oSheet, "H" + firstDtlRow.ToString(), "I" + firstDtlRow.ToString(), skidID, true);
+                               
+
+
+
+
+
+
                                 skidLetter = sp.GetNextLetter();
 
                                 string weight;
@@ -1244,6 +1745,10 @@ namespace ICMS
 
                             if (!prevcoil.Equals(coilTagID))
                             {
+                                if (prevcoil != "Nope")
+                                {
+                                    oSheet.Rows[firstHeaderRow].Insert();
+                                }
                                 prevcoil = coilTagID;
                                 string alloyDesc = reader.GetString(reader.GetOrdinal("AlloyDesc")).Trim();
                                 string finishDesc = reader.GetString(reader.GetOrdinal("finishDesc")).Trim();
@@ -1257,6 +1762,7 @@ namespace ICMS
                                 int endWeight = 0;
                                 int scrap = 0;
                                 string scrapType = "";
+                                decimal lbsPerInch = 0;
                                 if (status < 0)
                                 {
                                     weight = reader.GetInt32(reader.GetOrdinal("previousWeight"));
@@ -1271,7 +1777,11 @@ namespace ICMS
                                     {
                                         scrapType = reader.GetString(reader.GetOrdinal("scrapUnit"));
                                     }
-
+                                    if (!reader.IsDBNull(reader.GetOrdinal("lbsPerInch")))
+                                    {
+                                        lbsPerInch = reader.GetDecimal(reader.GetOrdinal("lbsPerInch"));
+                                    }
+                                    
                                 }
                                 decimal w = 0;
                                 for (int j = 0; j < coilIDs.Count; j++)
@@ -1319,111 +1829,196 @@ namespace ICMS
             db.CloseSQLConn();
 
         }
-        public void WorkOrderClskSame_DontLikeIt(int orderID, _Worksheet oSheet, int status)
+        
+        private void WorkOrderClClSame(int orderID, _Worksheet oSheet,int status)
         {
-
             DBUtils db = new DBUtils();
 
             db.OpenSQLConn();
 
-            if (status > 0)
+            MergeCellAddBox(oSheet, "U1", "V1", DateTime.Now.ToString("d"));
+
+            int firstHeaderRow = 8;
+            int firstDtlRow = 17;
+
+            using (DbDataReader reader = db.GetClClSameDetails(orderID))
             {
-
-            }
-            else
-            {
-
-            }
-            using (DbDataReader reader = db.GetCTLDetails(orderID,-1,"",true))
-            {
-
-
-                
-                string prevCoilTagSuffix = "";
-                string prevSkidLetter = "";
-                int firstHeaderRow = 8;
-                int firstDtlRow = 17;
-                bool addRow = true;
-                string prevTagID = "";
                 if (reader.HasRows)
                 {
+                    int prevTagID = -9999;
+                    string prevCoilTagSuffix = "NOPE";
                     while (reader.Read())
                     {
-                        
-                        int currtagID = reader.GetInt32(reader.GetOrdinal("coilTagID"));
-                        string coilTagSuffix = reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
-                        string coilTagID = currtagID.ToString() + coilTagSuffix;
-                        if (!prevTagID.Equals(coilTagID))
+
+
+                        int tagID = reader.GetInt32(reader.GetOrdinal("coilTagID"));
+                        string tagSuffix = reader.GetString(reader.GetOrdinal("coilTagSuffix")).Trim();
+                        string alloyDesc = reader.GetString(reader.GetOrdinal("alloyDesc")).Trim();
+                        string finishDesc = reader.GetString(reader.GetOrdinal("finishDesc")).Trim();
+                        decimal thickness = reader.GetDecimal(reader.GetOrdinal("thickness"));
+                        decimal width = reader.GetDecimal(reader.GetOrdinal("width"));
+                        decimal densityFactor = reader.GetDecimal(reader.GetOrdinal("DensityFactor"));
+                        int weight = Convert.ToInt32( reader.GetDecimal(reader.GetOrdinal("weight")));
+                        string location = reader.GetString(reader.GetOrdinal("location")).Trim();
+                        string heat = reader.GetString(reader.GetOrdinal("heat")).Trim();
+                        string millnum = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
+                        string origTagID = tagID.ToString() + tagSuffix;
+                        if (prevTagID == -9999)
                         {
-                            addRow = true;
-                        }
-                        if (addRow)
-                        { 
-                            addRow = false;
-                            prevTagID = coilTagID;
-
-                            
-
-                            string alloyDesc = reader.GetString(reader.GetOrdinal("AlloyDesc")).Trim();
-                            string finishDesc = reader.GetString(reader.GetOrdinal("finishDesc")).Trim();
-                            decimal width = reader.GetDecimal(reader.GetOrdinal("width"));
-                            decimal thickness = reader.GetDecimal(reader.GetOrdinal("thickness"));
-                            
-                            string location = reader.GetString(reader.GetOrdinal("location"));
-                            string heat = reader.GetString(reader.GetOrdinal("heat"));
-                            string millnum = reader.GetString(reader.GetOrdinal("millCoilNum"));
-                            int weight = Convert.ToInt32(reader.GetDecimal(reader.GetOrdinal("weight")));
-                            int endWeight = -1;
-                            if (!reader.IsDBNull(reader.GetOrdinal("previousWeight")))
-                            {
-                                weight = reader.GetInt32(reader.GetOrdinal("previousWeight"));
-                                endWeight = reader.GetInt32(reader.GetOrdinal("currentWeight"));
-
-
-                            }
-                            MergeCellAddBox(oSheet, "A" + firstHeaderRow.ToString(), "A" + firstHeaderRow.ToString(), coilTagID, true);
+                            MergeCellAddBox(oSheet, "A" + firstHeaderRow.ToString(), "A" + firstHeaderRow.ToString(), origTagID, true);
                             MergeCellAddBox(oSheet, "B" + firstHeaderRow.ToString(), "D" + firstHeaderRow.ToString(), alloyDesc + " " + finishDesc, true);
                             MergeCellAddBox(oSheet, "E" + firstHeaderRow.ToString(), "E" + firstHeaderRow.ToString(), thickness.ToString("G29"), true);
                             MergeCellAddBox(oSheet, "F" + firstHeaderRow.ToString(), "G" + firstHeaderRow.ToString(), width.ToString("G29"), true);
-                            MergeCellAddBox(oSheet, "H" + firstHeaderRow.ToString(), "I" + firstHeaderRow.ToString(), "0", true);
-                            MergeCellAddBox(oSheet, "J" + firstHeaderRow.ToString(), "K" + firstHeaderRow.ToString(), "0", true);
-                            MergeCellAddBox(oSheet, "L" + firstHeaderRow.ToString(), "L" + firstHeaderRow.ToString(), weight.ToString("G29"), true);
-                            string endLBS = "0";
-                            if (endWeight != -1)
-                            {
-                                endLBS = endWeight.ToString();
-                            }
-                            MergeCellAddBox(oSheet, "M" + firstHeaderRow.ToString(), "N" + firstHeaderRow.ToString(), endLBS, true);
+                            MergeCellAddBox(oSheet, "H" + firstHeaderRow.ToString(), "I" + firstHeaderRow.ToString(), "NA", true);
+                            MergeCellAddBox(oSheet, "J" + firstHeaderRow.ToString(), "K" + firstHeaderRow.ToString(), "", true);
+                            MergeCellAddBox(oSheet, "L" + firstHeaderRow.ToString(), "L" + firstHeaderRow.ToString(), weight.ToString(), true);
+                            MergeCellAddBox(oSheet, "M" + firstHeaderRow.ToString(), "N" + firstHeaderRow.ToString(), "", true);
                             MergeCellAddBox(oSheet, "O" + firstHeaderRow.ToString(), "P" + firstHeaderRow.ToString(), location, true);
                             MergeCellAddBox(oSheet, "Q" + firstHeaderRow.ToString(), "R" + firstHeaderRow.ToString(), heat, true);
                             MergeCellAddBox(oSheet, "S" + firstHeaderRow.ToString(), "S" + firstHeaderRow.ToString(), millnum, true);
-                            firstHeaderRow++;
+                            prevTagID = tagID;
+                            prevCoilTagSuffix = tagSuffix;
+                        }
+                        else
+                        {
+                            if (prevTagID != tagID || !prevCoilTagSuffix.Equals(tagSuffix))
+                            {
+                                firstHeaderRow++;
+                                Range line = (Range)oSheet.Rows[firstHeaderRow];
+                                line.Insert();
+                                
+                                MergeCellAddBox(oSheet, "A" + firstHeaderRow.ToString(), "A" + firstHeaderRow.ToString(), origTagID, true);
+                                MergeCellAddBox(oSheet, "B" + firstHeaderRow.ToString(), "D" + firstHeaderRow.ToString(), alloyDesc + " " + finishDesc, true);
+                                MergeCellAddBox(oSheet, "E" + firstHeaderRow.ToString(), "E" + firstHeaderRow.ToString(), thickness.ToString("G29"), true);
+                                MergeCellAddBox(oSheet, "F" + firstHeaderRow.ToString(), "G" + firstHeaderRow.ToString(), width.ToString("G29"), true);
+                                MergeCellAddBox(oSheet, "H" + firstHeaderRow.ToString(), "I" + firstHeaderRow.ToString(), "NA", true);
+                                MergeCellAddBox(oSheet, "J" + firstHeaderRow.ToString(), "K" + firstHeaderRow.ToString(), "", true);
+                                MergeCellAddBox(oSheet, "L" + firstHeaderRow.ToString(), "L" + firstHeaderRow.ToString(), weight.ToString(), true);
+                                MergeCellAddBox(oSheet, "M" + firstHeaderRow.ToString(), "N" + firstHeaderRow.ToString(), "", true);
+                                MergeCellAddBox(oSheet, "O" + firstHeaderRow.ToString(), "P" + firstHeaderRow.ToString(), location, true);
+                                MergeCellAddBox(oSheet, "Q" + firstHeaderRow.ToString(), "R" + firstHeaderRow.ToString(), heat, true);
+                                MergeCellAddBox(oSheet, "S" + firstHeaderRow.ToString(), "S" + firstHeaderRow.ToString(), millnum, true);
+
+                                firstDtlRow +=2;
+                                prevTagID = tagID;
+                                prevCoilTagSuffix = tagSuffix;
+
+
+                            }
                         }
                         
+                        
+                        string tagNewSuffix = reader.GetString(reader.GetOrdinal("coilTagNewSuffix"));
+                        string coilTagID = tagID.ToString() + tagNewSuffix;
+                        MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), coilTagID, true);
+
+                        
+                        MergeCellAddBox(oSheet, "C" + firstDtlRow.ToString(), "C" + firstDtlRow.ToString(), alloyDesc, true);
 
 
+                        
+                        MergeCellAddBox(oSheet, "D" + firstDtlRow.ToString(), "E" + firstDtlRow.ToString(), finishDesc, true);
+
+
+                        string newFinish = reader.GetString(reader.GetOrdinal("newFinishDesc")).Trim();
+                        MergeCellAddBox(oSheet, "F" + firstDtlRow.ToString(), "G" + firstDtlRow.ToString(), newFinish, true);
+
+
+                       
+                        
+
+                        
+                        int newWeight = reader.GetInt32(reader.GetOrdinal("nWeight"));
+                        MergeCellAddBox(oSheet, "H" + firstDtlRow.ToString(), "I" + firstDtlRow.ToString(), newWeight.ToString(), true);
+
+                        MetalFormula mt = new MetalFormula();
+                        
+                        decimal length = Math.Round(mt.MetFormula(densityFactor, thickness, 0, width, 1, newWeight)/12,1);
+                        MergeCellAddBox(oSheet, "J" + firstDtlRow.ToString(), "K" + firstDtlRow.ToString(),length.ToString("G29"), true);
+
+
+                        MergeCellAddBox(oSheet, "L" + firstDtlRow.ToString(), "N" + firstDtlRow.ToString(), "", true);
+                        
+                        
+                        MergeCellAddBox(oSheet, "O" + firstDtlRow.ToString(), "O" + firstDtlRow.ToString(), "", true);
+                        MergeCellAddBox(oSheet, "P" + firstDtlRow.ToString(), "P" + firstDtlRow.ToString(), "", true);
+                        MergeCellAddBox(oSheet, "Q" + firstDtlRow.ToString(), "Q" + firstDtlRow.ToString(), "", true);
+
+                        int paper = reader.GetInt32(reader.GetOrdinal("paper"));
+                        string comm = "Paper";
+                        if (paper <= 0)
+                            comm = "NO PAPER!!!";
+                        
+                        MergeCellAddBox(oSheet, "R" + firstDtlRow.ToString(), "V" + firstDtlRow.ToString(), comm, true);
+
+                       
+                        firstDtlRow++;
                     }
+
                 }
-
-
             }
 
-
-
-
-
+            
             db.CloseSQLConn();
+
+        }
+
+        public void WorkOrderShShDiff(int orderID, _Worksheet oSheet, int status)
+        {
+
+
         }
 
         public void WorkOrderShShSame(int orderID, _Worksheet oSheet, int status)
         {
 
-            MergeCellAddBox(oSheet, "H7", "I7", "Length", true);
-            MergeCellAddBox(oSheet, "J7", "K7", "Pieces", true);
-
             DBUtils db = new DBUtils();
 
             db.OpenSQLConn();
+
+            SheetSheetSamePricing pricing = new SheetSheetSamePricing();
+            pricing.OrderID = orderID;
+
+            pricing.GetShShPrices();
+
+            MergeCellAddBox(oSheet, "U1", "V1", DateTime.Now.ToString("d"));
+
+            int row = 0;
+            decimal totalCharge = 0;
+            for (int i = 0; i < pricing.Adders.Count; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        row = 3;
+                        break;
+                    case 1:
+                        row = 5;
+                        break;
+                    default:
+                        row++;
+                        break;
+                }
+                MergeCellAddBox(oSheet, "T" + row.ToString(), "T" + row.ToString(), pricing.Adders[i].adderDesc);
+                string charges = pricing.Adders[i].charge.ToString("$##,###.00##") + " X " + pricing.Adders[i].amount.ToString();
+                MergeCellAddBox(oSheet, "U" + row.ToString(), "U" + row.ToString(), charges);
+                decimal total = Math.Round(pricing.Adders[i].charge * pricing.Adders[i].amount, 2);
+                MergeCellAddBox(oSheet, "V" + row.ToString(), "V" + row.ToString(), total.ToString("$##,###.00"));
+                totalCharge += total;
+            }
+            if (totalCharge > 0)
+            {
+                row++;
+                MergeCellAddBox(oSheet, "T" + row.ToString(), "V" + row.ToString(), "Total " + totalCharge.ToString("$##,###.00"), true);
+
+            }
+            oSheet.get_Range("T1", "U1").EntireColumn.AutoFit();
+
+
+            MergeCellAddBox(oSheet, "H7", "I7", "Length", true);
+            MergeCellAddBox(oSheet, "J7", "K7", "Pieces", true);
+
+           
 
 
             using (DbDataReader PVCreader = db.GetPVCGroup())
@@ -1530,6 +2125,7 @@ namespace ICMS
 
                         if (!worryAboutIt)
                         {
+                            //skidweight = Convert.ToInt32(reader.GetValue(reader.GetOrdinal("SheetWeight")));
                             if (sheetWeight == 0)
                             {
                                 MetalFormula mt = new MetalFormula();
@@ -1562,19 +2158,32 @@ namespace ICMS
                         {
                             skidID = tagID.ToString().Trim() + "." + skidLetter + "." + orderLetter;
                         }
-
+                        decimal sqft = (length * width * pieces) / 144;
                         if (pvc > 0)
                         {
-                            string pvcName = width.ToString("G29");
+                            string pvcName = "";
 
                             try
                             {
                                 PVCInfo pv = pvcInfo.Find(x => x.groupID == pvc);
                                 pvcName = pv.groupName.Trim();
+                                if (status < 0)
+                                {
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //temporary for Trish
+                                    //here
+                                    
+                                    pvcName = Math.Round(sqft, 0).ToString();
+                                }
+                                
                             }
                             catch(Exception ex)
                             {
-
+                                MessageBox.Show(ex.Message);
                             }
                             
                             
@@ -1583,12 +2192,35 @@ namespace ICMS
                         }
                         else
                         {
-                            MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), "NO", true);
+                            //if (status < 0)
+                            //{
+                            //    //temporary for Trish
+                            //    //temporary for Trish
+                            //    //temporary for Trish
+                            //    //temporary for Trish
+                            //    //temporary for Trish
+                            //    //temporary for Trish
+                            //    //here
+                            //    decimal sqft = (length * width * pieces) / 144;
+
+                            //    MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), Math.Round(sqft, 0).ToString(), true);
+
+                            //}
+                            //else
+                            //{
+                                MergeCellAddBox(oSheet, "A" + firstDtlRow.ToString(), "A" + firstDtlRow.ToString(), "NO", true);
+                            //}
+                            
 
                         }
                         if (paper > 0)
                         {
-                            MergeCellAddBox(oSheet, "B" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), width.ToString("G29"), true);
+                            string paperName = width.ToString("G29");
+                            if (status < 0)
+                            {
+                                paperName = sqft.ToString("G29");
+                            }
+                            MergeCellAddBox(oSheet, "B" + firstDtlRow.ToString(), "B" + firstDtlRow.ToString(), paperName, true);
 
                         }
                         else
@@ -1685,14 +2317,34 @@ namespace ICMS
             {
                 oRng.Value = verbage;
             }
+            else
+            {
+                oRng.Value = null;
+            }
             
             
 
             
         }
 
-        public void MergeDataRow(_Worksheet oSheet, int row, bool isHeader = false, bool CTL = false)
+        public void MergeDataRow(_Worksheet oSheet, int row, bool isHeader = false, string processFunction = "")
         {
+
+
+            bool CTL = false;
+            bool CLCLSame = false;
+            if (processFunction == ProcessFunction.ClSkSame)
+            {
+                CTL = true;
+            }
+            else
+            {
+                if (processFunction == ProcessFunction.ClClSame)
+                {
+                    CLCLSame = true;
+                }
+            }
+
             string verbage = "";
             bool withBorder = true;
             if (isHeader)
@@ -1700,27 +2352,64 @@ namespace ICMS
                 withBorder = false;
             }
 
-            if (isHeader)            
-                verbage = "PVC";
-            MergeCellAddBox(oSheet, "A" + row.ToString(), "A" + row.ToString(), verbage, withBorder);
-            if (isHeader)
-                verbage = "PI";
-            MergeCellAddBox(oSheet, "B" + row.ToString(), "B" + row.ToString(), verbage, withBorder);
-            if (isHeader)
-                verbage = "Len(in)";
-            MergeCellAddBox(oSheet, "C" + row.ToString(), "C" + row.ToString(), verbage, withBorder);
-            if (isHeader)
-                verbage = "PCS";
-            MergeCellAddBox(oSheet, "D" + row.ToString() , "E" + row.ToString(), verbage, withBorder);
-            if (isHeader)
-                verbage = "ActPCS";
-            MergeCellAddBox(oSheet, "F" + row.ToString() , "G" + row.ToString(), verbage, withBorder);
-            if (isHeader)
-                verbage = "SkidID";
-            MergeCellAddBox(oSheet, "H" + row.ToString() , "I" + row.ToString(), verbage, withBorder);
-            if (isHeader)
-                verbage = "Weight";
-            MergeCellAddBox(oSheet, "J" + row.ToString() , "K" + row.ToString(), verbage, withBorder);
+           
+            if (CLCLSame)
+            {
+                if (isHeader)
+                {
+                    verbage = "New Tag ID";
+                }
+                MergeCellAddBox(oSheet, "A" + row.ToString(), "B" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "Alloy";
+                MergeCellAddBox(oSheet, "C" + row.ToString(), "C" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "OrigFin";
+                MergeCellAddBox(oSheet, "D" + row.ToString(), "E" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "NewFin";
+                MergeCellAddBox(oSheet, "F" + row.ToString(), "G" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "Target LBS";
+                MergeCellAddBox(oSheet, "H" + row.ToString(), "I" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "Lin Ft";
+                MergeCellAddBox(oSheet, "J" + row.ToString(), "K" + row.ToString(), verbage, withBorder);
+            }
+            else
+            {
+                if (isHeader)
+                {
+                    verbage = "PVC";
+                }
+                MergeCellAddBox(oSheet, "A" + row.ToString(), "A" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "PI";
+                MergeCellAddBox(oSheet, "B" + row.ToString(), "B" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "Len(in)";
+                MergeCellAddBox(oSheet, "C" + row.ToString(), "C" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "PCS";
+                MergeCellAddBox(oSheet, "D" + row.ToString(), "E" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "ActPCS";
+                MergeCellAddBox(oSheet, "F" + row.ToString(), "G" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "SkidID";
+                MergeCellAddBox(oSheet, "H" + row.ToString(), "I" + row.ToString(), verbage, withBorder);
+                if (isHeader)
+                    verbage = "Weight";
+                MergeCellAddBox(oSheet, "J" + row.ToString(), "K" + row.ToString(), verbage, withBorder);
+            }           
+                
+            
+            
+            
+            
+            
+            
+            
             if (CTL)
             {
                 if (isHeader)
@@ -1733,13 +2422,24 @@ namespace ICMS
             }
             else
             {
-                if (isHeader)
-                    verbage = "PrevFin";
-                MergeCellAddBox(oSheet, "L" + row.ToString(), "L" + row.ToString(), verbage, withBorder);
+                if (!CLCLSame)
+                {
+                    if (isHeader)
+                        verbage = "PrevFin";
+                    MergeCellAddBox(oSheet, "L" + row.ToString(), "L" + row.ToString(), verbage, withBorder);
 
-                if (isHeader)
-                    verbage = "NewFin";
-                MergeCellAddBox(oSheet, "M" + row.ToString(), "N" + row.ToString(), verbage, withBorder);
+                    if (isHeader)
+                        verbage = "NewFin";
+                    MergeCellAddBox(oSheet, "M" + row.ToString(), "N" + row.ToString(), verbage, withBorder);
+                }
+                else
+                {
+                    if (isHeader)
+                        verbage = "Actual LBS";
+                    MergeCellAddBox(oSheet, "L" + row.ToString(), "N" + row.ToString(), verbage, withBorder);
+
+                }
+
             }
             
            
@@ -1765,8 +2465,7 @@ namespace ICMS
             Excel.Application oXL;
             Excel._Workbook oWB;
             Excel._Worksheet oSheet;
-            Excel.Range oRng;
-
+            
             oXL = new Excel.Application();
 
 
@@ -1777,21 +2476,23 @@ namespace ICMS
             lblUpdate.Text = "Opening Database.";
             db.OpenSQLConn();
 
-            
+            DateTime dtNow = DateTime.Now;
             int row = 1;
             
             foreach (int custID in CustIDs)
             {
                 bool addCustRow = true;
 
-
+                
+                
                 if (coils)
                 {
                     using (DbDataReader reader = db.GetCoilInfo(0, "", custID))
                     {
+                        
                         if (reader.HasRows)
                         {
-                            
+                            int totCoilCnt = 0;
                             decimal weightTot = 0;
                             string custName = "";
                             while (reader.Read())
@@ -1802,7 +2503,7 @@ namespace ICMS
                                     
                                     custName = reader.GetString(reader.GetOrdinal("longCustomerName")).Trim();
                                     lblUpdate.Text = "Getting information for " + custName + ".";
-                                    string[] cName = { custName };
+                                    string[] cName = { custName + " - " + dtNow.ToString("d") };
                                     InvAddRow(row, oSheet, cName, "A");
                                     row++;
                                     
@@ -1818,6 +2519,7 @@ namespace ICMS
                                 string coilTag = tagID.ToString().Trim() + coilTagSuffix;
 
                                 int pieces = reader.GetInt32(reader.GetOrdinal("coilCount"));
+                                totCoilCnt += pieces;
 
                                 string alloyDesc = reader.GetString(reader.GetOrdinal("AlloyDesc")).Trim();
                                 string finishDesc = reader.GetString(reader.GetOrdinal("FinishDesc")).Trim();
@@ -1855,7 +2557,7 @@ namespace ICMS
 
                                 string vendor = reader.GetString(reader.GetOrdinal("vendor")).Trim();
 
-                                string poNum = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
+                                string poNum = reader.GetString(reader.GetOrdinal("dtlPO")).Trim();
 
                                 int recID = reader.GetInt32(reader.GetOrdinal("receiveID"));
 
@@ -1871,8 +2573,14 @@ namespace ICMS
 
                                 row++;
                             }
+
+                            object[] totals = { "Total Weight: " + weightTot.ToString("###,###,###").Trim(),"","", "Coil Count: " + totCoilCnt.ToString().Trim() };
+                            InvAddRow(row, oSheet, totals, "D");
+                            row += 2;
                         }
+
                         reader.Close();
+                        
                     }
                 }
                 if (skids)
@@ -1881,20 +2589,18 @@ namespace ICMS
                     {
                         if (reader.HasRows)
                         {
-                           
-                            
-                            decimal weightTot = 0;
-                            decimal skidweight = 0;
+                            int skidweight = 0;
                             string custName = "";
                             bool firstSkidRow = true;
-
+                            int totSkidWeight = 0;
+                            int totskidCnt = 0;
                             while (reader.Read())
                             {
                                 if (addCustRow)
                                 {
                                     custName = reader.GetString(reader.GetOrdinal("longCustomerName"));
                                     lblUpdate.Text = "Getting information for " + custName + ".";
-                                    string[] cName = { custName };
+                                    string[] cName = { custName + " - " + dtNow.ToString("d") };
                                     InvAddRow(row, oSheet, cName, "A");
                                     row++;
                                    
@@ -1941,22 +2647,17 @@ namespace ICMS
                                     pvc = "N";
                                 }
 
+
                                 decimal sheetWeight = reader.GetDecimal(reader.GetOrdinal("sheetWeight"));
 
-                                if (sheetWeight > 0)
-                                {
-                                    skidweight = sheetWeight * pieceCount;
-                                }
-                                else
-                                {
-                                    decimal density = reader.GetDecimal(reader.GetOrdinal("DensityFactor"));
-                                    MetalFormula mt = new MetalFormula();
-                                    skidweight = mt.MetFormula(density, thk, length, width, pieceCount, 0);
-                                }
+                                skidweight = Convert.ToInt32(reader.GetValue(reader.GetOrdinal("SkidWeight")));
+                                totSkidWeight += skidweight;
+                                totskidCnt++;
 
                                 decimal carbon = reader.GetDecimal(reader.GetOrdinal("carbon"));
 
                                 string heat = reader.GetString(reader.GetOrdinal("heat")).Trim();
+
                                 string mill = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
 
                                 string coo = reader.GetString(reader.GetOrdinal("countryOfOrigin")).Trim();
@@ -1975,36 +2676,66 @@ namespace ICMS
                                 }
                                 int orderID = reader.GetInt32(reader.GetOrdinal("orderID"));
 
+                                string customerPO = "";
+                                if (!reader.IsDBNull(reader.GetOrdinal("customerPO")))
+                                {
+                                    customerPO = reader.GetString(reader.GetOrdinal("customerPO")).Trim();
+                                }
+                                
+
+                                string dtSkidDate = "UNK";
+                                
+                                if (!reader.IsDBNull(reader.GetOrdinal("skidDate")))
+                                {
+                                    DateTime dtSkid = Convert.ToDateTime(reader.GetValue(reader.GetOrdinal("skidDate")));
+                                    dtSkidDate = dtSkid.ToString("d");
+                                        
+                                }
+                                
 
                                 string comments = reader.GetString(reader.GetOrdinal("comments")).Trim();
 
 
                                 object[] info = {coilTag, pieceCount, alloy,thk,width,
                                         length, pvc, paper,skidweight, carbon,
-                                        mill,heat,coo,location,vendor,prime,skidType, orderID,comments };
+                                        mill,heat,coo,location,vendor,prime,dtSkidDate, orderID + "-" + customerPO,comments, };
 
                                 InvAddRow(row, oSheet, info);
                                 row++;
 
                             }
+
+                            object[] totals = { "Total Weight: " + totSkidWeight.ToString("###,###,###").Trim(), "", "", "Skid Count: " + totskidCnt.ToString().Trim() };
+                            InvAddRow(row, oSheet, totals, "D");
+                            row += 2;
+                            
                         }
                     }
                 }
-                row ++;
+                
             }
 
             lblUpdate.Text = "Cleaning things up.";
-
-            //oSheet.PageSetup.Zoom = false;
+            oSheet.Columns["Q:R"].AutoFit();
+            
             oSheet.PageSetup.Orientation = Excel.XlPageOrientation.xlLandscape;
-            //oSheet.PageSetup.FitToPagesWide = 1;
-            oSheet.PageSetup.FitToPagesTall = 1;
-
-            //oRng = oSheet.get_Range("A1", "S1");
-            //oRng.EntireColumn.AutoFit();
-
+            oSheet.PageSetup.Zoom = false;
+            oSheet.PageSetup.FitToPagesTall = 430;
+            oSheet.PageSetup.FitToPagesWide = 1;
+            oSheet.PageSetup.PrintArea = "A:S";
+           
             db.CloseSQLConn();
             oXL.Visible = true;
+
+            //make sure the file path is there.  ReportDrive is usual "T:\"
+            string path = MachineDefaults.ReportDrive + @"Reports\Inventory\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            //save the file
+            oSheet.SaveAs(path + DateTime.Now.ToString("MMddyyyyHHmmss"));
             //set text back to whatever it was.
             lblUpdate.Text = updText;
         }
@@ -2015,7 +2746,7 @@ namespace ICMS
             if (skid)
             {
                 string[] skidheader = { "SkidID", "PCS", "Alloy", "Thk", "W", "Lng", "PVC", "PI",
-                "Weight", "C", "Mill#", "Heat", "C/O", "Loc", "Vnd", "NotPrime", "Skid", "WO#", "Comments" };
+                "Weight", "C", "Mill#", "Heat", "C/O", "Loc", "Vnd", "NotPrime", "Date", "WO#", "Comments" };
                 header = skidheader;
             }
             else
@@ -2045,7 +2776,7 @@ namespace ICMS
             Excel.Application oXL;
             Excel._Workbook oWB;
             Excel._Worksheet oSheet;
-           
+
 
             oXL = new Excel.Application();
 
@@ -2053,32 +2784,72 @@ namespace ICMS
             oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
             oSheet = (Excel._Worksheet)oWB.ActiveSheet;
 
-            object[,] arr = new object[lvwRunSheet.Items.Count +1, lvwRunSheet.Columns.Count + 1];
+            object[,] arr = new object[lvwRunSheet.Items.Count + 1, lvwRunSheet.Columns.Count + 1];
             oSheet.get_Range("A1", "B1").Merge();
-            oSheet.get_Range("A1","B1").Value2 = lvwRunSheet.Tag.ToString();
+            oSheet.get_Range("A1", "B1").Value2 = lvwRunSheet.Tag.ToString();
+
+            if (RSCoilCnt >= 0)
+            {
+                oSheet.get_Range("C1", "D1").Merge();
+                oSheet.get_Range("C1", "D1").Value2 = "Count: " + RSCoilCnt.ToString("###,###");
+            }
+            if (RStotWeight >= 0)
+            {
+                oSheet.get_Range("F1", "G1").Merge();
+                oSheet.get_Range("F1", "G1").Value2 = "LBS: " + RStotWeight.ToString("###,###,###");
+            }
+            if (RSPieceCnt >= 0)
+            {
+                oSheet.get_Range("I1", "J1").Merge();
+                oSheet.get_Range("I1", "J1").Value2 = "Pieces: " + RSPieceCnt.ToString("###,###");
+            }
             int topRow = 2;
 
             for (int i = 0;i< lvwRunSheet.Columns.Count;i++)
             {
                 arr[0, i] = lvwRunSheet.Columns[i].Text;
             }
+
+            int rowCnt = 0;
             for (int i = 0;i < lvwRunSheet.Items.Count;i++)
             {
                 ListViewItem lv  = lvwRunSheet.Items[i];
-
-                //arr[i, 0] = lv.Text;
-                for (int c = 0; c < lv.SubItems.Count; c++)
+                if (lv.ForeColor != Color.Red)
                 {
-                    arr[i +1, c ] = lv.SubItems[c].Text;
-                   
+                    for (int c = 0; c < lv.SubItems.Count; c++)
+                    {
+                        if (c == 0)
+                        {
+                            arr[rowCnt + 1, c] = rowCnt;
+                        }
+                        else
+                        {
+                            arr[rowCnt + 1, c] = lv.SubItems[c].Text;
+                        }
+                        
+
+                    }
+                    rowCnt++;
                 }
+                
+               
                 
                 
             }
 
             WriteArray(oSheet, topRow, 1, arr);
 
+            string path = MachineDefaults.ReportDrive + @"Reports\RunSheet\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            //save the file
+            oSheet.SaveAs(path + DateTime.Now.ToString("MMddyyyyHHmmss"));
+
             oXL.Visible = true;
+            //oXL.Quit();
             //set text back to whatever it was.
 
         }
@@ -2128,6 +2899,8 @@ namespace ICMS
             {
                 if (reader.HasRows)
                 {
+                    bool hasSkidHeader = false;
+                    bool hasCoilHeader = false;
                     Excel.Application oXL;
                     Excel._Workbook oWB;
                     Excel._Worksheet oSheet;
@@ -2141,27 +2914,33 @@ namespace ICMS
 
                     oSheet.get_Range("A1", "D1").Merge();
                     oSheet.Cells[1, 1] = "Report from TSA Processing: ";
-
+                    int materialType = 0;
                     while (reader.Read())
                     {
                         
-                            transferID = reader.GetInt32(reader.GetOrdinal("transferID"));
+                        transferID = reader.GetInt32(reader.GetOrdinal("transferID"));
 
                         
                         int tagid = reader.GetInt32(reader.GetOrdinal("transferCoilTagID"));
+                        coilTagID = tagid;
                         string suffix = reader.GetString(reader.GetOrdinal("transferCoilTagSuffix")).Trim();
+                        coilTagSuffix = suffix;
                         string skidLetter = reader.GetString(reader.GetOrdinal("transferLetter")).Trim();
+                        letter = skidLetter;
 
                         string origCust = reader.GetString(reader.GetOrdinal("origCust")).Trim();
                         string newCust = reader.GetString(reader.GetOrdinal("newCust")).Trim();
                         string PO = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
                         DateTime dtTrans = reader.GetDateTime(reader.GetOrdinal("transferDate"));
+                        materialType = reader.GetInt32(reader.GetOrdinal("materialType"));
+                        if (!hasCoilHeader && !hasSkidHeader)
+                        {
+                            oSheet.Cells[rowCnt, 1] = "Transfer ID:";
 
 
-                        oSheet.Cells[rowCnt, 1] = "Transfer ID:";
-
-
-                        oSheet.Cells[rowCnt, 2] = transferID;
+                            oSheet.Cells[rowCnt, 2] = transferID;
+                        }
+                       
                         string fullTag = tagid.ToString() + suffix;
                         if (skidLetter.Length > 0)
                         {
@@ -2173,10 +2952,197 @@ namespace ICMS
                                                     + " on " + dtTrans.ToString("d")
                                                     + " -Purchase Order: " + PO;
 
+                        
 
                         rowCnt++;
+
+                        
+                    
+                        if (materialType == 1)
+                        {
+                            using (DbDataReader reader1 = db.GetSkidInfo("-1", coilTagID, coilTagSuffix, letter, true))
+                            {
+                                if (reader1.HasRows)
+                                {
+                                    if (!hasSkidHeader)
+                                    {
+                                        object[] info1 = {"Tag", "PCS", "Alloy","THK","Wdth",
+                                            "LNG", "PVC", "PAP","LBS", "Carbon",
+                                            "Mill","Heat","COO","LOC","VND","PRIME","Date", "Order","Comments", };
+
+                                        InvAddRow(rowCnt, oSheet, info1, "R");
+                                        rowCnt++;
+                                        hasSkidHeader = true;
+                                    }
+                                    
+                                    while (reader1.Read())
+                                    {
+
+
+                                        tagID = reader1.GetInt32(reader1.GetOrdinal("coilTagID")).ToString();
+                                        coilTagSuffix = reader1.GetString(reader1.GetOrdinal("coilTagSuffix")).Trim();
+
+                                        skidLetter = reader1.GetString(reader1.GetOrdinal("letter"));
+                                        string coilTag = tagID.ToString().Trim() + coilTagSuffix + "." + skidLetter;
+
+                                        int pieceCount = reader1.GetInt32(reader1.GetOrdinal("pieceCount"));
+
+                                        string alloyDesc = reader1.GetString(reader1.GetOrdinal("AlloyDesc")).Trim();
+                                        string finishDesc = reader1.GetString(reader1.GetOrdinal("FinishDesc")).Trim();
+                                        string alloy = alloyDesc + " " + finishDesc;
+
+                                        decimal thk = reader1.GetDecimal(reader1.GetOrdinal("thickness"));
+                                        decimal width = reader1.GetDecimal(reader1.GetOrdinal("width"));
+                                        decimal length = reader1.GetDecimal(reader1.GetOrdinal("length"));
+
+                                        int intPaper = reader1.GetInt32(reader1.GetOrdinal("paper"));
+
+                                        string paper = "Y";
+                                        if (intPaper == 0)
+                                        {
+                                            paper = "N";
+                                        }
+                                        int intPvc = reader1.GetInt32(reader1.GetOrdinal("pvcID"));
+
+                                        string pvc = "Y";
+                                        if (intPvc == 0)
+                                        {
+                                            pvc = "N";
+                                        }
+
+
+                                        decimal sheetWeight = reader1.GetDecimal(reader1.GetOrdinal("sheetWeight"));
+
+                                        int skidweight = Convert.ToInt32(reader1.GetValue(reader1.GetOrdinal("SkidWeight")));
+
+
+                                        decimal carbon = reader1.GetDecimal(reader1.GetOrdinal("carbon"));
+
+                                        string heat = reader1.GetString(reader1.GetOrdinal("heat")).Trim();
+
+                                        string mill = reader1.GetString(reader1.GetOrdinal("millCoilNum")).Trim();
+
+                                        string coo = reader1.GetString(reader1.GetOrdinal("countryOfOrigin")).Trim();
+
+                                        string location = reader1.GetString(reader1.GetOrdinal("location"));
+
+                                        string vendor = reader1.GetString(reader1.GetOrdinal("vendor"));
+
+                                        string skidType = reader1.GetString(reader1.GetOrdinal("skidDescription"));
+
+                                        int notPrime = reader1.GetInt32(reader1.GetOrdinal("notPrime"));
+                                        string prime = "";
+                                        if (notPrime > 0)
+                                        {
+                                            prime = "Not Prime";
+                                        }
+                                        int orderID = reader1.GetInt32(reader1.GetOrdinal("orderID"));
+                                        string dtSkidDate = "UNK";
+
+                                        if (!reader1.IsDBNull(reader1.GetOrdinal("skidDate")))
+                                        {
+                                            DateTime dtSkid = Convert.ToDateTime(reader1.GetValue(reader1.GetOrdinal("skidDate")));
+                                            dtSkidDate = dtSkid.ToString("d");
+
+                                        }
+
+
+                                        string comments = reader1.GetString(reader1.GetOrdinal("comments")).Trim();
+
+
+                                        object[] info = {coilTag, pieceCount, alloy,thk,width,
+                                            length, pvc, paper,skidweight, carbon,
+                                            mill,heat,coo,location,vendor,prime,dtSkidDate, orderID,comments, };
+
+                                        InvAddRow(rowCnt, oSheet, info, "R");
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (DbDataReader reader1 = db.GetCoilInfo(coilTagID, coilTagSuffix,0,null,true))
+                            {
+                                if (reader1.HasRows)
+                                {
+                                    if (!hasCoilHeader)
+                                    {
+                                        object[] info1 = {"TAG", "Count", "Alloy","THK","Width",
+                                            "Length", "PVC", "Paper","LBS", "Carbon",
+                                            "Mill#","Heat","COO","Loc","VND","PO","Rec#", "RecDate" };
+
+                                        InvAddRow(rowCnt, oSheet, info1, "R");
+                                        rowCnt++;
+                                        hasCoilHeader = true;
+                                    }
+                                    
+
+                                    while (reader1.Read())
+                                    {
+                                        tagID = reader1.GetInt32(reader1.GetOrdinal("coilTagID")).ToString() ;
+                                        coilTagSuffix = reader1.GetString(reader1.GetOrdinal("coilTagSuffix")).Trim();
+                                        string coilTag = tagID.ToString().Trim() + coilTagSuffix;
+
+                                        int pieces = reader1.GetInt32(reader1.GetOrdinal("coilCount"));
+                                   
+
+                                        string alloyDesc = reader1.GetString(reader1.GetOrdinal("AlloyDesc")).Trim();
+                                        string finishDesc = reader1.GetString(reader1.GetOrdinal("FinishDesc")).Trim();
+                                        string alloy = alloyDesc + " " + finishDesc;
+
+                                        decimal thk = reader1.GetDecimal(reader1.GetOrdinal("thickness"));
+                                        decimal width = reader1.GetDecimal(reader1.GetOrdinal("width"));
+                                        decimal length = reader1.GetDecimal(reader1.GetOrdinal("length"));
+
+                                        int intPaper = reader1.GetInt32(reader1.GetOrdinal("paper"));
+
+                                        string paper = "Y";
+                                        if (intPaper == 0)
+                                        {
+                                            paper = "N";
+                                        }
+                                        int intPvc = reader1.GetInt32(reader1.GetOrdinal("pvc"));
+
+                                        string pvc = "Y";
+                                        if (intPvc == 0)
+                                        {
+                                            pvc = "N";
+                                        }
+
+                                        decimal weight = reader1.GetDecimal(reader1.GetOrdinal("weight"));
+                                    
+                                        decimal carbon = reader1.GetDecimal(reader1.GetOrdinal("carbon"));
+
+                                        string heat = reader1.GetString(reader1.GetOrdinal("heat")).Trim();
+                                        string mill = reader1.GetString(reader1.GetOrdinal("millCoilNum")).Trim();
+
+                                        string coo = reader1.GetString(reader1.GetOrdinal("countryOfOrigin")).Trim();
+
+                                        string location = reader1.GetString(reader1.GetOrdinal("location")).Trim();
+
+                                        string vendor = reader1.GetString(reader1.GetOrdinal("vendor")).Trim();
+
+                                        string poNum = reader1.GetString(reader1.GetOrdinal("dtlPO")).Trim();
+
+                                        int recID = reader1.GetInt32(reader1.GetOrdinal("receiveID"));
+
+                                        DateTime recDate = reader1.GetDateTime(reader1.GetOrdinal("receiveDate"));
+
+
+                                        object[] info = {coilTag, pieces, alloy,thk,width,
+                                            length, pvc, paper,weight, carbon,
+                                            mill,heat,coo,location,vendor,poNum,recID, recDate.ToString("d") };
+
+                                        InvAddRow(rowCnt, oSheet, info, "R");
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                    reader.Close();
                     oXL.Visible = true;
+                    
                 }
                 else
                 {

@@ -22,6 +22,8 @@ namespace ICMS
         public ListViewItem lvSkidItem { get; set; }
 
         public bool changesMade { get; set; }
+
+        private bool loading = true;
         public SkidUpdate()
         {
             InitializeComponent();
@@ -43,6 +45,7 @@ namespace ICMS
                 {
                     while (reader.Read())
                     {
+                        tbSkidUpdateSkidWeight.Text = reader.GetValue(reader.GetOrdinal("skidWeight")).ToString().Trim();
                         tbSkidUpdateLocation.Text = reader.GetString(reader.GetOrdinal("location")).Trim();
                         tbSkidUpdateSheetWeight.Text = reader.GetDecimal(reader.GetOrdinal("sheetWeight")).ToString("G29").Trim();
                         tbSkidUpdateLength.Text = reader.GetDecimal(reader.GetOrdinal("length")).ToString("G29").Trim();
@@ -55,6 +58,16 @@ namespace ICMS
                         tbSkidUpdateComments.Text = reader.GetString(reader.GetOrdinal("comments")).Trim();
                         tbSkidUpdateSkidPrice.Text = reader.GetDecimal(reader.GetOrdinal("skidPrice")).ToString("G29").Trim();
                         tbSkidUpdatePieceCount.Text = reader.GetInt32(reader.GetOrdinal("pieceCount")).ToString().Trim();
+                        tbSkidUpdateThk.Text = reader.GetDecimal(reader.GetOrdinal("thickness")).ToString("G29").Trim();
+                        tbSkidUpdateThk.Tag = tbSkidUpdateThk.Text;
+
+                        tbSkidUpdateHeat.Text = reader.GetString(reader.GetOrdinal("heat")).Trim();
+                        tbSkidUpdateHeat.Tag = tbSkidUpdateHeat.Text;
+
+                        tbSkidUpdateMillNum.Text = reader.GetString(reader.GetOrdinal("millCoilNum")).Trim();
+                        tbSkidUpdateMillNum.Tag = tbSkidUpdateMillNum.Text;
+
+
                         int notprime = reader.GetInt32(reader.GetOrdinal("notPrime"));
                         custid = reader.GetInt32(reader.GetOrdinal("customerID"));
                         branchID = reader.GetInt32(reader.GetOrdinal("branchID"));
@@ -156,7 +169,7 @@ namespace ICMS
             
 
             db.CloseSQLConn();
-
+            loading = false;
 
         }
 
@@ -371,6 +384,14 @@ namespace ICMS
 
             int cnt = db.UpdateSkidInfo(sdInfo);
 
+            if (!tbSkidUpdateThk.Text.Equals(tbSkidUpdateThk.Tag.ToString().Trim()) ||
+                !tbSkidUpdateHeat.Text.Equals(tbSkidUpdateHeat.Tag.ToString().Trim()) ||
+                !tbSkidUpdateMillNum.Text.Equals(tbSkidUpdateMillNum.Tag.ToString().Trim()))
+            {
+                decimal thk = Convert.ToDecimal(tbSkidUpdateThk.Text);
+                db.updateCoilThickness(sdInfo.skidID, sdInfo.coilTagSuffix, thk, tbSkidUpdateMillNum.Text.Trim(),tbSkidUpdateHeat.Text.Trim());
+            }
+
             db.CloseSQLConn();
 
             changesMade = true; 
@@ -510,6 +531,41 @@ namespace ICMS
         }
 
         private void tbSkidUpdateSkidPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            // only allow one decimal point
+            if (e.KeyChar == '.' && (sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbSkidUpdateSkidWeight_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tbSkidUpdateSkidWeight_TextChanged(object sender, EventArgs e)
+        {
+            if (!loading)
+            {
+                if (tbSkidUpdateSkidWeight.Text.Length > 0 && tbSkidUpdatePieceCount.Text.Length > 0)
+                {
+                    tbSkidUpdateSheetWeight.Text = (Convert.ToDecimal(tbSkidUpdateSkidWeight.Text) / Convert.ToDecimal(tbSkidUpdatePieceCount.Text)).ToString();
+                }
+            }
+            
+            
+        }
+
+        private void tbSkidUpdateThk_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
             {

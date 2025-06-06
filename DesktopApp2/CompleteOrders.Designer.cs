@@ -98,6 +98,8 @@
             this.dgvCOScrapRejectReason = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvCOScrapCoilTagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvCOScrapCoilTagSuffix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOTotalLength = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOScrapLbsPerInch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCTLInfo = new System.Windows.Forms.Panel();
             this.panelCOShShSame = new System.Windows.Forms.Panel();
             this.lvwSSSmTimes = new System.Windows.Forms.ListView();
@@ -111,7 +113,6 @@
             this.dtSSSmEndDate = new System.Windows.Forms.DateTimePicker();
             this.dtSSSmStartTime = new System.Windows.Forms.DateTimePicker();
             this.dtSSSmStartDate = new System.Windows.Forms.DateTimePicker();
-            this.btnCOShShSameCompleteOrder = new System.Windows.Forms.Button();
             this.dataGridViewCOShShSame = new System.Windows.Forms.DataGridView();
             this.dgvSSSmBreakSkid = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgvSSSmSkidID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -128,6 +129,7 @@
             this.dgvSSSmLineMark = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgvSSSmComments = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvSSSmBranch = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgvSSSmSkidPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvSSSmBranchID = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgvSSSmAlloyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvSSSmFinishID = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -146,6 +148,7 @@
             this.textBoxSSSmPrice = new System.Windows.Forms.TextBox();
             this.richTextBoxSSSmComments = new System.Windows.Forms.RichTextBox();
             this.btShShSmCancel = new System.Windows.Forms.Button();
+            this.btnCOShShSameCompleteOrder = new System.Windows.Forms.Button();
             this.panelCOShShDiff = new System.Windows.Forms.Panel();
             this.panelCOClClSame = new System.Windows.Forms.Panel();
             this.buttonClClSame_Commit = new System.Windows.Forms.Button();
@@ -180,7 +183,17 @@
             this.colClClSameConvertIntoLbs = new System.Windows.Forms.DataGridViewButtonColumn();
             this.colClClSameOrigTagSuffix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colClClSameNewTagSuffix = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colClClSameOriginalTag = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelCOClClDiff = new System.Windows.Forms.Panel();
+            this.dgvClClDfCloseOrder = new System.Windows.Forms.DataGridView();
+            this.dgvCOClClDfTagID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOClClDfThickness = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOClClDfAlloy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOClClDfWidth = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOClClDfOrigLBS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOClClDfNewLBS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvCOClClDfPaper = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnClClDiffCancel = new System.Windows.Forms.Button();
             this.lblOrderID = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCOOrderEntry)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCOCoilScrap)).BeginInit();
@@ -189,6 +202,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCOShShSame)).BeginInit();
             this.panelCOClClSame.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCOCLCLSame)).BeginInit();
+            this.panelCOClClDiff.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClClDfCloseOrder)).BeginInit();
             this.SuspendLayout();
             // 
             // listViewCOOpenOrders
@@ -203,10 +218,10 @@
             this.COCustPO,
             this.COPromiseDate});
             this.listViewCOOpenOrders.HideSelection = false;
-            this.listViewCOOpenOrders.Location = new System.Drawing.Point(12, 76);
+            this.listViewCOOpenOrders.Location = new System.Drawing.Point(0, 14);
             this.listViewCOOpenOrders.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewCOOpenOrders.Name = "listViewCOOpenOrders";
-            this.listViewCOOpenOrders.Size = new System.Drawing.Size(1419, 738);
+            this.listViewCOOpenOrders.Size = new System.Drawing.Size(1743, 749);
             this.listViewCOOpenOrders.TabIndex = 0;
             this.listViewCOOpenOrders.UseCompatibleStateImageBehavior = false;
             this.listViewCOOpenOrders.View = System.Windows.Forms.View.Details;
@@ -297,7 +312,7 @@
             this.dataGridViewCOOrderEntry.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewCOOrderEntry.Name = "dataGridViewCOOrderEntry";
             this.dataGridViewCOOrderEntry.RowHeadersWidth = 51;
-            this.dataGridViewCOOrderEntry.Size = new System.Drawing.Size(1419, 555);
+            this.dataGridViewCOOrderEntry.Size = new System.Drawing.Size(1528, 568);
             this.dataGridViewCOOrderEntry.TabIndex = 3;
             this.dataGridViewCOOrderEntry.Visible = false;
             this.dataGridViewCOOrderEntry.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewCOOrderEntry_CellClick);
@@ -565,7 +580,7 @@
             // buttonCOCompleteOrder
             // 
             this.buttonCOCompleteOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCOCompleteOrder.Location = new System.Drawing.Point(1238, 582);
+            this.buttonCOCompleteOrder.Location = new System.Drawing.Point(1329, 614);
             this.buttonCOCompleteOrder.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCOCompleteOrder.Name = "buttonCOCompleteOrder";
             this.buttonCOCompleteOrder.Size = new System.Drawing.Size(175, 28);
@@ -587,7 +602,7 @@
             // labelCOCustomerPO
             // 
             this.labelCOCustomerPO.AutoSize = true;
-            this.labelCOCustomerPO.Location = new System.Drawing.Point(1074, 17);
+            this.labelCOCustomerPO.Location = new System.Drawing.Point(1075, 17);
             this.labelCOCustomerPO.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelCOCustomerPO.Name = "labelCOCustomerPO";
             this.labelCOCustomerPO.Size = new System.Drawing.Size(86, 16);
@@ -608,9 +623,10 @@
             // buttonCOAddRow
             // 
             this.buttonCOAddRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCOAddRow.Location = new System.Drawing.Point(949, 37);
+            this.buttonCOAddRow.Location = new System.Drawing.Point(1009, 30);
+            this.buttonCOAddRow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCOAddRow.Name = "buttonCOAddRow";
-            this.buttonCOAddRow.Size = new System.Drawing.Size(102, 32);
+            this.buttonCOAddRow.Size = new System.Drawing.Size(101, 32);
             this.buttonCOAddRow.TabIndex = 10;
             this.buttonCOAddRow.Text = "Add Row";
             this.buttonCOAddRow.UseVisualStyleBackColor = true;
@@ -620,9 +636,10 @@
             // buttonCORemoveRow
             // 
             this.buttonCORemoveRow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCORemoveRow.Location = new System.Drawing.Point(1068, 37);
+            this.buttonCORemoveRow.Location = new System.Drawing.Point(1105, 30);
+            this.buttonCORemoveRow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCORemoveRow.Name = "buttonCORemoveRow";
-            this.buttonCORemoveRow.Size = new System.Drawing.Size(102, 32);
+            this.buttonCORemoveRow.Size = new System.Drawing.Size(101, 32);
             this.buttonCORemoveRow.TabIndex = 11;
             this.buttonCORemoveRow.Text = "Remove Row";
             this.buttonCORemoveRow.UseVisualStyleBackColor = true;
@@ -632,7 +649,7 @@
             // buttonCOCancel
             // 
             this.buttonCOCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCOCancel.Location = new System.Drawing.Point(1238, 621);
+            this.buttonCOCancel.Location = new System.Drawing.Point(1329, 654);
             this.buttonCOCancel.Margin = new System.Windows.Forms.Padding(4);
             this.buttonCOCancel.Name = "buttonCOCancel";
             this.buttonCOCancel.Size = new System.Drawing.Size(175, 28);
@@ -658,7 +675,8 @@
             this.COStartTime,
             this.COEndTime});
             this.listViewCOTimeRecords.HideSelection = false;
-            this.listViewCOTimeRecords.Location = new System.Drawing.Point(23, 561);
+            this.listViewCOTimeRecords.Location = new System.Drawing.Point(21, 574);
+            this.listViewCOTimeRecords.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewCOTimeRecords.Name = "listViewCOTimeRecords";
             this.listViewCOTimeRecords.Size = new System.Drawing.Size(345, 147);
             this.listViewCOTimeRecords.TabIndex = 14;
@@ -679,7 +697,8 @@
             // 
             this.dateTimePickerCOStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerCOStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerCOStartDate.Location = new System.Drawing.Point(427, 593);
+            this.dateTimePickerCOStartDate.Location = new System.Drawing.Point(425, 606);
+            this.dateTimePickerCOStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerCOStartDate.Name = "dateTimePickerCOStartDate";
             this.dateTimePickerCOStartDate.Size = new System.Drawing.Size(112, 22);
             this.dateTimePickerCOStartDate.TabIndex = 15;
@@ -688,25 +707,30 @@
             // 
             this.dateTimePickerCOStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerCOStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerCOStartTime.Location = new System.Drawing.Point(545, 593);
+            this.dateTimePickerCOStartTime.Location = new System.Drawing.Point(543, 606);
+            this.dateTimePickerCOStartTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerCOStartTime.Name = "dateTimePickerCOStartTime";
-            this.dateTimePickerCOStartTime.Size = new System.Drawing.Size(118, 22);
+            this.dateTimePickerCOStartTime.ShowUpDown = true;
+            this.dateTimePickerCOStartTime.Size = new System.Drawing.Size(119, 22);
             this.dateTimePickerCOStartTime.TabIndex = 16;
             // 
             // dateTimePickerCOEndTime
             // 
             this.dateTimePickerCOEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerCOEndTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerCOEndTime.Location = new System.Drawing.Point(544, 621);
+            this.dateTimePickerCOEndTime.Location = new System.Drawing.Point(542, 635);
+            this.dateTimePickerCOEndTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerCOEndTime.Name = "dateTimePickerCOEndTime";
-            this.dateTimePickerCOEndTime.Size = new System.Drawing.Size(118, 22);
+            this.dateTimePickerCOEndTime.ShowUpDown = true;
+            this.dateTimePickerCOEndTime.Size = new System.Drawing.Size(119, 22);
             this.dateTimePickerCOEndTime.TabIndex = 18;
             // 
             // dateTimePickerCOEndDate
             // 
             this.dateTimePickerCOEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerCOEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerCOEndDate.Location = new System.Drawing.Point(427, 621);
+            this.dateTimePickerCOEndDate.Location = new System.Drawing.Point(425, 635);
+            this.dateTimePickerCOEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerCOEndDate.Name = "dateTimePickerCOEndDate";
             this.dateTimePickerCOEndDate.Size = new System.Drawing.Size(112, 22);
             this.dateTimePickerCOEndDate.TabIndex = 17;
@@ -715,7 +739,7 @@
             // 
             this.labelCOStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelCOStartTime.AutoSize = true;
-            this.labelCOStartTime.Location = new System.Drawing.Point(383, 593);
+            this.labelCOStartTime.Location = new System.Drawing.Point(381, 606);
             this.labelCOStartTime.Name = "labelCOStartTime";
             this.labelCOStartTime.Size = new System.Drawing.Size(34, 16);
             this.labelCOStartTime.TabIndex = 19;
@@ -725,7 +749,7 @@
             // 
             this.labelCOEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelCOEndTime.AutoSize = true;
-            this.labelCOEndTime.Location = new System.Drawing.Point(388, 621);
+            this.labelCOEndTime.Location = new System.Drawing.Point(386, 635);
             this.labelCOEndTime.Name = "labelCOEndTime";
             this.labelCOEndTime.Size = new System.Drawing.Size(31, 16);
             this.labelCOEndTime.TabIndex = 20;
@@ -734,7 +758,8 @@
             // buttonCORecordTime
             // 
             this.buttonCORecordTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCORecordTime.Location = new System.Drawing.Point(391, 652);
+            this.buttonCORecordTime.Location = new System.Drawing.Point(389, 665);
+            this.buttonCORecordTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCORecordTime.Name = "buttonCORecordTime";
             this.buttonCORecordTime.Size = new System.Drawing.Size(123, 33);
             this.buttonCORecordTime.TabIndex = 21;
@@ -745,7 +770,8 @@
             // buttonCORemoveTime
             // 
             this.buttonCORemoveTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonCORemoveTime.Location = new System.Drawing.Point(539, 652);
+            this.buttonCORemoveTime.Location = new System.Drawing.Point(537, 665);
+            this.buttonCORemoveTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCORemoveTime.Name = "buttonCORemoveTime";
             this.buttonCORemoveTime.Size = new System.Drawing.Size(123, 33);
             this.buttonCORemoveTime.TabIndex = 22;
@@ -768,14 +794,17 @@
             this.dgvCOScrapRejectCoil,
             this.dgvCOScrapRejectReason,
             this.dgvCOScrapCoilTagID,
-            this.dgvCOScrapCoilTagSuffix});
+            this.dgvCOScrapCoilTagSuffix,
+            this.dgvCOTotalLength,
+            this.dgvCOScrapLbsPerInch});
             this.dgvCOCoilScrap.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dgvCOCoilScrap.Location = new System.Drawing.Point(695, 561);
+            this.dgvCOCoilScrap.Location = new System.Drawing.Point(693, 574);
+            this.dgvCOCoilScrap.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvCOCoilScrap.MultiSelect = false;
             this.dgvCOCoilScrap.Name = "dgvCOCoilScrap";
             this.dgvCOCoilScrap.RowHeadersWidth = 51;
             this.dgvCOCoilScrap.RowTemplate.Height = 24;
-            this.dgvCOCoilScrap.Size = new System.Drawing.Size(536, 147);
+            this.dgvCOCoilScrap.Size = new System.Drawing.Size(607, 146);
             this.dgvCOCoilScrap.TabIndex = 23;
             this.dgvCOCoilScrap.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCOCoilScrap_CellEndEdit);
             this.dgvCOCoilScrap.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.DgvCOCoilScrap_EditingControlShowing);
@@ -849,11 +878,27 @@
             this.dgvCOScrapCoilTagSuffix.Visible = false;
             this.dgvCOScrapCoilTagSuffix.Width = 125;
             // 
+            // dgvCOTotalLength
+            // 
+            this.dgvCOTotalLength.HeaderText = "ScrapLength";
+            this.dgvCOTotalLength.MinimumWidth = 6;
+            this.dgvCOTotalLength.Name = "dgvCOTotalLength";
+            this.dgvCOTotalLength.Width = 125;
+            // 
+            // dgvCOScrapLbsPerInch
+            // 
+            this.dgvCOScrapLbsPerInch.HeaderText = "LbsPerInch";
+            this.dgvCOScrapLbsPerInch.MinimumWidth = 6;
+            this.dgvCOScrapLbsPerInch.Name = "dgvCOScrapLbsPerInch";
+            this.dgvCOScrapLbsPerInch.Visible = false;
+            this.dgvCOScrapLbsPerInch.Width = 125;
+            // 
             // panelCTLInfo
             // 
             this.panelCTLInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelCTLInfo.Controls.Add(this.listViewCOOpenOrders);
             this.panelCTLInfo.Controls.Add(this.dataGridViewCOOrderEntry);
             this.panelCTLInfo.Controls.Add(this.listViewCOTimeRecords);
             this.panelCTLInfo.Controls.Add(this.dgvCOCoilScrap);
@@ -867,9 +912,10 @@
             this.panelCTLInfo.Controls.Add(this.dateTimePickerCOStartDate);
             this.panelCTLInfo.Controls.Add(this.buttonCOCancel);
             this.panelCTLInfo.Controls.Add(this.buttonCOCompleteOrder);
-            this.panelCTLInfo.Location = new System.Drawing.Point(7, 77);
+            this.panelCTLInfo.Location = new System.Drawing.Point(7, 78);
+            this.panelCTLInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelCTLInfo.Name = "panelCTLInfo";
-            this.panelCTLInfo.Size = new System.Drawing.Size(1423, 727);
+            this.panelCTLInfo.Size = new System.Drawing.Size(1741, 949);
             this.panelCTLInfo.TabIndex = 24;
             // 
             // panelCOShShSame
@@ -886,7 +932,6 @@
             this.panelCOShShSame.Controls.Add(this.dtSSSmEndDate);
             this.panelCOShShSame.Controls.Add(this.dtSSSmStartTime);
             this.panelCOShShSame.Controls.Add(this.dtSSSmStartDate);
-            this.panelCOShShSame.Controls.Add(this.btnCOShShSameCompleteOrder);
             this.panelCOShShSame.Controls.Add(this.dataGridViewCOShShSame);
             this.panelCOShShSame.Controls.Add(this.labelSSSmPrice);
             this.panelCOShShSame.Controls.Add(this.labelSSSmPO);
@@ -894,9 +939,11 @@
             this.panelCOShShSame.Controls.Add(this.textBoxSSSmPrice);
             this.panelCOShShSame.Controls.Add(this.richTextBoxSSSmComments);
             this.panelCOShShSame.Controls.Add(this.btShShSmCancel);
-            this.panelCOShShSame.Location = new System.Drawing.Point(7, 77);
+            this.panelCOShShSame.Controls.Add(this.btnCOShShSameCompleteOrder);
+            this.panelCOShShSame.Location = new System.Drawing.Point(7, 78);
+            this.panelCOShShSame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelCOShShSame.Name = "panelCOShShSame";
-            this.panelCOShShSame.Size = new System.Drawing.Size(1423, 727);
+            this.panelCOShShSame.Size = new System.Drawing.Size(1744, 953);
             this.panelCOShShSame.TabIndex = 25;
             // 
             // lvwSSSmTimes
@@ -906,7 +953,8 @@
             this.columnHeader3,
             this.columnHeader4});
             this.lvwSSSmTimes.HideSelection = false;
-            this.lvwSSSmTimes.Location = new System.Drawing.Point(13, 562);
+            this.lvwSSSmTimes.Location = new System.Drawing.Point(13, 602);
+            this.lvwSSSmTimes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvwSSSmTimes.Name = "lvwSSSmTimes";
             this.lvwSSSmTimes.Size = new System.Drawing.Size(520, 147);
             this.lvwSSSmTimes.TabIndex = 82;
@@ -926,7 +974,8 @@
             // btSSSmRemoveTime
             // 
             this.btSSSmRemoveTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btSSSmRemoveTime.Location = new System.Drawing.Point(766, 653);
+            this.btSSSmRemoveTime.Location = new System.Drawing.Point(765, 693);
+            this.btSSSmRemoveTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btSSSmRemoveTime.Name = "btSSSmRemoveTime";
             this.btSSSmRemoveTime.Size = new System.Drawing.Size(123, 33);
             this.btSSSmRemoveTime.TabIndex = 90;
@@ -936,7 +985,8 @@
             // btSSSmRecordTime
             // 
             this.btSSSmRecordTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btSSSmRecordTime.Location = new System.Drawing.Point(618, 653);
+            this.btSSSmRecordTime.Location = new System.Drawing.Point(619, 693);
+            this.btSSSmRecordTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btSSSmRecordTime.Name = "btSSSmRecordTime";
             this.btSSSmRecordTime.Size = new System.Drawing.Size(123, 33);
             this.btSSSmRecordTime.TabIndex = 89;
@@ -948,7 +998,7 @@
             // 
             this.lblSSSmEnd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSSSmEnd.AutoSize = true;
-            this.lblSSSmEnd.Location = new System.Drawing.Point(615, 622);
+            this.lblSSSmEnd.Location = new System.Drawing.Point(615, 661);
             this.lblSSSmEnd.Name = "lblSSSmEnd";
             this.lblSSSmEnd.Size = new System.Drawing.Size(31, 16);
             this.lblSSSmEnd.TabIndex = 88;
@@ -958,7 +1008,7 @@
             // 
             this.lblSSSmStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSSSmStart.AutoSize = true;
-            this.lblSSSmStart.Location = new System.Drawing.Point(610, 594);
+            this.lblSSSmStart.Location = new System.Drawing.Point(611, 634);
             this.lblSSSmStart.Name = "lblSSSmStart";
             this.lblSSSmStart.Size = new System.Drawing.Size(34, 16);
             this.lblSSSmStart.TabIndex = 87;
@@ -968,16 +1018,19 @@
             // 
             this.dtSSSmEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtSSSmEndTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtSSSmEndTime.Location = new System.Drawing.Point(771, 622);
+            this.dtSSSmEndTime.Location = new System.Drawing.Point(771, 661);
+            this.dtSSSmEndTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtSSSmEndTime.Name = "dtSSSmEndTime";
-            this.dtSSSmEndTime.Size = new System.Drawing.Size(118, 22);
+            this.dtSSSmEndTime.ShowUpDown = true;
+            this.dtSSSmEndTime.Size = new System.Drawing.Size(119, 22);
             this.dtSSSmEndTime.TabIndex = 86;
             // 
             // dtSSSmEndDate
             // 
             this.dtSSSmEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtSSSmEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtSSSmEndDate.Location = new System.Drawing.Point(654, 622);
+            this.dtSSSmEndDate.Location = new System.Drawing.Point(653, 661);
+            this.dtSSSmEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtSSSmEndDate.Name = "dtSSSmEndDate";
             this.dtSSSmEndDate.Size = new System.Drawing.Size(112, 22);
             this.dtSSSmEndDate.TabIndex = 85;
@@ -986,30 +1039,22 @@
             // 
             this.dtSSSmStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtSSSmStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtSSSmStartTime.Location = new System.Drawing.Point(772, 594);
+            this.dtSSSmStartTime.Location = new System.Drawing.Point(772, 634);
+            this.dtSSSmStartTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtSSSmStartTime.Name = "dtSSSmStartTime";
-            this.dtSSSmStartTime.Size = new System.Drawing.Size(118, 22);
+            this.dtSSSmStartTime.ShowUpDown = true;
+            this.dtSSSmStartTime.Size = new System.Drawing.Size(119, 22);
             this.dtSSSmStartTime.TabIndex = 84;
             // 
             // dtSSSmStartDate
             // 
             this.dtSSSmStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dtSSSmStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtSSSmStartDate.Location = new System.Drawing.Point(654, 594);
+            this.dtSSSmStartDate.Location = new System.Drawing.Point(653, 634);
+            this.dtSSSmStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtSSSmStartDate.Name = "dtSSSmStartDate";
             this.dtSSSmStartDate.Size = new System.Drawing.Size(112, 22);
             this.dtSSSmStartDate.TabIndex = 83;
-            // 
-            // btnCOShShSameCompleteOrder
-            // 
-            this.btnCOShShSameCompleteOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCOShShSameCompleteOrder.Location = new System.Drawing.Point(1253, 652);
-            this.btnCOShShSameCompleteOrder.Name = "btnCOShShSameCompleteOrder";
-            this.btnCOShShSameCompleteOrder.Size = new System.Drawing.Size(115, 43);
-            this.btnCOShShSameCompleteOrder.TabIndex = 81;
-            this.btnCOShShSameCompleteOrder.Text = "Complete Order";
-            this.btnCOShShSameCompleteOrder.UseVisualStyleBackColor = true;
-            this.btnCOShShSameCompleteOrder.Click += new System.EventHandler(this.btnCOShShSameCompleteOrder_Click);
             // 
             // dataGridViewCOShShSame
             // 
@@ -1037,6 +1082,7 @@
             this.dgvSSSmLineMark,
             this.dgvSSSmComments,
             this.dgvSSSmBranch,
+            this.dgvSSSmSkidPrice,
             this.dgvSSSmBranchID,
             this.dgvSSSmAlloyID,
             this.dgvSSSmFinishID,
@@ -1056,7 +1102,7 @@
             this.dataGridViewCOShShSame.Name = "dataGridViewCOShShSame";
             this.dataGridViewCOShShSame.RowHeadersWidth = 51;
             this.dataGridViewCOShShSame.RowTemplate.Height = 24;
-            this.dataGridViewCOShShSame.Size = new System.Drawing.Size(1390, 439);
+            this.dataGridViewCOShShSame.Size = new System.Drawing.Size(1478, 494);
             this.dataGridViewCOShShSame.TabIndex = 80;
             this.dataGridViewCOShShSame.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridViewCOShShSame_CellFormatting);
             this.dataGridViewCOShShSame.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewCOShShSame_CellValueChanged);
@@ -1184,6 +1230,13 @@
             this.dgvSSSmBranch.Name = "dgvSSSmBranch";
             this.dgvSSSmBranch.Width = 55;
             // 
+            // dgvSSSmSkidPrice
+            // 
+            this.dgvSSSmSkidPrice.HeaderText = "Skid Price";
+            this.dgvSSSmSkidPrice.MinimumWidth = 6;
+            this.dgvSSSmSkidPrice.Name = "dgvSSSmSkidPrice";
+            this.dgvSSSmSkidPrice.Width = 97;
+            // 
             // dgvSSSmBranchID
             // 
             this.dgvSSSmBranchID.HeaderText = "BranchID";
@@ -1290,7 +1343,7 @@
             // 
             this.labelSSSmPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSSSmPrice.AutoSize = true;
-            this.labelSSSmPrice.Location = new System.Drawing.Point(257, 502);
+            this.labelSSSmPrice.Location = new System.Drawing.Point(257, 542);
             this.labelSSSmPrice.Name = "labelSSSmPrice";
             this.labelSSSmPrice.Size = new System.Drawing.Size(38, 16);
             this.labelSSSmPrice.TabIndex = 76;
@@ -1300,7 +1353,7 @@
             // 
             this.labelSSSmPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSSSmPO.AutoSize = true;
-            this.labelSSSmPO.Location = new System.Drawing.Point(257, 526);
+            this.labelSSSmPO.Location = new System.Drawing.Point(257, 565);
             this.labelSSSmPO.Name = "labelSSSmPO";
             this.labelSSSmPO.Size = new System.Drawing.Size(101, 16);
             this.labelSSSmPO.TabIndex = 75;
@@ -1310,7 +1363,7 @@
             // 
             this.textBoxSSSmPO.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxSSSmPO.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBoxSSSmPO.Location = new System.Drawing.Point(371, 524);
+            this.textBoxSSSmPO.Location = new System.Drawing.Point(371, 564);
             this.textBoxSSSmPO.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSSSmPO.Name = "textBoxSSSmPO";
             this.textBoxSSSmPO.Size = new System.Drawing.Size(227, 22);
@@ -1319,7 +1372,7 @@
             // textBoxSSSmPrice
             // 
             this.textBoxSSSmPrice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxSSSmPrice.Location = new System.Drawing.Point(301, 499);
+            this.textBoxSSSmPrice.Location = new System.Drawing.Point(301, 538);
             this.textBoxSSSmPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSSSmPrice.Name = "textBoxSSSmPrice";
             this.textBoxSSSmPrice.Size = new System.Drawing.Size(112, 22);
@@ -1329,7 +1382,7 @@
             // 
             this.richTextBoxSSSmComments.AcceptsTab = true;
             this.richTextBoxSSSmComments.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.richTextBoxSSSmComments.Location = new System.Drawing.Point(13, 472);
+            this.richTextBoxSSSmComments.Location = new System.Drawing.Point(13, 512);
             this.richTextBoxSSSmComments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBoxSSSmComments.Name = "richTextBoxSSSmComments";
             this.richTextBoxSSSmComments.Size = new System.Drawing.Size(239, 74);
@@ -1339,7 +1392,8 @@
             // btShShSmCancel
             // 
             this.btShShSmCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btShShSmCancel.Location = new System.Drawing.Point(1116, 652);
+            this.btShShSmCancel.Location = new System.Drawing.Point(1239, 683);
+            this.btShShSmCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btShShSmCancel.Name = "btShShSmCancel";
             this.btShShSmCancel.Size = new System.Drawing.Size(115, 43);
             this.btShShSmCancel.TabIndex = 0;
@@ -1347,14 +1401,27 @@
             this.btShShSmCancel.UseVisualStyleBackColor = true;
             this.btShShSmCancel.Click += new System.EventHandler(this.btShShSmCancel_Click);
             // 
+            // btnCOShShSameCompleteOrder
+            // 
+            this.btnCOShShSameCompleteOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCOShShSameCompleteOrder.Location = new System.Drawing.Point(1376, 683);
+            this.btnCOShShSameCompleteOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCOShShSameCompleteOrder.Name = "btnCOShShSameCompleteOrder";
+            this.btnCOShShSameCompleteOrder.Size = new System.Drawing.Size(115, 43);
+            this.btnCOShShSameCompleteOrder.TabIndex = 81;
+            this.btnCOShShSameCompleteOrder.Text = "Complete Order";
+            this.btnCOShShSameCompleteOrder.UseVisualStyleBackColor = true;
+            this.btnCOShShSameCompleteOrder.Click += new System.EventHandler(this.btnCOShShSameCompleteOrder_Click);
+            // 
             // panelCOShShDiff
             // 
             this.panelCOShShDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelCOShShDiff.Location = new System.Drawing.Point(7, 77);
+            this.panelCOShShDiff.Location = new System.Drawing.Point(7, 78);
+            this.panelCOShShDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelCOShShDiff.Name = "panelCOShShDiff";
-            this.panelCOShShDiff.Size = new System.Drawing.Size(1423, 727);
+            this.panelCOShShDiff.Size = new System.Drawing.Size(1745, 951);
             this.panelCOShShDiff.TabIndex = 26;
             // 
             // panelCOClClSame
@@ -1375,15 +1442,18 @@
             this.panelCOClClSame.Controls.Add(this.dateTimePickerClClSameStartTime);
             this.panelCOClClSame.Controls.Add(this.dateTimePickerClClSameStartDate);
             this.panelCOClClSame.Controls.Add(this.dgvCOCLCLSame);
-            this.panelCOClClSame.Location = new System.Drawing.Point(7, 77);
+            this.panelCOClClSame.Location = new System.Drawing.Point(7, 78);
+            this.panelCOClClSame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelCOClClSame.Name = "panelCOClClSame";
-            this.panelCOClClSame.Size = new System.Drawing.Size(1423, 727);
+            this.panelCOClClSame.Size = new System.Drawing.Size(1733, 953);
             this.panelCOClClSame.TabIndex = 27;
+            this.panelCOClClSame.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCOClClSame_Paint);
             // 
             // buttonClClSame_Commit
             // 
             this.buttonClClSame_Commit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClClSame_Commit.Location = new System.Drawing.Point(1271, 621);
+            this.buttonClClSame_Commit.Location = new System.Drawing.Point(1028, 622);
+            this.buttonClClSame_Commit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonClClSame_Commit.Name = "buttonClClSame_Commit";
             this.buttonClClSame_Commit.Size = new System.Drawing.Size(131, 32);
             this.buttonClClSame_Commit.TabIndex = 33;
@@ -1394,7 +1464,8 @@
             // buttonClClSame_Cancel
             // 
             this.buttonClClSame_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonClClSame_Cancel.Location = new System.Drawing.Point(1274, 680);
+            this.buttonClClSame_Cancel.Location = new System.Drawing.Point(1028, 680);
+            this.buttonClClSame_Cancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonClClSame_Cancel.Name = "buttonClClSame_Cancel";
             this.buttonClClSame_Cancel.Size = new System.Drawing.Size(129, 28);
             this.buttonClClSame_Cancel.TabIndex = 32;
@@ -1404,13 +1475,15 @@
             // 
             // listViewAlloyFinish
             // 
+            this.listViewAlloyFinish.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewAlloyFinish.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeaderCOFinishID,
             this.columnHeaderCOSteelTypeID,
             this.columnHeaderCOFinishDesc});
             this.listViewAlloyFinish.FullRowSelect = true;
             this.listViewAlloyFinish.HideSelection = false;
-            this.listViewAlloyFinish.Location = new System.Drawing.Point(753, 582);
+            this.listViewAlloyFinish.Location = new System.Drawing.Point(296, 753);
+            this.listViewAlloyFinish.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewAlloyFinish.Name = "listViewAlloyFinish";
             this.listViewAlloyFinish.Size = new System.Drawing.Size(496, 80);
             this.listViewAlloyFinish.TabIndex = 29;
@@ -1440,12 +1513,14 @@
             this.columnHeader1,
             this.columnHeader2});
             this.listViewClClSameTimeRecords.HideSelection = false;
-            this.listViewClClSameTimeRecords.Location = new System.Drawing.Point(8, 562);
+            this.listViewClClSameTimeRecords.Location = new System.Drawing.Point(13, 579);
+            this.listViewClClSameTimeRecords.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listViewClClSameTimeRecords.Name = "listViewClClSameTimeRecords";
             this.listViewClClSameTimeRecords.Size = new System.Drawing.Size(345, 147);
             this.listViewClClSameTimeRecords.TabIndex = 23;
             this.listViewClClSameTimeRecords.UseCompatibleStateImageBehavior = false;
             this.listViewClClSameTimeRecords.View = System.Windows.Forms.View.Details;
+            this.listViewClClSameTimeRecords.SelectedIndexChanged += new System.EventHandler(this.listViewClClSameTimeRecords_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -1460,7 +1535,8 @@
             // buttonClClRemoveTime
             // 
             this.buttonClClRemoveTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonClClRemoveTime.Location = new System.Drawing.Point(524, 653);
+            this.buttonClClRemoveTime.Location = new System.Drawing.Point(534, 664);
+            this.buttonClClRemoveTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonClClRemoveTime.Name = "buttonClClRemoveTime";
             this.buttonClClRemoveTime.Size = new System.Drawing.Size(123, 33);
             this.buttonClClRemoveTime.TabIndex = 31;
@@ -1471,7 +1547,8 @@
             // buttonClClRecordTime
             // 
             this.buttonClClRecordTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonClClRecordTime.Location = new System.Drawing.Point(376, 653);
+            this.buttonClClRecordTime.Location = new System.Drawing.Point(406, 664);
+            this.buttonClClRecordTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonClClRecordTime.Name = "buttonClClRecordTime";
             this.buttonClClRecordTime.Size = new System.Drawing.Size(123, 33);
             this.buttonClClRecordTime.TabIndex = 30;
@@ -1483,59 +1560,69 @@
             // 
             this.labelClClEndtime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelClClEndtime.AutoSize = true;
-            this.labelClClEndtime.Location = new System.Drawing.Point(373, 622);
+            this.labelClClEndtime.Location = new System.Drawing.Point(378, 638);
             this.labelClClEndtime.Name = "labelClClEndtime";
             this.labelClClEndtime.Size = new System.Drawing.Size(31, 16);
             this.labelClClEndtime.TabIndex = 29;
             this.labelClClEndtime.Text = "End";
+            this.labelClClEndtime.Click += new System.EventHandler(this.labelClClEndtime_Click);
             // 
             // labelClClStartTime
             // 
             this.labelClClStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelClClStartTime.AutoSize = true;
-            this.labelClClStartTime.Location = new System.Drawing.Point(368, 594);
+            this.labelClClStartTime.Location = new System.Drawing.Point(373, 611);
             this.labelClClStartTime.Name = "labelClClStartTime";
             this.labelClClStartTime.Size = new System.Drawing.Size(34, 16);
             this.labelClClStartTime.TabIndex = 28;
             this.labelClClStartTime.Text = "Start";
+            this.labelClClStartTime.Click += new System.EventHandler(this.labelClClStartTime_Click);
             // 
             // dateTimePickerClClSameEndTime
             // 
             this.dateTimePickerClClSameEndTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerClClSameEndTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerClClSameEndTime.Location = new System.Drawing.Point(529, 622);
+            this.dateTimePickerClClSameEndTime.Location = new System.Drawing.Point(534, 638);
+            this.dateTimePickerClClSameEndTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerClClSameEndTime.Name = "dateTimePickerClClSameEndTime";
             this.dateTimePickerClClSameEndTime.ShowUpDown = true;
-            this.dateTimePickerClClSameEndTime.Size = new System.Drawing.Size(118, 22);
+            this.dateTimePickerClClSameEndTime.Size = new System.Drawing.Size(119, 22);
             this.dateTimePickerClClSameEndTime.TabIndex = 27;
+            this.dateTimePickerClClSameEndTime.ValueChanged += new System.EventHandler(this.dateTimePickerClClSameEndTime_ValueChanged);
             // 
             // dateTimePickerClClSameEndDate
             // 
             this.dateTimePickerClClSameEndDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerClClSameEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerClClSameEndDate.Location = new System.Drawing.Point(412, 622);
+            this.dateTimePickerClClSameEndDate.Location = new System.Drawing.Point(417, 638);
+            this.dateTimePickerClClSameEndDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerClClSameEndDate.Name = "dateTimePickerClClSameEndDate";
             this.dateTimePickerClClSameEndDate.Size = new System.Drawing.Size(112, 22);
             this.dateTimePickerClClSameEndDate.TabIndex = 26;
+            this.dateTimePickerClClSameEndDate.ValueChanged += new System.EventHandler(this.dateTimePickerClClSameEndDate_ValueChanged);
             // 
             // dateTimePickerClClSameStartTime
             // 
             this.dateTimePickerClClSameStartTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerClClSameStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dateTimePickerClClSameStartTime.Location = new System.Drawing.Point(530, 594);
+            this.dateTimePickerClClSameStartTime.Location = new System.Drawing.Point(534, 611);
+            this.dateTimePickerClClSameStartTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerClClSameStartTime.Name = "dateTimePickerClClSameStartTime";
             this.dateTimePickerClClSameStartTime.ShowUpDown = true;
-            this.dateTimePickerClClSameStartTime.Size = new System.Drawing.Size(118, 22);
+            this.dateTimePickerClClSameStartTime.Size = new System.Drawing.Size(119, 22);
             this.dateTimePickerClClSameStartTime.TabIndex = 25;
+            this.dateTimePickerClClSameStartTime.ValueChanged += new System.EventHandler(this.dateTimePickerClClSameStartTime_ValueChanged);
             // 
             // dateTimePickerClClSameStartDate
             // 
             this.dateTimePickerClClSameStartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.dateTimePickerClClSameStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePickerClClSameStartDate.Location = new System.Drawing.Point(412, 594);
+            this.dateTimePickerClClSameStartDate.Location = new System.Drawing.Point(417, 611);
+            this.dateTimePickerClClSameStartDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dateTimePickerClClSameStartDate.Name = "dateTimePickerClClSameStartDate";
             this.dateTimePickerClClSameStartDate.Size = new System.Drawing.Size(112, 22);
             this.dateTimePickerClClSameStartDate.TabIndex = 24;
+            this.dateTimePickerClClSameStartDate.ValueChanged += new System.EventHandler(this.dateTimePickerClClSameStartDate_ValueChanged);
             // 
             // dgvCOCLCLSame
             // 
@@ -1559,14 +1646,15 @@
             this.colClClSameNewFinishID,
             this.colClClSameConvertIntoLbs,
             this.colClClSameOrigTagSuffix,
-            this.colClClSameNewTagSuffix});
+            this.colClClSameNewTagSuffix,
+            this.colClClSameOriginalTag});
             this.dgvCOCLCLSame.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvCOCLCLSame.Location = new System.Drawing.Point(13, 14);
             this.dgvCOCLCLSame.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvCOCLCLSame.Name = "dgvCOCLCLSame";
             this.dgvCOCLCLSame.RowHeadersWidth = 51;
             this.dgvCOCLCLSame.RowTemplate.Height = 24;
-            this.dgvCOCLCLSame.Size = new System.Drawing.Size(1405, 541);
+            this.dgvCOCLCLSame.Size = new System.Drawing.Size(1146, 558);
             this.dgvCOCLCLSame.TabIndex = 4;
             this.dgvCOCLCLSame.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCOCLCLSame_CellContentClick);
             this.dgvCOCLCLSame.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvCOCLCLSame_CellEndEdit);
@@ -1678,6 +1766,7 @@
             this.colClClSameOrigTagSuffix.HeaderText = "OrigTagSuffix";
             this.colClClSameOrigTagSuffix.MinimumWidth = 6;
             this.colClClSameOrigTagSuffix.Name = "colClClSameOrigTagSuffix";
+            this.colClClSameOrigTagSuffix.Visible = false;
             this.colClClSameOrigTagSuffix.Width = 117;
             // 
             // colClClSameNewTagSuffix
@@ -1685,17 +1774,110 @@
             this.colClClSameNewTagSuffix.HeaderText = "NewTagSuffix";
             this.colClClSameNewTagSuffix.MinimumWidth = 6;
             this.colClClSameNewTagSuffix.Name = "colClClSameNewTagSuffix";
+            this.colClClSameNewTagSuffix.Visible = false;
             this.colClClSameNewTagSuffix.Width = 119;
+            // 
+            // colClClSameOriginalTag
+            // 
+            this.colClClSameOriginalTag.HeaderText = "OrigTag";
+            this.colClClSameOriginalTag.MinimumWidth = 6;
+            this.colClClSameOriginalTag.Name = "colClClSameOriginalTag";
+            this.colClClSameOriginalTag.Visible = false;
+            this.colClClSameOriginalTag.Width = 86;
             // 
             // panelCOClClDiff
             // 
             this.panelCOClClDiff.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelCOClClDiff.Location = new System.Drawing.Point(7, 77);
+            this.panelCOClClDiff.Controls.Add(this.dgvClClDfCloseOrder);
+            this.panelCOClClDiff.Controls.Add(this.btnClClDiffCancel);
+            this.panelCOClClDiff.Location = new System.Drawing.Point(7, 78);
+            this.panelCOClClDiff.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelCOClClDiff.Name = "panelCOClClDiff";
-            this.panelCOClClDiff.Size = new System.Drawing.Size(1423, 727);
+            this.panelCOClClDiff.Size = new System.Drawing.Size(1744, 951);
             this.panelCOClClDiff.TabIndex = 28;
+            // 
+            // dgvClClDfCloseOrder
+            // 
+            this.dgvClClDfCloseOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClClDfCloseOrder.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvCOClClDfTagID,
+            this.dgvCOClClDfThickness,
+            this.dgvCOClClDfAlloy,
+            this.dgvCOClClDfWidth,
+            this.dgvCOClClDfOrigLBS,
+            this.dgvCOClClDfNewLBS,
+            this.dgvCOClClDfPaper});
+            this.dgvClClDfCloseOrder.Location = new System.Drawing.Point(19, 7);
+            this.dgvClClDfCloseOrder.Name = "dgvClClDfCloseOrder";
+            this.dgvClClDfCloseOrder.RowHeadersWidth = 51;
+            this.dgvClClDfCloseOrder.RowTemplate.Height = 24;
+            this.dgvClClDfCloseOrder.Size = new System.Drawing.Size(1387, 610);
+            this.dgvClClDfCloseOrder.TabIndex = 1;
+            // 
+            // dgvCOClClDfTagID
+            // 
+            this.dgvCOClClDfTagID.HeaderText = "Tag ID";
+            this.dgvCOClClDfTagID.MinimumWidth = 6;
+            this.dgvCOClClDfTagID.Name = "dgvCOClClDfTagID";
+            this.dgvCOClClDfTagID.ReadOnly = true;
+            this.dgvCOClClDfTagID.Width = 125;
+            // 
+            // dgvCOClClDfThickness
+            // 
+            this.dgvCOClClDfThickness.HeaderText = "Thickness";
+            this.dgvCOClClDfThickness.MinimumWidth = 6;
+            this.dgvCOClClDfThickness.Name = "dgvCOClClDfThickness";
+            this.dgvCOClClDfThickness.ReadOnly = true;
+            this.dgvCOClClDfThickness.Width = 125;
+            // 
+            // dgvCOClClDfAlloy
+            // 
+            this.dgvCOClClDfAlloy.HeaderText = "Alloy";
+            this.dgvCOClClDfAlloy.MinimumWidth = 6;
+            this.dgvCOClClDfAlloy.Name = "dgvCOClClDfAlloy";
+            this.dgvCOClClDfAlloy.ReadOnly = true;
+            this.dgvCOClClDfAlloy.Width = 125;
+            // 
+            // dgvCOClClDfWidth
+            // 
+            this.dgvCOClClDfWidth.HeaderText = "Width";
+            this.dgvCOClClDfWidth.MinimumWidth = 6;
+            this.dgvCOClClDfWidth.Name = "dgvCOClClDfWidth";
+            this.dgvCOClClDfWidth.Width = 125;
+            // 
+            // dgvCOClClDfOrigLBS
+            // 
+            this.dgvCOClClDfOrigLBS.HeaderText = "Orig LBS";
+            this.dgvCOClClDfOrigLBS.MinimumWidth = 6;
+            this.dgvCOClClDfOrigLBS.Name = "dgvCOClClDfOrigLBS";
+            this.dgvCOClClDfOrigLBS.ReadOnly = true;
+            this.dgvCOClClDfOrigLBS.Width = 125;
+            // 
+            // dgvCOClClDfNewLBS
+            // 
+            this.dgvCOClClDfNewLBS.HeaderText = "New LBS";
+            this.dgvCOClClDfNewLBS.MinimumWidth = 6;
+            this.dgvCOClClDfNewLBS.Name = "dgvCOClClDfNewLBS";
+            this.dgvCOClClDfNewLBS.Width = 125;
+            // 
+            // dgvCOClClDfPaper
+            // 
+            this.dgvCOClClDfPaper.HeaderText = "Paper";
+            this.dgvCOClClDfPaper.MinimumWidth = 6;
+            this.dgvCOClClDfPaper.Name = "dgvCOClClDfPaper";
+            this.dgvCOClClDfPaper.Width = 125;
+            // 
+            // btnClClDiffCancel
+            // 
+            this.btnClClDiffCancel.Location = new System.Drawing.Point(1256, 716);
+            this.btnClClDiffCancel.Name = "btnClClDiffCancel";
+            this.btnClClDiffCancel.Size = new System.Drawing.Size(150, 33);
+            this.btnClClDiffCancel.TabIndex = 0;
+            this.btnClClDiffCancel.Text = "Cancel";
+            this.btnClClDiffCancel.UseVisualStyleBackColor = true;
+            this.btnClClDiffCancel.Click += new System.EventHandler(this.btnClClDiffCancel_Click);
             // 
             // lblOrderID
             // 
@@ -1710,8 +1892,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1447, 828);
+            this.ClientSize = new System.Drawing.Size(1769, 1044);
             this.Controls.Add(this.panelCTLInfo);
+            this.Controls.Add(this.panelCOClClDiff);
             this.Controls.Add(this.lblOrderID);
             this.Controls.Add(this.labelCOCustomerTier);
             this.Controls.Add(this.buttonCORemoveRow);
@@ -1721,8 +1904,6 @@
             this.Controls.Add(this.labelCOCustomer);
             this.Controls.Add(this.labelCOCity);
             this.Controls.Add(this.tabControlProcess);
-            this.Controls.Add(this.listViewCOOpenOrders);
-            this.Controls.Add(this.panelCOClClDiff);
             this.Controls.Add(this.panelCOShShDiff);
             this.Controls.Add(this.panelCOShShSame);
             this.Controls.Add(this.panelCOClClSame);
@@ -1742,6 +1923,8 @@
             this.panelCOClClSame.ResumeLayout(false);
             this.panelCOClClSame.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCOCLCLSame)).EndInit();
+            this.panelCOClClDiff.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClClDfCloseOrder)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1778,15 +1961,6 @@
         private System.Windows.Forms.Button buttonCORemoveTime;
         private System.Windows.Forms.DataGridView dgvCOCoilScrap;
         private System.Windows.Forms.Panel panelCTLInfo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapTagID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapTagEndWeight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapLocation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapAmount;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgvCOScrapUnits;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dgvCOScrapRejectCoil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapRejectReason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapCoilTagID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapCoilTagSuffix;
         private System.Windows.Forms.Panel panelCOShShSame;
         private System.Windows.Forms.Panel panelCOShShDiff;
         private System.Windows.Forms.Panel panelCOClClSame;
@@ -1860,6 +2034,7 @@
         private System.Windows.Forms.DateTimePicker dtSSSmEndDate;
         private System.Windows.Forms.DateTimePicker dtSSSmStartTime;
         private System.Windows.Forms.DateTimePicker dtSSSmStartDate;
+        private System.Windows.Forms.Label lblOrderID;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvSSSmBreakSkid;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmSkidID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmPieces;
@@ -1875,6 +2050,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvSSSmLineMark;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmComments;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgvSSSmBranch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmSkidPrice;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgvSSSmBranchID;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmAlloyID;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgvSSSmFinishID;
@@ -1887,7 +2063,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmCoilTagSuffix;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmSkidLetter;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvSSSmOrderLetter;
-        private System.Windows.Forms.Label lblOrderID;
+        private System.Windows.Forms.Button btnClClDiffCancel;
+        private System.Windows.Forms.DataGridView dgvClClDfCloseOrder;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClClSameCoilTagID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClCLSameThickness;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClClSameWidth;
@@ -1902,5 +2079,24 @@
         private System.Windows.Forms.DataGridViewButtonColumn colClClSameConvertIntoLbs;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClClSameOrigTagSuffix;
         private System.Windows.Forms.DataGridViewTextBoxColumn colClClSameNewTagSuffix;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colClClSameOriginalTag;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapTagID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapTagEndWeight;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapLocation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapAmount;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgvCOScrapUnits;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgvCOScrapRejectCoil;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapRejectReason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapCoilTagID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapCoilTagSuffix;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOTotalLength;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOScrapLbsPerInch;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOClClDfTagID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOClClDfThickness;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOClClDfAlloy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOClClDfWidth;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOClClDfOrigLBS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgvCOClClDfNewLBS;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgvCOClClDfPaper;
     }
 }
