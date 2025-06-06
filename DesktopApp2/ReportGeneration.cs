@@ -2941,33 +2941,33 @@ namespace ICMS
                         PO = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
                         dtTrans = reader.GetDateTime(reader.GetOrdinal("transferDate"));
                         materialType = reader.GetInt32(reader.GetOrdinal("materialType"));
-                        //if (!hasCoilHeader && !hasSkidHeader)
-                        //{
-                        //    oSheet.Cells[rowCnt, 1] = "Transfer ID:";
+                        if (!hasCoilHeader && !hasSkidHeader)
+                        {
+                            oSheet.Cells[rowCnt, 1] = "Transfer ID:";
 
 
-                        //    oSheet.Cells[rowCnt, 2] = transferID;
-                        //}
+                            oSheet.Cells[rowCnt, 2] = transferID;
+                        }
 
-                        //string fullTag = tagid.ToString() + suffix;
-                        //if (skidLetter.Length > 0)
-                        //{
-                        //    fullTag += "." + skidLetter;
-                        //}
+                        string fullTag = tagid.ToString() + suffix;
+                        if (skidLetter.Length > 0)
+                        {
+                            fullTag += "." + skidLetter;
+                        }
 
-                        //tags.Add(fullTag);
+                        tags.Add(fullTag);
 
-                        //cellValue = oSheet.Cells[2, 3].Value?.ToString() ?? "";
+                        cellValue = oSheet.Cells[2, 3].Value?.ToString() ?? "";
 
-                        //for (int i = 0; i < tags.Count(); i++)
-                        //{
-                        //    if (i == 0)
-                        //        cellValue += tags[i];
-                            
-                        //    else
-                        //        cellValue += ", " + tags[i];
-                        //}
-                        
+                        for (int i = 0; i < tags.Count(); i++)
+                        {
+                            if (i == 0)
+                                cellValue += tags[i];
+
+                            else
+                                cellValue += ", " + tags[i];
+                        }
+
 
                         rowCnt++;
 
