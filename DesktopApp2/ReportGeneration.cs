@@ -3153,7 +3153,13 @@ namespace ICMS
 
                     reader.Close();
                     oXL.Visible = true;
-                    
+
+                    cellValue += " transfered from "
+                                                    + origCust + " to " + newCust
+                                                    + " on " + dtTrans.ToString("d")
+                                                    + " -Purchase Order: " + PO;
+
+                    oSheet.Cells[2, 3].Value = cellValue;
                 }
                 else
                 {
