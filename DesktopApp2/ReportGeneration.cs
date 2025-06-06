@@ -2928,10 +2928,10 @@ namespace ICMS
                         string skidLetter = reader.GetString(reader.GetOrdinal("transferLetter")).Trim();
                         letter = skidLetter;
 
-                        string origCust = reader.GetString(reader.GetOrdinal("origCust")).Trim();
-                        string newCust = reader.GetString(reader.GetOrdinal("newCust")).Trim();
-                        string PO = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
-                        DateTime dtTrans = reader.GetDateTime(reader.GetOrdinal("transferDate"));
+                        origCust = reader.GetString(reader.GetOrdinal("origCust")).Trim();
+                        newCust = reader.GetString(reader.GetOrdinal("newCust")).Trim();
+                        PO = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
+                        dtTrans = reader.GetDateTime(reader.GetOrdinal("transferDate"));
                         materialType = reader.GetInt32(reader.GetOrdinal("materialType"));
                         if (!hasCoilHeader && !hasSkidHeader)
                         {
