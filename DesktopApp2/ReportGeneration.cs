@@ -2887,9 +2887,13 @@ namespace ICMS
                 
 
             }
-            
 
-            
+
+            string cellValue = "";
+            string origCust = "";
+            string newCust = "";
+            string PO = "";
+            DateTime dtTrans = new DateTime();
 
             int rowCnt = 2;
 
