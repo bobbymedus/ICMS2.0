@@ -2905,6 +2905,7 @@ namespace ICMS
                     Excel._Workbook oWB;
                     Excel._Worksheet oSheet;
 
+                    List<string> tags = new List<string>();
 
                     oXL = new Excel.Application();
 
