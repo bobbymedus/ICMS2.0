@@ -2947,12 +2947,18 @@ namespace ICMS
                             fullTag += "." + skidLetter;
                         }
 
-                        oSheet.Cells[rowCnt, 3] = fullTag + " transfered from "
-                                                    + origCust + " to " + newCust
-                                                    + " on " + dtTrans.ToString("d")
-                                                    + " -Purchase Order: " + PO;
+                        tags.Add(fullTag);
 
-                        
+                        cellValue = oSheet.Cells[2, 3].Value?.ToString() ?? "";
+
+                        for (int i = 0; i < tags.Count(); i++)
+                        {
+                            if (i == 0)
+                                cellValue += tags[i];
+
+                            else
+                                cellValue += ", " + tags[i];
+                        }
 
                         rowCnt++;
 
