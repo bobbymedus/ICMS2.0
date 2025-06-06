@@ -43,5 +43,10 @@ namespace ICMS
             returnCustName =chkLsBxCustomer.Items[e.Index].ToString();
             this.Close();
         }
+
+        private void chkLsBxCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
