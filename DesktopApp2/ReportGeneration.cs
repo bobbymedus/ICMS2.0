@@ -2887,9 +2887,13 @@ namespace ICMS
                 
 
             }
-            
 
-            
+
+            string cellValue = "";
+            string origCust = "";
+            string newCust = "";
+            string PO = "";
+            DateTime dtTrans = new DateTime();
 
             int rowCnt = 2;
 
@@ -2905,6 +2909,7 @@ namespace ICMS
                     Excel._Workbook oWB;
                     Excel._Worksheet oSheet;
 
+                    List<string> tags = new List<string>();
 
                     oXL = new Excel.Application();
 
@@ -2928,10 +2933,10 @@ namespace ICMS
                         string skidLetter = reader.GetString(reader.GetOrdinal("transferLetter")).Trim();
                         letter = skidLetter;
 
-                        string origCust = reader.GetString(reader.GetOrdinal("origCust")).Trim();
-                        string newCust = reader.GetString(reader.GetOrdinal("newCust")).Trim();
-                        string PO = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
-                        DateTime dtTrans = reader.GetDateTime(reader.GetOrdinal("transferDate"));
+                        origCust = reader.GetString(reader.GetOrdinal("origCust")).Trim();
+                        newCust = reader.GetString(reader.GetOrdinal("newCust")).Trim();
+                        PO = reader.GetString(reader.GetOrdinal("purchaseOrder")).Trim();
+                        dtTrans = reader.GetDateTime(reader.GetOrdinal("transferDate"));
                         materialType = reader.GetInt32(reader.GetOrdinal("materialType"));
                         if (!hasCoilHeader && !hasSkidHeader)
                         {
@@ -2947,12 +2952,18 @@ namespace ICMS
                             fullTag += "." + skidLetter;
                         }
 
-                        oSheet.Cells[rowCnt, 3] = fullTag + " transfered from "
-                                                    + origCust + " to " + newCust
-                                                    + " on " + dtTrans.ToString("d")
-                                                    + " -Purchase Order: " + PO;
+                        tags.Add(fullTag);
 
-                        
+                        cellValue = oSheet.Cells[2, 3].Value?.ToString() ?? "";
+
+                        for (int i = 0; i < tags.Count(); i++)
+                        {
+                            if (i == 0)
+                                cellValue += tags[i];
+
+                            else
+                                cellValue += ", " + tags[i];
+                        }
 
                         rowCnt++;
 
@@ -3142,7 +3153,13 @@ namespace ICMS
 
                     reader.Close();
                     oXL.Visible = true;
-                    
+
+                    cellValue += " transfered from "
+                                                    + origCust + " to " + newCust
+                                                    + " on " + dtTrans.ToString("d")
+                                                    + " -Purchase Order: " + PO;
+
+                    oSheet.Cells[2, 3].Value = cellValue;
                 }
                 else
                 {
